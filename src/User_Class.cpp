@@ -13,6 +13,12 @@ std::string user::get_name() const                      // returning the name of
 }
 
 
+std::string user::get_username() const                 // returning the username of the user
+{
+    return Username;
+}
+
+
 std::string user::get_biography() const                // returning the biography of the user
 {
     return Biography[160];
@@ -77,11 +83,10 @@ bool user::Validating_Username(std::string user_name)                        // 
 
     for (int i = 0; i < user_name.length(); ++i)
     {
-        int check = user_name[i];
-        if ((check >= 33 and check <= 47) and(check >= 58 and check <= 64) and 
-            (check >= 91 and check <= 96) and (check >= 123 and check <= 126))
+        if (!isalnum(user_name[i]))
             return false;
     }
+   
     for (int i = 0; i < user_name.length(); ++i)
         user_name[i] = tolower(user_name[i]);
 
