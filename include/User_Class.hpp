@@ -23,20 +23,21 @@ class user
 //============ sets ==================
         void set_name(std::string);
         void set_username(std::string);
-        void set_biography();
-        void set_link();
-        void set_birthday();
-        void set_phone();
-        void set_password();
-        void set_header();
+        void set_biography(std::string*);
+        void set_link(std::string);
+        void set_birthday(std::string);
+        void set_phone(std::string);
+        void set_password(std::string);
+        void set_header(std::string);
 
 //============ General functions =============
-        void like();
-        void delete_account();
-        void Show_profile();
-        void edit();
+        void Like();
+        void Delete_Account();
+        void Show_Profile();
+        void Edit();
         void Tweet();
-        void logout();
+        void Logout();
+        bool Validating_Username(std::string);
 
     private:
         std::string Full_Name;
