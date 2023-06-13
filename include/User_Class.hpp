@@ -21,8 +21,8 @@ class user
         std::string get_header()const;
 
 //============ sets ==================
-        void set_name();
-        void set_userName();
+        void set_name(std::string);
+        void set_username(std::string);
         void set_biography();
         void set_link();
         void set_birthday();
@@ -39,14 +39,14 @@ class user
         void logout();
 
     private:
-        std::string name;
-        std::string username;
-        std::string biography[160];
-        std::string link;
-        std::string birthday;
-        std::string phone_number;
-        std::string password;
-        std::string header;
+        std::string Full_Name;
+        std::string Username;
+        std::string Biography[160];
+        std::string Link;
+        std::string Birthday;
+        std::string Phone_Number;
+        std::string Password;
+        std::string Header;
 
         std::vector<tweet> tweets;
 };

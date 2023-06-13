@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctype.h>
 #include "User_Class.hpp"
 
 //===================================================  Get_Functions =================================================== 
@@ -45,4 +46,10 @@ std::string user::get_header() const            // returning the color of the he
 }
 
 //===================================================  Get_Functions =================================================== 
+
+void user::set_name(std::string name)
+{
+    Full_Name = name;
+}
+
 
