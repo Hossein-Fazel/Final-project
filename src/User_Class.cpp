@@ -1,9 +1,12 @@
 #include <iostream>
+#include <unordered_map>
 #include <vector>
 #include <string>
 #include <ctype.h>
 #include <sha256.h>
+
 #include "User_Class.hpp"
+#include "Twitterak_Class.hpp"
 
 //==================================================================  Get_Functions =================================================================
 
@@ -12,46 +15,67 @@ std::string user::get_name() const                      // returning the name of
     return Full_Name;
 }
 
+//------------------------------------------------------------------------
 
 std::string user::get_username() const                 // returning the username of the user
 {
     return Username;
 }
 
+//------------------------------------------------------------------------
 
 std::string user::get_biography() const                // returning the biography of the user
 {
-    return Biography[160];
+    return Biography;
 }
 
+//------------------------------------------------------------------------
 
 std::string user::get_link() const                    // returning the link of the user
 {
     return Link;
 }
 
+//------------------------------------------------------------------------
 
 std::string user::get_birthday() const              // returning the date of birth of the user
 {
     return Birthday;
 }
 
+//------------------------------------------------------------------------
 
 std::string user::get_phone() const                // returning the phone number of the user
 {
     return Phone_Number;
 }
 
+//------------------------------------------------------------------------
 
 std::string user::get_password() const            // returning the password of the user's account
 {
     return Password;
 }
 
+//------------------------------------------------------------------------
 
 std::string user::get_header() const            // returning the color of the header that user had chosen 
 {
     return Header;
+}
+
+//------------------------------------------------------------------------
+
+std::string user::get_header() const            // returning the color of the header that user had chosen 
+{
+    return Header;
+}
+
+//------------------------------------------------------------------------
+
+std::string user::get_country() const            // returning the color of the header that user had chosen 
+{
+    return Country;
 }
 
 //==================================================================  Set_Functions =================================================================
@@ -88,11 +112,11 @@ bool user::Validating_Username(std::string user_name)                        // 
     }
    
     for (int i = 0; i < user_name.length(); ++i)
-        user_name[i] = tolower(user_name[i]);
+        Username[i] = tolower(user_name[i]);
 
-    if ((user_name != "help") and (user_name != "login") and (user_name != "signup") and (user_name != "edit") 
-        and (user_name != "exit") and (user_name != "delete account") and (user_name != "like") and (user_name != "profile") 
-        and (user_name != "quit")and (user_name != "logout") and (user_name != "delete tweet")and (user_name != "edit tweet"))
+    if ((Username != "help") and (Username != "login") and (Username != "signup") and (Username != "edit") 
+        and (Username != "exit") and (Username != "delete account") and (Username != "like") and (Username != "profile") 
+        and (Username != "quit")and (Username != "logout") and (Username != "delete tweet")and (Username != "edit tweet"))
         return false;
 
 
@@ -101,10 +125,9 @@ bool user::Validating_Username(std::string user_name)                        // 
 
 //------------------------------------------------------------------------
 
-void user::set_biography(std::string bio[160])                                  // setting the biography of a user
+void user::set_biography(std::string bio)                                  // setting the biography of a user
 {
-    std::getline(std::cin, bio[160]);
-    Biography[160] = bio[160];
+    Biography = bio;
 }
 
 //------------------------------------------------------------------------
@@ -112,6 +135,7 @@ void user::set_biography(std::string bio[160])                                  
 void user::set_link(std::string input_link)                                    // setting the link of a user
 {
     std::string Https = "https://";
+    std::cout << Https;
     Link = Https + input_link;
 }
 
@@ -144,5 +168,117 @@ void user::set_header(std::string input_header)                             // s
     Header = input_header;
 }
 
+//------------------------------------------------------------------------
+
+void user::set_country(std::string input_country)                          // setting the country of the user
+{
+    Country = input_country;
+}
+
 //================================================================  General_Functions ===============================================================
 
+void user::Like()
+{
+    std::unordered_map <std::string, bool> likes;
+
+    likes[Username] = true;
+}
+
+
+void user::Show_Profile(std::string in_username)
+{
+    std::cout << "Header : " << Header << std::endl;
+    std::cout << "Name : " << Full_Name << std::endl;
+    std::cout << "Username : " << Username << std::endl;
+    std::cout << "Birthday : " << Birthday << std::endl;
+    std::cout << "Biography : " << Biography << std::endl;
+    std::cout << "Link : " << Link << std::endl;
+    std::cout << "Phone_Number : " << Phone_Number << std::endl;
+}
+
+
+void user::Show_Profile()
+{
+    std::cout << "Header : " << Header << std::endl;
+    std::cout << "Name : " << Full_Name << std::endl;
+    std::cout << "Username : " << Username << std::endl;
+    std::cout << "Birthday : " << Birthday << std::endl;
+    std::cout << "Biography : " << Biography << std::endl;
+    std::cout << "Link : " << Link << std::endl;
+    std::cout << "Phone_Number : " << Phone_Number << std::endl;
+}
+
+
+void user::Edit()
+{
+    std::string Edit_part, Edit;
+    std::getline(std::cin, Edit_part);
+  
+
+    if (Edit_part == "Name")
+    {
+        std::cout << "$Name : ";
+        std::cin.ignore();
+        std::cin >> Edit;
+        set_name(Edit);
+    }
+
+    if (Edit_part == "Biography")
+    {
+        std::cout << "$Biography : ";           // problem 
+
+        set_biography(Edit);
+    }
+
+    else if (Edit_part == "Link")
+    {
+        std::cout << "$Link : ";
+        std::cin >> Edit;
+        set_link(Edit);
+    }
+
+
+    else if (Edit_part == "Birthday")
+    {
+        std::cout <<"Please Enter The Birth Date In This Form : 2003.12.19\n";
+        std::cout << "$Birthday : ";
+        std::cin >> Edit;
+        set_birthday(Edit);
+    }
+
+
+    else if (Edit_part == "Phone_Number")
+    {
+        std::cout << "$Phone_Number : ";
+        std::getline(std::cin, Edit);
+        set_phone(Edit);
+    }
+
+    else if (Edit_part == "Password")
+    {
+        std::cout << "$Password : ";
+        std::cin.ignore();
+        std::cin >> Edit;
+        set_password(Edit);
+    }
+
+    else if (Edit_part == "Header")
+    {
+        std::cout << "$Header : ";
+        std::cin >> Edit;
+        set_header(Edit);
+    }
+
+    else if (Edit_part == "Country")
+    {
+        std::cout << "$Country : ";
+        std::cin >> Edit;
+        set_country(Edit);
+    }
+}
+
+
+void user::Delete_Account()
+{
+    twitterak::users.erase(Username);
+}
