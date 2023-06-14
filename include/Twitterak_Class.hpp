@@ -23,6 +23,7 @@ class twitterak
 
 
     public:
+        std::string lower(std::string);
         void run();
         void tokenize(std::string);
 

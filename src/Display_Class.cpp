@@ -6,10 +6,12 @@
 
 void display::login(twitterak app,std:: string user_name, std::string password)
 {
-    if(app.users.count(user_name) == 1)
-    {
-        
-    }
+    //empty
+}
+
+void display::login(twitterak app, std::string)
+{
+    //empty
 }
 
 void display::login(twitterak app)
