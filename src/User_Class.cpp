@@ -258,77 +258,53 @@ void user::Show_Profile(twitterak app)                                          
 
 //------------------------------------------------------------------------
 
-void user::Edit()                                                                                       // Edit the user's information 
+void user::Edit(twitterak app, std::string Edit_part ,std::string value)                                                                                       // Edit the user's information 
 {
-    std::string Edit_part, Edit;
-    std::getline(std::cin, Edit_part);
-  
     Edit_part = to_lower(Edit_part);
-    Edit = to_lower(Edit);
 
     if (Edit_part == "name")
     {
-        std::cout << "$Name : ";
-        std::cin.ignore();
-        std::cin >> Edit;
-        set_name(Edit);
+        app.users[app.logedin_user].set_name(value);
     }
 
     if (Edit_part == "biography")
     {
-        std::cout << "$Biography : ";    
-        std::getline(std::cin, Edit);
+        if (value.length() > 160)
+            value.erase(160, value.length());
 
-        if (Edit.length() > 160)
-            Edit.erase(160, Edit.length());
-
-        set_biography(Edit);
+        app.users[app.logedin_user].set_biography(value);
     }
 
     else if (Edit_part == "link")
     {
-        std::cout << "$link : ";
-        std::cin >> Edit;
-        set_link(Edit);
+        app.users[app.logedin_user].set_link(value);
     }
 
 
     else if (Edit_part == "birthday")
     {
-        std::cout <<"Please Enter The Birth Date In This Form : 2003.12.19\n";
-        std::cout << "$Birthday : ";
-        std::cin >> Edit;
-        set_birthday(Edit);
+        app.users[app.logedin_user].set_birthday(value);
     }
 
 
     else if (Edit_part == "phone_number")
     {
-        std::cout << "$Phone_Number : ";
-        std::getline(std::cin, Edit);
-        set_phone(Edit);
+        app.users[app.logedin_user].set_phone(value);
     }
 
     else if (Edit_part == "password")
     {
-        std::cout << "$Password : ";
-        std::cin.ignore();
-        std::cin >> Edit;
-        set_password(Edit);
+        app.users[app.logedin_user].set_password(value);
     }
 
     else if (Edit_part == "header")
     {
-        std::cout << "$Header : ";
-        std::cin >> Edit;
-        set_header(Edit);
+        app.users[app.logedin_user].set_header(value);
     }
 
     else if (Edit_part == "country")
     {
-        std::cout << "$Country : ";
-        std::cin >> Edit;
-        set_country(Edit);
+        app.users[app.logedin_user].set_country(value);
     }
 }
 
