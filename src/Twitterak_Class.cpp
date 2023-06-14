@@ -4,6 +4,13 @@
 
 #include "Twitterak_Class.hpp"
 
+bool twitterak::is_logedin = false;
+
+bool twitterak::is_logedin;
+std:: string twitterak::log_user;
+std::vector<std::string> twitterak::commands; 
+std::unordered_map<std::string, user> twitterak::users;
+std::unordered_map<std::string,tweet> twitterak::Hashtags;
 
 void twitterak::tokenize(std::string command)
 {
@@ -47,10 +54,3 @@ void twitterak::run()
     
 }
 
-bool twitterak::is_logedin = false;
-
-bool twitterak::is_logedin;
-std:: string twitterak::log_user;
-std::vector<std::string> twitterak::commands; 
-std::unordered_map<std::string, user> twitterak::users;
-std::unordered_map<std::string,tweet> twitterak::Hashtags;

@@ -41,7 +41,9 @@ class user
         void Edit();
         void Tweet();  //ساخت توییت
         void Logout();
-        bool Validating_Username(std::string);          // the validation of a user's username
+        int Validating_Username(std::string);           // the validation of a user's username
+        std::string to_lower(std::string);              // make a string a lowercase
+        std::string remove_atsing(std::string);                           // removing @ from the first of the user name
 
     private:
         std::string Full_Name;

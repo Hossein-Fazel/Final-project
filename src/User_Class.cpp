@@ -80,52 +80,74 @@ std::string user::get_country() const            // returning the color of the h
 
 //==================================================================  Set_Functions =================================================================
 
-void user::set_name(std::string name)                                         // setting the name of a user
+void user::set_name(std::string name)                                               // setting the name of a user
 {
     Full_Name = name;
 }
 
 //------------------------------------------------------------------------
 
-void user::set_username(std::string user_name)                               // setting the username of a user with a validation
+void user::set_username(std::string user_name)                                     // setting the username of a user with a validation
 {
-    while (!(Validating_Username(user_name)))
+    while (1)
     {
-        std::cerr << "Please Enter a Valid Username : ";
-        std::cin >> user_name;
-    }
+        if ((Validating_Username(user_name)) == 0)
+        {
+            std::cerr << "! Username must have at least 5 characters.";
+            std::cin >> user_name;
+        }
 
-    Username = user_name;
+        else if ((Validating_Username(user_name)) == -1)
+        {
+            std::cerr << "! Username must not have characters.";
+            std::cin >> user_name;
+        }
+            
+        else if ((Validating_Username(user_name)) == -2)
+        {
+            std::cerr << "! Username must not be the commands of the program.";
+            std::cin >> user_name;
+        }
+
+        else
+        {
+            if (Username[0] == '@') 
+                Username = remove_atsing(user_name);
+
+            Username = to_lower(user_name);
+
+            break;
+        }
+    }
 }
 
 //------------------------------------------------------------------------
 
-bool user::Validating_Username(std::string user_name)                        // the validation of a user's username
+int user::Validating_Username(std::string user_name)                              // the validation of a user's username
 {
     if (user_name.length() < 5)
-        return false;
+        return 0;
 
     for (int i = 0; i < user_name.length(); ++i)
     {
         if (!isalnum(user_name[i]))
-            return false;
+            return -1;
     }
    
-    for (int i = 0; i < user_name.length(); ++i)
-        Username[i] = tolower(user_name[i]);
+    Username = to_lower(user_name);
 
     if ((Username != "help") and (Username != "login") and (Username != "signup") and (Username != "edit") 
         and (Username != "exit") and (Username != "delete account") and (Username != "like") and (Username != "profile") 
         and (Username != "quit")and (Username != "logout") and (Username != "delete tweet")and (Username != "edit tweet"))
-        return false;
+        return -2;
 
 
-    return true;
+    return 1;
 }
 
 //------------------------------------------------------------------------
 
-void user::set_biography(std::string bio)                                  // setting the biography of a user
+void user::set_biography(std::string bio)                                       // setting the biography of a user
 {
     Biography = bio;
 }
@@ -185,8 +207,27 @@ void user::Like()
 }
 
 
+std::string user::remove_atsing(std::string str)                                                             // removing @ from the first of the user name
+{
+    return str.erase(0, 1);
+}
+
+
+std::string user::to_lower(std::string str)                                            // make a string a lowercase
+{
+    for (int i = 0; i < str.length(); ++i)
+        str[i] = tolower(str[i]);
+
+    return str;
+}
+
+
 void user::Show_Profile(std::string in_username)
 {
+    in_username = remove_atsing(in_username);
+
+    if (in_username == )
+    {
     std::cout << "Header : " << Header << std::endl;
     std::cout << "Name : " << Full_Name << std::endl;
     std::cout << "Username : " << Username << std::endl;
@@ -194,6 +235,13 @@ void user::Show_Profile(std::string in_username)
     std::cout << "Biography : " << Biography << std::endl;
     std::cout << "Link : " << Link << std::endl;
     std::cout << "Phone_Number : " << Phone_Number << std::endl;
+    }
+
+    else 
+    {
+        
+    }
+
 }
 
 
@@ -278,7 +326,25 @@ void user::Edit()
 }
 
 
-void user::Delete_Account()
+void user::Delete_Account()      // bug
 {
-    twitterak::users.erase(Username);
+    std::cout << "? This operation cannot be reversed in any way. Are you sure? (y/n) : ";
+
+    char ch;
+    std::cin >> ch;
+
+    if (ch == 'y')
+    {
+        twitterak::users.erase(Username);
+        std::cout << "* You're account have successfully deleted.";
+    }
 }
+
+
+void user::Logout()            // bug
+{
+    twitterak::is_logedin = false;
+    std::cout << "* You have successfully logged out.";
+}
+
+
