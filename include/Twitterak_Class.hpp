@@ -11,6 +11,9 @@
 
 class twitterak
 {
+    friend void user::Logout(twitterak);
+    friend void user::Delete_Account(twitterak);
+
     friend void user::Show_Profile(twitterak,std:: string);
     friend void user::Show_Profile(twitterak);
 

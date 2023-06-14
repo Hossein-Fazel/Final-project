@@ -45,9 +45,13 @@ void twitterak::run()
             }
             else
             {
-                if(commands.size() > 1)
+                if(commands.size() == 1)
                 {
-                    
+                    d1.login(*this);
+                }
+                else if(commands.size() == 2)
+                {
+                    d1.login(*this, commands[1]);
                 }
             }
         }
