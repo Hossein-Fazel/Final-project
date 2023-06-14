@@ -4,19 +4,15 @@
 #include "Display_Class.hpp"
 #include "Twitterak_Class.hpp"
 
-void display::login(std:: string user_name, std::string password)
+void display::login(twitterak app,std:: string user_name, std::string password)
 {
-    if(twitterak::users.count(user_name) == 1)
+    if(app.users.count(user_name) == 1)
     {
-        if(twitterak::users[user_name].get_password() == display::encrypt(password))
-        {
-            twitterak::is_logedin = true;
-            twitterak::log_user = user_name;
-        }
+        
     }
 }
 
-void display::login()
+void display::login(twitterak app)
 {
     std::string user_name, password;
     std::cout << "$ User Name : \n";

@@ -1,3 +1,6 @@
+#ifndef TWITTERAK_HPP
+#define TWITTERAK_HPP
+
 #include "User_Class.hpp"
 #include "Tweet_Class.hpp"
 #include "Display_Class.hpp"
@@ -6,13 +9,15 @@
 #include <vector>
 #include <string>
 
-#ifndef TWITTERAK_HPP
-#define TWITTERAK_HPP
 
 class twitterak
 {
-    friend void display::login(std::string, std::string);
-    friend void display::login();
+    friend void user::Show_Profile();
+
+    friend void display::login(twitterak app,std::string, std::string);
+    friend void display::login(twitterak app);
+    friend void display::login(twitterak app, std::string password);
+
 
     public:
         void run();
@@ -20,11 +25,10 @@ class twitterak
 
     private:
         bool is_logedin = false;
-        std:: string log_user;
+        std:: string logedin_user;
         std::vector<std::string> commands; 
         std::unordered_map<std::string, user> users;
         std::unordered_map<std::string,tweet> Hashtags;
-
 };
 
 #endif
