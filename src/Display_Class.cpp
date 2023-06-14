@@ -116,8 +116,9 @@ void display::signup(twitterak app)
     u1.set_username(Username);
 
     std::cout << "$ Biography : ";
-    std::cin >> Biography;
+    getline(std::cin, Biography);
     u1.set_biography(Biography);
+    std::cin.ignore();
 
     std::cout << "$ Link : https://";
     std::cin >> Link;
@@ -141,7 +142,7 @@ void display::signup(twitterak app)
     u1.set_header(Header);
 
     app.users[u1.get_username()] = u1;
-    std::cout << "* Registration was successful";
+    std::cout << "* Registration was successful.\n";
 }
 
 void display::help(twitterak app)

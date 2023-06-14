@@ -160,7 +160,7 @@ void twitterak::run()
             }
         }
 
-        else if (commands[0] != "exit")
+        else if (commands[0] == "exit")
         {
             std::cout << "Good Bye\n";
             exit(0);
