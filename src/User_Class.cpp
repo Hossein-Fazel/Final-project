@@ -87,19 +87,22 @@ void user::set_username(std::string user_name)                                  
     {
         if ((Validating_Username(user_name)) == 0)
         {
-            std::cerr << "! Username must have at least 5 characters.";
+            std::cerr << "! Username must have at least 5 characters.\n";
+            std::cout << "$ Name : ";
             std::cin >> user_name;
         }
 
         else if ((Validating_Username(user_name)) == -1)
         {
-            std::cerr << "! Username must not have characters.";
+            std::cerr << "! Username must not have characters.\n";
+            std::cout << "$ Name : ";
             std::cin >> user_name;
         }
             
         else if ((Validating_Username(user_name)) == -2)
         {
-            std::cerr << "! Username must not be the commands of the program.";
+            std::cerr << "! Username must not be the commands of the program.\n";
+            std::cout << "$ Name : ";
             std::cin >> user_name;
         }
 
@@ -128,12 +131,15 @@ int user::Validating_Username(std::string user_name)                            
             return -1;
     }
    
-    Username = to_lower(user_name);
+    user_name = to_lower(user_name);
 
-    if ((Username != "help") and (Username != "login") and (Username != "signup") and (Username != "edit") 
-        and (Username != "exit") and (Username != "delete account") and (Username != "like") and (Username != "profile") 
-        and (Username != "quit")and (Username != "logout") and (Username != "delete tweet")and (Username != "edit tweet"))
+    if ((user_name == "help") or (user_name == "login") or (user_name == "signup") or (user_name == "edit") 
+        or (user_name == "exit") or (user_name == "delete account") or (user_name == "like") or (user_name == "profile") 
+        or (user_name == "quit")or (user_name == "logout") or (user_name == "delete tweet") or (user_name == "edit tweet"))
+    {
         return -2;
+    }
+        
 
     return 1;
 }
@@ -142,7 +148,8 @@ int user::Validating_Username(std::string user_name)                            
 
 void user::set_biography(std::string bio)                                        // setting the biography of a user
 {
-    Biography = bio;
+    if (bio.length() > 160)
+        Biography = bio.erase(160, bio.length());
 }
 
 //------------------------------------------------------------------------
@@ -150,7 +157,6 @@ void user::set_biography(std::string bio)                                       
 void user::set_link(std::string input_link)                                     // setting the link of a user
 {
     const std::string Https = "https://";
-    std::cout << Https;
     Link = Https + input_link;
 }
 
