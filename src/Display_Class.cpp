@@ -116,7 +116,7 @@ void display::signup(twitterak app)
     u1.set_username(Username);
 
     std::cout << "$ Biography : ";
-    getline(std::cin, Biography);
+    std::getline(std::cin, Biography);
     u1.set_biography(Biography);
     std::cin.ignore();
 
