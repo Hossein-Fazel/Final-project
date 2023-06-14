@@ -8,6 +8,7 @@
 #include "User_Class.hpp"
 #include "Twitterak_Class.hpp"
 
+
 //==================================================================  Get_Functions =================================================================
 
 std::string user::get_name() const                      // returning the name of the user
@@ -222,24 +223,27 @@ std::string user::to_lower(std::string str)                                     
 }
 
 
-void user::Show_Profile(std::string in_username)
+void user::Show_Profile(twitterak app, std::string in_username)
 {
     in_username = remove_atsing(in_username);
 
-    if (in_username == )
+    if (in_username == app.logedin_user)
     {
-    std::cout << "Header : " << Header << std::endl;
-    std::cout << "Name : " << Full_Name << std::endl;
-    std::cout << "Username : " << Username << std::endl;
-    std::cout << "Birthday : " << Birthday << std::endl;
-    std::cout << "Biography : " << Biography << std::endl;
-    std::cout << "Link : " << Link << std::endl;
-    std::cout << "Phone_Number : " << Phone_Number << std::endl;
+        std::cout << "$ Header : " << Header << std::endl;
+        std::cout << "$ Name : " << Full_Name << std::endl;
+        std::cout << "$ Username : " << Username << std::endl;
+        std::cout << "$ Birthday : " << Birthday << std::endl;
+        std::cout << "$ Biography : " << Biography << std::endl;
+        std::cout << "$ Link : " << Link << std::endl;
+        std::cout << "$ Phone_Number : " << Phone_Number << std::endl;
     }
 
     else 
     {
-        
+        std::cout << "$ Header : " << Header << std::endl;
+        std::cout << "$ Name : " << Full_Name << std::endl;
+        std::cout << "$ Username : " << Username << std::endl;
+        std::cout << "$ Biography : " << Biography << std::endl;
     }
 
 }

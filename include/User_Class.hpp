@@ -6,6 +6,7 @@
 
 #include"Tweet_Class.hpp"
 class tweet;
+class twitterak;
 
 class user
 {
@@ -24,7 +25,7 @@ class user
 //=================== sets ===================
         void set_name(std::string);                     // setting the name of a user
         void set_username(std::string);                 // setting the username of a user with a validation
-        void set_biography(std::string);               // setting the biography of a user
+        void set_biography(std::string);                // setting the biography of a user
         void set_link(std::string);                     // setting the link of a user
         void set_birthday(std::string);                 // setting the date of birth of a user
         void set_phone(std::string);                    // setting the phone number of a user
@@ -36,14 +37,14 @@ class user
 
         void Like();
         void Delete_Account();
-        void Show_Profile(std::string);
+        void Show_Profile(twitterak,std::string);
         void Show_Profile();
         void Edit();
         void Tweet();  //ساخت توییت
         void Logout();
         int Validating_Username(std::string);           // the validation of a user's username
         std::string to_lower(std::string);              // make a string a lowercase
-        std::string remove_atsing(std::string);                           // removing @ from the first of the user name
+        std::string remove_atsing(std::string);         // removing @ from the first of the user name
 
     private:
         std::string Full_Name;
