@@ -41,12 +41,14 @@ void twitterak::run()
         {
             if(is_logedin == true)
             {
-                std::cout << "! you are loged in\n";
-                std::cout << "if ";
+                std::cout << "! You are loged in\n";
             }
-            if(commands.size() > 1)
+            else
             {
-                
+                if(commands.size() > 1)
+                {
+                    
+                }
             }
         }
     }

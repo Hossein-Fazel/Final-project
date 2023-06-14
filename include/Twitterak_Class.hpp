@@ -9,10 +9,10 @@
 #include <vector>
 #include <string>
 
-
 class twitterak
 {
     friend void user::Show_Profile(twitterak,std:: string);
+    friend void user::Show_Profile(twitterak);
 
     friend void display::login(twitterak app,std::string, std::string);
     friend void display::login(twitterak app);
