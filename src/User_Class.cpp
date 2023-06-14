@@ -258,14 +258,14 @@ void user::Show_Profile(twitterak app)                                          
 
 //------------------------------------------------------------------------
 
-void user::Edit(twitterak app, std::string Edit_part ,std::string value)                                                                                       // Edit the user's information 
+void user::Edit(twitterak app, std::string Edit_part ,std::string value)                                 // edit the user's information                                                                                    // Edit the user's information 
 {
     Edit_part = to_lower(Edit_part);
 
     if (Edit_part == "name")
     {
         app.users[app.logedin_user].set_name(value);
-        std::cout << "* Your " << Edit_part << " has been successfully changed."
+        std::cout << "* Your " << Edit_part << " has been successfully changed.";
     }
 
     if (Edit_part == "biography")
@@ -274,7 +274,7 @@ void user::Edit(twitterak app, std::string Edit_part ,std::string value)        
             value.erase(160, value.length());
 
         app.users[app.logedin_user].set_biography(value);
-        std::cout << "* Your " << Edit_part << " has been successfully changed."
+        std::cout << "* Your " << Edit_part << " has been successfully changed.";
     }
 
     else if (Edit_part == "link")
