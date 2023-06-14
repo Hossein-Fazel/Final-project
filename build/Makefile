@@ -277,6 +277,33 @@ src/User_Class.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/User_Class.cpp.s
 .PHONY : src/User_Class.cpp.s
 
+src/sha256.o: src/sha256.cpp.o
+
+.PHONY : src/sha256.o
+
+# target to build an object file
+src/sha256.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/sha256.cpp.o
+.PHONY : src/sha256.cpp.o
+
+src/sha256.i: src/sha256.cpp.i
+
+.PHONY : src/sha256.i
+
+# target to preprocess a source file
+src/sha256.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/sha256.cpp.i
+.PHONY : src/sha256.cpp.i
+
+src/sha256.s: src/sha256.cpp.s
+
+.PHONY : src/sha256.s
+
+# target to generate assembly for a file
+src/sha256.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/sha256.cpp.s
+.PHONY : src/sha256.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -301,6 +328,9 @@ help:
 	@echo "... src/User_Class.o"
 	@echo "... src/User_Class.i"
 	@echo "... src/User_Class.s"
+	@echo "... src/sha256.o"
+	@echo "... src/sha256.i"
+	@echo "... src/sha256.s"
 .PHONY : help
 
 

@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 #include <ctype.h>
-#include <sha256.h>
+#include "sha256.h"
 
 #include "User_Class.hpp"
 #include "Twitterak_Class.hpp"
@@ -11,14 +11,14 @@
 
 //==================================================================  Get_Functions =================================================================
 
-std::string user::get_name() const                      // returning the name of the user
+std::string user::get_name() const                       // returning the name of the user
 {
     return Full_Name;
 }
 
 //------------------------------------------------------------------------
 
-std::string user::get_username() const                 // returning the username of the user
+std::string user::get_username() const                  // returning the username of the user
 {
     return Username;
 }
@@ -67,14 +67,7 @@ std::string user::get_header() const            // returning the color of the he
 
 //------------------------------------------------------------------------
 
-std::string user::get_header() const            // returning the color of the header that user had chosen 
-{
-    return Header;
-}
-
-//------------------------------------------------------------------------
-
-std::string user::get_country() const            // returning the color of the header that user had chosen 
+std::string user::get_country() const         // returning the color of the header that user had chosen 
 {
     return Country;
 }
@@ -148,14 +141,14 @@ int user::Validating_Username(std::string user_name)                            
 
 //------------------------------------------------------------------------
 
-void user::set_biography(std::string bio)                                       // setting the biography of a user
+void user::set_biography(std::string bio)                                        // setting the biography of a user
 {
     Biography = bio;
 }
 
 //------------------------------------------------------------------------
                                                                                 
-void user::set_link(std::string input_link)                                    // setting the link of a user
+void user::set_link(std::string input_link)                                     // setting the link of a user
 {
     std::string Https = "https://";
     std::cout << Https;
@@ -164,14 +157,14 @@ void user::set_link(std::string input_link)                                    /
 
 //------------------------------------------------------------------------
 
-void user::set_birthday(std::string birth)                                    // setting the date of birth of a user
+void user::set_birthday(std::string birth)                                     // setting the date of birth of a user
 {
     Birthday = birth;
 }
 
 //------------------------------------------------------------------------
 
-void user::set_phone(std::string input_phone)                                // setting the phone number of a user
+void user::set_phone(std::string input_phone)                                 // setting the phone number of a user
 {
     Phone_Number = input_phone;
 }
@@ -205,14 +198,16 @@ void user::set_country(std::string input_country)                          // se
     
 // }
 
+//------------------------------------------------------------------------
 
 std::string user::remove_atsing(std::string str)                                                             // removing @ from the first of the user name
 {
     return str.erase(0, 1);
 }
 
+//------------------------------------------------------------------------
 
-std::string user::to_lower(std::string str)                                            // make a string a lowercase
+std::string user::to_lower(std::string str)                                                                 // make a string a lowercase
 {
     for (int i = 0; i < str.length(); ++i)
         str[i] = tolower(str[i]);
@@ -220,8 +215,9 @@ std::string user::to_lower(std::string str)                                     
     return str;
 }
 
+//------------------------------------------------------------------------
 
-void user::Show_Profile(twitterak app, std::string in_username)
+void user::Show_Profile(twitterak app, std::string in_username)                                            // showing the self-information of a user
 {
     in_username = remove_atsing(in_username);
 
@@ -249,8 +245,9 @@ void user::Show_Profile(twitterak app, std::string in_username)
     }
 }
 
+//------------------------------------------------------------------------
 
-void user::Show_Profile(twitterak app)
+void user::Show_Profile(twitterak app)                                                                    // showing the information of a user itself
 {
     std::cout << "$ Header : " << app.users[app.logedin_user].get_header() << std::endl;
     std::cout << "$ Name : " << app.users[app.logedin_user].get_name() << std::endl;
@@ -262,6 +259,7 @@ void user::Show_Profile(twitterak app)
     std::cout << "$ country : " << app.users[app.logedin_user].get_country()   << std::endl;
 }
 
+//------------------------------------------------------------------------
 
 void user::Edit()
 {
@@ -331,8 +329,9 @@ void user::Edit()
     }
 }
 
+//------------------------------------------------------------------------
 
-void user::Delete_Account(twitterak app)      // bug
+void user::Delete_Account(twitterak app)                                                                         // Deleting the account of the use      
 {
     std::cout << "? This operation cannot be reversed in any way. Are you sure? (y/n) : ";
 
@@ -346,11 +345,10 @@ void user::Delete_Account(twitterak app)      // bug
     }
 }
 
+//------------------------------------------------------------------------
 
-void user::Logout(twitterak app)            // bug
+void user::Logout(twitterak app)                                                                                // loging out of the user's account       
 {
     app.is_logedin = false;
     std::cout << "* You have successfully logged out.";
 }
-
-

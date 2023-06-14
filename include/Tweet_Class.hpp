@@ -30,7 +30,7 @@ class tweet
     private:
         std::vector<tweet> comments;
         
-        std::unordered_map<std::string, user> likes;
+        std::unordered_map<std::string, bool> likes;
         std::string tweet_type;
         std::string self_tweet;
         std::string owner_name;

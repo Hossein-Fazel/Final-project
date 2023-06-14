@@ -1,6 +1,10 @@
+cmake_minimum_required(VERSION 3.0)
 project(Twitterak)
 
 set(CMAKE_CXX_STANDARD 11)
+
+include_directories(include/ hash-library-master/)
+
 
 set(SOURCES
 	
@@ -9,10 +13,7 @@ set(SOURCES
    src/Tweet_Class.cpp
    src/Twitterak_Class.cpp
    src/User_Class.cpp
+   src/sha256.cpp
 )
-
-cmake_minimum_required(VERSION 3.0)
-
-include_directories(include/ hash-library-master/)
 
 add_executable(app ${SOURCES})

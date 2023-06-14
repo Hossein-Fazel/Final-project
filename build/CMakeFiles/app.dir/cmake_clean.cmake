@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/app.dir/src/Tweet_Class.cpp.o"
   "CMakeFiles/app.dir/src/Twitterak_Class.cpp.o"
   "CMakeFiles/app.dir/src/User_Class.cpp.o"
+  "CMakeFiles/app.dir/src/sha256.cpp.o"
   "app"
   "app.pdb"
 )
