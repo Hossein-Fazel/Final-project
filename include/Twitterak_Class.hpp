@@ -21,6 +21,11 @@ class twitterak
     friend void display::login(twitterak app);
     friend void display::login(twitterak app, std::string password);
 
+    friend void display::signup(twitterak);
+
+    friend void display::help(twitterak);
+
+    friend void user::Edit(twitterak, std::string, std::string);
 
     public:
         std::string lower(std::string);

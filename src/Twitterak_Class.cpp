@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <ctype.h>
 #include <vector>
 
 #include "Twitterak_Class.hpp"
@@ -25,11 +26,22 @@ void twitterak::tokenize(std::string command)
     commands.push_back(cm);
 }
 
+std::string twitterak::lower(std::string command)
+{
+    for(int i = 0; i < command.size(); i++)
+    {
+        command[i] = std::tolower(command[i]);
+    }
+
+    return command;
+}
+
+
 void twitterak::run()
 {
     system("cls");
     std::cout << "\t\t\t--- Wellcome to Twitterak ---\n";
-    std::cout << "If you need help, enter help command\n";
+    std::cout << "If you need help, enter help command :)\n";
 
     if(is_logedin == true)
     {
@@ -44,6 +56,7 @@ void twitterak::run()
 
     std:: string command;
     getline(std::cin , command);
+    command = lower(command);
     tokenize(command);
 
     while (commands[0] != "exit")
@@ -73,6 +86,15 @@ void twitterak::run()
         }
 
         else if(commands[0] == "signup")
+        {
+            d1.signup(*this);
+        }
+
+        else if (commands[0] == "")
+        {
+            /* code */
+        }
+        
 
 
         if(is_logedin == true)
@@ -83,8 +105,8 @@ void twitterak::run()
         {
             std:: cout << ">";
         }
-        
         getline(std::cin , command);
+        command = lower(command);
         tokenize(command);
     }
     

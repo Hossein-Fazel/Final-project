@@ -10,12 +10,12 @@ class twitterak;
 class display
 {
     public:
-        void help();
+        void help(twitterak);
         void login(twitterak ,std::string , std::string);
         void login(twitterak, std::string );
         void login(twitterak );
-        void signup();
-        void show_tweet();
+        void signup(twitterak);
+        // void show_tweet();
 
         SHA256 encrypt;
 };
