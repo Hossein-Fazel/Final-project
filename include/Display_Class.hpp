@@ -3,7 +3,6 @@
 
 #include <string>
 
-// #include "Twitterak_Class.hpp"
 #include "sha256.h"
 
 class twitterak;

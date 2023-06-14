@@ -21,12 +21,12 @@ void display::login(twitterak app)
     std::cout << "$ Password : \n";
     std::cin >> password;
 
-    if(twitterak::users.count(user_name) == 1)
+    if(app.users.count(user_name) == 1)
     {
-        if(twitterak::users[user_name].get_password() == display::encrypt(password))
+        if(app.users[user_name].get_password() == display::encrypt(password))
         {
-            twitterak::is_logedin = true;
-            twitterak::log_user = user_name;
+            app.is_logedin = true;
+            app.logedin_user = user_name;
         }
     }
 }
@@ -47,5 +47,5 @@ void display::signup()
     std:: cin >> Full_Name;
 
     std:: cout <<"$ User Name";
-    std::cin >> Username
+    std::cin >> Username;
 }
