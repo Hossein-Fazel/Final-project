@@ -265,6 +265,7 @@ void user::Edit(twitterak app, std::string Edit_part ,std::string value)        
     if (Edit_part == "name")
     {
         app.users[app.logedin_user].set_name(value);
+        std::cout << "* Your " << Edit_part << " has been successfully changed."
     }
 
     if (Edit_part == "biography")
@@ -273,38 +274,45 @@ void user::Edit(twitterak app, std::string Edit_part ,std::string value)        
             value.erase(160, value.length());
 
         app.users[app.logedin_user].set_biography(value);
+        std::cout << "* Your " << Edit_part << " has been successfully changed."
     }
 
     else if (Edit_part == "link")
     {
         app.users[app.logedin_user].set_link(value);
+        std::cout << "* Your " << Edit_part << " has been successfully changed.";
     }
 
 
     else if (Edit_part == "birthday")
     {
         app.users[app.logedin_user].set_birthday(value);
+        std::cout << "* Your " << Edit_part << " has been successfully changed.";
     }
 
 
     else if (Edit_part == "phone_number")
     {
         app.users[app.logedin_user].set_phone(value);
+        std::cout << "* Your " << Edit_part << " has been successfully changed.";
     }
 
     else if (Edit_part == "password")
     {
         app.users[app.logedin_user].set_password(value);
+        std::cout << "* Your " << Edit_part << " has been successfully changed.";
     }
 
     else if (Edit_part == "header")
     {
         app.users[app.logedin_user].set_header(value);
+        std::cout << "* Your " << Edit_part << " has been successfully changed.";
     }
-
+ 
     else if (Edit_part == "country")
     {
         app.users[app.logedin_user].set_country(value);
+        std::cout << "* Your " << Edit_part << " has been successfully changed.";
     }
 }
 
