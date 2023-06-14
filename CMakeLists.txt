@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(SOURCES
 	
    src/Display_Class.cpp
-   src/main.cpp
-   src/Twitt_Class.cpp
+   src/Main.cpp
+   src/Tweet_Class.cpp
    src/Twitterak_Class.cpp
    src/User_Class.cpp
 )

@@ -1,0 +1,3 @@
+/mnt/h/projects/Tiwtterack/build/CMakeFiles/rebuild_cache.dir
+/mnt/h/projects/Tiwtterack/build/CMakeFiles/edit_cache.dir
+/mnt/h/projects/Tiwtterack/build/CMakeFiles/app.dir

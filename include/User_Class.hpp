@@ -38,7 +38,7 @@ class user
         void Like();
         void Delete_Account();
         void Show_Profile(twitterak,std::string);
-        void Show_Profile();
+        void Show_Profile(twitterak);
         void Edit();
         void Tweet();  //ساخت توییت
         void Logout();
