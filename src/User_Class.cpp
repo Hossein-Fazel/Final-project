@@ -135,7 +135,6 @@ int user::Validating_Username(std::string user_name)                            
         and (Username != "quit")and (Username != "logout") and (Username != "delete tweet")and (Username != "edit tweet"))
         return -2;
 
-
     return 1;
 }
 
@@ -150,7 +149,7 @@ void user::set_biography(std::string bio)                                       
                                                                                 
 void user::set_link(std::string input_link)                                     // setting the link of a user
 {
-    std::string Https = "https://";
+    const std::string Https = "https://";
     std::cout << Https;
     Link = Https + input_link;
 }
@@ -232,10 +231,8 @@ void user::Show_Profile(twitterak app, std::string in_username)                 
         std::cout << "$ Phone_Number : " << app.users[in_username].get_phone() << std::endl;
         std::cout << "$ country : " << app.users[in_username].get_country()   << std::endl;
     }
-
     else
     {
-        
         std::cout << "$ Header : " << app.users[in_username].get_header() << std::endl;
         std::cout << "$ Name : " << app.users[in_username].get_name() << std::endl;
         std::cout << "$ Username : " << app.users[in_username].get_username() << std::endl;
@@ -261,13 +258,15 @@ void user::Show_Profile(twitterak app)                                          
 
 //------------------------------------------------------------------------
 
-void user::Edit()
+void user::Edit()                                                                                       // Edit the user's information 
 {
     std::string Edit_part, Edit;
     std::getline(std::cin, Edit_part);
   
+    Edit_part = to_lower(Edit_part);
+    Edit = to_lower(Edit);
 
-    if (Edit_part == "Name")
+    if (Edit_part == "name")
     {
         std::cout << "$Name : ";
         std::cin.ignore();
@@ -275,22 +274,26 @@ void user::Edit()
         set_name(Edit);
     }
 
-    if (Edit_part == "Biography")
+    if (Edit_part == "biography")
     {
-        std::cout << "$Biography : ";           // problem 
+        std::cout << "$Biography : ";    
+        std::getline(std::cin, Edit);
+
+        if (Edit.length() > 160)
+            Edit.erase(160, Edit.length());
 
         set_biography(Edit);
     }
 
-    else if (Edit_part == "Link")
+    else if (Edit_part == "link")
     {
-        std::cout << "$Link : ";
+        std::cout << "$link : ";
         std::cin >> Edit;
         set_link(Edit);
     }
 
 
-    else if (Edit_part == "Birthday")
+    else if (Edit_part == "birthday")
     {
         std::cout <<"Please Enter The Birth Date In This Form : 2003.12.19\n";
         std::cout << "$Birthday : ";
@@ -299,14 +302,14 @@ void user::Edit()
     }
 
 
-    else if (Edit_part == "Phone_Number")
+    else if (Edit_part == "phone_number")
     {
         std::cout << "$Phone_Number : ";
         std::getline(std::cin, Edit);
         set_phone(Edit);
     }
 
-    else if (Edit_part == "Password")
+    else if (Edit_part == "password")
     {
         std::cout << "$Password : ";
         std::cin.ignore();
@@ -314,14 +317,14 @@ void user::Edit()
         set_password(Edit);
     }
 
-    else if (Edit_part == "Header")
+    else if (Edit_part == "header")
     {
         std::cout << "$Header : ";
         std::cin >> Edit;
         set_header(Edit);
     }
 
-    else if (Edit_part == "Country")
+    else if (Edit_part == "country")
     {
         std::cout << "$Country : ";
         std::cin >> Edit;
