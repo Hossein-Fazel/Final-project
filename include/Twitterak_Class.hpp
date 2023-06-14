@@ -12,7 +12,7 @@
 
 class twitterak
 {
-    friend void user::Show_Profile();
+    friend void user::Show_Profile(std:: string);
 
     friend void display::login(twitterak app,std::string, std::string);
     friend void display::login(twitterak app);
