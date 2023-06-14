@@ -200,12 +200,10 @@ void user::set_country(std::string input_country)                          // se
 
 //================================================================  General_Functions ===============================================================
 
-void user::Like()
-{
-    std::unordered_map <std::string, bool> likes;
-
-    likes[Username] = true;
-}
+// void user::Like()
+// {
+    
+// }
 
 
 std::string user::remove_atsing(std::string str)                                                             // removing @ from the first of the user name
@@ -254,14 +252,14 @@ void user::Show_Profile(twitterak app, std::string in_username)
 
 void user::Show_Profile(twitterak app)
 {
-    std::cout << "$ Header : " << app.users[in_username].get_header() << std::endl;
-    std::cout << "$ Name : " << app.users[in_username].get_name() << std::endl;
-    std::cout << "$ Username : " << app.users[in_username].get_username() << std::endl;
-    std::cout << "$ Birthday : " << app.users[in_username].get_birthday() << std::endl;
-    std::cout << "$ Biography : " << app.users[in_username].get_biography() << std::endl;
-    std::cout << "$ Link : " << app.users[in_username].get_link() << std::endl;
-    std::cout << "$ Phone_Number : " << app.users[in_username].get_phone() << std::endl;
-    std::cout << "$ country : " << app.users[in_username].get_country()   << std::endl;
+    std::cout << "$ Header : " << app.users[app.logedin_user].get_header() << std::endl;
+    std::cout << "$ Name : " << app.users[app.logedin_user].get_name() << std::endl;
+    std::cout << "$ Username : " << app.users[app.logedin_user].get_username() << std::endl;
+    std::cout << "$ Birthday : " << app.users[app.logedin_user].get_birthday() << std::endl;
+    std::cout << "$ Biography : " << app.users[app.logedin_user].get_biography() << std::endl;
+    std::cout << "$ Link : " << app.users[app.logedin_user].get_link() << std::endl;
+    std::cout << "$ Phone_Number : " << app.users[app.logedin_user].get_phone() << std::endl;
+    std::cout << "$ country : " << app.users[app.logedin_user].get_country()   << std::endl;
 }
 
 
@@ -334,7 +332,7 @@ void user::Edit()
 }
 
 
-void user::Delete_Account()      // bug
+void user::Delete_Account(twitterak app)      // bug
 {
     std::cout << "? This operation cannot be reversed in any way. Are you sure? (y/n) : ";
 
@@ -343,15 +341,15 @@ void user::Delete_Account()      // bug
 
     if (ch == 'y')
     {
-        twitterak::users.erase(Username);
+        app.users.erase(app.logedin_user);
         std::cout << "* You're account have successfully deleted.";
     }
 }
 
 
-void user::Logout()            // bug
+void user::Logout(twitterak app)            // bug
 {
-    twitterak::is_logedin = false;
+    app.is_logedin = false;
     std::cout << "* You have successfully logged out.";
 }
 
