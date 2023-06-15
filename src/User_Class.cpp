@@ -88,21 +88,21 @@ void user::set_username(std::string user_name)                                  
         if ((Validating_Username(user_name)) == 0)
         {
             std::cerr << "! Username must have at least 5 characters.\n";
-            std::cout << "$ Name : ";
+            std::cout << "$ Username : ";
             std::cin >> user_name;
         }
 
         else if ((Validating_Username(user_name)) == -1)
         {
             std::cerr << "! Username must not have characters.\n";
-            std::cout << "$ Name : ";
+            std::cout << "$ Username : ";
             std::cin >> user_name;
         }
             
         else if ((Validating_Username(user_name)) == -2)
         {
             std::cerr << "! Username must not be the commands of the program.\n";
-            std::cout << "$ Name : ";
+            std::cout << "$ Username : ";
             std::cin >> user_name;
         }
 
