@@ -11,77 +11,77 @@
 
 //==================================================================  Get_Functions =================================================================
 
-std::string user::get_name() const                       // returning the name of the user
+std::string user::get_name() const                       // returns the name of the user
 {
     return Full_Name;
 }
 
 //------------------------------------------------------------------------
 
-std::string user::get_username() const                  // returning the username of the user
+std::string user::get_username() const                  // returns the username of the user
 {
     return Username;
 }
 
 //------------------------------------------------------------------------
 
-std::string user::get_biography() const                // returning the biography of the user
+std::string user::get_biography() const                // returns the biography of the user
 {
     return Biography;
 }
 
 //------------------------------------------------------------------------
 
-std::string user::get_link() const                    // returning the link of the user
+std::string user::get_link() const                    // returns the link of the user
 {
     return Link;
 }
 
 //------------------------------------------------------------------------
 
-std::string user::get_birthday() const              // returning the date of birth of the user
+std::string user::get_birthday() const              // returns the date of birth of the user
 {
     return Birthday;
 }
 
 //------------------------------------------------------------------------
 
-std::string user::get_phone() const                // returning the phone number of the user
+std::string user::get_phone() const                // returns the phone number of the user
 {
     return Phone_Number;
 }
 
 //------------------------------------------------------------------------
 
-std::string user::get_password() const            // returning the password of the user's account
+std::string user::get_password() const            // returns the password of the user's account
 {
     return Password;
 }
 
 //------------------------------------------------------------------------
 
-std::string user::get_header() const            // returning the color of the header that user had chosen 
+std::string user::get_header() const            // returns the color of the header that user had chosen 
 {
     return Header;
 }
 
 //------------------------------------------------------------------------
 
-std::string user::get_country() const         // returning the color of the header that user had chosen 
+std::string user::get_country() const         // returns the color of the header that user had chosen 
 {
     return Country;
 }
 
 //==================================================================  Set_Functions =================================================================
 
-void user::set_name(std::string name)                                               // setting the name of a user
+void user::set_name(std::string name)                                               // sets the name of a user
 {
     Full_Name = name;
 }
 
 //------------------------------------------------------------------------
 
-void user::set_username(std::string user_name)                                     // setting the username of a user with a validation
+void user::set_username(std::string user_name)                                     // sets the username of a user with a validation
 {
     while (1)
     {
@@ -146,7 +146,7 @@ int user::Validating_Username(std::string user_name)                            
 
 //------------------------------------------------------------------------
 
-void user::set_biography(std::string bio)                                        // setting the biography of a user
+void user::set_biography(std::string bio)                                        // sets the biography of a user
 {
     if (bio.length() > 160)
         Biography = bio.erase(160, bio.length());
@@ -154,7 +154,7 @@ void user::set_biography(std::string bio)                                       
 
 //------------------------------------------------------------------------
                                                                                 
-void user::set_link(std::string input_link)                                     // setting the link of a user
+void user::set_link(std::string input_link)                                     // sets the link of a user
 {
     const std::string Https = "https://";
     Link = Https + input_link;
@@ -162,21 +162,21 @@ void user::set_link(std::string input_link)                                     
 
 //------------------------------------------------------------------------
 
-void user::set_birthday(std::string birth)                                     // setting the date of birth of a user
+void user::set_birthday(std::string birth)                                     // sets the date of birth of a user
 {
     Birthday = birth;
 }
 
 //------------------------------------------------------------------------
 
-void user::set_phone(std::string input_phone)                                 // setting the phone number of a user
+void user::set_phone(std::string input_phone)                                 // sets the phone number of a user
 {
     Phone_Number = input_phone;
 }
 
 //------------------------------------------------------------------------
 
-void user::set_password(std::string input_pass)                             // setting the password of the user's account
+void user::set_password(std::string input_pass)                             // sets the password of the user's account
 {
     SHA256 sha256;
     Password = sha256(input_pass);
@@ -184,14 +184,14 @@ void user::set_password(std::string input_pass)                             // s
 
 //------------------------------------------------------------------------
 
-void user::set_header(std::string input_header)                             // setting the color of the header that user had chosen
+void user::set_header(std::string input_header)                             // sets the color of the header that user had chosen
 {
     Header = input_header;
 }
 
 //------------------------------------------------------------------------
 
-void user::set_country(std::string input_country)                          // setting the country of the user
+void user::set_country(std::string input_country)                          // sets the country of the user
 {
     Country = input_country;
 }
@@ -205,14 +205,14 @@ void user::set_country(std::string input_country)                          // se
 
 //------------------------------------------------------------------------
 
-std::string user::remove_atsing(std::string str)                                                             // removing @ from the first of the user name
+std::string user::remove_atsing(std::string str)                                                             // removes @ from the first of the user name
 {
     return str.erase(0, 1);
 }
 
 //------------------------------------------------------------------------
 
-std::string user::to_lower(std::string str)                                                                 // make a string a lowercase
+std::string user::to_lower(std::string str)                                                                 // makes a string lowercase
 {
     for (int i = 0; i < str.length(); ++i)
         str[i] = tolower(str[i]);
@@ -222,7 +222,7 @@ std::string user::to_lower(std::string str)                                     
 
 //------------------------------------------------------------------------
 
-void user::Show_Profile(twitterak app, std::string in_username)                                            // showing the self-information of a user
+void user::Show_Profile(twitterak app, std::string in_username)                                            // shows the self-information of a user
 {
     in_username = remove_atsing(in_username);
 
@@ -250,7 +250,7 @@ void user::Show_Profile(twitterak app, std::string in_username)                 
 
 //------------------------------------------------------------------------
 
-void user::Show_Profile(twitterak app)                                                                    // showing the information of a user itself
+void user::Show_Profile(twitterak app)                                                                    // shows the information of a user itself
 {
     std::cout << "$ Header : " << app.users[app.logedin_user].get_header() << std::endl;
     std::cout << "$ Name : " << app.users[app.logedin_user].get_name() << std::endl;
@@ -264,7 +264,7 @@ void user::Show_Profile(twitterak app)                                          
 
 //------------------------------------------------------------------------
 
-void user::Edit(twitterak app, std::string Edit_part ,std::string value)                                 // edit the user's information                                                                                    // Edit the user's information 
+void user::Edit(twitterak app, std::string Edit_part ,std::string value)                                 // edits the user's information                                                                                    // Edit the user's information 
 {
     Edit_part = to_lower(Edit_part);
 
@@ -324,7 +324,7 @@ void user::Edit(twitterak app, std::string Edit_part ,std::string value)        
 
 //------------------------------------------------------------------------
 
-void user::Delete_Account(twitterak app)                                                                         // Deleting the account of the use      
+void user::Delete_Account(twitterak app)                                                                         // deletes the account of the use      
 {
     std::cout << "? This operation cannot be reversed in any way. Are you sure? (y/n) : ";
 
@@ -340,7 +340,7 @@ void user::Delete_Account(twitterak app)                                        
 
 //------------------------------------------------------------------------
 
-void user::Logout(twitterak app)                                                                                // loging out of the user's account       
+void user::Logout(twitterak app)                                                                                // logs out of the user's account       
 {
     app.is_logedin = false;
     std::cout << "* You have successfully logged out.";
