@@ -147,10 +147,30 @@ void display::signup(twitterak app)
 
 void display::help(twitterak app)
 {
-    if(app.is_logedin)
+    if(app.is_logedin == false)
     {
-        std:: cout << "==================== Help ====================\n";
-        std:: cout << "logout : for log";
+        std:: cout << "login : to login to your acount\n";
+        std::cout << "-> login your_user_name your_password / login your_user_name / login \n";
+
+        std::cout << "signup : to create a new account\n";
+        std::cout << "exit/quit/q : to close the app\n";
+    }
+    else
+    {
+        std::cout << "delete account : to delete your account\n";
+        std::cout << "\n";
+        std::cout << "signup : for create a new account\n";
+        std::cout << "signup : for create a new account\n";
+        std::cout << "signup : for create a new account\n";
+        std::cout << "signup : for create a new account\n";
+        std::cout << "signup : for create a new account\n";
+        std::cout << "signup : for create a new account\n";
+        std::cout << "signup : for create a new account\n";
+        std::cout << "signup : for create a new account\n";
+        std::cout << "signup : for create a new account\n";
+        std::cout << "signup : for create a new account\n";
+        std::cout << "signup : for create a new account\n";
+
     }
 
 
