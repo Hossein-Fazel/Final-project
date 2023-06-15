@@ -111,14 +111,14 @@ void display::signup(twitterak app)
         }
     }
 
-    std::cout << "$ User Name : ";
+    std::cout << "$ User Name : @";
     std::cin >> Username;
     u1.set_username(Username);
 
     std::cout << "$ Biography : ";
+    std::cin.ignore();
     std::getline(std::cin, Biography);
     u1.set_biography(Biography);
-    std::cin.ignore();
 
     std::cout << "$ Link : https://";
     std::cin >> Link;
@@ -143,6 +143,9 @@ void display::signup(twitterak app)
 
     app.users[u1.get_username()] = u1;
     std::cout << "* Registration was successful.\n";
+
+    app.is_logedin = true;
+    app.logedin_user = u1.get_username();
 }
 
 void display::help(twitterak app)
