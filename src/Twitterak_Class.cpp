@@ -40,7 +40,7 @@ std::string twitterak::lower(std::string command)
 void twitterak::run()
 {
     system("cls");
-    std::cout << "\t\t\t--- Wellcome to Twitterak ---\n";
+    std::cout << "\t\t\t--- Welcome to Twitterak ---\n";
     std::cout << "If you need help, enter help command :)\n";
 
     if(is_logedin == true)
