@@ -334,6 +334,7 @@ void user::Delete_Account(twitterak &app)                                       
     if (ch == 'y')
     {
         app.users.erase(app.logedin_user);
+        app.is_logedin = false;
         std::cout << "* You're account have successfully deleted.\n";
     }
 }
