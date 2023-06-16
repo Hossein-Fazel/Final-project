@@ -88,21 +88,21 @@ void user::set_username(std::string user_name)                                  
         if ((Validating_Username(user_name)) == 0)
         {
             std::cerr << "! Username must have at least 5 characters.\n";
-            std::cout << "$ Username : ";
+            std::cout << "$ Username : @";
             std::cin >> user_name;
         }
 
         else if ((Validating_Username(user_name)) == -1)
         {
             std::cerr << "! Username must not have characters.\n";
-            std::cout << "$ Username : ";
+            std::cout << "$ Username : @";
             std::cin >> user_name;
         }
             
         else if ((Validating_Username(user_name)) == -2)
         {
             std::cerr << "! Username must not be the commands of the program.\n";
-            std::cout << "$ Username : ";
+            std::cout << "$ Username : @";
             std::cin >> user_name;
         }
 
@@ -222,7 +222,7 @@ std::string user::to_lower(std::string str)                                     
 
 //------------------------------------------------------------------------
 
-void user::Show_Profile(twitterak app, std::string in_username)                                            // shows the self-information of a user
+void user::Show_Profile(twitterak &app, std::string in_username)                                            // shows the self-information of a user
 {
     in_username = remove_atsing(in_username);
 
@@ -250,7 +250,7 @@ void user::Show_Profile(twitterak app, std::string in_username)                 
 
 //------------------------------------------------------------------------
 
-void user::Show_Profile(twitterak app)                                                                    // shows the information of a user itself
+void user::Show_Profile(twitterak &app)                                                                    // shows the information of a user itself
 {
     std::cout << "$ Header : " << app.users[app.logedin_user].get_header() << std::endl;
     std::cout << "$ Name : " << app.users[app.logedin_user].get_name() << std::endl;
@@ -264,14 +264,14 @@ void user::Show_Profile(twitterak app)                                          
 
 //------------------------------------------------------------------------
 
-void user::Edit(twitterak app, std::string Edit_part ,std::string value)                                 // edits the user's information                                                                                    // Edit the user's information 
+void user::Edit(twitterak &app, std::string Edit_part ,std::string value)                                 // edits the user's information                                                                                    // Edit the user's information 
 {
     Edit_part = to_lower(Edit_part);
 
     if (Edit_part == "name")
     {
         app.users[app.logedin_user].set_name(value);
-        std::cout << "* Your " << Edit_part << " has been successfully changed.";
+        std::cout << "* Your " << Edit_part << " has been successfully changed.\n";
     }
 
     if (Edit_part == "biography")
@@ -280,13 +280,13 @@ void user::Edit(twitterak app, std::string Edit_part ,std::string value)        
             value.erase(160, value.length());
 
         app.users[app.logedin_user].set_biography(value);
-        std::cout << "* Your " << Edit_part << " has been successfully changed.";
+        std::cout << "* Your " << Edit_part << " has been successfully changed.\n";
     }
 
     else if (Edit_part == "link")
     {
         app.users[app.logedin_user].set_link(value);
-        std::cout << "* Your " << Edit_part << " has been successfully changed.";
+        std::cout << "* Your " << Edit_part << " has been successfully changed.\n";
     }
 
 
@@ -300,31 +300,31 @@ void user::Edit(twitterak app, std::string Edit_part ,std::string value)        
     else if (Edit_part == "phone_number")
     {
         app.users[app.logedin_user].set_phone(value);
-        std::cout << "* Your " << Edit_part << " has been successfully changed.";
+        std::cout << "* Your " << Edit_part << " has been successfully changed.\n";
     }
 
     else if (Edit_part == "password")
     {
         app.users[app.logedin_user].set_password(value);
-        std::cout << "* Your " << Edit_part << " has been successfully changed.";
+        std::cout << "* Your " << Edit_part << " has been successfully changed.\n";
     }
 
     else if (Edit_part == "header")
     {
         app.users[app.logedin_user].set_header(value);
-        std::cout << "* Your " << Edit_part << " has been successfully changed.";
+        std::cout << "* Your " << Edit_part << " has been successfully changed.\n";
     }
  
     else if (Edit_part == "country")
     {
         app.users[app.logedin_user].set_country(value);
-        std::cout << "* Your " << Edit_part << " has been successfully changed.";
+        std::cout << "* Your " << Edit_part << " has been successfully changed.\n";
     }
 }
 
 //------------------------------------------------------------------------
 
-void user::Delete_Account(twitterak app)                                                                         // deletes the account of the use      
+void user::Delete_Account(twitterak &app)                                                                         // deletes the account of the use      
 {
     std::cout << "? This operation cannot be reversed in any way. Are you sure? (y/n) : ";
 
@@ -334,14 +334,14 @@ void user::Delete_Account(twitterak app)                                        
     if (ch == 'y')
     {
         app.users.erase(app.logedin_user);
-        std::cout << "* You're account have successfully deleted.";
+        std::cout << "* You're account have successfully deleted.\n";
     }
 }
 
 //------------------------------------------------------------------------
 
-void user::Logout(twitterak app)                                                                                // logs out of the user's account       
+void user::Logout(twitterak &app)                                                                                // logs out of the user's account       
 {
     app.is_logedin = false;
-    std::cout << "* You have successfully logged out.";
+    std::cout << "* You have successfully logged out.\n";
 }

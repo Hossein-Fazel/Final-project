@@ -36,12 +36,12 @@ class user
 //============ General functions ==============
 
         // void Like();
-        void Delete_Account(twitterak);                          // delets the account of the user
-        void Show_Profile(twitterak,std::string);                // shows the self-information of a user
-        void Show_Profile(twitterak);                            // shows the information of a user itself
-        void Edit(twitterak, std::string, std::string);          // edits the user's information                                                                    
+        void Delete_Account(twitterak &);                          // delets the account of the user
+        void Show_Profile(twitterak &,std::string);                // shows the self-information of a user
+        void Show_Profile(twitterak &);                            // shows the information of a user itself
+        void Edit(twitterak &, std::string, std::string);          // edits the user's information                                                                    
         void Tweet();  //ساخت توییت
-        void Logout(twitterak);                                  // logs out of the user's account
+        void Logout(twitterak &);                                  // logs out of the user's account
         int Validating_Username(std::string);                    // the validation of a user's username
         std::string to_lower(std::string);                       // makes a string a lowercase
         std::string remove_atsing(std::string);                  // removes @ from the first of the user name
