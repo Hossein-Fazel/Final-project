@@ -293,7 +293,7 @@ void user::Edit(twitterak &app, std::string Edit_part ,std::string value)       
     else if (Edit_part == "birthday")
     {
         app.users[app.logedin_user].set_birthday(value);
-        std::cout << "* Your " << Edit_part << " has been successfully changed.";
+        std::cout << "* Your " << Edit_part << " has been successfully changed.\n";
     }
 
 
