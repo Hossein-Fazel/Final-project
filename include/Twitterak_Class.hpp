@@ -13,19 +13,17 @@ class twitterak
 {
     friend void user::Logout(twitterak &);
     friend void user::Delete_Account(twitterak &);
-
     friend void user::Show_Profile(twitterak &,std:: string);
     friend void user::Show_Profile(twitterak &);
+    friend void user::Edit(twitterak &, std::string, std::string);
 
     friend void display::login(twitterak  &,std::string, std::string);
     friend void display::login(twitterak  &);
-    friend void display::login(twitterak  &, std::string password);
-
+    friend void display::login(twitterak  &, std::string);
     friend void display::signup(twitterak &);
-
     friend void display::help(twitterak &);
+    friend void display::signup(twitterak &, std::string);
 
-    friend void user::Edit(twitterak &, std::string, std::string);
 
     public:
         std::string lower(std::string);

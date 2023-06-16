@@ -19,20 +19,21 @@ void twitterak::tokenize(std::string command)
         }
         else
         {
-            commands.push_back(cm);
-            cm = "";
-        }
-
-        if(commands.size() == 3)
-        {
-            if(commands[2] == "biography")
+            if(cm.empty())
             {
-                cm = command.substr(i+1, command.size()-1);
-                break;
+                continue;
+            }
+            else
+            {
+                commands.push_back(cm);
+                cm = "";
             }
         }
     }
-    commands.push_back(cm);
+    if(!cm.empty())
+    {
+        commands.push_back(cm);
+    }
 }
 
 std::string twitterak::lower(std::string command)
@@ -79,18 +80,18 @@ void twitterak::run()
                     if(cSize == 1)
                     {
                         d1.login(*this);
+                        std::cin.ignore();
                     }
                     else if(cSize == 2)
                     {
                         d1.login(*this, commands[1]);
+                        std::cin.ignore();
                     }
                     else if (cSize == 3)
                     {
-                        d1.login(*this);
+                        d1.login(*this, commands[1], commands[2]);
                     }
                 }
-
-                std::cin.ignore();
             }
 
             else if(commands[0] == "signup")
@@ -101,7 +102,14 @@ void twitterak::run()
                 }
                 else
                 {
-                    d1.signup(*this);
+                    if(commands.size() == 2)
+                    {
+                        d1.signup(*this, commands[1]);
+                    }
+                    else
+                    {
+                        d1.signup(*this);
+                    }
                     std::cin.ignore();
                 }
             }
