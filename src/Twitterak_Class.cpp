@@ -22,6 +22,15 @@ void twitterak::tokenize(std::string command)
             commands.push_back(cm);
             cm = "";
         }
+
+        if(commands.size() == 3)
+        {
+            if(commands[2] == "biography")
+            {
+                cm = command.substr(i+1, command.size()-1);
+                break;
+            }
+        }
     }
     commands.push_back(cm);
 }
@@ -130,7 +139,6 @@ void twitterak::run()
                 {
                     std:: cout << "! You must login first to your account.\n";
                 }
-                std::cin.ignore();
             }
 
             else if(commands[0] == "edit")
@@ -139,10 +147,10 @@ void twitterak::run()
                 {
                     if(cSize == 4)
                     {
-                        if(commands[2] != "phone_number")
+                        if(commands[2] != "phone_number" and commands[2] != "birthday")
                         {
                             commands[3] = commands[3].erase(0,1);
-                            commands[3] = commands[3].erase(commands.size()-1,1);
+                            commands[3] = commands[3].erase(commands[3].size()-1,1);
                         }
                         users[logedin_user].Edit(*this, commands[2], commands[3]);
                     }
@@ -155,7 +163,6 @@ void twitterak::run()
                 {
                     std:: cout << "! You must login first to your account\n";
                 }
-                std::cin.ignore();
             }
 
             else if(commands[0] == "logout")
@@ -168,8 +175,6 @@ void twitterak::run()
                 {
                     std:: cout << "! You must login first to your account\n";
                 }
-                std::cin.ignore();
-
             }
 
             else if (commands[0] == "exit" or commands[0] == "quit" or commands[0] == "q")
@@ -186,7 +191,6 @@ void twitterak::run()
             else
             {
                 std:: cout << "! undefined command.\n";
-                std::cin.ignore();
             }
         
         }
