@@ -150,6 +150,9 @@ void user::set_biography(std::string bio)                                       
 {
     if (bio.length() > 160)
         Biography = bio.erase(160, bio.length());
+
+    else   
+        Biography = bio;
 }
 
 //------------------------------------------------------------------------
@@ -333,8 +336,8 @@ void user::Delete_Account(twitterak &app)                                       
 
     if (ch == 'y')
     {
-        app.users.erase(app.logedin_user);
         app.is_logedin = false;
+        app.users.erase(app.logedin_user);
         std::cout << "* You're account have successfully deleted.\n";
     }
 }
