@@ -145,7 +145,7 @@ void twitterak::run()
             {
                 if(is_logedin)
                 {
-                    if(cSize == 4)
+                    if(cSize == 4 and !commands[3].empty())
                     {
                         if(commands[2] != "phone_number" and commands[2] != "birthday")
                         {
