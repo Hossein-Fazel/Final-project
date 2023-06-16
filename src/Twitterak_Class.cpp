@@ -39,18 +39,11 @@ std::string twitterak::lower(std::string command)
 
 void twitterak::run()
 {
-    system("cls");
+    system("cls | clear");
     std::cout << "\t\t\t--- Welcome to Twitterak ---\n";
     std::cout << "If you need help, enter help command :)\n";
 
-    if(is_logedin == true)
-    {
-        std::cout << "@" << users[logedin_user].get_username() << "> ";
-    }
-    else
-    {
-        std:: cout << "> ";
-    }
+    std:: cout << "> ";
 
     display d1;
 
@@ -59,8 +52,6 @@ void twitterak::run()
     getline(std::cin , command);
     command = lower(command);
     tokenize(command);
-
-
 
     while (1)
     {
@@ -93,7 +84,15 @@ void twitterak::run()
 
             else if(commands[0] == "signup")
             {
-                d1.signup(*this);
+                if(is_logedin)
+                {
+                    std::cout << "! You must login first to your account.\n";
+                }
+                else
+                {
+                    d1.signup(*this);
+                    std::cin.ignore();
+                }
             }
 
             else if(commands[0] == "delete")
@@ -177,14 +176,14 @@ void twitterak::run()
                 d1.help(*this);
             }
             
-
             else
             {
                 std:: cout << "! undefined command.\n";
             }
         
         }
-        if(is_logedin == true)
+
+        if(is_logedin)
         {
             std::cout << "@" << users[logedin_user].get_username() << "> ";
         }
@@ -192,6 +191,7 @@ void twitterak::run()
         {
             std:: cout << "> ";
         }
+
         getline(std::cin , command);
         command = lower(command);
         tokenize(command);
