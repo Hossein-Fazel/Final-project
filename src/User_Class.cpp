@@ -230,7 +230,7 @@ void user::Show_Profile(twitterak &app, std::string in_username)                
     {
         std::cout << "$ Header : " << app.users[in_username].get_header() << std::endl;
         std::cout << "$ Name : " << app.users[in_username].get_name() << std::endl;
-        std::cout << "$ Username : " << app.users[in_username].get_username() << std::endl;
+        std::cout << "$ Username : @" << app.users[in_username].get_username() << std::endl;
         std::cout << "$ Birthday : " << app.users[in_username].get_birthday() << std::endl;
         std::cout << "$ Biography : " << app.users[in_username].get_biography() << std::endl;
         std::cout << "$ Link : " << app.users[in_username].get_link() << std::endl;
@@ -241,7 +241,7 @@ void user::Show_Profile(twitterak &app, std::string in_username)                
     {
         std::cout << "$ Header : " << app.users[in_username].get_header() << std::endl;
         std::cout << "$ Name : " << app.users[in_username].get_name() << std::endl;
-        std::cout << "$ Username : " << app.users[in_username].get_username() << std::endl;
+        std::cout << "$ Username : @" << app.users[in_username].get_username() << std::endl;
         std::cout << "$ Biography : " << app.users[in_username].get_biography() << std::endl;
         std::cout << "$ Link : " << app.users[in_username].get_link() << std::endl;
         std::cout << "$ country : " << app.users[in_username].get_country()   << std::endl;
@@ -254,7 +254,7 @@ void user::Show_Profile(twitterak &app)                                         
 {
     std::cout << "$ Header : " << app.users[app.logedin_user].get_header() << std::endl;
     std::cout << "$ Name : " << app.users[app.logedin_user].get_name() << std::endl;
-    std::cout << "$ Username : " << app.users[app.logedin_user].get_username() << std::endl;
+    std::cout << "$ Username : @" << app.users[app.logedin_user].get_username() << std::endl;
     std::cout << "$ Birthday : " << app.users[app.logedin_user].get_birthday() << std::endl;
     std::cout << "$ Biography : " << app.users[app.logedin_user].get_biography() << std::endl;
     std::cout << "$ Link : " << app.users[app.logedin_user].get_link() << std::endl;
