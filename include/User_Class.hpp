@@ -37,7 +37,6 @@ class user
 
         // void Like();
         void Delete_Account(twitterak &);                          // delets the account of the user
-        void Show_Profile(twitterak &,std::string);                // shows the self-information of a user
         void Show_Profile(twitterak &);                            // shows the information of a user itself
         void Edit(twitterak &, std::string, std::string);          // edits the user's information                                                                    
         void Tweet();  //ساخت توییت
