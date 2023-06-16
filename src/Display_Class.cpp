@@ -4,8 +4,16 @@
 #include "Display_Class.hpp"
 #include "Twitterak_Class.hpp"
 
+//============================================================= Login_Functions ============================================================= 
+
 void display::login(twitterak &app, std::string user_name, std::string password)
 {
+    user_name = app.lower(user_name);
+    if(user_name[0] == '@')
+    {
+        user_name.erase(0,1);
+    }
+
     if (app.users.count(user_name) == 1)
     {
         if (app.users[user_name].get_password() == display::encrypt(password))
@@ -25,8 +33,16 @@ void display::login(twitterak &app, std::string user_name, std::string password)
     }
 }
 
+//------------------------------------------------------------------------------------------
+
 void display::login(twitterak &app, std::string user_name)
 {
+    user_name = app.lower(user_name);
+    if(user_name[0] == '@')
+    {
+        user_name.erase(0,1);
+    }
+
     std::string password;
 
     std::cout << "$ Password : ";
@@ -51,11 +67,19 @@ void display::login(twitterak &app, std::string user_name)
     }
 }
 
+//------------------------------------------------------------------------------------------
+
 void display::login(twitterak &app)
 {
     std::string user_name, password;
     std::cout << "$ User Name : ";
     std::cin >> user_name;
+    user_name = app.lower(user_name);
+    if(user_name[0] == '@')
+    {
+        user_name.erase(0,1);
+    }
+    std::cout << user_name;
 
     std::cout << "$ Password : ";
     std::cin >> password;
@@ -79,6 +103,8 @@ void display::login(twitterak &app)
     }
 }
 
+//============================================================= Sign-up_Function ============================================================= 
+
 void display::signup(twitterak &app)
 {
     std::string Full_Name;
@@ -92,28 +118,29 @@ void display::signup(twitterak &app)
 
     user u1;
 
+    std::cout << "$ Name : ";
+    std::cin >> Full_Name;
+    u1.set_name(Full_Name);
+
+    std::cout << "$ Username : @";
+    std::cin >> Username;
+    u1.set_username(Username);
+
     while(1)
     {
-        std::cout << "$ Name : ";
-        std::cin >> Full_Name;
-        u1.set_name(Full_Name);
-
         if(app.users.count(u1.get_username()) == 1)
         {
-            std:: cout << "! Your user name is invalid\n";
-            std::cout << "$ Name : ";
-            std::cin >> Full_Name;
-            u1.set_name(Full_Name);
+            std::cout << "! Your username is invalid.\n";
+            std::cout << "$ Username : @";
+            std::cin >> Username;
+            u1.set_username(Username);
         }
+
         else
         {
             break;
         }
     }
-
-    std::cout << "$ User Name : @";
-    std::cin >> Username;
-    u1.set_username(Username);
 
     std::cout << "$ Password : ";
     std::cin >> Password;
@@ -127,6 +154,8 @@ void display::signup(twitterak &app)
     std::cout << "* Registration was successful.\n";
 }
 
+//============================================================= Help_Function ============================================================= 
+
 void display::help(twitterak &app)
 {
     if(app.is_logedin == false)
@@ -137,6 +166,7 @@ void display::help(twitterak &app)
         std::cout << "signup : to create a new account\n";
         std::cout << "exit/quit/q : to close the app\n";
     }
+
     else
     {
         std::cout << "delete account : to delete your account\n";
@@ -154,8 +184,4 @@ void display::help(twitterak &app)
         std::cout << "signup : for create a new account\n";
 
     }
-
-
 }
-
-

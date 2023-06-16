@@ -80,6 +80,8 @@ void twitterak::run()
                         d1.login(*this);
                     }
                 }
+
+                std::cin.ignore();
             }
 
             else if(commands[0] == "signup")
@@ -108,6 +110,7 @@ void twitterak::run()
                 {
                     std:: cout << "! You must login first to your account.\n";
                 }
+                std::cin.ignore();
             }
 
             else if(commands[0] == "profile" or commands[0] == "me")
@@ -127,6 +130,7 @@ void twitterak::run()
                 {
                     std:: cout << "! You must login first to your account.\n";
                 }
+                std::cin.ignore();
             }
 
             else if(commands[0] == "edit")
@@ -151,6 +155,7 @@ void twitterak::run()
                 {
                     std:: cout << "! You must login first to your account\n";
                 }
+                std::cin.ignore();
             }
 
             else if(commands[0] == "logout")
@@ -163,6 +168,8 @@ void twitterak::run()
                 {
                     std:: cout << "! You must login first to your account\n";
                 }
+                std::cin.ignore();
+
             }
 
             else if (commands[0] == "exit" or commands[0] == "quit" or commands[0] == "q")
@@ -179,6 +186,7 @@ void twitterak::run()
             else
             {
                 std:: cout << "! undefined command.\n";
+                std::cin.ignore();
             }
         
         }
