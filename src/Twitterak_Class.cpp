@@ -132,13 +132,20 @@ void twitterak::run()
 
             else if(commands[0] == "profile" and commands.size() == 2)
             {
-
                 if(commands[1][0] == '@')
                 {
                     commands[1].erase(0, 1);
                 }
+
+                if(users.count(commands[1]) == 1)
+                {
+                    users[commands[1]].Show_Profile(*this);
+                }
+                else
+                {
+                    std::cout << "! The username is not recognized.\n";
+                }
                 
-                users[commands[1]].Show_Profile(*this);
             }
 
             else if(commands[0] == "profile" or commands[0] == "me" or commands[0] == "@me")

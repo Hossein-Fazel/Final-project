@@ -29,7 +29,7 @@ void display::login(twitterak &app, std::string user_name, std::string password)
     }
     else
     {
-        std::cout << "! Your user name is incorrect\n";
+        std::cout << "! Your username is incorrect\n";
     }
 }
 
@@ -62,7 +62,7 @@ void display::login(twitterak &app, std::string user_name)
     }
     else
     {
-        std::cout << "! Your user name is incorrect\n";
+        std::cout << "! Your username is incorrect\n";
     }
 }
 
@@ -71,7 +71,7 @@ void display::login(twitterak &app, std::string user_name)
 void display::login(twitterak &app)
 {
     std::string user_name, password;
-    std::cout << "$ User Name : ";
+    std::cout << "$ Username : ";
     std::cin >> user_name;
     user_name = app.lower(user_name);
     if(user_name[0] == '@')
@@ -97,7 +97,7 @@ void display::login(twitterak &app)
     }
     else
     {
-        std::cout << "! Your user name is incorrect\n";
+        std::cout << "! Your username is incorrect\n";
     }
 }
 
