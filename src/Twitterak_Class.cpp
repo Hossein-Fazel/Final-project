@@ -130,18 +130,22 @@ void twitterak::run()
                 std::cin.ignore();
             }
 
-            else if(commands[0] == "profile" or commands[0] == "me")
+            else if(commands[0] == "profile" and commands.size() == 2)
+            {
+
+                if(commands[1][0] == '@')
+                {
+                    commands[1].erase(0, 1);
+                }
+                
+                users[commands[1]].Show_Profile(*this);
+            }
+
+            else if(commands[0] == "profile" or commands[0] == "me" or commands[0] == "@me")
             {
                 if(is_logedin)
                 {
-                    if(cSize == 2)
-                    {
-                        users[logedin_user].Show_Profile(*this, commands[1]);
-                    }
-                    else if(cSize == 1)
-                    {
-                        users[logedin_user].Show_Profile(*this);
-                    }
+                    users[logedin_user].Show_Profile(*this);
                 }
                 else
                 {
