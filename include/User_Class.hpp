@@ -12,7 +12,7 @@ class user
 {
 //=================== Friends ===================
 
-friend void tweet::set_user_age(user);
+friend void tweet::set_user_age(user);                          // friend with Tweet_Class to set user age
 
     public:
 //=================== Gets ===================

@@ -14,7 +14,7 @@ class tweet
     public:
 //================ gets =====================
 
-        std::string get_tweetType() const;                                      // returns the type of tweet(quote/retweet)
+        std::string get_tweetType() const;                                      // returns the type of a tweet(quote/retweet)
         std::string get_sefTweet() const;                                       // returns the user's tweet
         std::string get_ownerName() const;                                      // returns the name of the owner of another user
         std::string get_ownerUser_name() const;                                 // returns the username of the owner of another user
@@ -26,15 +26,15 @@ class tweet
 
 //================ sets =====================
 
-        void set_tweetType(std::string);
-        void set_selfTweet(std:: string);
-        void set_ownerName(std:: string);
-        void set_ownerUser_name(std:: string);
-        void set_ownerTweet(std:: string);
-        void set_name(std:: string);
-        void set_user_name(std:: string);
-        void set_number(int);
-        void set_user_age(user);
+        void set_tweetType(std::string);                                        // sets the type of a tweet(quote/retweet)
+        void set_selfTweet(std:: string);                                       // sets the user's tweet
+        void set_ownerName(std:: string);                                       // sets the name of the owner of another user
+        void set_ownerUser_name(std:: string);                                  // sets the username of the owner of another user
+        void set_ownerTweet(std:: string);                                      // sets the tweet of the owner of another user
+        void set_name(std:: string);                                            // sets the name of the user
+        void set_user_name(std:: string);                                       // sets the username of the user
+        void set_number(int);                                                   // sets the tweet's number
+        void set_user_age(user);                                                // sets the age of the user 
         
 //============ General functions =============
 
