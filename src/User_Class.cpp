@@ -251,7 +251,7 @@ void user::Edit(twitterak &app, std::string Edit_part ,std::string value)       
 
     if (Edit_part == "biography")
     {
-        if (value.length() > 160)
+        if (value.length() > 160) 
             value.erase(160, value.length());
 
         app.users[app.logedin_user].set_biography(value);
