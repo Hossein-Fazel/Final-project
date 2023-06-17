@@ -40,6 +40,7 @@ class tweet
 
         void delete_tweet();
         void edit_tweet();
+        void rq_tweet();
 
 
     private:
