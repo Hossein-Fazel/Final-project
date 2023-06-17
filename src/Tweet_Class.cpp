@@ -55,6 +55,12 @@ int tweet::get_number() const                                                   
     return number;
 }
 
+
+int tweet::get_user_age() const
+{
+    return user_age;
+}
+
 //==================================================================  Set_Functions =================================================================
 
 

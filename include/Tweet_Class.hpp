@@ -22,6 +22,7 @@ class tweet
         std::string get_name() const;                                           // returns the name of the user
         std::string get_user_name() const;                                      // returns the username of the user
         int get_number() const;                                                 // returns the tweet's number
+        int get_user_age() const;                                               // returns the age of the user 
 
 //================ sets =====================
 
