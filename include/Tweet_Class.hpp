@@ -1,7 +1,6 @@
 #ifndef TWEET_HPP
 #define TWEET_HPP
 
-
 #include <unordered_map>
 #include <vector>
 #include <string>
@@ -12,7 +11,20 @@
 class tweet
 {
     public:
-//============ sets ==================
+//================ gets =====================
+
+        void get_tweetType() const;
+        void get_sefTweet() const;
+        void get_ownerName() const;
+        void get_ownerUser_name() const;
+        void get_ownerTweet() const;
+        void get_hashtags() const;
+        void get_name() const;
+        void get_user() const;
+        void get_number() const;
+
+//================ sets =====================
+
         void set_tweetType();
         void set_sefTweet();
         void set_ownerName();
@@ -22,10 +34,12 @@ class tweet
         void set_name();
         void set_user();
         void set_number();
-
+        
 //============ General functions =============
+
         void delete_tweet();
         void edit_tweet();
+
 
     private:
         std::vector<tweet> comments;

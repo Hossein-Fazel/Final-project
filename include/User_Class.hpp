@@ -41,9 +41,9 @@ class user
         void Edit(twitterak &, std::string, std::string);          // edits the user's information                                                                    
         void Tweet();  //ساخت توییت
         void Logout(twitterak &);                                  // logs out of the user's account
-        int Validating_Username(std::string);                    // the validation of a user's username
-        std::string to_lower(std::string);                       // makes a string a lowercase
-        std::string remove_atsing(std::string);                  // removes @ from the first of the user name
+        int Validating_Username(std::string);                      // the validation of a user's username
+        std::string to_lower(std::string);                         // makes a string a lowercase
+        std::string remove_atsing(std::string);                    // removes @ from the first of the user name
 
     private:
         std::string Full_Name;
