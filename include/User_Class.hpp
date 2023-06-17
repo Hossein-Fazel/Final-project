@@ -10,6 +10,10 @@ class twitterak;
 
 class user
 {
+//=================== Friends ===================
+
+friend void tweet::set_user_age(user);
+
     public:
 //=================== Gets ===================
         std::string get_name()const;                            // returns the name of the user

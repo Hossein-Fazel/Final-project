@@ -8,7 +8,7 @@
 
 //==================================================================  Get_Functions =================================================================
 
-std::string tweet::get_tweetType() const                                                // returns the type of tweet(quote/retweet)
+std::string tweet::get_tweetType() const                                               // returns the type of tweet(quote/retweet)
 {
     return tweet_type;
 }
@@ -56,7 +56,7 @@ int tweet::get_number() const                                                   
 }
 
 
-int tweet::get_user_age() const
+int tweet::get_user_age() const                                                  // returns the age of the user 
 {
     return user_age;
 }
@@ -66,3 +66,4 @@ int tweet::get_user_age() const
 
 
 //================================================================  General_Functions ===============================================================
+
