@@ -14,15 +14,14 @@ class tweet
     public:
 //================ gets =====================
 
-        void get_tweetType() const;
-        void get_sefTweet() const;
-        void get_ownerName() const;
-        void get_ownerUser_name() const;
-        void get_ownerTweet() const;
-        void get_hashtags() const;
-        void get_name() const;
-        void get_user() const;
-        void get_number() const;
+        std::string get_tweetType() const;                                      // returns the type of tweet(quote/retweet)
+        std::string get_sefTweet() const;                                       // returns the user's tweet
+        std::string get_ownerName() const;                                      // returns the name of the owner of another user
+        std::string get_ownerUser_name() const;                                 // returns the username of the owner of another user
+        std::string get_ownerTweet() const;                                     // returns the tweet of the owner of another user
+        std::string get_name() const;                                           // returns the name of the user
+        std::string get_user_name() const;                                      // returns the username of the user
+        int get_number() const;                                                 // returns the tweet's number
 
 //================ sets =====================
 
@@ -33,14 +32,16 @@ class tweet
         void set_ownerTweet();
         void set_hashtags();
         void set_name();
-        void set_user();
+        void set_user_name();
         void set_number();
+        void set_user_age();
         
 //============ General functions =============
 
         void delete_tweet();
         void edit_tweet();
         void rq_tweet();
+        void hastags();
 
 
     private:
@@ -56,6 +57,8 @@ class tweet
         std::string name;
         std::string user_name;
         int number;
+        int user_age;
+
 };
 
 #endif
