@@ -216,7 +216,7 @@ void twitterak::run()
 
         if(is_logedin)
         {
-            std::cout << "@" << users[logedin_user].get_username() << "> ";
+            std::cout << "> @" << users[logedin_user].get_username() << "> ";
         }
         else
         {
