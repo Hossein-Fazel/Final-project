@@ -39,10 +39,10 @@ class tweet
         
 //============ General functions =============
 
-        void delete_tweet();
-        void edit_tweet();
-        void rq_tweet();
-        void hastags();
+        void delete_tweet();                                                     // deletes a tweet of a user 
+        void edit_tweet();                                                       // edits a tweet of a user
+        void rq_tweet();                                                         // quote tweet or retweet
+        void hastags();                                                          // finds and saves hashtags of user's tweet
 
 
     private:

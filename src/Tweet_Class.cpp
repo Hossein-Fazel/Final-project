@@ -15,21 +15,21 @@ std::string tweet::get_tweetType() const                                        
 
 //------------------------------------------------------------------------
 
-std::string tweet::get_sefTweet() const                                                // returns the user's tweet
+std::string tweet::get_sefTweet() const                                              // returns the user's tweet
 {
     return self_tweet;
 }
 
 //------------------------------------------------------------------------
 
-std::string tweet::get_ownerName() const                                              // returns the name of the owner of another user
+std::string tweet::get_ownerName() const                                            // returns the name of the owner of another user
 {
     return owner_name;
 }
 
 //------------------------------------------------------------------------
 
-std::string tweet::get_ownerUser_name() const                                        // returns the username of the owner of another user
+std::string tweet::get_ownerUser_name() const                                       // returns the username of the owner of another user
 {
     return owner_username;
 }
@@ -136,3 +136,28 @@ void tweet::set_user_age(user usr)                                          // s
 
 //================================================================  General_Functions ===============================================================
 
+void tweet::delete_tweet()                                                  // deletes a tweet of a user 
+{
+
+}
+
+//------------------------------------------------------------------------
+
+void tweet::edit_tweet()                                                   // edits a tweet of a user
+{
+    
+}
+
+//------------------------------------------------------------------------
+
+void tweet::rq_tweet()                                                    // quote tweet or retweet
+{
+    
+}
+
+//------------------------------------------------------------------------
+
+void tweet::hastags()                                                    // finds and saves hashtags of user's tweet
+{
+
+}
