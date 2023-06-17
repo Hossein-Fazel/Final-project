@@ -63,7 +63,53 @@ int tweet::get_user_age() const                                                 
 
 //==================================================================  Set_Functions =================================================================
 
+void tweet::set_tweetType(std::string type)
+{
+    tweet_type = type;
+}
 
+void tweet::set_selfTweet(std::string tweet)
+{
+    self_tweet = tweet;
+}
+
+void tweet::set_ownerName(std::string name)
+{
+    owner_name = name;
+}
+
+void tweet::set_ownerUser_name(std::string user_name)
+{
+    owner_username = user_name;
+}
+
+void tweet::set_ownerTweet(std::string tweet)
+{
+    owner_tweet = tweet;
+}
+
+
+void tweet::set_name(std:: string name)
+{
+    this->name = name;
+}
+
+void tweet::set_user_name(std:: string user_name)
+{
+    this->user_name = user_name;
+}
+
+void tweet::set_number(int number)
+{
+    this->number = number;
+}
+
+void tweet::set_user_age(user usr)
+{
+    int user_birth;
+    user_birth = std::stoi(usr.get_birthday().substr(0,3));
+    user_age = 2023 - user_birth;
+}
 
 //================================================================  General_Functions ===============================================================
 
