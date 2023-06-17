@@ -2,9 +2,8 @@
 #define TWEET_HPP
 
 
-#include <unordered_map>
-#include <vector>
 #include <string>
+#include <unordered_set>
 
 #include "User_Class.hpp"
 
@@ -28,9 +27,9 @@ class tweet
         void edit_tweet();
 
     private:
-        std::vector<tweet> comments;
+        std::unordered_set<tweet> comments;
         
-        std::unordered_map<std::string, bool> likes;
+        std::unordered_set<std::string> likes;
         std::string tweet_type;
         std::string self_tweet;
         std::string owner_name;
