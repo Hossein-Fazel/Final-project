@@ -26,16 +26,15 @@ class tweet
 
 //================ sets =====================
 
-        void set_tweetType();
-        void set_sefTweet();
-        void set_ownerName();
-        void set_ownerUser_name();
-        void set_ownerTweet();
-        void set_hashtags();
-        void set_name();
-        void set_user_name();
-        void set_number();
-        void set_user_age();
+        void set_tweetType(std::string);
+        void set_selfTweet(std:: string);
+        void set_ownerName(std:: string);
+        void set_ownerUser_name(std:: string);
+        void set_ownerTweet(std:: string);
+        void set_name(std:: string);
+        void set_user_name(std:: string);
+        void set_number(int);
+        void set_user_age(user);
         
 //============ General functions =============
 
