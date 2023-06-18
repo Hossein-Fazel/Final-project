@@ -209,13 +209,6 @@ void user::set_country(std::string input_country)                          // se
 
 //================================================================  General_Functions ===============================================================
 
-// void user::Like()
-// {
-    
-// }
-
-//------------------------------------------------------------------------
-
 std::string user::remove_atsing(std::string str)                                                             // removes @ from the first of the user name
 {
     return str.erase(0, 1);
@@ -303,6 +296,26 @@ void user::Edit(twitterak &app, std::string Edit_part ,std::string value)       
         app.users[app.logedin_user].set_country(value);
         std::cout << "* Your " << Edit_part << " has been successfully changed.\n";
     }
+}
+
+//------------------------------------------------------------------------
+
+void user::Tweet()                                                                                                  // make a normal tweet                                              
+{
+    std::string twt;
+    tweet tw;
+    tw.set_tweetType("normal");
+
+    tw.set_name(this->get_name());
+    tw.set_user_name(this->get_username());
+    tw.set_number(this->get_last_number()+1);
+
+    std::getline(std::cin, twt);
+    tw.set_selfTweet(twt);
+
+    this->last_number();
+
+    this->Push_Tweet(tw);
 }
 
 //------------------------------------------------------------------------

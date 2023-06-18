@@ -32,7 +32,6 @@ class tweet
 //================ sets =====================
 
         void set_tweetType(std::string);
-        void set_type(std:: string);                                            // sets the type of a tweet(quote/retweet)
         void set_selfTweet(std:: string);                                       // sets the user's tweet
         void set_ownerName(std:: string);                                       // sets the name of the owner of another user
         void set_ownerUser_name(std:: string);                                  // sets the username of the owner of another user
