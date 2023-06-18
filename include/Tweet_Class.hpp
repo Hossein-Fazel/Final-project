@@ -8,11 +8,15 @@
 
 #include "User_Class.hpp"
 
+class twitterak;
+
+
 //================================================================================ Tweet_Class ================================================================================ 
 
 class tweet
 {
     public:
+        tweet();
 //================ gets =====================
 
         std::string get_tweetType() const;                                      // returns the type of a tweet(quote/retweet)
@@ -27,7 +31,8 @@ class tweet
 
 //================ sets =====================
 
-        void set_tweetType(std::string);                                        // sets the type of a tweet(quote/retweet)
+        void set_tweetType(std::string);
+        void set_type(std:: string);                                      // sets the type of a tweet(quote/retweet)
         void set_selfTweet(std:: string);                                       // sets the user's tweet
         void set_ownerName(std:: string);                                       // sets the name of the owner of another user
         void set_ownerUser_name(std:: string);                                  // sets the username of the owner of another user
@@ -41,8 +46,8 @@ class tweet
 
         void delete_tweet();                                                     // deletes a tweet of a user 
         void edit_tweet();                                                       // edits a tweet of a user
-        void rq_tweet();                                                         // quote tweet or retweet
-        void hastags();                                                          // finds and saves hashtags of user's tweet
+        void rq_tweet(twitterak, std::string);                                                         // quote tweet or retweet
+        void fetch_hashtags(twitterak &,std::string);                                                          // finds and saves hashtags of user's tweet
 
 
     private:
@@ -59,7 +64,6 @@ class tweet
         std::string user_name;
         int number;
         int user_age;
-
 };
 
 #endif
