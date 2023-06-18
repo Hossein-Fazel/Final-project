@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 
+
 class twitterak
 {
     friend void user::Logout(twitterak &);
@@ -23,6 +24,8 @@ class twitterak
     friend void display::help(twitterak &);
     friend void display::signup(twitterak &, std::string);
 
+    friend void tweet::fetch_hashtags(twitterak &, std::string);
+    friend void tweet::rq_tweet(twitterak, std::string);
 
     public:
         std::string lower(std::string);
@@ -34,7 +37,7 @@ class twitterak
         std:: string logedin_user;
         std::vector<std::string> commands; 
         std::unordered_map<std::string, user> users;
-        std::unordered_map<std::string,tweet> Hashtags;
+        std::unordered_map<std::string,tweet&> Hashtags;
 };
 
 #endif

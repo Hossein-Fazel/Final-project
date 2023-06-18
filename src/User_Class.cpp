@@ -72,6 +72,17 @@ std::string user::get_country() const         // returns the color of the header
     return Country;
 }
 
+//------------------------------------------------------------------------
+
+int user::get_last_number()                   // returns the last tweet's number
+{
+    if (tweets.size() == 0)
+        return 0;
+
+    else
+        return tweets[tweets.size() - 1].get_number();
+}
+
 //==================================================================  Set_Functions =================================================================
 
 void user::set_name(std::string name)                                               // sets the name of a user
@@ -320,4 +331,11 @@ void user::Logout(twitterak &app)                                               
 {
     app.is_logedin = false;
     std::cout << "* You have successfully logged out.\n";
+}
+
+//------------------------------------------------------------------------
+
+void user::Push_Tweet(tweet tw)                                                                                     // push a tweet into a vector
+{
+    tweets.push_back(tw);
 }

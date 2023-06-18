@@ -28,6 +28,7 @@ friend void tweet::rq_tweet(twitterak, std::string);            // friend with T
         std::string get_password()const;                        // returns the password of the user's account
         std::string get_header()const;                          // returns the color of the header that user had chosen 
         std::string get_country()const;                         // returns the country of the user
+        int get_last_number();                            // returns the last tweet's number
 
 //=================== sets ===================
         void set_name(std::string);                             // sets the name of a user
@@ -48,9 +49,11 @@ friend void tweet::rq_tweet(twitterak, std::string);            // friend with T
         void Edit(twitterak &, std::string, std::string);          // edits the user's information                                                                    
         void Tweet();  //ساخت توییت
         void Logout(twitterak &);                                  // logs out of the user's account
+        void Push_Tweet(tweet);                                    // push a tweet into a vector
         int Validating_Username(std::string);                      // the validation of a user's username
         std::string to_lower(std::string);                         // makes a string a lowercase
         std::string remove_atsing(std::string);                    // removes @ from the first of the user name
+             
 
     private:
         std::string Full_Name;
@@ -63,7 +66,7 @@ friend void tweet::rq_tweet(twitterak, std::string);            // friend with T
         std::string Header;
         std::string Country;
 
-        std::vector<tweet> tweets;
+        std::vector <tweet> tweets;
 };
 
 

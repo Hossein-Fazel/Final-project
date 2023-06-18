@@ -5,6 +5,7 @@
 #include <unordered_set>
 
 #include "Tweet_Class.hpp"
+#include "Twitterak_Class.hpp"
 
 //==================================================================  Get_Functions =================================================================
 
@@ -150,14 +151,62 @@ void tweet::edit_tweet()                                                        
 
 //------------------------------------------------------------------------
 
-void tweet::rq_tweet()                                                                                               // quote tweet or retweet
+void tweet::rq_tweet(twitterak app, std:: string type)
 {
-    
+    tweet rq_tweet;
+    rq_tweet.set_tweetType(type);
+    rq_tweet.set_ownerTweet(this->self_tweet);
+    rq_tweet.set_ownerUser_name(this->user_name);
+    rq_tweet.set_ownerName(this->user_name);
+
+    rq_tweet.set_name(app.users[app.logedin_user].get_name());
+    rq_tweet.set_user_name(app.users[app.logedin_user].get_username());
+    rq_tweet.set_number(app.users[app.logedin_user].get_last_number() + 1);
+
+    if(type == "qoute")
+    {
+        std::string tweet;
+        std::cout << "$ your tweet : ";
+        std::getline(std::cin, tweet);
+        std::cin.ignore();
+
+        rq_tweet.set_selfTweet(tweet);
+    }
+
+    app.users[app.logedin_user].
 }
 
 //------------------------------------------------------------------------
 
-void tweet::hastags()                                                                                                // finds and saves hashtags of user's tweet
+void tweet::fetch_hashtags(twitterak &app, std::string tweet)              // finds and saves hashtags of user's tweet
 {
+    std::string hashtag;
+    int tsize = hashtags.size();
+
+    for(int i = 0; i < tsize; i++)
+    {
+        if(tweet[i] == '#')
+        {
+            for(int j = i+1; j < tsize; j++)
+            {
+                if(tweet[j] != ' ')
+                {
+                    hashtag += tweet[j];
+                }
+                else
+                {
+                    if(!hashtag.empty())
+                    {
+                        hashtags.push_back(hashtag);
+                        app.Hashtags[hashtag] = *this;
+                    }
+                    hashtag = "";
+                    i = j;
+                    break;
+                }
+            }
+        }
+    }
+    hashtags.push_back(hashtag);
 
 }
