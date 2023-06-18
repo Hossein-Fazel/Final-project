@@ -5,6 +5,8 @@
 #include <vector>
 
 #include"Tweet_Class.hpp"
+#include"Display_Class.hpp"
+
 class tweet;
 class twitterak;
 
@@ -16,6 +18,7 @@ class user
 
 friend void tweet::set_user_age(user);                            // friend with Tweet_Class to set user age
 friend void tweet::rq_tweet(twitterak, std::string);              // friend with Tweet_Class to push_back tweets on vector
+friend void display::show_tweet(twitterak);                       // friend with Twitterack_Class to show tweets
 
     public:
 //=================== Gets ===================
