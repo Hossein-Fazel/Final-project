@@ -16,7 +16,7 @@ class display
         void login(twitterak &);
         void signup(twitterak &);
         void signup(twitterak &, std::string);
-        // void show_tweet();
+        void show_tweet(twitterak);
 
         SHA256 encrypt;
 };
