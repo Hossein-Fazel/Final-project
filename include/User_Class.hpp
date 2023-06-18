@@ -15,6 +15,7 @@ class user
 //=================== Friends ===================
 
 friend void tweet::set_user_age(user);                          // friend with Tweet_Class to set user age
+friend void tweet::rq_tweet(twitterak, std::string);            // friend with Tweet_Class to push_back tweets on vector
 
     public:
 //=================== Gets ===================
