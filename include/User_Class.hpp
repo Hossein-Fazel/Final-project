@@ -14,40 +14,40 @@ class user
 {
 //=================== Friends ===================
 
-friend void tweet::set_user_age(user);                          // friend with Tweet_Class to set user age
-friend void tweet::rq_tweet(twitterak, std::string);            // friend with Tweet_Class to push_back tweets on vector
+friend void tweet::set_user_age(user);                            // friend with Tweet_Class to set user age
+friend void tweet::rq_tweet(twitterak, std::string);              // friend with Tweet_Class to push_back tweets on vector
 
     public:
 //=================== Gets ===================
-        std::string get_name()const;                            // returns the name of the user
-        std::string get_username()const;                        // returns the username of the user
-        std::string get_biography()const;                       // returns the biography of the user
-        std::string get_link()const;                            // returns the link of the user
-        std::string get_birthday()const;                        // returns the date of birth of the user
-        std::string get_phone()const;                           // returns the phone number of the user
-        std::string get_password()const;                        // returns the password of the user's account
-        std::string get_header()const;                          // returns the color of the header that user had chosen 
-        std::string get_country()const;                         // returns the country of the user
-        int get_last_number();                            // returns the last tweet's number
+        std::string get_name()const;                              // returns the name of the user
+        std::string get_username()const;                          // returns the username of the user
+        std::string get_biography()const;                         // returns the biography of the user
+        std::string get_link()const;                              // returns the link of the user
+        std::string get_birthday()const;                          // returns the date of birth of the user
+        std::string get_phone()const;                             // returns the phone number of the user
+        std::string get_password()const;                          // returns the password of the user's account
+        std::string get_header()const;                            // returns the color of the header that user had chosen 
+        std::string get_country()const;                           // returns the country of the user
+        int get_last_number();                                    // returns the last tweet's number
 
 //=================== sets ===================
-        void set_name(std::string);                             // sets the name of a user
-        void set_username(std::string);                         // sets the username of a user with a validation
-        void set_biography(std::string);                        // sets the biography of a user
-        void set_link(std::string);                             // sets the link of a user
-        void set_birthday(std::string);                         // sets the date of birth of a user
-        void set_phone(std::string);                            // sets the phone number of a user
-        void set_password(std::string);                         // sets the password of the user's account
-        void set_header(std::string);                           // sets the color of the header that user had chosen
-        void set_country(std::string);                          // sets the country of the user
+        void set_name(std::string);                               // sets the name of a user
+        void set_username(std::string);                           // sets the username of a user with a validation
+        void set_biography(std::string);                          // sets the biography of a user
+        void set_link(std::string);                               // sets the link of a user
+        void set_birthday(std::string);                           // sets the date of birth of a user
+        void set_phone(std::string);                              // sets the phone number of a user
+        void set_password(std::string);                           // sets the password of the user's account
+        void set_header(std::string);                             // sets the color of the header that user had chosen
+        void set_country(std::string);                            // sets the country of the user
 
 //============ General functions ==============
 
-        // void Like();
+        void Like();                                               // like or dislike a tweet
         void Delete_Account(twitterak &);                          // delets the account of the user
         void Show_Profile(twitterak &);                            // shows the information of a user itself
         void Edit(twitterak &, std::string, std::string);          // edits the user's information                                                                    
-        void Tweet();  //ساخت توییت
+        void Tweet();                                              // make a normal tweet
         void Logout(twitterak &);                                  // logs out of the user's account
         void Push_Tweet(tweet);                                    // push a tweet into a vector
         int Validating_Username(std::string);                      // the validation of a user's username

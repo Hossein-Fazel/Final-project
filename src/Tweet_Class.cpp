@@ -151,7 +151,7 @@ void tweet::edit_tweet()                                                        
 
 //------------------------------------------------------------------------
 
-void tweet::rq_tweet(twitterak app, std:: string type)
+void tweet::rq_tweet(twitterak app, std:: string type)                                                                // quote tweet or retweet
 {
     tweet rq_tweet;
     rq_tweet.set_tweetType(type);
@@ -178,7 +178,7 @@ void tweet::rq_tweet(twitterak app, std:: string type)
 
 //------------------------------------------------------------------------
 
-void tweet::fetch_hashtags(twitterak &app, std::string tweet)              // finds and saves hashtags of user's tweet
+void tweet::fetch_hashtags(twitterak &app, std::string tweet)                                                    // finds and saves hashtags of user's tweet
 {
     std::string hashtag;
     int tsize = hashtags.size();

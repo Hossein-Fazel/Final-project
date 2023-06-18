@@ -335,7 +335,7 @@ void user::Logout(twitterak &app)                                               
 
 //------------------------------------------------------------------------
 
-void user::Push_Tweet(tweet tw)                                                                                     // push a tweet into a vector
+void user::Push_Tweet(tweet tw)                                                                                  // push a tweet into a vector
 {
     tweets.push_back(tw);
 }
