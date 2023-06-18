@@ -20,6 +20,7 @@ friend void tweet::set_user_age(user);                            // friend with
 friend void tweet::rq_tweet(twitterak, std::string);              // friend with Tweet_Class to push_back tweets on vector
 friend void display::show_tweet(twitterak);                       // friend with Twitterak_Class to show tweets
 friend void tweet::delete_tweet(twitterak, int);                  // friend with Twitterak_Class to delete a tweet
+friend void tweet::edit_tweet(twitterak, int);                    // friend with Twitterak_Class to edit a tweet
 
     public:
 //===================== Gets ======================
@@ -54,6 +55,7 @@ friend void tweet::delete_tweet(twitterak, int);                  // friend with
         void Tweet();                                              // make a normal tweet
         void Logout(twitterak &);                                  // logs out of the user's account
         void Push_Tweet(tweet);                                    // push a tweet into a vector
+        void last_number();                                        // plus plus last_num variable
         int Validating_Username(std::string);                      // the validation of a user's username
         std::string to_lower(std::string);                         // makes a string a lowercase
         std::string remove_atsing(std::string);                    // removes @ from the first of the user name
@@ -69,6 +71,8 @@ friend void tweet::delete_tweet(twitterak, int);                  // friend with
         std::string Password;
         std::string Header;
         std::string Country;
+
+        int last_num = 0;
 
         std::vector <tweet> tweets;
 };

@@ -45,7 +45,7 @@ class tweet
 //============ General functions =============
 
         void delete_tweet(twitterak, int);                                       // deletes a tweet of a user 
-        void edit_tweet();                                                       // edits a tweet of a user
+        void edit_tweet(twitterak, int);                                         // edits a tweet of a user
         void rq_tweet(twitterak, std::string);                                   // quote tweet or retweet
         void fetch_hashtags(twitterak &,std::string);                            // finds and saves hashtags of user's tweet
 

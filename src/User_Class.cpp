@@ -77,11 +77,7 @@ std::string user::get_country() const         // returns the color of the header
 
 int user::get_last_number()                   // returns the last tweet's number
 {
-    if (tweets.size() == 0)
-        return 0;
-
-    else
-        return tweets[tweets.size() - 1].get_number();
+    return last_num;
 }
 
 //==================================================================  Set_Functions =================================================================
@@ -339,4 +335,11 @@ void user::Logout(twitterak &app)                                               
 void user::Push_Tweet(tweet tw)                                                                                  // push a tweet into a vector
 {
     tweets.push_back(tw);
+}
+
+//------------------------------------------------------------------------
+
+void user::last_number()                                                                                         // plus plus last_num variable
+{
+    last_num++;
 }
