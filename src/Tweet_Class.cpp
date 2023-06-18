@@ -137,7 +137,7 @@ void tweet::set_user_age(user usr)                                              
 
 //================================================================  General_Functions ===============================================================
 
-void tweet::delete_tweet(twitterak app, int number)                                                  // deletes a tweet of a user 
+void tweet::delete_tweet(twitterak app, int number)                                                                  // deletes a tweet of a user 
 {
     int size = app.users[app.logedin_user].tweets.size();
 
@@ -153,9 +153,27 @@ void tweet::delete_tweet(twitterak app, int number)                             
 
 //------------------------------------------------------------------------
 
-void tweet::edit_tweet()                                                                                              // edits a tweet of a user
+void tweet::edit_tweet(twitterak app, int number)                                                                                              // edits a tweet of a user
 {
-   
+    int size = app.users[app.logedin_user].tweets.size();
+    std::string E_tweet;
+
+    for (int i = 0; i < size; i++)
+    {
+        if (app.users[app.logedin_user].tweets[i].get_number() == number)
+        {
+            std::cout << number << " : " << app.users[app.logedin_user].tweets[i].get_sefTweet() << std::endl;
+            std::cout << "* Enter new text for tweet " << number << " : ";
+
+            std::getline(std::cin, E_tweet);
+            app.users[app.logedin_user].tweets[i].set_selfTweet(E_tweet);
+            std::cout << "* You're tweet has been successfully changed.\n";
+            std::cin.ignore();
+        }
+
+        else
+            std::cout << "! There is no tweet with this number.\n";
+    }
 }
 
 //------------------------------------------------------------------------
@@ -217,5 +235,4 @@ void tweet::fetch_hashtags(twitterak &app, std::string tweet)                   
         }
     }
     hashtags.push_back(hashtag);
-
 }

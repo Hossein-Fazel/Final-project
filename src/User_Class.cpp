@@ -77,11 +77,7 @@ std::string user::get_country() const         // returns the color of the header
 
 int user::get_last_number()                   // returns the last tweet's number
 {
-    if (tweets.size() == 0)
-        return 0;
-
-    else
-        return tweets[tweets.size() - 1].get_number();
+    return last_num;
 }
 
 //==================================================================  Set_Functions =================================================================
@@ -213,13 +209,6 @@ void user::set_country(std::string input_country)                          // se
 
 //================================================================  General_Functions ===============================================================
 
-// void user::Like()
-// {
-    
-// }
-
-//------------------------------------------------------------------------
-
 std::string user::remove_atsing(std::string str)                                                             // removes @ from the first of the user name
 {
     return str.erase(0, 1);
@@ -311,6 +300,26 @@ void user::Edit(twitterak &app, std::string Edit_part ,std::string value)       
 
 //------------------------------------------------------------------------
 
+void user::Tweet()                                                                                                  // make a normal tweet                                              
+{
+    std::string twt;
+    tweet tw;
+    tw.set_tweetType("normal");
+
+    tw.set_name(this->get_name());
+    tw.set_user_name(this->get_username());
+    tw.set_number(this->get_last_number()+1);
+
+    std::getline(std::cin, twt);
+    tw.set_selfTweet(twt);
+
+    this->last_number();
+
+    this->Push_Tweet(tw);
+}
+
+//------------------------------------------------------------------------
+
 void user::Delete_Account(twitterak &app)                                                                         // deletes the account of the use      
 {
     std::cout << "? This operation cannot be reversed in any way. Are you sure? (y/n) : ";
@@ -339,4 +348,11 @@ void user::Logout(twitterak &app)                                               
 void user::Push_Tweet(tweet tw)                                                                                  // push a tweet into a vector
 {
     tweets.push_back(tw);
+}
+
+//------------------------------------------------------------------------
+
+void user::last_number()                                                                                         // plus plus last_num variable
+{
+    last_num++;
 }
