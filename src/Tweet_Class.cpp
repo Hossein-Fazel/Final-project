@@ -137,9 +137,18 @@ void tweet::set_user_age(user usr)                                              
 
 //================================================================  General_Functions ===============================================================
 
-void tweet::delete_tweet(user usr, std::string user_name, int number)                                                  // deletes a tweet of a user 
+void tweet::delete_tweet(twitterak app, int number)                                                  // deletes a tweet of a user 
 {
-    
+    int size = app.users[app.logedin_user].tweets.size();
+
+    for (int i = 0; i < size; i++)
+    {
+        if (app.users[app.logedin_user].tweets[i].get_number() == number)
+            app.users[app.logedin_user].tweets.erase(app.users[app.logedin_user].tweets.begin()+i);
+
+        else
+            std::cout << "! There is no tweet with this number.\n";
+    }
 }
 
 //------------------------------------------------------------------------

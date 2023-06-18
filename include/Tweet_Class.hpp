@@ -6,10 +6,10 @@
 #include <string>
 #include <unordered_set>
 
-#include "User_Class.hpp"
+// #include "User_Class.hpp"
 
 class twitterak;
-
+class user;
 
 //================================================================================ Tweet_Class ================================================================================ 
 
@@ -44,24 +44,22 @@ class tweet
         
 //============ General functions =============
 
-        void delete_tweet(user, std::string, int);                               // deletes a tweet of a user 
+        void delete_tweet(twitterak, int);                                       // deletes a tweet of a user 
         void edit_tweet();                                                       // edits a tweet of a user
         void rq_tweet(twitterak, std::string);                                   // quote tweet or retweet
         void fetch_hashtags(twitterak &,std::string);                            // finds and saves hashtags of user's tweet
 
 
-    private:
-        std::unordered_set<tweet> comments;
-        
+    private:        
         std::unordered_set<std::string> likes;
         std::string tweet_type;
         std::string self_tweet;
-        std::string &owner_name;
-        std::string &owner_username;
-        std::string &owner_tweet;
+        std::string owner_name;
+        std::string owner_username;
+        std::string owner_tweet;
         std::vector<std::string> hashtags;
-        std::string &name;
-        std::string &user_name;
+        std::string name;
+        std::string user_name;
         int number;
         int user_age;
 };

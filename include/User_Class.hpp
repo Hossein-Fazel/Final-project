@@ -18,10 +18,11 @@ class user
 
 friend void tweet::set_user_age(user);                            // friend with Tweet_Class to set user age
 friend void tweet::rq_tweet(twitterak, std::string);              // friend with Tweet_Class to push_back tweets on vector
-friend void display::show_tweet(twitterak);                       // friend with Twitterack_Class to show tweets
+friend void display::show_tweet(twitterak);                       // friend with Twitterak_Class to show tweets
+friend void tweet::delete_tweet(twitterak, int);                  // friend with Twitterak_Class to delete a tweet
 
     public:
-//=================== Gets ===================
+//===================== Gets ======================
         std::string get_name()const;                              // returns the name of the user
         std::string get_username()const;                          // returns the username of the user
         std::string get_biography()const;                         // returns the biography of the user
@@ -33,7 +34,7 @@ friend void display::show_tweet(twitterak);                       // friend with
         std::string get_country()const;                           // returns the country of the user
         int get_last_number();                                    // returns the last tweet's number
 
-//=================== sets ===================
+//====================== sets =====================
         void set_name(std::string);                               // sets the name of a user
         void set_username(std::string);                           // sets the username of a user with a validation
         void set_biography(std::string);                          // sets the biography of a user
@@ -44,7 +45,7 @@ friend void display::show_tweet(twitterak);                       // friend with
         void set_header(std::string);                             // sets the color of the header that user had chosen
         void set_country(std::string);                            // sets the country of the user
 
-//============ General functions ==============
+//=============== General functions =================
 
         void Like();                                               // like or dislike a tweet
         void Delete_Account(twitterak &);                          // delets the account of the user

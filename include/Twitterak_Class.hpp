@@ -12,6 +12,9 @@
 
 class twitterak
 {
+
+//=================== Friends ===================
+
     friend void user::Logout(twitterak &);
     friend void user::Delete_Account(twitterak &);
     friend void user::Show_Profile(twitterak &);
@@ -26,6 +29,8 @@ class twitterak
 
     friend void tweet::fetch_hashtags(twitterak &, std::string);
     friend void tweet::rq_tweet(twitterak, std::string);
+    friend void tweet::delete_tweet(twitterak, int);                        // friend with Twitterak_Class to delete a tweet
+
 
     public:
         std::string lower(std::string);
