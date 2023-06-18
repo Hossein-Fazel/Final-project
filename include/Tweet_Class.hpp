@@ -56,12 +56,12 @@ class tweet
         std::unordered_set<std::string> likes;
         std::string tweet_type;
         std::string self_tweet;
-        std::string &owner_name;
-        std::string &owner_username;
-        std::string &owner_tweet;
+        std::string owner_name;
+        std::string owner_username;
+        std::string owner_tweet;
         std::vector<std::string> hashtags;
-        std::string &name;
-        std::string &user_name;
+        std::string name;
+        std::string user_name;
         int number;
         int user_age;
 };
