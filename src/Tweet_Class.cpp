@@ -173,7 +173,7 @@ void tweet::rq_tweet(twitterak app, std:: string type)
         rq_tweet.set_selfTweet(tweet);
     }
 
-    app.users[app.logedin_user].
+    app.users[app.logedin_user].Push_Tweet(rq_tweet);
 }
 
 //------------------------------------------------------------------------
