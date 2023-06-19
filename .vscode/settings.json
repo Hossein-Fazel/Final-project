@@ -43,6 +43,7 @@
         "cstring": "cpp",
         "iostream": "cpp",
         "unordered_set": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "ctime": "cpp"
     }
 }
