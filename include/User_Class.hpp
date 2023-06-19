@@ -2,10 +2,11 @@
 #define USER_HPP
 
 #include <string>
-#include <vector>
+#include <map>
 
 #include"Tweet_Class.hpp"
 #include"Display_Class.hpp"
+
 
 class tweet;
 class twitterak;
@@ -17,10 +18,12 @@ class user
 //=================== Friends ===================
 
 friend void tweet::set_user_age(user);                            // friend with Tweet_Class to set user age
-friend void tweet::rq_tweet(twitterak, std::string);              // friend with Tweet_Class to push_back tweets on vector
+friend void tweet::rq_tweet(twitterak&, std::string);              // friend with Tweet_Class to push_back tweets on vector
 friend void display::show_tweet(twitterak);                       // friend with Twitterak_Class to show tweets
 friend void tweet::delete_tweet(twitterak, int);                  // friend with Twitterak_Class to delete a tweet
 friend void tweet::edit_tweet(twitterak, int);                    // friend with Twitterak_Class to edit a tweet
+// friend void twitterak::run();/
+
 
     public:
 //===================== Gets ======================
@@ -73,7 +76,7 @@ friend void tweet::edit_tweet(twitterak, int);                    // friend with
 
         int last_num = 0;
 
-        std::vector <tweet> tweets;
+        std::map <int, tweet> tweets;
 };
 
 

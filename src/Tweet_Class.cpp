@@ -139,15 +139,13 @@ void tweet::set_user_age(user usr)                                              
 
 void tweet::delete_tweet(twitterak app, int number)                                                                  // deletes a tweet of a user 
 {
-    int size = app.users[app.logedin_user].tweets.size();
-
-    for (int i = 0; i < size; i++)
+    if(app.users[app.logedin_user].tweets.count(number))
     {
-        if (app.users[app.logedin_user].tweets[i].get_number() == number)
-            app.users[app.logedin_user].tweets.erase(app.users[app.logedin_user].tweets.begin()+i);
-
-        else
-            std::cout << "! There is no tweet with this number.\n";
+        app.users[app.logedin_user].tweets.erase(number);
+    }
+    else
+    {
+        std::cout << "! There is no tweet wtih this number.\n";
     }
 }
 
@@ -155,30 +153,27 @@ void tweet::delete_tweet(twitterak app, int number)                             
 
 void tweet::edit_tweet(twitterak app, int number)                                                                                              // edits a tweet of a user
 {
-    int size = app.users[app.logedin_user].tweets.size();
-    std::string E_tweet;
-
-    for (int i = 0; i < size; i++)
+    if(get_user_age() >= 18)
     {
-        if (app.users[app.logedin_user].tweets[i].get_number() == number)
-        {
-            std::cout << number << " : " << app.users[app.logedin_user].tweets[i].get_sefTweet() << std::endl;
-            std::cout << "* Enter new text for tweet " << number << " : ";
+        std::string E_tweet;
 
-            std::getline(std::cin, E_tweet);
-            app.users[app.logedin_user].tweets[i].set_selfTweet(E_tweet);
-            std::cout << "* You're tweet has been successfully changed.\n";
-            std::cin.ignore();
-        }
+        std::cout << number << " : " << app.users[app.logedin_user].tweets[number].get_sefTweet() << std::endl;
+        std::cout << "* Enter new text for tweet " << number << " : ";
+        std::getline(std::cin, E_tweet);
 
-        else
-            std::cout << "! There is no tweet with this number.\n";
+        app.users[app.logedin_user].tweets[number].set_selfTweet(E_tweet);
+        std::cout << "* You're tweet has been successfully changed.\n";
+        std::cin.ignore();
+    }
+    else
+    {
+        std::cout << "! Your age is less than 18.\n";
     }
 }
 
 //------------------------------------------------------------------------
 
-void tweet::rq_tweet(twitterak app, std:: string type)                                                                // quote tweet or retweet
+void tweet::rq_tweet(twitterak &app, std:: string type)                                                                // quote tweet or retweet
 {
     tweet rq_tweet;
     rq_tweet.set_tweetType(type);
@@ -205,34 +200,55 @@ void tweet::rq_tweet(twitterak app, std:: string type)                          
 
 //------------------------------------------------------------------------
 
-void tweet::fetch_hashtags(twitterak &app, std::string tweet)                                                    // finds and saves hashtags of user's tweet
+int tweet::get_like_number() const
 {
-    std::string hashtag;
-    int tsize = hashtags.size();
+    return likes.size();
+}
+//------------------------------------------------------------------------
 
-    for(int i = 0; i < tsize; i++)
+// void tweet::fetch_hashtags(twitterak &app, std::string tweet)                                                    // finds and saves hashtags of user's tweet
+// {
+//     std::string hashtag;
+//     int tsize = hashtags.size();
+
+//     for(int i = 0; i < tsize; i++)
+//     {
+//         if(tweet[i] == '#')
+//         {
+//             for(int j = i+1; j < tsize; j++)
+//             {
+//                 if(tweet[j] != ' ')
+//                 {
+//                     hashtag += tweet[j];
+//                 }
+//                 else
+//                 {
+//                     if(!hashtag.empty())
+//                     {
+//                         hashtags.push_back(hashtag);
+//                         app.Hashtags[hashtag] = *this;
+//                     }
+//                     hashtag = "";
+//                     i = j;
+//                     break;
+//                 }
+//             }
+//         }
+//     }
+//     hashtags.push_back(hashtag);
+// }
+
+//------------------------------------------------------------------------
+
+void tweet::like(std:: string userName)
+{
+    if(likes.count(userName))
     {
-        if(tweet[i] == '#')
-        {
-            for(int j = i+1; j < tsize; j++)
-            {
-                if(tweet[j] != ' ')
-                {
-                    hashtag += tweet[j];
-                }
-                else
-                {
-                    if(!hashtag.empty())
-                    {
-                        hashtags.push_back(hashtag);
-                        app.Hashtags[hashtag] = *this;
-                    }
-                    hashtag = "";
-                    i = j;
-                    break;
-                }
-            }
-        }
+        likes.erase(userName);
     }
-    hashtags.push_back(hashtag);
+
+    else
+    {
+        likes[userName] = true;
+    }
 }

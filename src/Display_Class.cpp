@@ -189,16 +189,61 @@ void display::signup(twitterak &app, std::string user_name)
     
     std::cout << "* Registration was successful.\n";
 }
+
+//------------------------------------------------------------------------------------------
+
+void display::show_tweet(twitterak app)
+{
+    for(auto our_tweet:app.users[app.logedin_user].tweets)
+    {
+        if(our_tweet.second.get_tweetType() == "normal")
+        {
+            std::cout << our_tweet.first << " : " << our_tweet.second.get_sefTweet() << std:: endl;
+            std::cout << "likes : " << our_tweet.second.get_like_number() << "\t";
+            our_tweet.second.timeDate.print_date();
+            std::cout << " ";
+            our_tweet.second.timeDate.print_time();
+            std::cout << "\n\n";
+        }
+
+        else if(our_tweet.second.get_tweetType() == "retweet")
+        {
+            std::cout << "tweet number : " << our_tweet.first << '\n';
+            std::cout << our_tweet.second.get_name() << std::endl << our_tweet.second.get_user_name() <<std::endl;
+            std::cout << "\t" << our_tweet.second.get_ownerName() << "\n\t" << our_tweet.second.get_ownerUser_name() << std::endl;
+            std::cout << "\t" << our_tweet.second.get_ownerTweet() << '\n';
+            std::cout << "likes : " << our_tweet.second.get_like_number() << " ";
+            our_tweet.second.timeDate.print_date();
+            std::cout << " ";
+            our_tweet.second.timeDate.print_time();
+            std::cout << "\n\n";
+        }
+
+        else
+        {
+            std::cout << "tweet number : " << our_tweet.first << '\n';
+            std::cout << our_tweet.second.get_name() << std::endl << our_tweet.second.get_user_name() << std::endl << our_tweet.second.get_sefTweet() << '\n';
+            std::cout << "\t" << our_tweet.second.get_ownerName() << "\n\t" << our_tweet.second.get_ownerUser_name() << std::endl;
+            std::cout << "\t" << our_tweet.second.get_ownerTweet() << '\n';
+            std::cout << "likes : " << our_tweet.second.get_like_number() << " ";
+            our_tweet.second.timeDate.print_date();
+            std::cout << " ";
+            our_tweet.second.timeDate.print_time();
+            std::cout << "\n\n";
+        }
+    }
+}
+
 //============================================================= Help_Function ============================================================= 
 
 void display::help(twitterak &app)
 {
     if(app.is_logedin == false)
     {
-        std:: cout << "login : to login to your acount\n";
+        std:: cout << "to login to your acount\n";
         std::cout << "~ login your_user_name your_password\n~ login your_user_name\n~ login \n\n";
 
-        std::cout << "signup : to create a new account\n";
+        std::cout << "to create a new account\n";
         std::cout << "~ login your_user_name\n~ signup \n\n";
 
         std::cout << "exit : to close the app\n";
@@ -208,25 +253,50 @@ void display::help(twitterak &app)
 
     else
     {
-        std::cout << "show profile : show your/another person account\n";
+        std::cout << "show your/another person account\n";
         std::cout << "show your profile :\n";
         std::cout << "~ profile\n";
         std::cout << "~ me\n";
-        std::cout << "~ @me\n";
         std::cout << "show another person profile :\n";
         std::cout << "~ profile @user_name\n\n";
 
-        std::cout << "edit account : to edit your profile\n";
+        std::cout << "to edit your profile\n";
         std::cout << "~ edit profile edit_part value\n";
         std::cout << "~ if your value is an string, put it between "" \n\n";
 
-        std::cout << "logout : logout from your account\n";
+        std::cout << "logout from your account\n";
         std::cout << "~ logout\n\n";
 
-        std::cout << "delete account : to delete your account\n";
+        std::cout << "to delete your account\n";
         std::cout << "~ delete account\n\n";
 
-        // std::cout << "signup : \n";
-        // std::cout << "signup : for create a new account\n";
+        std::cout << "create a new tweet\n";
+        std::cout << "~ tweet \n";
+        std::cout << "~ tweet your_tweet_text\n\n";
+
+        std::cout << "retweet a tweet\n";
+        std::cout << "~ retweet user_name number_of_tweet\n\n";
+
+        std::cout << "like a tweet\n";
+        std::cout << "~ like user_name number_of_tweet\n\n";
+
+        std::cout << "dislike a tweet\n";
+        std::cout << "~ dislike user_name number_of_tweet\n\n";
+    
+        std::cout << "show your/another person tweets\n";
+        std::cout << "@me (show your tweets)\n";
+        std::cout << "@your_user_name (show your tweets)\n";
+        std::cout << "@user_name (show another person tweets)\n\n";
+
+        std::cout << "show specific tweet \n";
+        std::cout << "~ @user_name:number_of_tweet\n\n";
+
+        std::cout << "edit your tweet\n";
+        std::cout << "~ edit tweet number_of_tweet\n\n";
+
+        std::cout << "edit your tweet\n";
+        std::cout << "edit tweet number_of_tweet\n\n";
+
+        // std::cout << ""
     }
 }

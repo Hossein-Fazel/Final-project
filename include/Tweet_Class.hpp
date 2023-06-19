@@ -4,9 +4,9 @@
 #include <unordered_map>
 #include <vector>
 #include <string>
-#include <unordered_set>
 
-// #include "User_Class.hpp"
+#include "TD_Class.hpp"
+#include "Display_Class.hpp"
 
 class twitterak;
 class user;
@@ -15,8 +15,8 @@ class user;
 
 class tweet
 {
+    friend void display::show_tweet(twitterak);
     public:
-        tweet();
 //================ gets =====================
 
         std::string get_tweetType() const;                                      // returns the type of a tweet(quote/retweet)
@@ -28,6 +28,7 @@ class tweet
         std::string get_user_name() const;                                      // returns the username of the user
         int get_number() const;                                                 // returns the tweet's number
         int get_user_age() const;                                               // returns the age of the user 
+        int get_like_number() const;
 
 //================ sets =====================
 
@@ -45,12 +46,14 @@ class tweet
 
         void delete_tweet(twitterak, int);                                       // deletes a tweet of a user 
         void edit_tweet(twitterak, int);                                         // edits a tweet of a user
-        void rq_tweet(twitterak, std::string);                                   // quote tweet or retweet
-        void fetch_hashtags(twitterak &,std::string);                            // finds and saves hashtags of user's tweet
+        void rq_tweet(twitterak&, std::string);                                   // quote tweet or retweet
+        // void fetch_hashtags(twitterak &,std::string);                            // finds and saves hashtags of user's tweet
+        void like (std:: string);
 
 
     private:        
-        std::unordered_set<std::string> likes;
+        std::unordered_map<std::string, bool> likes;
+
         std::string tweet_type;
         std::string self_tweet;
         std::string owner_name;
@@ -61,6 +64,7 @@ class tweet
         std::string user_name;
         int number;
         int user_age;
+        TD timeDate;
 };
 
 #endif
