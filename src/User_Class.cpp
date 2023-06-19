@@ -9,7 +9,6 @@
 #include "Twitterak_Class.hpp"
 
 
-
 //==================================================================  Get_Functions =================================================================
 
 std::string user::get_name() const                       // returns the name of the user
@@ -309,11 +308,11 @@ void user::Tweet()                                                              
     tw.set_name(this->get_name());
     tw.set_user_name(this->get_username());
     tw.set_number(this->get_last_number()+1);
-
+    std::cout << "$ tweet text : ";
     std::getline(std::cin, twt);
     tw.set_selfTweet(twt);
 
-    this->last_number();
+    last_number();
 
     this->Push_Tweet(tw);
 }
@@ -347,7 +346,7 @@ void user::Logout(twitterak &app)                                               
 
 void user::Push_Tweet(tweet tw)                                                                                  // push a tweet into a vector
 {
-    tweets.push_back(tw);
+    tweets[tw.get_number()] = tw;
 }
 
 //------------------------------------------------------------------------

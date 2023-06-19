@@ -5,6 +5,8 @@
 
 #include "Twitterak_Class.hpp"
 #include "Display_Class.hpp"
+#include "User_Class.hpp"
+
 
 void twitterak::tokenize(std::string command)
 {
@@ -148,7 +150,7 @@ void twitterak::run()
                 
             }
 
-            else if(commands[0] == "profile" or commands[0] == "me" or commands[0] == "@me")
+            else if(commands[0] == "profile" or commands[0] == "me")
             {
                 if(is_logedin)
                 {
@@ -206,12 +208,64 @@ void twitterak::run()
             {
                 d1.help(*this);
             }
-            
+
+            else if(commands[0] == "tweet")
+            {
+                if(is_logedin)
+                {
+                    users[logedin_user].Tweet();
+                }
+
+                else
+                {
+                    std:: cout << "! You must login first to your account\n";
+                }
+            }
+
+            // else if(commands[0] == "retweet")
+            // {
+            //     if(commands[1][0] == '@')
+            //     {
+            //         commands[1].erase(0,1);
+            //     }
+            //     if( users[commands[1]].tweets.count(std::stoi(commands[2])) )
+            //     {
+            //         users[commands[1]].tweets[std::stoi(commands[2])].rq_tweet(*this, "retweet");
+            //     }
+            //     else
+            //     {
+            //         std::cout << "! There is no tweet with this number.\n";
+            //     }
+            // }
+
+            // else if(commands[0] == "qoutetweet")
+            // {
+            //     if(commands[1][0] == '@')
+            //     {
+            //         commands[1].erase(0,1);
+            //     }
+            //     if( users[commands[1]].tweets.count(std::stoi(commands[2])) )
+            //     {
+            //         users[commands[1]].tweets[std::stoi(commands[2])].rq_tweet(*this, "qoutetweet");
+            //     }
+            //     else
+            //     {
+            //         std::cout << "! There is no tweet with this number.\n";
+            //     }
+            // }
+
+            else if (commands[0] == "@me")
+            {
+                if(is_logedin)
+                {
+                    d1.show_tweet(*this);
+                }
+            }
+
             else
             {
                 std:: cout << "! undefined command.\n";
             }
-        
         }
 
         if(is_logedin)
