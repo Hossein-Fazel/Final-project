@@ -265,10 +265,77 @@ void twitterak::run()
 
                 if(counter == 0)
                 {
-                    commands[0].erase(0, 1);
-                    d1.show_tweet(*this);
+                    if(commands[0] == "@me")
+                    {
+                        d1.show_tweet(*this);
+                    }
+
+                    else
+                    {
+                        commands[0].erase(0, 1);
+                        d1.show_tweet(*this, commands[0]);
+                    }
                 }
 
+                else if(counter == 1)
+                {
+                    std::string num;
+                    std::string user_name;
+                    for(int i = 0; i < commands[0].size(); i++)
+                    {
+                        if(commands[0][i] == ':')
+                        {
+                            for( int j = i+1; j < commands[0].size(); j++)
+                            {
+                                num += commands[0][j];
+                            }
+                            break;
+                        }
+                        else
+                        {
+                            user_name += commands[0][i];
+                        }
+                    }
+                    int number = std::stoi(num);
+                    
+                    d1.show_tweet(*this, user_name, number);
+                }
+
+                else if(counter == 2)
+                {
+                    std::string num;
+                    std::string user_name;
+
+                    for(int i = 0; i < commands[0].size(); i++)
+                    {
+                        if(commands[0][i] == ':')
+                        {
+                            for( int j = i+1; j < commands[0].size(); j++)
+                            {
+                                if(commands[0][j] != ':')
+                                {
+                                    num += commands[0][j];
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                        else
+                        {
+                            user_name += commands[0][i];
+                        }
+                    }
+                    int number = std::stoi(num);
+                    
+                    d1.show_tweet(*this, user_name, number);
+                }
+            }
+
+            else if(commands[0] == "like")
+            {
                 
             }
 

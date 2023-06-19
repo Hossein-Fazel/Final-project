@@ -17,6 +17,8 @@ class tweet
 {
     friend void display::show_tweet(twitterak);
     friend void display::show_tweet(twitterak,std:: string, int);
+    friend void display::show_tweet(twitterak,std:: string);
+
 
     public:
 //================ gets =====================
@@ -51,7 +53,7 @@ class tweet
         void rq_tweet(twitterak&, std::string);                                   // quote tweet or retweet
         // void fetch_hashtags(twitterak &,std::string);                            // finds and saves hashtags of user's tweet
         void like (std:: string);
-
+        void print_likers();
 
     private:        
         std::unordered_map<std::string, bool> likes;
