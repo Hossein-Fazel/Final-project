@@ -14,7 +14,6 @@ set(SOURCES
    src/Twitterak_Class.cpp
    src/User_Class.cpp
    src/sha256.cpp
-   src/TD_Class.cpp
 )
 
 add_executable(app ${SOURCES})
