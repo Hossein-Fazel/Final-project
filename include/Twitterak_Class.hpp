@@ -25,6 +25,8 @@ friend void display::signup(twitterak &);
 friend void display::help(twitterak &);
 friend void display::signup(twitterak &, std::string);
 friend void display::show_tweet(twitterak);
+friend void display::show_tweet(twitterak, std::string, int);
+ 
 
 friend void tweet::rq_tweet(twitterak&, std::string);
 friend void tweet::delete_tweet(twitterak, int);                        // friend with Twitterak_Class to delete a tweet

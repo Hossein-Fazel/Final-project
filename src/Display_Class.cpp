@@ -196,6 +196,7 @@ void display::show_tweet(twitterak app)
 {
     for(auto our_tweet:app.users[app.logedin_user].tweets)
     {
+        
         if(our_tweet.second.get_tweetType() == "normal")
         {
             std::cout << our_tweet.first << " : " << our_tweet.second.get_sefTweet() << std:: endl;
@@ -230,6 +231,32 @@ void display::show_tweet(twitterak app)
             std::cout << " ";
             our_tweet.second.timeDate.print_time();
             std::cout << "\n\n";
+        }
+    }
+}
+
+//------------------------------------------------------------------------------------------
+
+void display::show_tweet(twitterak app,std::string user_name, int number)
+{
+    if(app.users[user_name].tweets.count(number))
+    {
+        if(app.users[user_name].tweets[number].get_tweetType() == "normal")
+        {
+            std::cout << app.users[user_name].tweets[number].get_number() << ':' << app.users[user_name].tweets[number].get_sefTweet() << std::endl;
+            std::cout << "Likes : " << app.users[user_name].tweets[number].get_like_number() << ' ';
+            app.users[user_name].tweets[number].timeDate.print_date();
+            std::cout << ' ';
+            app.users[user_name].tweets[number].timeDate.print_time();
+
+        }
+        else if(app.users[user_name].tweets[number].get_tweetType() == "retweet")
+        {
+
+        }
+        else
+        {
+
         }
     }
 }

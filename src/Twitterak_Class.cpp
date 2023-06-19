@@ -254,12 +254,22 @@ void twitterak::run()
             //     }
             // }
 
-            else if (commands[0] == "@me")
+            else if(commands[0][0] == '@')
             {
-                if(is_logedin)
+                int counter = 0;
+
+                for(;commands[0].find(':') != std::string::npos;)
                 {
+                    counter++;
+                }
+
+                if(counter == 0)
+                {
+                    commands[0].erase(0, 1);
                     d1.show_tweet(*this);
                 }
+
+                
             }
 
             else

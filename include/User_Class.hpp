@@ -20,6 +20,7 @@ class user
 friend void tweet::set_user_age(user);                            // friend with Tweet_Class to set user age
 friend void tweet::rq_tweet(twitterak&, std::string);              // friend with Tweet_Class to push_back tweets on vector
 friend void display::show_tweet(twitterak);                       // friend with Twitterak_Class to show tweets
+friend void display::show_tweet(twitterak, std::string, int);                       // friend with Twitterak_Class to show tweets
 friend void tweet::delete_tweet(twitterak, int);                  // friend with Twitterak_Class to delete a tweet
 friend void tweet::edit_tweet(twitterak, int);                    // friend with Twitterak_Class to edit a tweet
 // friend void twitterak::run();/
