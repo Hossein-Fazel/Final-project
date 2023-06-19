@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <ctype.h>
+#include <iterator>
 #include "sha256.h"
 
 #include "User_Class.hpp"
@@ -239,13 +240,33 @@ void user::Show_Profile(twitterak &app)                                         
 
 //------------------------------------------------------------------------
 
-void user::Edit(twitterak &app, std::string Edit_part ,std::string value)                                 // edits the user's information                                                                                    // Edit the user's information 
+void user::Edit(twitterak &app, std::string Edit_part ,std::string value)                                 // edits the user's information                                                                                    
 {
     Edit_part = to_lower(Edit_part);
 
     if (Edit_part == "name")
     {
         app.users[app.logedin_user].set_name(value);
+        std::cout << "* Your " << Edit_part << " has been successfully changed.\n";
+    }
+
+    if (Edit_part == "username")
+    {
+        if (value[0] == '@')
+            value = remove_atsing(value);
+
+        set_username(value);
+        std::unordered_map <std::string,user>::const_iterator got = app.users.find(app.logedin_user);
+
+        auto entry = app.users.find(Edit_part);
+
+        if (entry != end(app.users))
+        {
+            auto const val = std::move(entry->second);
+            app.users.erase(entry);
+            app.users.insert({value, std::move(val)});
+        }
+
         std::cout << "* Your " << Edit_part << " has been successfully changed.\n";
     }
 

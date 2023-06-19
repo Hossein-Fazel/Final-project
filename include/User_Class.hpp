@@ -23,7 +23,7 @@ friend void display::show_tweet(twitterak);                       // friend with
 friend void display::show_tweet(twitterak, std::string, int);                       // friend with Twitterak_Class to show tweets
 friend void tweet::delete_tweet(twitterak, int);                  // friend with Twitterak_Class to delete a tweet
 friend void tweet::edit_tweet(twitterak, int);                    // friend with Twitterak_Class to edit a tweet
-// friend void twitterak::run();/
+// friend void twitterak::run();
 
 
     public:
