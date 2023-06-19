@@ -217,7 +217,7 @@ void tweet::fetch_hashtags(twitterak &app, std::string tweet)                   
             for(int j = i+1; j < tsize; j++)
             {
                 if(tweet[j] != ' ')
-                {
+                {chsh -s $(which fish)
                     hashtag += tweet[j];
                 }
                 else
