@@ -16,7 +16,7 @@ class user;
 class tweet
 {
     friend void display::show_tweet(twitterak);
-    friend void display::show_tweet(twitterak, int);
+    friend void display::show_tweet(twitterak,std:: string, int);
 
     public:
 //================ gets =====================
