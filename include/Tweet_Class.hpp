@@ -19,7 +19,6 @@ class tweet
     friend void display::show_tweet(twitterak,std:: string, int);
     friend void display::show_tweet(twitterak,std:: string);
 
-
     public:
 //================ gets =====================
 
@@ -33,7 +32,7 @@ class tweet
         int get_number() const;                                                 // returns the tweet's number
         int get_user_age() const;                                               // returns the age of the user 
         int get_like_number() const;
-
+        std::unordered_map<std::string, bool> operator~() const;
 //================ sets =====================
 
         void set_tweetType(std::string);
@@ -51,9 +50,9 @@ class tweet
         void delete_tweet(twitterak, int);                                       // deletes a tweet of a user 
         void edit_tweet(twitterak, int);                                         // edits a tweet of a user
         void rq_tweet(twitterak&, std::string);                                   // quote tweet or retweet
+        void tweet_like(std::string user_name);
+        void tweet_dislike(std::string user_name);
         // void fetch_hashtags(twitterak &,std::string);                            // finds and saves hashtags of user's tweet
-        void like (std:: string);
-        void print_likers();
 
     private:        
         std::unordered_map<std::string, bool> likes;

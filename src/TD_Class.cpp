@@ -45,10 +45,10 @@ TD::TD()
 
 void TD::print_date()
 {
-    std::cout << year << " " << month << " " << day;
+    std::cout << month << " " << day << ',' << year ;
 }
 
 void TD::print_time()
 {
-    std::cout << time;
+    std::cout << time <<'.';
 }

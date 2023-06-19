@@ -27,7 +27,6 @@ friend void display::signup(twitterak &, std::string);
 friend void display::show_tweet(twitterak);
 friend void display::show_tweet(twitterak, std::string, int);
 friend void display::show_tweet(twitterak, std::string);
-
  
 
 friend void tweet::rq_tweet(twitterak&, std::string);

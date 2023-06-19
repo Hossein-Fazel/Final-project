@@ -258,7 +258,7 @@ void user::Edit(twitterak &app, std::string Edit_part ,std::string value)       
         set_username(value);
         std::unordered_map <std::string,user>::const_iterator got = app.users.find(app.logedin_user);
 
-        auto entry = app.users.find(Edit_part);
+        auto entry = app.users.find(app.logedin_user);
 
         if (entry != end(app.users))
         {
@@ -268,6 +268,7 @@ void user::Edit(twitterak &app, std::string Edit_part ,std::string value)       
         }
 
         std::cout << "* Your " << Edit_part << " has been successfully changed.\n";
+        app.logedin_user = value;
     }
 
     if (Edit_part == "biography")
@@ -378,3 +379,56 @@ void user::last_number()                                                        
 }
 
 //------------------------------------------------------------------------
+
+void user::print_likers(int number)
+{
+    if(tweets.count(number))
+    {
+        if(tweets.size() == 0)
+        {
+            std::cout << "! This tweet has no like.\n";
+        }
+        else
+        {
+            for(auto liker:~tweets[number])
+            {
+                std::cout << liker.first << '\n';
+            }
+        }
+    }
+}
+
+//------------------------------------------------------------------------
+
+void user::like(std::string user_name, int number)
+{
+    if(tweets.count(number))
+    {
+        tweets[number].tweet_like(user_name);
+    }
+    else
+    {
+        std::cout << "! There is no tweet with this number.\n";
+    }
+}
+
+//------------------------------------------------------------------------
+
+void user::dislike(std::string user_name, int number)
+{
+    if(tweets.count(number))
+    {
+        tweets[number].tweet_dislike(user_name);
+    }
+    else
+    {
+        std::cout << "! There is no tweet with this number.\n";
+    }
+}
+
+//------------------------------------------------------------------------
+
+std::map <int, tweet> user::get_tweets()
+{
+    return tweets;
+}

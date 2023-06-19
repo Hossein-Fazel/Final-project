@@ -41,6 +41,7 @@ friend void tweet::edit_tweet(twitterak, int);                    // friend with
         int get_last_number();                                    // returns the last tweet's number
 
 //====================== sets =====================
+
         void set_name(std::string);                               // sets the name of a user
         void set_username(std::string);                           // sets the username of a user with a validation
         void set_biography(std::string);                          // sets the biography of a user
@@ -63,6 +64,12 @@ friend void tweet::edit_tweet(twitterak, int);                    // friend with
         int Validating_Username(std::string);                      // the validation of a user's username
         std::string to_lower(std::string);                         // makes a string a lowercase
         std::string remove_atsing(std::string);                    // removes @ from the first of the user name
+        void print_likers(int);
+        void like(std::string ,int);
+        void dislike(std::string, int);
+
+        std::map <int, tweet> get_tweets();
+        
              
 
     private:

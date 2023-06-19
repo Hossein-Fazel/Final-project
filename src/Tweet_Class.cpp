@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include <vector>
 #include <string>
+#include <ctime>
 #include <unordered_set>
 
 #include "Tweet_Class.hpp"
@@ -238,21 +239,35 @@ int tweet::get_like_number() const
 //     hashtags.push_back(hashtag);
 // }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------
 
-void tweet::like(std:: string userName)
+std::unordered_map<std::string, bool> tweet::operator~() const
 {
-    if(likes.count(userName))
-    {
-        likes.erase(userName);
-    }
-
-    else
-    {
-        likes[userName] = true;
-    }
+    return likes;
 }
-
 
 //-----------------------------------------------------------------------
 
+void tweet::tweet_like(std::string user_name)
+{
+    if(likes.count(user_name) == 0)
+    {
+        likes[user_name] = true;
+    }
+    else
+    {
+        std::cout << "! You have already liked the tweet.\n";
+    }
+}
+
+//-----------------------------------------------------------------------
+
+void tweet::tweet_dislike(std::string user_name)
+{
+    if(likes.count(user_name))
+    {
+        likes.erase(user_name);
+    }
+}
+
+//-----------------------------------------------------------------------
