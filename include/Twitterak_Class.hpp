@@ -9,7 +9,6 @@
 #include <vector>
 #include <string>
 
-
 class twitterak
 {
 //=================== Friends ===================
