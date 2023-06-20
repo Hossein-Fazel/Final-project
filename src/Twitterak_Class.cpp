@@ -104,8 +104,11 @@ std::string twitterak::lower(std::string command)
 void twitterak::run()
 {
     system("cls | clear");
-    std::cout << "\t\t\t--- Welcome to Twitterak ---\n";
+    std::cout << "\t\t\t--- Welcome to Twitterak ---\n\n";
     std::cout << "If you need help, enter help command :)\n";
+    std::cout << "~ help\n";
+    std::cout << "~ twitterak --help\n";
+
 
     std:: cout << "> ";
 
@@ -119,7 +122,6 @@ void twitterak::run()
 
     while (1)
     {
-        
         if(!command.empty())
         {
             int cSize = commands.size();
@@ -152,7 +154,7 @@ void twitterak::run()
             {
                 if(is_logedin)
                 {
-                    std::cout << "! You must login first to your account.\n";
+                    std::cout << "! You must logout first from your account.\n";
                 }
                 else
                 {
@@ -257,7 +259,7 @@ void twitterak::run()
                 exit(0);
             }
 
-            else if (commands[0] == "help")
+            else if ((commands[0] == "twitterak" and commands[1] == "--help") or commands[0] == "help")
             {
                 d1.help(*this);
             }

@@ -141,6 +141,12 @@ void display::signup(twitterak &app)
     u1.set_birthday(birthday);
 
     Pass = getpass("$ Password : ");
+    while (Pass.empty())
+    {
+        std::cout << "! please enter a password\n";
+        Pass = getpass("$ Password : ");
+    }
+
     u1.set_password(Pass);
 
     app.users[u1.get_username()] = u1;
@@ -189,6 +195,12 @@ void display::signup(twitterak &app, std::string user_name)
     u1.set_birthday(birthday);
 
     Pass = getpass("$ Password : ");
+    while (Pass.empty())
+    {
+        std::cout << "! please enter a password\n";
+        Pass = getpass("$ Password : ");
+    }
+    
     u1.set_password(Pass);
 
     app.users[u1.get_username()] = u1;
@@ -354,7 +366,7 @@ void display::help(twitterak &app)
     if(app.is_logedin == false)
     {
         std::cout << "\n";
-        std::cout << "--------------------------------------- Help -----------------------------------------\n";
+        std::cout << "--------------------------------------- Help -----------------------------------------\n\n";
         std::cout << "login to your acount\n";
         std::cout << "~ login your_user_name your_password\n~ login your_user_name\n~ login \n\n";
 
@@ -363,13 +375,13 @@ void display::help(twitterak &app)
 
         std::cout << "close the app\n";
         std::cout << "~ exit\n~ quit\n~ q\n\n";
-        std::cout << "--------------------------------------- end -----------------------------------------\n";
+        std::cout << "-------------------------------------------------------------------------------------\n";
     }
 
     else
     {
         std::cout << "\n";
-        std::cout << "--------------------------------------- Help -----------------------------------------\n";
+        std::cout << "--------------------------------------- Help -----------------------------------------\n\n";
 
         std::cout << "show your/another person account\n";
         std::cout << "show your profile :\n";
@@ -431,6 +443,6 @@ void display::help(twitterak &app)
         std::cout << "show likes of a tweet\n";
         std::cout << "~ @user_name:number_of_tweet:like\n\n";
 
-        std::cout << "--------------------------------------- end -----------------------------------------\n";
+        std::cout << "------------------------------------------------------------------------------------\n";
     }
 }
