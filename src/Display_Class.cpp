@@ -1,4 +1,5 @@
 #include <iostream>
+#include <unistd.h>
 
 #include "sha256.h"
 #include "Display_Class.hpp"
@@ -44,8 +45,7 @@ void display::login(twitterak &app, std::string user_name)
     }
     std::string password;
 
-    std::cout << "$ Password : ";
-    std::cin >> password;
+    password = getpass("$ Password : ");
 
     if (app.users.count(user_name) == 1)
     {
@@ -79,8 +79,7 @@ void display::login(twitterak &app)
         user_name.erase(0,1);
     }
 
-    std::cout << "$ Password : ";
-    std::cin >> password;
+    password = getpass("$ Password : ");
 
     if (app.users.count(user_name) == 1)
     {
@@ -107,7 +106,7 @@ void display::signup(twitterak &app)
 {
     std::string Full_Name;
     std::string Username;
-    std::string Password;
+    std::string Pass;
     std::string birthday;
 
     user u1;
@@ -141,9 +140,8 @@ void display::signup(twitterak &app)
     std::cin >> birthday;
     u1.set_birthday(birthday);
 
-    std::cout << "$ Password : ";
-    std::cin >> Password;
-    u1.set_password(Password);
+    Pass = getpass("$ Password : ");
+    u1.set_password(Pass);
 
     app.users[u1.get_username()] = u1;
 
@@ -158,7 +156,7 @@ void display::signup(twitterak &app)
 void display::signup(twitterak &app, std::string user_name)
 {
     std::string Full_Name;
-    std::string Password;
+    std::string Pass;
     std::string birthday;
 
     user u1;
@@ -190,9 +188,8 @@ void display::signup(twitterak &app, std::string user_name)
     std::cin >> birthday;
     u1.set_birthday(birthday);
 
-    std::cout << "$ Password : ";
-    std::cin >> Password;
-    u1.set_password(Password);
+    Pass = getpass("$ Password : ");
+    u1.set_password(Pass);
 
     app.users[u1.get_username()] = u1;
 

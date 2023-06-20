@@ -99,6 +99,8 @@ void user::set_username(std::string user_name)                                  
             std::cerr << "! Username must have at least 5 characters.\n";
             std::cout << "$ Username : @";
             std::cin >> user_name;
+
+            std::cin.ignore();
         }
 
         else if ((Validating_Username(user_name)) == -1)
@@ -106,6 +108,8 @@ void user::set_username(std::string user_name)                                  
             std::cerr << "! Username must not have characters.\n";
             std::cout << "$ Username : @";
             std::cin >> user_name;
+
+            std::cin.ignore();
         }
             
         else if ((Validating_Username(user_name)) == -2)
@@ -113,6 +117,8 @@ void user::set_username(std::string user_name)                                  
             std::cerr << "! Username must not be the commands of the program.\n";
             std::cout << "$ Username : @";
             std::cin >> user_name;
+
+            std::cin.ignore();
         }
 
         else

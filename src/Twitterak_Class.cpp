@@ -66,7 +66,7 @@ void twitterak::tokenize(std::string command)
             if(commands[0] == "edit" and counter == 3)
             {
                 cm = "";
-                for(int j = i+1; j < cSize ; i++)
+                for(int j = i+1; j < cSize ; j++)
                 {
                     cm += command[j];
                 }
@@ -76,7 +76,7 @@ void twitterak::tokenize(std::string command)
             else if(commands[0] == "tweet")
             {
                 cm = "";
-                for(int j = i+1; j < cSize ; i++)
+                for(int j = i+1; j < cSize ; j++)
                 {
                     cm += command[j];
                 }
@@ -265,7 +265,14 @@ void twitterak::run()
             {
                 if(is_logedin)
                 {
-                    users[logedin_user].Tweet();
+                    if(commands.size() == 2)
+                    {
+                        users[logedin_user].Tweet(commands[1]);
+                    }
+                    else if(commands.size() == 1)
+                    {
+                        users[logedin_user].Tweet("");
+                    }
                 }
 
                 else
@@ -382,7 +389,6 @@ void twitterak::run()
                         }
                     }
                     int number = std::stoi(num);
-                    // std::cout << number << " " << user_name << std::endl;
                     user_name.erase(0, 1);
                     
                     d1.show_tweet(*this, user_name, number);
