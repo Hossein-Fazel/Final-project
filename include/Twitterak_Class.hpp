@@ -37,6 +37,8 @@ friend void tweet::edit_tweet(twitterak, int);                          // frien
         std::string lower(std::string);
         void run();
         void tokenize(std::string);
+        bool is_in(std::string,char);
+        bool is_in(std::string,std::string);
 
     private:
         bool is_logedin = false;

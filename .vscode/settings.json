@@ -44,6 +44,11 @@
         "iostream": "cpp",
         "unordered_set": "cpp",
         "map": "cpp",
-        "ctime": "cpp"
+        "ctime": "cpp",
+        "bit": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "string_view": "cpp",
+        "numbers": "cpp"
     }
 }

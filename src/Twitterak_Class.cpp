@@ -8,12 +8,40 @@
 #include "User_Class.hpp"
 
 
+bool twitterak::is_in(std::string str, char ch)
+{
+    int strSize = str.size();
+    for(int i = 0; i < strSize; i++)
+    {
+        if(str[i] == ch)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool twitterak::is_in(std::string str, std::string ch)
+{
+    int strSize = str.size();
+    for(int i = 0; i < strSize; i++)
+    {
+        if(str.substr(i,i + (ch.size())) == ch)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 void twitterak::tokenize(std::string command)
 {
     commands.clear();
+    int counter = 0;
+    int cSize = command.size();
 
     std::string cm="";
-    for(int i = 0; i < command.size(); i++)
+    for(int i = 0; i < cSize; i++)
     {
         if(int(command[i]) != 32)
         {
@@ -29,6 +57,30 @@ void twitterak::tokenize(std::string command)
             {
                 commands.push_back(cm);
                 cm = "";
+                counter++;
+            }
+        }
+        
+        if(commands.size() != 0)
+        {
+            if(commands[0] == "edit" and counter == 3)
+            {
+                cm = "";
+                for(int j = i+1; j < cSize ; i++)
+                {
+                    cm += command[j];
+                }
+                break;
+            }
+
+            else if(commands[0] == "tweet")
+            {
+                cm = "";
+                for(int j = i+1; j < cSize ; i++)
+                {
+                    cm += command[j];
+                }
+                break;
             }
         }
     }
@@ -241,77 +293,41 @@ void twitterak::run()
 
             else if(commands[0] == "qoutetweet")
             {
-                if(commands[1][0] == '@')
+                if(commands.size() !=  3)
                 {
-                    commands[1].erase(0,1);
+                    std::cout << "! undefined command.\n";
                 }
-                if( users[commands[1]].get_tweets().count(std::stoi(commands[2])) )
-                {
-                    users[commands[1]].get_tweets()[std::stoi(commands[2])].rq_tweet(*this, "qoutetweet");
-                }
+
                 else
                 {
-                    std::cout << "! There is no tweet with this number.\n";
+                    if(commands[1][0] == '@')
+                    {
+                        commands[1].erase(0,1);
+                    }
+                    if( users[commands[1]].get_tweets().count(std::stoi(commands[2])) )
+                    {
+                        users[commands[1]].get_tweets()[std::stoi(commands[2])].rq_tweet(*this, "qoute");
+                    }
+                    else
+                    {
+                        std::cout << "! There is no tweet with this number.\n";
+                    }
                 }
             }
 
             else if(commands[0][0] == '@')
             {
-                int counter = 0;
-
-                for(;commands[0].find(':') != std::string::npos;)
-                {
-                    counter++;
-                }
-
-                if(counter == 0)
-                {
-                    if(commands[0] == "@me")
-                    {
-                        d1.show_tweet(*this);
-                    }
-
-                    else
-                    {
-                        commands[0].erase(0, 1);
-                        d1.show_tweet(*this, commands[0]);
-                    }
-                }
-
-                else if(counter == 1)
+                if(is_in(commands[0], "like"))
                 {
                     std::string num;
                     std::string user_name;
-                    for(int i = 0; i < commands[0].size(); i++)
+                    int cSize = commands[0].size();
+
+                    for(int i = 0; i < cSize; i++)
                     {
                         if(commands[0][i] == ':')
                         {
-                            for( int j = i+1; j < commands[0].size(); j++)
-                            {
-                                num += commands[0][j];
-                            }
-                            break;
-                        }
-                        else
-                        {
-                            user_name += commands[0][i];
-                        }
-                    }
-                    int number = std::stoi(num);
-                    
-                    d1.show_tweet(*this, user_name, number);
-                }
-
-                else if(counter == 2)
-                {
-                    std::string num;
-                    std::string user_name;
-
-                    for(int i = 1; i < commands[0].size(); i++)
-                    {
-                        if(commands[0][i] == ':')
-                        {
-                            for( int j = i+1; j < commands[0].size(); j++)
+                            for( int j = i+1; j < cSize; j++)
                             {
                                 if(commands[0][j] != ':')
                                 {
@@ -331,7 +347,10 @@ void twitterak::run()
                             user_name += commands[0][i];
                         }
                     }
+
                     int number = std::stoi(num);
+
+                    user_name.erase(0, 1);
                     if(users.count(user_name))
                     {
                         users[user_name].print_likers(number);
@@ -339,6 +358,48 @@ void twitterak::run()
                     else
                     {
                         std::cout << "! There is no user with this username.\n";
+                    }
+                }
+
+                else if(is_in(commands[0], ':'))
+                {
+                    std::string num;
+                    std::string user_name;
+                    int cSize = commands[0].size();
+                    for(int i = 0; i < cSize; i++)
+                    {
+                        if(commands[0][i] == ':')
+                        {
+                            for( int j = i+1; j < cSize; j++)
+                            {
+                                num += commands[0][j];
+                            }
+                            break;
+                        }
+                        else
+                        {
+                            user_name += commands[0][i];
+                        }
+                    }
+                    int number = std::stoi(num);
+                    // std::cout << number << " " << user_name << std::endl;
+                    user_name.erase(0, 1);
+                    
+                    d1.show_tweet(*this, user_name, number);
+                }
+
+
+                else if(!is_in(commands[0], ':'))
+                {
+                    if(commands[0] == "@me")
+                    {
+                        d1.show_tweet(*this);
+                    }
+
+                    else
+                    {
+                        commands[0].erase(0, 1);
+                        d1.show_tweet(*this, commands[0]);
                     }
                 }
             }
@@ -389,6 +450,11 @@ void twitterak::run()
                 int number = std::stoi(num);
 
                 users[user_name].like(logedin_user, number);
+            }
+
+            else if(commands[0] == "clear" or commands[0] == "cls")
+            {
+                system("cls | clear");
             }
 
             else

@@ -108,16 +108,16 @@ void tweet::set_ownerTweet(std::string tweet)                                   
 
 //------------------------------------------------------------------------
 
-void tweet::set_name(std:: string name)                                                                             // sets the name of the user
+void tweet::set_name(std:: string got_name)                                                                             // sets the name of the user
 {
-    this->name = name;
+    name = got_name;
 }
 
 //------------------------------------------------------------------------
 
-void tweet::set_user_name(std:: string user_name)                                                                    // sets the username of the user
+void tweet::set_user_name(std:: string Guser_name)                                                                    // sets the username of the user
 {
-    this->user_name = user_name;
+    user_name = Guser_name;
 }
 
 //------------------------------------------------------------------------
@@ -180,7 +180,7 @@ void tweet::rq_tweet(twitterak &app, std:: string type)                         
     rq_tweet.set_tweetType(type);
     rq_tweet.set_ownerTweet(this->self_tweet);
     rq_tweet.set_ownerUser_name(this->user_name);
-    rq_tweet.set_ownerName(this->user_name);
+    rq_tweet.set_ownerName(this->name);
 
     rq_tweet.set_name(app.users[app.logedin_user].get_name());
     rq_tweet.set_user_name(app.users[app.logedin_user].get_username());
@@ -267,6 +267,10 @@ void tweet::tweet_dislike(std::string user_name)
     if(likes.count(user_name))
     {
         likes.erase(user_name);
+    }
+    else
+    {
+        std::cout << "! You have never lke this tweet\n";
     }
 }
 

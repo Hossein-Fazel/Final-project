@@ -327,16 +327,16 @@ void user::Tweet()                                                              
     tweet tw;
     tw.set_tweetType("normal");
 
-    tw.set_name(this->get_name());
-    tw.set_user_name(this->get_username());
-    tw.set_number(this->get_last_number()+1);
+    tw.set_name(get_name());
+    tw.set_user_name(get_username());
+    tw.set_number(get_last_number()+1);
     std::cout << "$ tweet text : ";
     std::getline(std::cin, twt);
     tw.set_selfTweet(twt);
 
     last_number();
 
-    this->Push_Tweet(tw);
+    Push_Tweet(tw);
 }
 
 //------------------------------------------------------------------------
@@ -384,7 +384,7 @@ void user::print_likers(int number)
 {
     if(tweets.count(number))
     {
-        if(tweets.size() == 0)
+        if(~tweets[number].get_like_number() ==0)
         {
             std::cout << "! This tweet has no like.\n";
         }
