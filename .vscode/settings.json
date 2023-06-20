@@ -49,6 +49,7 @@
         "compare": "cpp",
         "concepts": "cpp",
         "string_view": "cpp",
-        "numbers": "cpp"
+        "numbers": "cpp",
+        "optional": "cpp"
     }
 }

@@ -4,6 +4,7 @@
 #include <string>
 #include <ctype.h>
 #include <iterator>
+#include <cctype>
 #include "sha256.h"
 
 #include "User_Class.hpp"
@@ -154,6 +155,19 @@ int user::Validating_Username(std::string user_name)                            
 
 //------------------------------------------------------------------------
 
+bool user::validate_phone_number(std::string phone)                              // validate user's phone_number
+{
+    for (int i = 0; i < phone.size(); i++)
+    {
+        if ((isdigit(phone[i])) == 0)
+            return false;
+    }
+
+    return true;
+}
+
+//------------------------------------------------------------------------
+
 void user::set_biography(std::string bio)                                        // sets the biography of a user
 {
     if (bio.length() > 160)
@@ -182,7 +196,15 @@ void user::set_birthday(std::string birth)                                     /
 
 void user::set_phone(std::string input_phone)                                 // sets the phone number of a user
 {
-    Phone_Number = input_phone;
+    while (1)
+    {
+        if (!(validate_phone_number(input_phone)))
+        {
+            std::cout << "! You're phone number is invalid.\n";
+            std::cout << "$ Phone_Number : ";
+            std::cin >> input_phone;
+        }
+    }
 }
 
 //------------------------------------------------------------------------
@@ -321,7 +343,7 @@ void user::Edit(twitterak &app, std::string Edit_part ,std::string value)       
 
 //------------------------------------------------------------------------
 
-void user::Tweet()                                                                                                  // make a normal tweet                                              
+void user::Tweet(std::string tweet_text)                                                                                                  // make a normal tweet                                              
 {
     std::string twt;
     tweet tw;
@@ -330,9 +352,17 @@ void user::Tweet()                                                              
     tw.set_name(get_name());
     tw.set_user_name(get_username());
     tw.set_number(get_last_number()+1);
-    std::cout << "$ tweet text : ";
-    std::getline(std::cin, twt);
-    tw.set_selfTweet(twt);
+
+    if (tweet_text.empty())
+    {
+        std::cout << "$ tweet text : ";
+        std::getline(std::cin, twt);
+        tw.set_selfTweet(twt);
+    }
+    else
+    {
+        tw.set_selfTweet(tweet_text);
+    }
 
     last_number();
 

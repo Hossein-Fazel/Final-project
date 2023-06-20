@@ -57,17 +57,17 @@ friend void tweet::edit_tweet(twitterak, int);                    // friend with
         void Delete_Account(twitterak &);                          // delets the account of the user
         void Show_Profile(twitterak &);                            // shows the information of a user itself
         void Edit(twitterak &, std::string, std::string);          // edits the user's information                                                                    
-        void Tweet();                                              // make a normal tweet
+        void Tweet(std::string );                                  // make a normal tweet
         void Logout(twitterak &);                                  // logs out of the user's account
         void Push_Tweet(tweet);                                    // push a tweet into a vector
         void last_number();                                        // plus plus last_num variable
-        int Validating_Username(std::string);                      // the validation of a user's username
-        std::string to_lower(std::string);                         // makes a string a lowercase
-        std::string remove_atsing(std::string);                    // removes @ from the first of the user name
         void print_likers(int);
         void like(std::string ,int);
         void dislike(std::string, int);
-
+        int Validating_Username(std::string);                      // the validation of a user's username
+        std::string to_lower(std::string);                         // makes a string a lowercase
+        std::string remove_atsing(std::string);                    // removes @ from the first of the user name
+        bool validate_phone_number(std::string);                   // validate user's phone_number
         std::map <int, tweet> get_tweets();
         
              
