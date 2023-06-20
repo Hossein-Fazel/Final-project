@@ -123,7 +123,7 @@ void twitterak::run()
         if(!command.empty())
         {
             int cSize = commands.size();
-            if(commands[0] == "login")
+            if(commands[0] == "login" and (cSize == 1 or cSize == 2 or cSize == 4))
             {
                 if(is_logedin == true)
                 {
@@ -148,7 +148,7 @@ void twitterak::run()
                 }
             }
 
-            else if(commands[0] == "signup")
+            else if(commands[0] == "signup" and (cSize == 1 or cSize == 2))
             {
                 if(is_logedin)
                 {
@@ -168,7 +168,7 @@ void twitterak::run()
                 }
             }
 
-            else if(commands[0] == "delete")
+            else if(commands[0] == "delete" and cSize == 2)
             {
                 if(is_logedin)
                 {
@@ -184,7 +184,7 @@ void twitterak::run()
                 std::cin.ignore();
             }
 
-            else if(commands[0] == "profile" and commands.size() == 2)
+            else if(commands[0] == "profile" and cSize == 2)
             {
                 if(commands[1][0] == '@')
                 {
@@ -208,6 +208,7 @@ void twitterak::run()
                 {
                     users[logedin_user].Show_Profile(*this);
                 }
+
                 else
                 {
                     std:: cout << "! You must login first to your account.\n";
@@ -238,7 +239,7 @@ void twitterak::run()
                 }
             }
 
-            else if(commands[0] == "logout")
+            else if(commands[0] == "logout" and cSize == 1)
             {
                 if(is_logedin)
                 {
@@ -250,7 +251,7 @@ void twitterak::run()
                 }
             }
 
-            else if (commands[0] == "exit" or commands[0] == "quit" or commands[0] == "q")
+            else if ((commands[0] == "exit" or commands[0] == "quit" or commands[0] == "q") and cSize == 1)
             {
                 std::cout << "Good Bye\n";
                 exit(0);
@@ -261,7 +262,7 @@ void twitterak::run()
                 d1.help(*this);
             }
 
-            else if(commands[0] == "tweet")
+            else if(commands[0] == "tweet" and (cSize == 1 or cSize == 2))
             {
                 if(is_logedin)
                 {
@@ -281,24 +282,33 @@ void twitterak::run()
                 }
             }
 
-            else if(commands[0] == "retweet")
+            else if(commands[0] == "retweet" and cSize == 3)
             {
-                if(commands[1][0] == '@')
+                if(is_logedin)
                 {
-                    commands[1].erase(0,1);
+                    if(commands[1][0] == '@')
+                    {
+                        commands[1].erase(0,1);
+                    }
+
+                    if( users[commands[1]].get_tweets().count(std::stoi(commands[2])) )
+                    {
+                        users[commands[1]].get_tweets()[std::stoi(commands[2])].rq_tweet(*this, "retweet");
+                        std::cout << "* Retweeted.\n";
+                    }
+                    else
+                    {
+                        std::cout << "! There is no tweet with this number.\n";
+                    }
                 }
 
-                if( users[commands[1]].get_tweets().count(std::stoi(commands[2])) )
-                {
-                    users[commands[1]].get_tweets()[std::stoi(commands[2])].rq_tweet(*this, "retweet");
-                }
                 else
                 {
-                    std::cout << "! There is no tweet with this number.\n";
+                    std:: cout << "! You must login first to your account\n";
                 }
             }
 
-            else if(commands[0] == "qoutetweet")
+            else if(commands[0] == "qoutetweet" and cSize == 3)
             {
                 if(commands.size() !=  3)
                 {
@@ -314,6 +324,7 @@ void twitterak::run()
                     if( users[commands[1]].get_tweets().count(std::stoi(commands[2])) )
                     {
                         users[commands[1]].get_tweets()[std::stoi(commands[2])].rq_tweet(*this, "qoute");
+                        std::cout << "* Qouted.\n";
                     }
                     else
                     {
@@ -322,7 +333,7 @@ void twitterak::run()
                 }
             }
 
-            else if(commands[0][0] == '@')
+            else if(commands[0][0] == '@' and cSize == 1)
             {
                 if(is_in(commands[0], "like"))
                 {
@@ -410,7 +421,7 @@ void twitterak::run()
                 }
             }
 
-            else if(commands[0] == "dislike")
+            else if(commands[0] == "dislike" and cSize == 2)
             {
                 std::string num;
                 std::string user_name;
@@ -434,7 +445,7 @@ void twitterak::run()
                 users[user_name].dislike(logedin_user, number);
             }
 
-            else if(commands[0] == "like")
+            else if(commands[0] == "like" and cSize == 2)
             {
                 std::string num = "";
                 std::string user_name;
