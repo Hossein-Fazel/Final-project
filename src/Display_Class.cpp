@@ -356,7 +356,9 @@ void display::help(twitterak &app)
 {
     if(app.is_logedin == false)
     {
-        std:: cout << "login to your acount\n";
+        std::cout << "\n";
+        std::cout << "--------------------------------------- Help -----------------------------------------\n";
+        std::cout << "login to your acount\n";
         std::cout << "~ login your_user_name your_password\n~ login your_user_name\n~ login \n\n";
 
         std::cout << "create a new account\n";
@@ -364,11 +366,14 @@ void display::help(twitterak &app)
 
         std::cout << "close the app\n";
         std::cout << "~ exit\n~ quit\n~ q\n\n";
-
+        std::cout << "--------------------------------------- end -----------------------------------------\n";
     }
 
     else
     {
+        std::cout << "\n";
+        std::cout << "--------------------------------------- Help -----------------------------------------\n";
+
         std::cout << "show your/another person account\n";
         std::cout << "show your profile :\n";
         std::cout << "~ profile\n";
@@ -428,5 +433,7 @@ void display::help(twitterak &app)
 
         std::cout << "show likes of a tweet\n";
         std::cout << "~ @user_name:number_of_tweet:like\n\n";
+
+        std::cout << "--------------------------------------- end -----------------------------------------\n";
     }
 }
