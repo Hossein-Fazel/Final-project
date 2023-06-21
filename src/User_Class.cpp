@@ -351,7 +351,7 @@ void user::Edit(twitterak &app, std::string Edit_part ,std::string value)       
 
 void user::Tweet(std::string tweet_text)                                                                                                  // make a normal tweet                                              
 {
-    std::string twt;
+    // std::string twt;
     tweet tw;
     tw.set_tweetType("normal");
 
@@ -359,16 +359,14 @@ void user::Tweet(std::string tweet_text)                                        
     tw.set_user_name(get_username());
     tw.set_number(get_last_number()+1);
 
-    if (tweet_text.empty())
+    while (tweet_text.empty())
     {
-        std::cout << "$ tweet text : ";
-        std::getline(std::cin, twt);
-        tw.set_selfTweet(twt);
+        std::cout << "$ your tweet : ";
+        getline(std::cin, tweet_text);
+        // std::cin.ignore();
     }
-    else
-    {
-        tw.set_selfTweet(tweet_text);
-    }
+    
+    tw.set_selfTweet(tweet_text);
 
     last_number();
 
@@ -438,7 +436,7 @@ void user::print_likers(int number)
 
 void user::like(std::string user_name, int number)
 {
-    if(tweets.count(number))
+    if(tweets.count(number) == 1)
     {
         tweets[number].tweet_like(user_name);
     }
@@ -452,7 +450,7 @@ void user::like(std::string user_name, int number)
 
 void user::dislike(std::string user_name, int number)
 {
-    if(tweets.count(number))
+    if(tweets.count(number) == 1)
     {
         tweets[number].tweet_dislike(user_name);
     }

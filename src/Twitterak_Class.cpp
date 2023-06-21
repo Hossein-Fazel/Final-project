@@ -427,7 +427,7 @@ void twitterak::run()
             {
                 std::string num;
                 std::string user_name;
-                for(int i = 1; i < commands[1].size(); i++)
+                for(int i = 0; i < commands[1].size(); i++)
                 {
                     if(commands[1][i] == ':')
                     {
@@ -444,14 +444,26 @@ void twitterak::run()
                 }
                 int number = std::stoi(num);
 
-                users[user_name].dislike(logedin_user, number);
+                if(user_name[0] == '@')
+                {
+                    user_name.erase(0,1);
+                }
+
+                if(users.count(user_name))
+                {
+                    users[user_name].dislike(logedin_user, number);
+                }
+                else
+                {
+                    std::cout << "! There is no user with this username.\n";
+                }
             }
 
             else if(commands[0] == "like" and cSize == 2)
             {
                 std::string num = "";
                 std::string user_name;
-                for(int i = 1; i < commands[1].size(); i++)
+                for(int i = 0; i < commands[1].size(); i++)
                 {
                     if(commands[1][i] == ':')
                     {
@@ -466,9 +478,21 @@ void twitterak::run()
                         user_name += commands[1][i];
                     }
                 }
+
+                if(user_name[0] == '@')
+                {
+                    user_name.erase(0,1);
+                }
                 int number = std::stoi(num);
 
-                users[user_name].like(logedin_user, number);
+                if(users.count(user_name))
+                {
+                    users[user_name].like(logedin_user, number);
+                }
+                else
+                {
+                    std::cout << "! There is no user with this username.\n";
+                }
             }
 
             else if(commands[0] == "clear" or commands[0] == "cls")

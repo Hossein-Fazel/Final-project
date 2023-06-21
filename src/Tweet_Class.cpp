@@ -191,7 +191,15 @@ void tweet::rq_tweet(twitterak &app, std:: string type)                         
         std::string tweet;
         std::cout << "$ your tweet : ";
         std::getline(std::cin, tweet);
-        std::cin.ignore();
+        // std::cin.ignore();
+
+        while (tweet.empty())
+        {
+            std::cout << "! Please enter your tweet\n";
+            std::cout << "$ your tweet : ";
+            std::getline(std::cin, tweet);
+            // std::cin.ignore();
+        }
 
         rq_tweet.set_selfTweet(tweet);
     }
