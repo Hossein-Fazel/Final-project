@@ -215,37 +215,37 @@ int tweet::get_like_number() const
 }
 //------------------------------------------------------------------------
 
-// void tweet::fetch_hashtags(twitterak &app, std::string tweet)                                                    // finds and saves hashtags of user's tweet
-// {
-//     std::string hashtag;
-//     int tsize = hashtags.size();
+void tweet::fetch_hashtags(twitterak &app, std::string tweet)                                                    // finds and saves hashtags of user's tweet
+{
+    std::string hashtag;
+    int tsize = tweet.size();
 
-//     for(int i = 0; i < tsize; i++)
-//     {
-//         if(tweet[i] == '#')
-//         {
-//             for(int j = i+1; j < tsize; j++)
-//             {
-//                 if(tweet[j] != ' ')
-//                 {
-//                     hashtag += tweet[j];
-//                 }
-//                 else
-//                 {
-//                     if(!hashtag.empty())
-//                     {
-//                         hashtags.push_back(hashtag);
-//                         app.Hashtags[hashtag] = *this;
-//                     }
-//                     hashtag = "";
-//                     i = j;
-//                     break;
-//                 }
-//             }
-//         }
-//     }
-//     hashtags.push_back(hashtag);
-// }
+    for(int i = 0; i < tsize; i++)
+    {
+        if(tweet[i] == '#')
+        {
+            for(int j = i+1; j < tsize; j++)
+            {
+                if(tweet[j] != ' ')
+                {
+                    hashtag += tweet[j];
+                }
+                else
+                {
+                    if(!hashtag.empty())
+                    {
+                        hashtags.push_back(hashtag);
+                        app.Hashtags[hashtag] = *this;
+                    }
+                    hashtag = "";
+                    i = j;
+                    break;
+                }
+            }
+        }
+    }
+    hashtags.push_back(hashtag);
+}
 
 //-----------------------------------------------------------------------
 
