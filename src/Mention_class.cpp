@@ -13,6 +13,11 @@ std::string mention::get_username() const
     return mUsername;
 }
 
+std::string mention::get_mention() const
+{
+    return mention;
+}
+
 int mention::get_number() const
 {
     return mNumber;
@@ -31,6 +36,11 @@ std:: unordered_map<std::string, bool> mention::operator~() const
 void mention::set_name(std::string name)
 {
     mName = name;
+}
+
+void mention::set_mention(std::string text)
+{
+    mention = text;
 }
 
 void mention::set_number(int num)
