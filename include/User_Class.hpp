@@ -69,6 +69,8 @@ friend void tweet::edit_tweet(twitterak, int);                    // friend with
         std::string remove_atsing(std::string);                    // removes @ from the first of the user name
         bool validate_phone_number(std::string);                   // validate user's phone_number
         std::map <int, tweet> get_tweets();
+
+        void add_mention(int, std::string, std::string);
         
              
 

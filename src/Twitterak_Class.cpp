@@ -500,6 +500,30 @@ void twitterak::run()
                 system("cls | clear");
             }
 
+            else if(commands[0] == "mention" and cSize == 3)
+            {
+                if(is_logedin)
+                {
+                    if(users.count(commands[1]) == 1)
+                    {
+                        users[commands[1]].add_mention(stoi(commands[2]), users[logedin_user].get_name(), logedin_user);
+                    }
+                    else
+                    {
+                        std::cout << "! There is no user with this username.\n";
+                    }
+                }
+                else
+                {
+                    std::cout << "! You must login first to your account\n";
+                }
+            }
+
+            // else if(commands[0] == "show" and cSize == 4)
+            // {
+
+            // }
+
             else
             {
                 std:: cout << "! undefined command.\n";

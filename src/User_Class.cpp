@@ -466,3 +466,17 @@ std::map <int, tweet> user::get_tweets()
 {
     return tweets;
 }
+
+//------------------------------------------------------------------------
+
+void user::add_mention(int tweet_number, std::string got_name, std::string got_user_name)
+{
+    if(tweets.count(tweet_number) == 1)
+    {
+        tweets[tweet_number].creat_mention(got_user_name, got_name);
+    }
+    else
+    {
+        std::cout << "! There is no tweet with this number.\n";
+    }
+}

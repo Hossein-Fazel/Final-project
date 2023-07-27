@@ -7,6 +7,7 @@
 
 #include "TD_Class.hpp"
 #include "Display_Class.hpp"
+#include "Mention_class.hpp"
 
 class twitterak;
 class user;
@@ -53,9 +54,13 @@ class tweet
         void tweet_like(std::string user_name);
         void tweet_dislike(std::string user_name);
         void fetch_hashtags(twitterak &,std::string);                            // finds and saves hashtags of user's tweet
+        void creat_mention(std::string, std::string);
 
-    private:        
+    private:
+        int mentionNumber = 0;
+
         std::unordered_map<std::string, bool> likes;
+        std::unordered_map<int , mention> tweet_mentions;
 
         std::string tweet_type;
         std::string self_tweet;
