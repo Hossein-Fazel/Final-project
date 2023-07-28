@@ -402,9 +402,9 @@ void display::help(twitterak &app)
         std::cout << "--------------------------------------- Help -----------------------------------------\n\n";
 
         std::cout << "show your/another person account\n";
-        std::cout << "show your profile :\n";
         std::cout << "~ profile\n";
         std::cout << "~ me\n";
+
         std::cout << "show another person profile :\n";
         std::cout << "~ profile @user_name\n\n";
 
@@ -440,11 +440,8 @@ void display::help(twitterak &app)
         std::cout << "@user_name (show another person tweets)\n\n";
 
         std::cout << "show specific tweet \n";
-        std::cout << "~ @user_name:number_of_tweet\n\n";
+        std::cout << "~ @user_name:number_of_tweet\n";
         std::cout << "~ @me:number_of_tweet\n\n";
-
-        std::cout << "edit your tweet\n";
-        std::cout << "~ edit tweet number_of_tweet\n\n";
 
         std::cout << "edit your tweet\n";
         std::cout << "edit tweet number_of_tweet\n\n";
@@ -463,7 +460,7 @@ void display::help(twitterak &app)
 
         std::cout << "add mention to a tweet\n";
         std::cout << "~ mention username tweetNumber\n";
-        std::cout << "~ mention @username tweetNumber\n";
+        std::cout << "~ mention @username tweetNumber\n\n";
 
         std::cout << "show mentions of a tweet\n";
         std::cout << "~ show mention username tweetNumber\n";

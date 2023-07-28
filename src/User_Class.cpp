@@ -504,7 +504,7 @@ void user::push_myMentions(int number, std::string uName)
     my_mentions[uName].insert(number);
 }
 
-//============================================== delete traces =========================================
+//============================================== delete user traces =========================================
 
 void user::del_myMentions(twitterak &app)
 {

@@ -76,7 +76,7 @@ friend void tweet::edit_tweet(twitterak &, int);                    // friend wi
         std::map <int, tweet> get_tweets();
         bool add_mention(int, std::string, std::string);
         void push_myMentions(int , std::string);
-//============================================== delete traces =========================================
+//============================================== delete user traces =========================================
 
         void del_myMentions(twitterak &);
         void cls_hashtags(twitterak &);
@@ -98,7 +98,7 @@ friend void tweet::edit_tweet(twitterak &, int);                    // friend wi
 
         std::map <int, tweet> tweets;
 
-// ================================= traces ============================
+// ================================= user traces ============================
        std::unordered_map<std::string , std::unordered_set<int>> my_mentions;
 
 };
