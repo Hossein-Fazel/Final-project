@@ -25,7 +25,7 @@ friend void display::show_tweet(twitterak, std::string);          // friend with
 friend void display::show_mentions(twitterak, std::string user_name, int tweet_number);
 
 friend void tweet::delete_tweet(twitterak, int);                  // friend with Twitterak_Class to delete a tweet
-friend void tweet::edit_tweet(twitterak, int);                    // friend with Twitterak_Class to edit a tweet
+friend void tweet::edit_tweet(twitterak &, int);                    // friend with Twitterak_Class to edit a tweet
 // friend void twitterak::run();
 
 
@@ -59,6 +59,7 @@ friend void tweet::edit_tweet(twitterak, int);                    // friend with
         void Delete_Account(twitterak &);                          // delets the account of the user
         void Show_Profile(twitterak &);                            // shows the information of a user itself
         void Edit(twitterak &, std::string, std::string);          // edits the user's information                                                                    
+        void edit_tweet(int, twitterak &);
         void Tweet(std::string );                                  // make a normal tweet
         void Logout(twitterak &);                                  // logs out of the user's account
         void Push_Tweet(tweet);                                    // push a tweet into a vector

@@ -230,6 +230,17 @@ void twitterak::run()
                         }
                         users[logedin_user].Edit(*this, commands[2], commands[3]);
                     }
+                    else if(cSize = 3)
+                    {
+                        if(is_logedin)
+                        {
+                            users[logedin_user].edit_tweet(stoi(commands[2]), *this);
+                        }
+                        else
+                        {
+                            std:: cout << "! You must login first to your account\n";
+                        }
+                    }
                     else
                     {
                         std::cout << "! undefined command.\n";

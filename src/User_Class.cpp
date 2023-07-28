@@ -480,3 +480,17 @@ void user::add_mention(int tweet_number, std::string got_name, std::string got_u
         std::cout << "! There is no tweet with this number.\n";
     }
 }
+
+//------------------------------------------------------------------------
+
+void user::edit_tweet(int tNum, twitterak &app)
+{
+    if(tweets.count(tNum) == 1)
+    {
+        tweets[tNum].edit_tweet(app, tNum);
+    }
+    else
+    {
+        std::cout << "! There is no tweet with this number.\n";
+    }
+}

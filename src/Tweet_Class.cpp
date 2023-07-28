@@ -153,19 +153,25 @@ void tweet::delete_tweet(twitterak app, int number)                             
 
 //------------------------------------------------------------------------
 
-void tweet::edit_tweet(twitterak app, int number)                                                                                              // edits a tweet of a user
+void tweet::edit_tweet(twitterak &app, int number)                                                                                              // edits a tweet of a user
 {
     if(get_user_age() >= 18)
     {
+        if(hashtags.size() != 0)
+        {
+            this->delete_hashtags(app);
+            this->hashtags.clear();
+        }
         std::string E_tweet;
 
-        std::cout << number << " : " << app.users[app.logedin_user].tweets[number].get_sefTweet() << std::endl;
+        std::cout << number << " : " << this->get_sefTweet() << std::endl;
         std::cout << "* Enter new text for tweet " << number << " : ";
         std::getline(std::cin, E_tweet);
 
-        app.users[app.logedin_user].tweets[number].set_selfTweet(E_tweet);
+        this->set_selfTweet(E_tweet);
+        this->fetch_hashtags(app,E_tweet);
         std::cout << "* You're tweet has been successfully changed.\n";
-        std::cin.ignore();
+        // std::cin.ignore();
     }
     else
     {
@@ -310,4 +316,22 @@ void tweet::creat_mention(std::string guserName, std::string gname)
 int tweet::get_mentions_number() const
 {
     return tweet_mentions.size();
+}
+
+//-----------------------------------------------------------------------
+
+void tweet::delete_hashtags(twitterak &app)
+{
+    for(auto hashtag :hashtags)
+    {
+        int vSize = app.Hashtags[hashtag].size();
+        for(int i = 0; i < vSize; i++)
+        {
+            if(app.Hashtags[hashtag][i].get_number() == this->get_number() and app.Hashtags[hashtag][i].get_user_name() == this->get_user_name())
+            {
+                app.Hashtags[hashtag].erase(app.Hashtags[hashtag].begin() + i);
+                break;
+            }
+        }
+    }
 }
