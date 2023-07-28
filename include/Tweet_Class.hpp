@@ -19,6 +19,7 @@ class tweet
     friend void display::show_tweet(twitterak);
     friend void display::show_tweet(twitterak,std:: string, int);
     friend void display::show_tweet(twitterak,std:: string);
+    friend void display::show_mentions(twitterak, std::string user_name, int tweet_number);
 
     public:
 //================ gets =====================
@@ -33,6 +34,7 @@ class tweet
         int get_number() const;                                                 // returns the tweet's number
         int get_user_age() const;                                               // returns the age of the user 
         int get_like_number() const;
+        int get_mentions_number() const;
         std::unordered_map<std::string, bool> operator~() const;
 //================ sets =====================
 

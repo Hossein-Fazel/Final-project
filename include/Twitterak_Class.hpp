@@ -4,6 +4,7 @@
 #include "User_Class.hpp"
 #include "Tweet_Class.hpp"
 #include "Display_Class.hpp"
+#include "Mention_class.hpp"
 
 #include <unordered_map>
 #include <vector>
@@ -27,7 +28,7 @@ friend void display::signup(twitterak &, std::string);
 friend void display::show_tweet(twitterak);
 friend void display::show_tweet(twitterak, std::string, int);
 friend void display::show_tweet(twitterak, std::string);
- 
+friend void display::show_mentions(twitterak, std::string user_name, int tweet_number);
 
 friend void tweet::rq_tweet(twitterak&, std::string);
 friend void tweet::delete_tweet(twitterak, int);                        // friend with Twitterak_Class to delete a tweet
@@ -46,7 +47,7 @@ friend void tweet::fetch_hashtags(twitterak &, std:: string);           // frien
         std:: string logedin_user;
         std::vector<std::string> commands; 
         std::unordered_map<std::string, user> users;
-        std::unordered_map<std::string,tweet&> Hashtags;
+        std::unordered_map<std::string,std::vector<tweet>> Hashtags;
 };
 
 #endif

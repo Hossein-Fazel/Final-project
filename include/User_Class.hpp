@@ -6,7 +6,7 @@
 
 #include"Tweet_Class.hpp"
 #include"Display_Class.hpp"
-
+#include "Mention_class.hpp"
 
 class tweet;
 class twitterak;
@@ -22,6 +22,8 @@ friend void tweet::rq_tweet(twitterak&, std::string);              // friend wit
 friend void display::show_tweet(twitterak);                       // friend with Twitterak_Class to show tweets
 friend void display::show_tweet(twitterak, std::string, int);     // friend with Twitterak_Class to show tweets
 friend void display::show_tweet(twitterak, std::string);          // friend with Twitterak_Class to show tweets
+friend void display::show_mentions(twitterak, std::string user_name, int tweet_number);
+
 friend void tweet::delete_tweet(twitterak, int);                  // friend with Twitterak_Class to delete a tweet
 friend void tweet::edit_tweet(twitterak, int);                    // friend with Twitterak_Class to edit a tweet
 // friend void twitterak::run();

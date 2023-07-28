@@ -7,6 +7,7 @@
 
 #include "Tweet_Class.hpp"
 #include "Twitterak_Class.hpp"
+#include "Mention_class.hpp"
 
 //==================================================================  Get_Functions =================================================================
 
@@ -235,7 +236,7 @@ void tweet::fetch_hashtags(twitterak &app, std::string tweet)                   
                     if(!hashtag.empty())
                     {
                         hashtags.push_back(hashtag);
-                        app.Hashtags[hashtag] = *this;
+                        app.Hashtags[hashtag].push_back(*this);
                     }
                     hashtag = "";
                     i = j;
@@ -302,4 +303,11 @@ void tweet::creat_mention(std::string guserName, std::string gname)
     tweet_mentions[ment.get_number()] = ment;
 
     std::cout << "* Your mention was create successfully.\n";
+}
+
+//-----------------------------------------------------------------------
+
+int tweet::get_mentions_number() const
+{
+    return tweet_mentions.size();
 }

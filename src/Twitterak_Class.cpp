@@ -502,6 +502,11 @@ void twitterak::run()
 
             else if(commands[0] == "mention" and cSize == 3)
             {
+                if(commands[1][0] == '@')
+                {
+                    commands[1].erase(0, 1);
+                }
+
                 if(is_logedin)
                 {
                     if(users.count(commands[1]) == 1)
@@ -519,10 +524,22 @@ void twitterak::run()
                 }
             }
 
-            // else if(commands[0] == "show" and cSize == 4)
-            // {
+            else if(commands[0] == "show" and cSize == 4)
+            {
+                if(commands[2][0] == '@')
+                {
+                    commands[2].erase(0, 1);
+                }
 
-            // }
+                if(users.count(commands[2]) == 1)
+                {
+                    d1.show_mentions(*this, commands[2], stoi(commands[3]));
+                }
+                else
+                {
+                    std::cout << "! There is no user with this username.\n";
+                }
+            }
 
             else
             {

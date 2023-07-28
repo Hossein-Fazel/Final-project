@@ -6,6 +6,7 @@
 #include "sha256.h"
 
 class twitterak;
+// class mention;
 
 class display
 {
@@ -19,6 +20,7 @@ class display
         void show_tweet(twitterak);
         void show_tweet(twitterak,std::string, int);
         void show_tweet(twitterak,std::string);
+        void show_mentions(twitterak, std::string user_name, int tweet_number);
 
         SHA256 encrypt;
 };

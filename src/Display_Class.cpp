@@ -224,6 +224,7 @@ void display::show_tweet(twitterak app)
             {
                 std::cout << our_tweet.first << " : " << our_tweet.second.get_sefTweet() << std:: endl;
                 std::cout << "likes : " << our_tweet.second.get_like_number() << "\t";
+                std::cout << "mentions : " << our_tweet.second.get_mentions_number() << "  ";
                 our_tweet.second.timeDate.print_time();
                 std::cout << " ";
                 our_tweet.second.timeDate.print_date();
@@ -237,6 +238,7 @@ void display::show_tweet(twitterak app)
                 std::cout << "\t" << our_tweet.second.get_ownerName() << "\n\t" << our_tweet.second.get_ownerUser_name() << std::endl;
                 std::cout << "\t" << our_tweet.second.get_ownerTweet() << "\n\n";
                 std::cout << "likes : " << our_tweet.second.get_like_number() << " ";
+                std::cout << "mentions : " << our_tweet.second.get_mentions_number() << "  ";
                 our_tweet.second.timeDate.print_time();
                 std::cout << " ";
                 our_tweet.second.timeDate.print_date();
@@ -250,6 +252,7 @@ void display::show_tweet(twitterak app)
                 std::cout << "\t" << our_tweet.second.get_ownerName() << "\n\t" << our_tweet.second.get_ownerUser_name() << std::endl;
                 std::cout << "\t" << our_tweet.second.get_ownerTweet() << "\n\n";
                 std::cout << "likes : " << our_tweet.second.get_like_number() << " ";
+                std::cout << "mentions : " << our_tweet.second.get_mentions_number() << "  ";
                 our_tweet.second.timeDate.print_time();
                 std::cout << " ";
                 our_tweet.second.timeDate.print_date();
@@ -276,6 +279,7 @@ void display::show_tweet(twitterak app, std::string user_name)
             {
                 std::cout << our_tweet.first << " : " << our_tweet.second.get_sefTweet() << std:: endl;
                 std::cout << "likes : " << our_tweet.second.get_like_number() << "\t";
+                std::cout << "mentions : " << our_tweet.second.get_mentions_number() << "  ";
                 our_tweet.second.timeDate.print_time();
                 std::cout << " ";
                 our_tweet.second.timeDate.print_date();
@@ -289,6 +293,7 @@ void display::show_tweet(twitterak app, std::string user_name)
                 std::cout << "\t" << our_tweet.second.get_ownerName() << "\n\t" << our_tweet.second.get_ownerUser_name() << std::endl;
                 std::cout << "\t" << our_tweet.second.get_ownerTweet() << '\n';
                 std::cout << "likes : " << our_tweet.second.get_like_number() << " ";
+                std::cout << "mentions : " << our_tweet.second.get_mentions_number() << "  ";
                 our_tweet.second.timeDate.print_time();
                 std::cout << " ";
                 our_tweet.second.timeDate.print_date();
@@ -302,6 +307,7 @@ void display::show_tweet(twitterak app, std::string user_name)
                 std::cout << "\t" << our_tweet.second.get_ownerName() << "\n\t" << our_tweet.second.get_ownerUser_name() << std::endl;
                 std::cout << "\t" << our_tweet.second.get_ownerTweet() << '\n';
                 std::cout << "likes : " << our_tweet.second.get_like_number() << " ";
+                std::cout << "mentions : " << our_tweet.second.get_mentions_number() << "  ";
                 our_tweet.second.timeDate.print_time();
                 std::cout << " ";
                 our_tweet.second.timeDate.print_date();
@@ -325,6 +331,7 @@ void display::show_tweet(twitterak app,std::string user_name, int number)
         {
             std::cout << app.users[user_name].tweets[number].get_number() << ':' << app.users[user_name].tweets[number].get_sefTweet() << std::endl;
             std::cout << "Likes : " << app.users[user_name].tweets[number].get_like_number() << ' ';
+            std::cout << "mentions : " << app.users[user_name].tweets[number].get_mentions_number() << "  ";
             app.users[user_name].tweets[number].timeDate.print_time();
             std::cout << ' ';
             app.users[user_name].tweets[number].timeDate.print_date();
@@ -338,6 +345,7 @@ void display::show_tweet(twitterak app,std::string user_name, int number)
             std::cout << "\t" << app.users[user_name].tweets[number].get_ownerName() << "\n\t" << app.users[user_name].tweets[number].get_ownerUser_name() << std::endl;
             std::cout << "\t" << app.users[user_name].tweets[number].get_ownerTweet() << '\n';
             std::cout << "likes : " << app.users[user_name].tweets[number].get_like_number() << " ";
+            std::cout << "mentions : " << app.users[user_name].tweets[number].get_mentions_number() << "  ";
             app.users[user_name].tweets[number].timeDate.print_time();
             std::cout << " ";
             app.users[user_name].tweets[number].timeDate.print_date();
@@ -351,11 +359,17 @@ void display::show_tweet(twitterak app,std::string user_name, int number)
             std::cout << "\t" << app.users[user_name].tweets[number].get_ownerName() << "\n\t" << app.users[user_name].tweets[number].get_ownerUser_name() << std::endl;
             std::cout << "\t" << app.users[user_name].tweets[number].get_ownerTweet() << '\n';
             std::cout << "likes : " << app.users[user_name].tweets[number].get_like_number() << " ";
+            std::cout << "mentions : " << app.users[user_name].tweets[number].get_mentions_number() << "  ";
             app.users[user_name].tweets[number].timeDate.print_time();
             std::cout << " ";
             app.users[user_name].tweets[number].timeDate.print_date();
             std::cout << "\n\n";
         }
+    }
+
+    else
+    {
+        std::cout << "! There is no tweet with this number.\n";
     }
 }
 
@@ -372,6 +386,10 @@ void display::help(twitterak &app)
 
         std::cout << "create a new account\n";
         std::cout << "~ signup your_user_name\n~ signup \n\n";
+        
+        std::cout << "show mentions of a tweet\n";
+        std::cout << "~ show mention username tweetNumber\n";
+        std::cout << "~ show mention @username tweetNumber\n\n";
 
         std::cout << "close the app\n";
         std::cout << "~ exit\n~ quit\n~ q\n\n";
@@ -443,6 +461,45 @@ void display::help(twitterak &app)
         std::cout << "show likes of a tweet\n";
         std::cout << "~ @user_name:number_of_tweet:like\n\n";
 
+        std::cout << "add mention to a tweet\n";
+        std::cout << "~ mention username tweetNumber\n";
+        std::cout << "~ mention @username tweetNumber\n";
+
+        std::cout << "show mentions of a tweet\n";
+        std::cout << "~ show mention username tweetNumber\n";
+        std::cout << "~ show mention @username tweetNumber\n\n";
+
         std::cout << "------------------------------------------------------------------------------------\n";
+    }
+}
+
+//============================================================= Show_Mention Function ============================================================= 
+
+void display::show_mentions(twitterak app, std::string user_name, int tweet_number)
+{
+    if(app.users.count(user_name) == 1)
+    {
+        if(app.users[user_name].tweets.count(tweet_number) == 1)
+        {
+            std::cout << "username : " << app.users[user_name].tweets[tweet_number].get_user_name() << std::endl;
+            std::cout << "tweet number : " << app.users[user_name].tweets[tweet_number].get_number() << std::endl;
+
+            for (auto ment :app.users[user_name].tweets[tweet_number].tweet_mentions)
+            {
+                std::cout << "  number : " << ment.second.get_number() << std::endl;
+                std::cout << "  name : " << ment.second.get_name() << std::endl;
+                std::cout << "  username : " << ment.second.get_username() << std::endl;
+                std::cout << "  text : " << ment.second.get_mention() << std::endl;
+                std::cout << "  likes : " << ment.second.get_likes_number() << std::endl << std::endl;
+            }
+        }
+        else
+        {
+            std::cout << "! There is no tweet with this number.\n";
+        }
+    }
+    else
+    {
+        std::cout << "! There is no user with this username.\n";
     }
 }
