@@ -469,15 +469,17 @@ std::map <int, tweet> user::get_tweets()
 
 //------------------------------------------------------------------------
 
-void user::add_mention(int tweet_number, std::string got_name, std::string got_user_name)
+bool user::add_mention(int tweet_number, std::string got_name, std::string got_user_name)
 {
     if(tweets.count(tweet_number) == 1)
     {
         tweets[tweet_number].creat_mention(got_user_name, got_name);
+        return true;
     }
     else
     {
         std::cout << "! There is no tweet with this number.\n";
+        return false;
     }
 }
 
@@ -492,5 +494,44 @@ void user::edit_tweet(int tNum, twitterak &app)
     else
     {
         std::cout << "! There is no tweet with this number.\n";
+    }
+}
+
+//------------------------------------------------------------------------
+
+void user::push_myMentions(int number, std::string uName)
+{
+    my_mentions[uName].insert(number);
+}
+
+//============================================== delete traces =========================================
+
+void user::del_myMentions(twitterak &app)
+{
+    for(auto i : my_mentions)
+    {
+        if(i.first != this->Username)
+        {
+            if(app.users.count(i.first) == 1)
+            {
+                for(auto j : i.second)
+                {
+                    if(app.users[i.first].tweets.count(j) == 1)
+                    {
+                        app.users[i.first].tweets[j].delete_mentions(this->Username);
+                    }
+                }
+            }
+        }
+    }
+}
+
+//------------------------------------------------------------------------
+
+void user::cls_hashtags(twitterak &app)
+{
+    for(auto i: tweets)
+    {
+        i.second.delete_hashtags(app);
     }
 }

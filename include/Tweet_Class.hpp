@@ -57,13 +57,14 @@ class tweet
         void tweet_dislike(std::string user_name);
         void fetch_hashtags(twitterak &,std::string);                            // finds and saves hashtags of user's tweet
         void creat_mention(std::string, std::string);
+        void delete_mentions(std::string);
         void delete_hashtags(twitterak &);
 
     private:
         int mentionNumber = 0;
 
         std::unordered_map<std::string, bool> likes;
-        std::unordered_map<int , mention> tweet_mentions;
+        std::unordered_map<std::string , std::vector<mention>> tweet_mentions;
 
         std::string tweet_type;
         std::string self_tweet;

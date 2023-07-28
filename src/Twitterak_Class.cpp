@@ -522,7 +522,13 @@ void twitterak::run()
                 {
                     if(users.count(commands[1]) == 1)
                     {
-                        users[commands[1]].add_mention(stoi(commands[2]), users[logedin_user].get_name(), logedin_user);
+                        bool status;
+                        status = users[commands[1]].add_mention(stoi(commands[2]), users[logedin_user].get_name(), logedin_user);
+
+                        if(status)
+                        {
+                            users[logedin_user].push_myMentions(stoi(commands[2]), commands[1]); // save mentions traces
+                        }
                     }
                     else
                     {

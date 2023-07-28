@@ -306,7 +306,7 @@ void tweet::creat_mention(std::string guserName, std::string gname)
 
     mentionNumber += 1;
 
-    tweet_mentions[ment.get_number()] = ment;
+    tweet_mentions[guserName].push_back(ment);
 
     std::cout << "* Your mention was create successfully.\n";
 }
@@ -315,7 +315,14 @@ void tweet::creat_mention(std::string guserName, std::string gname)
 
 int tweet::get_mentions_number() const
 {
-    return tweet_mentions.size();
+    int size = 0;
+
+    for(auto i:tweet_mentions)
+    {
+        size += i.second.size();
+    }
+
+    return size;
 }
 
 //-----------------------------------------------------------------------
@@ -334,4 +341,11 @@ void tweet::delete_hashtags(twitterak &app)
             }
         }
     }
+}
+
+//-----------------------------------------------------------------------
+
+void tweet::delete_mentions(std::string got_userName)
+{
+    tweet_mentions.erase(got_userName);
 }

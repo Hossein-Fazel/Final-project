@@ -482,15 +482,18 @@ void display::show_mentions(twitterak app, std::string user_name, int tweet_numb
         if(app.users[user_name].tweets.count(tweet_number) == 1)
         {
             std::cout << "username : " << app.users[user_name].tweets[tweet_number].get_user_name() << std::endl;
-            std::cout << "tweet number : " << app.users[user_name].tweets[tweet_number].get_number() << std::endl;
+            std::cout << "tweet number : " << app.users[user_name].tweets[tweet_number].get_number() << std::endl << std::endl;
 
-            for (auto ment :app.users[user_name].tweets[tweet_number].tweet_mentions)
+            for (auto user :app.users[user_name].tweets[tweet_number].tweet_mentions)
             {
-                std::cout << "  number : " << ment.second.get_number() << std::endl;
-                std::cout << "  name : " << ment.second.get_name() << std::endl;
-                std::cout << "  username : " << ment.second.get_username() << std::endl;
-                std::cout << "  text : " << ment.second.get_mention() << std::endl;
-                std::cout << "  likes : " << ment.second.get_likes_number() << std::endl << std::endl;
+                for(auto ment:user.second)
+                {
+                    std::cout << "  number   : " << ment.get_number() << std::endl;
+                    std::cout << "  name     : " << ment.get_name() << std::endl;
+                    std::cout << "  username : " << ment.get_username() << std::endl;
+                    std::cout << "  text     : " << ment.get_mention() << std::endl;
+                    std::cout << "  likes    : " << ment.get_likes_number() << std::endl << std::endl;
+                }
             }
         }
         else

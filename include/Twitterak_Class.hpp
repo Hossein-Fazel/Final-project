@@ -18,6 +18,7 @@ friend void user::Logout(twitterak &);
 friend void user::Delete_Account(twitterak &);
 friend void user::Show_Profile(twitterak &);
 friend void user::Edit(twitterak &, std::string, std::string);
+friend void user::del_myMentions(twitterak &);
 
 friend void display::login(twitterak  &,std::string, std::string);
 friend void display::login(twitterak  &);

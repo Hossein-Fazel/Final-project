@@ -3,6 +3,8 @@
 
 #include <string>
 #include <map>
+#include <bits/stdc++.h>
+#include <unordered_map>
 
 #include"Tweet_Class.hpp"
 #include"Display_Class.hpp"
@@ -72,8 +74,12 @@ friend void tweet::edit_tweet(twitterak &, int);                    // friend wi
         std::string remove_atsing(std::string);                    // removes @ from the first of the user name
         bool validate_phone_number(std::string);                   // validate user's phone_number
         std::map <int, tweet> get_tweets();
+        bool add_mention(int, std::string, std::string);
+        void push_myMentions(int , std::string);
+//============================================== delete traces =========================================
 
-        void add_mention(int, std::string, std::string);
+        void del_myMentions(twitterak &);
+        void cls_hashtags(twitterak &);
         
              
 
@@ -91,7 +97,9 @@ friend void tweet::edit_tweet(twitterak &, int);                    // friend wi
         int last_num = 0;
 
         std::map <int, tweet> tweets;
+
+// ================================= traces ============================
+       std::unordered_map<std::string , std::unordered_set<int>> my_mentions;
+
 };
-
-
 #endif
