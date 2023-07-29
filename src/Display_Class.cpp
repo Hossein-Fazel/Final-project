@@ -478,14 +478,14 @@ void display::show_mentions(twitterak app, std::string user_name, int tweet_numb
     {
         if(app.users[user_name].tweets.count(tweet_number) == 1)
         {
-            std::cout << "username : " << app.users[user_name].tweets[tweet_number].get_user_name() << std::endl;
-            std::cout << "tweet number : " << app.users[user_name].tweets[tweet_number].get_number() << std::endl << std::endl;
+            std::cout << "username     : " << app.users[user_name].tweets[tweet_number].get_user_name() << std::endl;
+            std::cout << "tweet number : " << app.users[user_name].tweets[tweet_number].get_number() << std::endl;
+            std::cout << "tweet text   : " << app.users[user_name].tweets[tweet_number].get_sefTweet() << std::endl << std::endl;
 
             for (auto user :app.users[user_name].tweets[tweet_number].tweet_mentions)
             {
                 for(auto ment:user.second)
                 {
-                    std::cout << "  number   : " << ment.get_number() << std::endl;
                     std::cout << "  name     : " << ment.get_name() << std::endl;
                     std::cout << "  username : " << ment.get_username() << std::endl;
                     std::cout << "  text     : " << ment.get_mention() << std::endl;
