@@ -434,29 +434,35 @@ void user::print_likers(int number)
 
 //------------------------------------------------------------------------
 
-void user::like(std::string user_name, int number)
+bool user::like(std::string user_name, int number)
 {
     if(tweets.count(number) == 1)
     {
-        tweets[number].tweet_like(user_name);
+        bool status;
+        status = tweets[number].tweet_like(user_name);
+        return status;
     }
     else
     {
         std::cout << "! There is no tweet with this number.\n";
+        return false;
     }
 }
 
 //------------------------------------------------------------------------
 
-void user::dislike(std::string user_name, int number)
+bool user::dislike(std::string user_name, int number)
 {
     if(tweets.count(number) == 1)
     {
-        tweets[number].tweet_dislike(user_name);
+        bool status;
+        status = tweets[number].tweet_dislike(user_name);
+        return status;
     }
     else
     {
         std::cout << "! There is no tweet with this number.\n";
+        return false;
     }
 }
 
@@ -533,5 +539,48 @@ void user::cls_hashtags(twitterak &app)
     for(auto i: tweets)
     {
         i.second.delete_hashtags(app);
+    }
+}
+
+//------------------------------------------------------------------------
+
+void user::push_tweetLikes(int number, std::string uName)
+{
+    tweetLikes[uName].insert(number);
+}
+
+//------------------------------------------------------------------------
+
+void user::pop_tweetLikes(int number, std::string uName)
+{
+    if(tweetLikes.count(uName) == 1)
+    {
+        tweetLikes[uName].erase(number);
+        if(tweetLikes[uName].size() == 0)
+        {
+            tweetLikes.erase(uName);
+        }
+    }
+}
+
+//------------------------------------------------------------------------
+
+void user::del_tweetLikes(twitterak &app)
+{
+    for(auto i: tweetLikes)
+    {
+        if(i.first != this->Username)
+        {
+            if(app.users.count(i.first) == 1)
+            {
+                for(auto j:i.second)
+                {
+                    if(app.users[i.first].tweets.count(j))
+                    {
+                        app.users[i.first].tweets[j].dLike(this->Username);
+                    }
+                }
+            }
+        }
     }
 }

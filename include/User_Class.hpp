@@ -67,21 +67,26 @@ friend void tweet::edit_tweet(twitterak &, int);                    // friend wi
         void Push_Tweet(tweet);                                    // push a tweet into a vector
         void last_number();                                        // plus plus last_num variable
         void print_likers(int);
-        void like(std::string ,int);
-        void dislike(std::string, int);
+        bool like(std::string ,int);
+        bool dislike(std::string, int);
         int Validating_Username(std::string);                      // the validation of a user's username
         std::string to_lower(std::string);                         // makes a string a lowercase
         std::string remove_atsing(std::string);                    // removes @ from the first of the user name
         bool validate_phone_number(std::string);                   // validate user's phone_number
         std::map <int, tweet> get_tweets();
         bool add_mention(int, std::string, std::string);
+
+//============================================== save user traces =========================================
+
         void push_myMentions(int , std::string);
+        void push_tweetLikes(int, std::string);
+        void pop_tweetLikes(int, std::string);
+
 //============================================== delete user traces =========================================
 
         void del_myMentions(twitterak &);
         void cls_hashtags(twitterak &);
-        
-             
+        void del_tweetLikes(twitterak &);
 
     private:
         std::string Full_Name;
@@ -100,6 +105,8 @@ friend void tweet::edit_tweet(twitterak &, int);                    // friend wi
 
 // ================================= user traces ============================
        std::unordered_map<std::string , std::unordered_set<int>> my_mentions;
+       std::unordered_map<std::string , std::unordered_set<int>> tweetLikes;
+       
 
 };
 #endif

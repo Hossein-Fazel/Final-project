@@ -436,73 +436,100 @@ void twitterak::run()
 
             else if(commands[0] == "dislike" and cSize == 2)
             {
-                std::string num;
-                std::string user_name;
-                for(int i = 0; i < commands[1].size(); i++)
+                if(is_logedin)
                 {
-                    if(commands[1][i] == ':')
+                    std::string num;
+                    std::string user_name;
+                    for(int i = 0; i < commands[1].size(); i++)
                     {
-                        for( int j = i+1; j < commands[1].size(); j++)
+                        if(commands[1][i] == ':')
                         {
-                            num += commands[1][j];
+                            for( int j = i+1; j < commands[1].size(); j++)
+                            {
+                                num += commands[1][j];
+                            }
+                            break;
                         }
-                        break;
+                        else
+                        {
+                            user_name += commands[1][i];
+                        }
+                    }
+                    int number = std::stoi(num);
+
+                    if(user_name[0] == '@')
+                    {
+                        user_name.erase(0,1);
+                    }
+
+                    if(users.count(user_name))
+                    {
+                        bool b;
+                        b = users[user_name].dislike(logedin_user, number);
+
+                        if(b)
+                        {
+                            users[logedin_user].pop_tweetLikes(number, user_name);
+                        }
                     }
                     else
                     {
-                        user_name += commands[1][i];
+                        std::cout << "! There is no user with this username.\n";
                     }
-                }
-                int number = std::stoi(num);
-
-                if(user_name[0] == '@')
-                {
-                    user_name.erase(0,1);
-                }
-
-                if(users.count(user_name))
-                {
-                    users[user_name].dislike(logedin_user, number);
                 }
                 else
                 {
-                    std::cout << "! There is no user with this username.\n";
+                    std:: cout << "! You must login first to your account\n";
                 }
             }
 
             else if(commands[0] == "like" and cSize == 2)
             {
-                std::string num = "";
-                std::string user_name;
-                for(int i = 0; i < commands[1].size(); i++)
+                if(is_logedin)
                 {
-                    if(commands[1][i] == ':')
+                    std::string num = "";
+                    std::string user_name;
+                    for(int i = 0; i < commands[1].size(); i++)
                     {
-                        for( int j = i+1; j < commands[1].size(); j++)
+                        if(commands[1][i] == ':')
                         {
-                            num += commands[1][j];
+                            for( int j = i+1; j < commands[1].size(); j++)
+                            {
+                                num += commands[1][j];
+                            }
+                            break;
                         }
-                        break;
+                        else
+                        {
+                            user_name += commands[1][i];
+                        }
+                    }
+
+                    if(user_name[0] == '@')
+                    {
+                        user_name.erase(0,1);
+                    }
+                    int number = std::stoi(num);
+
+                    if(users.count(user_name))
+                    {
+                        bool b;
+                        b = users[user_name].like(logedin_user, number);
+
+                        if(b)
+                        {
+                            users[logedin_user].push_tweetLikes(number, user_name);
+                        }
                     }
                     else
                     {
-                        user_name += commands[1][i];
+                        std::cout << "! There is no user with this username.\n";
                     }
                 }
 
-                if(user_name[0] == '@')
-                {
-                    user_name.erase(0,1);
-                }
-                int number = std::stoi(num);
-
-                if(users.count(user_name))
-                {
-                    users[user_name].like(logedin_user, number);
-                }
                 else
                 {
-                    std::cout << "! There is no user with this username.\n";
+                    std:: cout << "! You must login first to your account\n";
                 }
             }
 

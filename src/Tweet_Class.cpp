@@ -263,29 +263,33 @@ std::unordered_map<std::string, bool> tweet::operator~() const
 
 //-----------------------------------------------------------------------
 
-void tweet::tweet_like(std::string user_name)
+bool tweet::tweet_like(std::string user_name)
 {
     if(likes.count(user_name) == 0)
     {
         likes[user_name] = true;
+        return true;
     }
     else
     {
         std::cout << "! You have already liked the tweet.\n";
+        return false;
     }
 }
 
 //-----------------------------------------------------------------------
 
-void tweet::tweet_dislike(std::string user_name)
+bool tweet::tweet_dislike(std::string user_name)
 {
     if(likes.count(user_name))
     {
         likes.erase(user_name);
+        return true;
     }
     else
     {
         std::cout << "! You have never lke this tweet\n";
+        return false;
     }
 }
 
@@ -348,4 +352,11 @@ void tweet::delete_hashtags(twitterak &app)
 void tweet::delete_mentions(std::string got_userName)
 {
     tweet_mentions.erase(got_userName);
+}
+
+//-----------------------------------------------------------------------
+
+void tweet::dLike(std::string uName)
+{
+    likes.erase(uName);
 }
