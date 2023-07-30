@@ -7,6 +7,29 @@
 #include "Display_Class.hpp"
 #include "User_Class.hpp"
 
+void twitterak::serch_hashtag(std::string hash)
+{
+
+    if(hash[0] == '#')
+    {
+        hash.erase(0,1);
+    }
+    std::string hashtag = lower(hash);
+
+    if(Hashtags.count(hashtag) == 1)
+    {
+        for(auto i : Hashtags[hashtag])
+        {
+            std::cout << i.get_number() << " : \n";
+            std::cout << i.get_name() << '\n' << i.get_user_name() << '\n';
+            std::cout << i.get_sefTweet() << "\n\n";
+        }
+    }
+    else
+    {
+        std::cout << "! this hashtag is not exist.\n";
+    }
+}
 
 bool twitterak::is_in(std::string str, char ch)
 {
@@ -281,11 +304,11 @@ void twitterak::run()
                 {
                     if(commands.size() == 2)
                     {
-                        users[logedin_user].Tweet(commands[1]);
+                        users[logedin_user].Tweet(commands[1], *this);
                     }
                     else if(commands.size() == 1)
                     {
-                        users[logedin_user].Tweet("");
+                        users[logedin_user].Tweet("", *this);
                     }
                 }
 
@@ -583,6 +606,11 @@ void twitterak::run()
                 {
                     std::cout << "! There is no user with this username.\n";
                 }
+            }
+
+            else if(commands[0][0] == '#')
+            {
+                serch_hashtag(commands[0]);
             }
 
             else

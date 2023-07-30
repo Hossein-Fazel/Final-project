@@ -349,7 +349,7 @@ void user::Edit(twitterak &app, std::string Edit_part ,std::string value)       
 
 //------------------------------------------------------------------------
 
-void user::Tweet(std::string tweet_text)                                                                                                  // make a normal tweet                                              
+void user::Tweet(std::string tweet_text, twitterak &app)                                                                                                  // make a normal tweet                                              
 {
     // std::string twt;
     tweet tw;
@@ -367,6 +367,7 @@ void user::Tweet(std::string tweet_text)                                        
     }
     
     tw.set_selfTweet(tweet_text);
+    tw.fetch_hashtags(app);
 
     last_number();
 

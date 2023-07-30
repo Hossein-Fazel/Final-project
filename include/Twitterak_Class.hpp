@@ -35,7 +35,7 @@ friend void display::show_mentions(twitterak, std::string user_name, int tweet_n
 friend void tweet::rq_tweet(twitterak&, std::string);
 friend void tweet::delete_tweet(twitterak, int);                        // friend with Twitterak_Class to delete a tweet
 friend void tweet::edit_tweet(twitterak &, int);                          // friend with Twitterak_Class to edit a tweet
-friend void tweet::fetch_hashtags(twitterak &, std:: string);           // friend with Twitterak_Class to fecth hashtags from tweets
+friend void tweet::fetch_hashtags(twitterak &);           // friend with Twitterak_Class to fecth hashtags from tweets
 friend void tweet::delete_hashtags(twitterak &); 
 
     public:
@@ -44,6 +44,7 @@ friend void tweet::delete_hashtags(twitterak &);
         void tokenize(std::string);
         bool is_in(std::string,char);
         bool is_in(std::string,std::string);
+        void serch_hashtag(std::string);
 
     private:
         bool is_logedin = false;

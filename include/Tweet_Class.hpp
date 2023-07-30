@@ -55,7 +55,7 @@ class tweet
         void rq_tweet(twitterak&, std::string);                                   // quote tweet or retweet
         bool tweet_like(std::string user_name);
         bool tweet_dislike(std::string user_name);
-        void fetch_hashtags(twitterak &,std::string);                            // finds and saves hashtags of user's tweet
+        void fetch_hashtags(twitterak &);                            // finds and saves hashtags of user's tweet
         void creat_mention(std::string, std::string);
         void delete_mentions(std::string);
         void delete_hashtags(twitterak &);

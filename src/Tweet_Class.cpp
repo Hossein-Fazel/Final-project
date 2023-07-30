@@ -169,7 +169,7 @@ void tweet::edit_tweet(twitterak &app, int number)                              
         std::getline(std::cin, E_tweet);
 
         this->set_selfTweet(E_tweet);
-        this->fetch_hashtags(app,E_tweet);
+        this->fetch_hashtags(app);
         std::cout << "* You're tweet has been successfully changed.\n";
         // std::cin.ignore();
     }
@@ -222,27 +222,28 @@ int tweet::get_like_number() const
 }
 //------------------------------------------------------------------------
 
-void tweet::fetch_hashtags(twitterak &app, std::string tweet)                                                    // finds and saves hashtags of user's tweet
+void tweet::fetch_hashtags(twitterak &app)                                                    // finds and saves hashtags of user's tweet
 {
     std::string hashtag;
-    int tsize = tweet.size();
+    int tsize = this->self_tweet.size();
 
     for(int i = 0; i < tsize; i++)
     {
-        if(tweet[i] == '#')
+        if(this->self_tweet[i] == '#')
         {
             for(int j = i+1; j < tsize; j++)
             {
-                if(tweet[j] != ' ')
+                if(this->self_tweet[j] != ' ')
                 {
-                    hashtag += tweet[j];
+                    hashtag += this->self_tweet[j];
                 }
                 else
                 {
                     if(!hashtag.empty())
                     {
-                        hashtags.push_back(hashtag);
-                        app.Hashtags[hashtag].push_back(*this);
+                        std::string lHashtag = app.lower(hashtag);
+                        hashtags.push_back(lHashtag);
+                        app.Hashtags[lHashtag].push_back(*this);
                     }
                     hashtag = "";
                     i = j;
@@ -341,6 +342,10 @@ void tweet::delete_hashtags(twitterak &app)
             if(app.Hashtags[hashtag][i].get_number() == this->get_number() and app.Hashtags[hashtag][i].get_user_name() == this->get_user_name())
             {
                 app.Hashtags[hashtag].erase(app.Hashtags[hashtag].begin() + i);
+                if(app.Hashtags[hashtag].size())
+                {
+                    app.Hashtags.erase(hashtag);
+                }
                 break;
             }
         }
