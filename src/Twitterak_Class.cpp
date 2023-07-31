@@ -7,6 +7,50 @@
 #include "Display_Class.hpp"
 #include "User_Class.hpp"
 
+
+bool twitterak::get_userName_number(std:: string txt, std::string &username, int &number)
+{
+    bool flag = false;
+    std::string num;
+
+    for(auto i: txt)
+    {
+        if(!flag)
+        {
+            if(i != ':')
+            {
+                username += i;
+            }
+            else
+            {
+                flag = true;
+            }
+        }
+        else
+        {
+            num += i;
+        }
+    }
+
+    if(!num.empty())
+    {
+        number = std::stoi(num);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void twitterak::del_atsign(std::string &str)
+{
+    if(str[0] == '@')
+    {
+        str.erase(0, 1);
+    }
+}
+
 void twitterak::serch_hashtag(std::string hash)
 {
 
@@ -211,10 +255,7 @@ void twitterak::run()
 
             else if(commands[0] == "profile" and cSize == 2)
             {
-                if(commands[1][0] == '@')
-                {
-                    commands[1].erase(0, 1);
-                }
+                del_atsign(commands[1]);
 
                 if(users.count(commands[1]) == 1)
                 {
@@ -322,10 +363,7 @@ void twitterak::run()
             {
                 if(is_logedin)
                 {
-                    if(commands[1][0] == '@')
-                    {
-                        commands[1].erase(0,1);
-                    }
+                    del_atsign(commands[1]);
 
                     if( users[commands[1]].get_tweets().count(std::stoi(commands[2])) )
                     {
@@ -353,10 +391,7 @@ void twitterak::run()
 
                 else
                 {
-                    if(commands[1][0] == '@')
-                    {
-                        commands[1].erase(0,1);
-                    }
+                    del_atsign(commands[1]);
                     if( users[commands[1]].get_tweets().count(std::stoi(commands[2])) )
                     {
                         users[commands[1]].get_tweets()[std::stoi(commands[2])].rq_tweet(*this, "qoute");
@@ -461,43 +496,33 @@ void twitterak::run()
             {
                 if(is_logedin)
                 {
-                    std::string num;
                     std::string user_name;
-                    for(int i = 0; i < commands[1].size(); i++)
+                    int number = 0;
+                    bool tc;
+
+                    tc = get_userName_number(commands[1], user_name, number);
+                    del_atsign(user_name);
+
+                    if(tc)
                     {
-                        if(commands[1][i] == ':')
+                        if(users.count(user_name))
                         {
-                            for( int j = i+1; j < commands[1].size(); j++)
+                            bool b;
+                            b = users[user_name].dislike(logedin_user, number);
+
+                            if(b)
                             {
-                                num += commands[1][j];
+                                users[logedin_user].pop_tweetLikes(number, user_name);
                             }
-                            break;
                         }
                         else
                         {
-                            user_name += commands[1][i];
-                        }
-                    }
-                    int number = std::stoi(num);
-
-                    if(user_name[0] == '@')
-                    {
-                        user_name.erase(0,1);
-                    }
-
-                    if(users.count(user_name))
-                    {
-                        bool b;
-                        b = users[user_name].dislike(logedin_user, number);
-
-                        if(b)
-                        {
-                            users[logedin_user].pop_tweetLikes(number, user_name);
+                            std::cout << "! There is no user with this username.\n";
                         }
                     }
                     else
                     {
-                        std::cout << "! There is no user with this username.\n";
+                        std:: cout << "! undefined command.\n";
                     }
                 }
                 else
@@ -510,43 +535,33 @@ void twitterak::run()
             {
                 if(is_logedin)
                 {
-                    std::string num = "";
                     std::string user_name;
-                    for(int i = 0; i < commands[1].size(); i++)
+                    int number = 0;
+                    bool tc;
+
+                    tc = get_userName_number(commands[1], user_name, number);
+                    del_atsign(user_name);
+
+                    if(tc)
                     {
-                        if(commands[1][i] == ':')
+                        if(users.count(user_name))
                         {
-                            for( int j = i+1; j < commands[1].size(); j++)
+                            bool b;
+                            b = users[user_name].like(logedin_user, number);
+
+                            if(b)
                             {
-                                num += commands[1][j];
+                                users[logedin_user].push_tweetLikes(number, user_name);
                             }
-                            break;
                         }
                         else
                         {
-                            user_name += commands[1][i];
-                        }
-                    }
-
-                    if(user_name[0] == '@')
-                    {
-                        user_name.erase(0,1);
-                    }
-                    int number = std::stoi(num);
-
-                    if(users.count(user_name))
-                    {
-                        bool b;
-                        b = users[user_name].like(logedin_user, number);
-
-                        if(b)
-                        {
-                            users[logedin_user].push_tweetLikes(number, user_name);
+                            std::cout << "! There is no user with this username.\n";
                         }
                     }
                     else
                     {
-                        std::cout << "! There is no user with this username.\n";
+                        std::cout << "! undefined command.\n";
                     }
                 }
 
@@ -563,10 +578,7 @@ void twitterak::run()
 
             else if(commands[0] == "mention" and cSize == 3)
             {
-                if(commands[1][0] == '@')
-                {
-                    commands[1].erase(0, 1);
-                }
+                del_atsign(commands[1]);
 
                 if(is_logedin)
                 {
@@ -593,10 +605,7 @@ void twitterak::run()
 
             else if(commands[0] == "show" and cSize == 4)
             {
-                if(commands[2][0] == '@')
-                {
-                    commands[2].erase(0, 1);
-                }
+                del_atsign(commands[2]);
 
                 if(users.count(commands[2]) == 1)
                 {

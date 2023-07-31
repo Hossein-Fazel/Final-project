@@ -45,6 +45,8 @@ friend void tweet::delete_hashtags(twitterak &);
         bool is_in(std::string,char);
         bool is_in(std::string,std::string);
         void serch_hashtag(std::string);
+        bool get_userName_number(std:: string, std::string &, int &);
+        void del_atsign(std::string &);
 
     private:
         bool is_logedin = false;

@@ -1,5 +1,5 @@
 #include "Mention_class.hpp"
-#include <unordered_map>
+#include <unordered_set>
 #include <string>
 #include <iostream>
 
@@ -28,7 +28,7 @@ int mention::get_likes_number() const
     return mLikes.size();
 }
 
-std:: unordered_map<std::string, bool> mention::operator~() const
+std:: unordered_set<std::string> mention::operator~() const
 {
     return mLikes;
 }
@@ -51,28 +51,4 @@ void mention::set_number(int num)
 void mention::set_userName(std:: string userName)
 {
     mUsername = userName;
-}
-
-void mention::mention_like(std::string userName)
-{
-    if(mLikes.count(userName) == 0)
-    {
-        mLikes[userName] = true;
-    }
-    else
-    {
-        std::cout << "! You have already liked the mention.\n";
-    }
-}
-
-void mention::mention_dislike(std::string userName)
-{
-    if(mLikes.count(userName))
-    {
-        mLikes.erase(userName);
-    }
-    else
-    {
-        std::cout << "! You have never like this mention.\n";
-    }
 }

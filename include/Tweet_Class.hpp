@@ -62,7 +62,7 @@ class tweet
         void dLike(std::string);
 
     private:
-        int mentionNumber = 0;
+        int mentionNumber = 1;
 
         std::unordered_map<std::string, bool> likes;
         std::unordered_map<std::string , std::vector<mention>> tweet_mentions;

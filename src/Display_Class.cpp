@@ -486,10 +486,11 @@ void display::show_mentions(twitterak app, std::string user_name, int tweet_numb
             {
                 for(auto ment:user.second)
                 {
-                    std::cout << "  name     : " << ment.get_name() << std::endl;
-                    std::cout << "  username : " << ment.get_username() << std::endl;
-                    std::cout << "  text     : " << ment.get_mention() << std::endl;
-                    std::cout << "  likes    : " << ment.get_likes_number() << std::endl << std::endl;
+                    std::cout << "  mention no : " << ment.get_number() << std::endl;
+                    std::cout << "  name       : " << ment.get_name() << std::endl;
+                    std::cout << "  username   : " << ment.get_username() << std::endl;
+                    std::cout << "  text       : " << ment.get_mention() << std::endl;
+                    std::cout << "  likes      : " << ment.get_likes_number() << std::endl << std::endl;
                 }
             }
         }
