@@ -16,6 +16,7 @@ set(SOURCES
    src/sha256.cpp
    src/TD_Class.cpp
    src/Mention_class.cpp
+   src/Base_User.cpp
 )
 
 add_executable(app ${SOURCES})
