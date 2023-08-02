@@ -617,6 +617,19 @@ void twitterak::run()
                 }
             }
 
+            else if(commands[0] == "follow" and cSize == 2)
+            {
+                if(is_logedin)
+                {
+                    del_atsign(commands[1]);
+                    users[logedin_user].follow(*this, commands[1]);
+                }
+                else
+                {
+                    std::cout << "! You must login first to your account\n";
+                }
+            }
+
             else if(commands[0][0] == '#')
             {
                 serch_hashtag(commands[0]);

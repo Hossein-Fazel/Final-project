@@ -62,12 +62,13 @@ class Base_User
         virtual void del_myMentions(twitterak &) {};
         virtual void cls_hashtags(twitterak &) {};
         virtual void del_tweetLikes(twitterak &) {};
+        virtual int get_followers_num() {};
+        virtual int get_following_num() {};
 
     private:
         std::string Full_Name;
         std::string Username;
         std::string Password;
 };
-
 
 #endif

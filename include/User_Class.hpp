@@ -1,17 +1,18 @@
 #ifndef USER_HPP
 #define USER_HPP
 
-#include "Base_User.hpp"
-
-#include"Tweet_Class.hpp"
-#include"Display_Class.hpp"
-#include "Mention_class.hpp"
 
 
 #include <string>
 #include <map>
 #include <unordered_map>
+#include <unordered_set>
 
+#include "Base_User.hpp"
+
+#include"Tweet_Class.hpp"
+#include"Display_Class.hpp"
+#include "Mention_class.hpp"
 //================================================================================ User_Class ================================================================================ 
 
 class user: public Base_User
@@ -40,6 +41,8 @@ friend void tweet::edit_tweet(twitterak &, int);                    // friend wi
         std::string get_header()const;                            // returns the color of the header that user had chosen 
         std::string get_country()const;                           // returns the country of the user
         int get_last_number();                                    // returns the last tweet's number
+        int get_followers_num();
+        int get_following_num();
 
 //====================== sets =====================
 
@@ -66,6 +69,8 @@ friend void tweet::edit_tweet(twitterak &, int);                    // friend wi
         bool validate_phone_number(std::string);                   // validate user's phone_number
         std::map <int, tweet> get_tweets();
         bool add_mention(int, std::string, std::string);
+        void follow(twitterak &, std::string);
+        void add_followers(std::string);
 
 //============================================== save user traces =========================================
 
@@ -78,6 +83,7 @@ friend void tweet::edit_tweet(twitterak &, int);                    // friend wi
         void del_myMentions(twitterak &);
         void cls_hashtags(twitterak &);
         void del_tweetLikes(twitterak &);
+
 
     private:
         std::string Full_Name;
@@ -93,6 +99,9 @@ friend void tweet::edit_tweet(twitterak &, int);                    // friend wi
         int last_num = 0;
 
         std::map <int, tweet> tweets;
+
+        std::unordered_set< std::string> followers;
+        std::unordered_set< std::string> following;
 
 // ================================= user traces ============================
        std::unordered_map<std::string , std::unordered_set<int>> my_mentions;

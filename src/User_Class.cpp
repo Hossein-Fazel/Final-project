@@ -69,6 +69,20 @@ int user::get_last_number()                   // returns the last tweet's number
     return last_num;
 }
 
+//------------------------------------------------------------------------
+
+int user::get_followers_num()
+{
+    return followers.size();
+}
+
+//------------------------------------------------------------------------
+
+int user::get_following_num()
+{
+    return following.size();
+}
+
 //==================================================================  Set_Functions =================================================================
 
 bool user::validate_phone_number(std::string phone)                              // validate user's phone_number
@@ -391,12 +405,49 @@ void user::edit_tweet(int tNum, twitterak &app)
 
 //------------------------------------------------------------------------
 
+void user::follow(twitterak &app, std::string uName)
+{
+    if(uName == app.logedin_user)
+    {
+        std::cout << "! You can not follow yourself.\n";
+    }
+    else
+    {
+        if(app.users.count(uName) == 1)
+        {
+            if(this->following.count(uName) == 1)
+            {
+                std::cout << "! You have already followed this user.\n";
+            }
+            else
+            {
+                this->following.insert(uName);
+                app.users[uName].add_followers(uName);
+                std::cout << "* Followed.\n";
+            }
+        }
+        else
+        {
+            std::cout << "! There is no user with this username.\n";
+        }
+    }
+}
+
+
+void user::add_followers(std::string uName)
+{
+    this->followers.insert(uName);
+}
+
+
+//============================================== delete user traces =========================================
+
 void user::push_myMentions(int number, std::string uName)
 {
     my_mentions[uName].insert(number);
 }
 
-//============================================== delete user traces =========================================
+//------------------------------------------------------------------------
 
 void user::del_myMentions(twitterak &app)
 {

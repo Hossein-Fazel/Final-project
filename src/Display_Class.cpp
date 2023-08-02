@@ -466,6 +466,10 @@ void display::help(twitterak &app)
         std::cout << "~ show mention username tweetNumber\n";
         std::cout << "~ show mention @username tweetNumber\n\n";
 
+        std::cout << "follow a user\n";
+        std::cout << "~ follow @username.\n";
+        std::cout << "~ follow username.\n\n";
+
         std::cout << "------------------------------------------------------------------------------------\n";
     }
 }
