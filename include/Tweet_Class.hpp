@@ -7,10 +7,11 @@
 
 #include "TD_Class.hpp"
 #include "Display_Class.hpp"
-#include "Mention_class.hpp"
+// #include "Mention_class.hpp"
 
 class twitterak;
 class user;
+class mention;
 
 //================================================================================ Tweet_Class ================================================================================ 
 
@@ -60,6 +61,7 @@ class tweet
         void delete_mentions(std::string);
         void delete_hashtags(twitterak &);
         void dLike(std::string);
+        void mention_like(std::string, int);
 
     private:
         int mentionNumber = 1;

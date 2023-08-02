@@ -64,6 +64,8 @@ class Base_User
         virtual void del_tweetLikes(twitterak &) {};
         virtual int get_followers_num() {};
         virtual int get_following_num() {};
+        virtual void like_mention(int, std::string, int) {};
+
 
     private:
         std::string Full_Name;

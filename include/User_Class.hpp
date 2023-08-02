@@ -71,6 +71,7 @@ friend void tweet::edit_tweet(twitterak &, int);                    // friend wi
         bool add_mention(int, std::string, std::string);
         void follow(twitterak &, std::string);
         void add_followers(std::string);
+        void like_mention(int, std::string, int);
 
 //============================================== save user traces =========================================
 
@@ -83,7 +84,6 @@ friend void tweet::edit_tweet(twitterak &, int);                    // friend wi
         void del_myMentions(twitterak &);
         void cls_hashtags(twitterak &);
         void del_tweetLikes(twitterak &);
-
 
     private:
         std::string Full_Name;

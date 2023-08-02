@@ -635,6 +635,32 @@ void twitterak::run()
                 serch_hashtag(commands[0]);
             }
 
+            else if(commands[0] == "like" and commands[1] == "mention" and cSize == 4)
+            {
+                std::string user_name;
+                int tweet_number = 0;
+                int ment_number = std::stoi(commands[3]);
+
+                bool b = get_userName_number(commands[2], user_name, tweet_number);
+
+                if(b)
+                {
+                    if(is_logedin)
+                    {
+                        users[logedin_user].like_mention(tweet_number, user_name, ment_number);
+                    }
+                    else
+                    {
+                        std::cout << "! You must login first to your account\n";
+                    }
+                }
+
+                else
+                {
+                    std:: cout << "! undefined command.\n";
+                }
+            }
+
             else
             {
                 std:: cout << "! undefined command.\n";

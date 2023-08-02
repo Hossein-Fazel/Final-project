@@ -4,8 +4,11 @@
 #include <string>
 #include <unordered_set>
 
+#include "Tweet_Class.hpp"
+
 class mention
 {
+    friend void tweet::mention_like(std::string, int);
     public:
 //      ======================================== sets =============================================
         void set_userName(std::string);

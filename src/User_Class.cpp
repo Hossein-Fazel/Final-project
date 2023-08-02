@@ -433,12 +433,26 @@ void user::follow(twitterak &app, std::string uName)
     }
 }
 
+//------------------------------------------------------------------------
 
 void user::add_followers(std::string uName)
 {
     this->followers.insert(uName);
 }
 
+//------------------------------------------------------------------------
+
+void user::like_mention(int tNumber, std::string uName, int mNumber)
+{
+    if(tweets.count(tNumber) == 1)
+    {
+        tweets[tNumber].mention_like(uName , mNumber);
+    }
+    else
+    {
+        std::cout << "! There is no tweet with this number.\n";
+    }
+}
 
 //============================================== delete user traces =========================================
 

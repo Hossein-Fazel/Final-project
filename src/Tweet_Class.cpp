@@ -365,3 +365,36 @@ void tweet::dLike(std::string uName)
 {
     likes.erase(uName);
 }
+
+//-----------------------------------------------------------------------
+
+void tweet::mention_like(std::string uName, int mNumber)
+{
+    bool find_mention = false;
+    for(auto &i:tweet_mentions)
+    {
+        for(auto &j:i.second)
+        {
+            if(j.get_number() == mNumber)
+            {
+                find_mention = true;
+                if (j.mLikes.count(uName) == 1)
+                {
+                    std::cout << "! You have already liked this mention.\n";
+                }
+                else
+                {
+                    j.mLikes.insert(uName);
+                    std::cout << "* Liked.\n";
+                }
+
+                break;
+            }
+        }
+
+        if(find_mention)
+        {
+            break;
+        }
+    }
+}
