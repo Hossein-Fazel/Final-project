@@ -5,23 +5,23 @@
 
 
 // ============================================= get functions ===============================================
-std::string Base_user::get_name() const                       // returns the name of the user
+std::string Base_User::get_name()                      // returns the name of the user
 {
     return Full_Name;
 }
 
-std::string Base_user::get_username() const                  // returns the username of the user
+std::string Base_User::get_username()                  // returns the username of the user
 {
     return Username;
 }
 
 //  ======================================= set functions =====================================
-void Base_user::set_name(std::string name)                                               // sets the name of a user
+void Base_User::set_name(std::string name)                                               // sets the name of a user
 {
     Full_Name = name;
 }
 
-void Base_user::set_username(std::string user_name)                                     // sets the username of a user with a validation
+void Base_User::set_username(std::string user_name)                                     // sets the username of a user with a validation
 {
     while (1)
     {
@@ -64,7 +64,7 @@ void Base_user::set_username(std::string user_name)                             
     }
 }
 
-void Base_user::set_password(std::string input_pass)                             // sets the password of the user's account
+void Base_User::set_password(std::string input_pass)                             // sets the password of the user's account
 {
     SHA256 sha256;
     Password = sha256(input_pass);
@@ -72,7 +72,7 @@ void Base_user::set_password(std::string input_pass)                            
 
 // ============================================= general functions ===============================================
 
-int Base_user::Validating_Username(std::string user_name)                              // the validation of a user's username
+int Base_User::Validating_Username(std::string user_name)                              // the validation of a user's username
 {
     if (user_name.length() < 5)
         return 0;
@@ -96,7 +96,7 @@ int Base_user::Validating_Username(std::string user_name)                       
     return 1;
 }
 
-std::string Base_user::to_lower(std::string str)                                                                 // makes a string lowercase
+std::string Base_User::to_lower(std::string str)                                                                 // makes a string lowercase
 {
     for (int i = 0; i < str.length(); ++i)
         str[i] = tolower(str[i]);
@@ -104,7 +104,7 @@ std::string Base_user::to_lower(std::string str)                                
     return str;
 }
 
-std::string Base_user::remove_atsing(std::string str)                                                             // removes @ from the first of the user name
+std::string Base_User::remove_atsing(std::string str)                                                             // removes @ from the first of the user name
 {
     return str.erase(0, 1);
 }

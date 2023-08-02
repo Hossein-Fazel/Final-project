@@ -5,6 +5,7 @@
 #include "Tweet_Class.hpp"
 #include "Display_Class.hpp"
 #include "Mention_class.hpp"
+#include "Base_User.hpp"
 
 #include <unordered_map>
 #include <vector>
