@@ -60,7 +60,6 @@ friend void tweet::edit_tweet(twitterak &, int);                         // frie
         void Edit(twitterak &, std::string, std::string);          // edits the user's information                                                                    
         void edit_tweet(int, twitterak &);
         void Tweet(std::string , twitterak &);                     // make a normal tweet
-        void Logout(twitterak &);                                  // logs out of the user's account
         void Push_Tweet(tweet);                                    // push a tweet into a vector
         void last_number();                                        // plus plus last_num variable
         void print_likers(int);

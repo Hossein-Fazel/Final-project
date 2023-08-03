@@ -30,6 +30,8 @@ class Base_User
         int Validating_Username(std::string);                      // the validation of a user's username
         std::string to_lower(std::string);                         // makes a string a lowercase
         std::string remove_atsing(std::string);                    // removes @ from the first of the user name
+        void Logout(twitterak &);                                  // logs out of the user's account
+        void add_followers(std::string);                           // add a new follower to set
 
 //======================================= virtual functions =====================================
 
@@ -60,7 +62,6 @@ class Base_User
         virtual void Edit(twitterak &, std::string, std::string);         // edits the user's information                                                                    
         virtual void edit_tweet(int, twitterak &);                        // edits user's tweet
         virtual void Tweet(std::string , twitterak &);                    // make a normal tweet
-        virtual void Logout(twitterak &);                                 // logs out of the user's account
         virtual void Push_Tweet(tweet);                                   // push a tweet into a vector
         virtual void last_number();                                       // plus plus last_num variable
         virtual void print_likers(int);                                   // print tweet likers
@@ -69,7 +70,6 @@ class Base_User
         virtual bool validate_phone_number(std::string);                  // validate user's phone_number
         virtual bool add_mention(int, std::string, std::string);          // add a mention to a tweet
         virtual void follow(twitterak &, std::string);                    // follow a user
-        void add_followers(std::string);                                  // add a new follower to set
         virtual void like_mention(int, std::string, int);                 // like a mention
 
 //==================== Save_User_Traces ====================

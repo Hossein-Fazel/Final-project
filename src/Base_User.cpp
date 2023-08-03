@@ -293,7 +293,8 @@ void Base_User::Tweet(std::string tweet_text, twitterak & app)
 
 void Base_User::Logout(twitterak & app)
 {
-    std::cout << "! This feature can't be reached for your account.\n";
+    app.is_logedin = false;
+    std::cout << "* You have successfully logged out.\n";
 }
 
 //------------------------------------------------------------------------

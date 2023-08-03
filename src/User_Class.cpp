@@ -285,14 +285,6 @@ void user::Delete_Account(twitterak &app)                                       
 
 //------------------------------------------------------------------------
 
-void user::Logout(twitterak &app)                                                                                // logs out of the user's account       
-{
-    app.is_logedin = false;
-    std::cout << "* You have successfully logged out.\n";
-}
-
-//------------------------------------------------------------------------
-
 void user::Push_Tweet(tweet tw)                                                                                  // push a tweet into a vector
 {
     tweets[tw.get_number()] = tw;
