@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <unordered_set>
 
 #include "Tweet_Class.hpp"
 #include "sha256.h"
@@ -20,8 +21,9 @@ class Base_User
         
 //======================================== get functions ======================================
 
-        std::string get_name();                                  // returns the name of the user
-        std::string get_username();                              // returns the username of the user
+        std::string get_name() const;                                  // returns the name of the user
+        std::string get_username() const;                              // returns the username of the user
+        int get_followers_num() const;                                 // returns the number of followers
 
 //======================================= general functions ====================================
 
@@ -38,10 +40,9 @@ class Base_User
         virtual std::string get_password() const;                               // returns the password of the user's account
         virtual std::string get_header() const;                                 // returns the color of the header that user had chosen 
         virtual std::string get_country() const;                                // returns the country of the user
-        
-        virtual int get_last_number() const;
-        virtual int get_followers_num() const;
-        virtual int get_following_num() const;
+        virtual int get_last_number() const;                                    // returns the last number of tweet
+        virtual int get_following_num() const;                                  // returns the number of following 
+        virtual std::map <int, tweet> get_tweets();                             // returns the tweets
 
 //========================= sets ==========================
 
@@ -62,33 +63,33 @@ class Base_User
         virtual void Logout(twitterak &);                                 // logs out of the user's account
         virtual void Push_Tweet(tweet);                                   // push a tweet into a vector
         virtual void last_number();                                       // plus plus last_num variable
-        virtual void print_likers(int);
-        virtual bool like(std::string ,int);
-        virtual bool dislike(std::string, int);
+        virtual void print_likers(int);                                   // print tweet likers
+        virtual bool like(std::string ,int);                              // like a tweet
+        virtual bool dislike(std::string, int);                           // dislike a tweet
         virtual bool validate_phone_number(std::string);                  // validate user's phone_number
-        virtual bool add_mention(int, std::string, std::string);
-        void follow(twitterak &, std::string);
-        void add_followers(std::string);
-        virtual void like_mention(int, std::string, int);
+        virtual bool add_mention(int, std::string, std::string);          // add a mention to a tweet
+        virtual void follow(twitterak &, std::string);                    // follow a user
+        void add_followers(std::string);                                  // add a new follower to set
+        virtual void like_mention(int, std::string, int);                 // like a mention
 
 //==================== Save_User_Traces ====================
 
-        virtual void push_myMentions(int, std::string);
-        virtual void push_tweetLikes(int, std::string);
-        virtual void pop_tweetLikes(int, std::string);
+        virtual void push_myMentions(int, std::string);                   // save my mention traces
+        virtual void push_tweetLikes(int, std::string);                   // save my tweet likes traces
+        virtual void pop_tweetLikes(int, std::string);                    // delete a like of a tweet
 
 //=================== Delete_User_Traces ===================
 
-        virtual void del_myMentions(twitterak &);
-        virtual void cls_hashtags(twitterak &);
-        virtual void del_tweetLikes(twitterak &);
-
-        virtual std::map <int, tweet> get_tweets();
+        virtual void del_myMentions(twitterak &);                         // delete mention traces
+        virtual void cls_hashtags(twitterak &);                           // delete hashtag traces
+        virtual void del_tweetLikes(twitterak &);                         // delete tweet like traces
 
     private:
         std::string Full_Name;
         std::string Username;
         std::string Password;
+        std::unordered_set< std::string> followers;
+
 };
 
 #endif

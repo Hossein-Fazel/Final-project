@@ -7,16 +7,23 @@
 
 //============================================== get functions ================================================
 
-std::string Base_User::get_name()                                                       // returns the name of the user
+std::string Base_User::get_name() const                                                       // returns the name of the user
 {
     return Full_Name;
 }
 
 //------------------------------------------------------------------------
 
-std::string Base_User::get_username()                                                    // returns the username of the user
+std::string Base_User::get_username() const                                                    // returns the username of the user
 {
     return Username;
+}
+
+//------------------------------------------------------------------------
+
+int Base_User::get_followers_num() const                                                     // returns the number of followers
+{
+    return this->followers.size();
 }
 
 //=============================================== set functions ===============================================
@@ -82,40 +89,17 @@ void Base_User::set_password(std::string input_pass)                            
 
 void Base_User::follow(twitterak & app, std::string uName)
 {
-    if(uName == app.logedin_user)
-    {
-        std::cout << "! You can not follow yourself.\n";
-    }
-    else
-    {
-        if(app.users.count(uName) == 1)
-        {
-            if(this->following.count(uName) == 1)
-            {
-                std::cout << "! You have already followed this user.\n";
-            }
-            else
-            {
-                this->following.insert(uName);
-                app.users[uName].add_followers(uName);
-                std::cout << "* Followed.\n";
-            }
-        }
-        else
-        {
-            std::cout << "! There is no user with this username.\n";
-        }
-    }
+    std::cout << "! This feature can't be reached for your account.\n";
 }
 
-//------------------------------------------------------------------------
+// ============================================= general functions ===============================================
 
 void Base_User::add_followers(std::string uName)
 {
     this->followers.insert(uName);
 }
 
-// ============================================= general functions ===============================================
+//------------------------------------------------------------------------
 
 int Base_User::Validating_Username(std::string user_name)                              // the validation of a user's username
 {
@@ -406,6 +390,13 @@ void Base_User::del_tweetLikes(twitterak & app)
 //------------------------------------------------------------------------
 
 void Base_User::like_mention(int tNumber, std::string uName, int mNumber)
+{
+    std::cout << "! This feature can't be reached for your account.\n";
+}
+
+//------------------------------------------------------------------------
+
+std::map <int, tweet> Base_User::get_tweets()
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }

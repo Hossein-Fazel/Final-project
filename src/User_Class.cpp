@@ -71,13 +71,6 @@ int user::get_last_number() const                   // returns the last tweet's 
 
 //------------------------------------------------------------------------
 
-int user::get_followers_num() const
-{
-    return followers.size();
-}
-
-//------------------------------------------------------------------------
-
 int user::get_following_num() const
 {
     return following.size();
@@ -431,13 +424,6 @@ void user::follow(twitterak &app, std::string uName)
             std::cout << "! There is no user with this username.\n";
         }
     }
-}
-
-//------------------------------------------------------------------------
-
-void user::add_followers(std::string uName)
-{
-    this->followers.insert(uName);
 }
 
 //------------------------------------------------------------------------

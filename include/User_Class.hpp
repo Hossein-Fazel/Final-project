@@ -42,7 +42,6 @@ friend void tweet::edit_tweet(twitterak &, int);                         // frie
         std::string get_header() const;                            // returns the color of the header that user had chosen 
         std::string get_country() const;                           // returns the country of the user
         int get_last_number() const;                                    // returns the last tweet's number
-        int get_followers_num() const;
         int get_following_num() const;
 
 //====================== sets =====================
@@ -71,7 +70,6 @@ friend void tweet::edit_tweet(twitterak &, int);                         // frie
         std::map <int, tweet> get_tweets();
         bool add_mention(int, std::string, std::string);
         void follow(twitterak &, std::string);
-        void add_followers(std::string);
         void like_mention(int, std::string, int);
 
 //================== Save_User_Traces ==================
@@ -101,7 +99,6 @@ friend void tweet::edit_tweet(twitterak &, int);                         // frie
 
         std::map <int, tweet> tweets;
 
-        std::unordered_set< std::string> followers;
         std::unordered_set< std::string> following;
 
 // ================================= User_Traces ============================
