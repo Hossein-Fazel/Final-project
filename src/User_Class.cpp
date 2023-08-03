@@ -146,7 +146,7 @@ void user::set_country(std::string input_country)                          // se
 
 //================================================================  General_Functions ===============================================================
 
-void user::Show_Profile(twitterak &app)                                                                    // shows the information of a user itself
+void user::Show_Profile(twitterak & app)                                                                    // shows the information of a user itself
 {
     std::cout << "$ Header : " << get_header() << std::endl;
     std::cout << "$ Name : " << get_name() << std::endl;

@@ -1,4 +1,7 @@
 #include <iostream>
+#include <unordered_set>
+#include <cctype>
+#include <ctype.h>
 
 #include "Base_User.hpp"
 #include "Twitterak_Class.hpp"
@@ -6,35 +9,36 @@
 
 
 //============================================== get functions ================================================
-
-std::string Base_User::get_name() const                                                       // returns the name of the user
+// shows the name of the user
+std::string Base_User::get_name() const                                                       
 {
     return Full_Name;
 }
 
 //------------------------------------------------------------------------
-
-std::string Base_User::get_username() const                                                    // returns the username of the user
+// shows the username of the user
+std::string Base_User::get_username() const                                                    
 {
     return Username;
 }
 
 //------------------------------------------------------------------------
-
-int Base_User::get_followers_num() const                                                     // returns the number of followers
+// shows the number of followers
+int Base_User::get_followers_num() const                                                     
 {
     return this->followers.size();
 }
 
 //=============================================== set functions ===============================================
-void Base_User::set_name(std::string name)                                               // sets the name of a user
+// sets the name of a user
+void Base_User::set_name(std::string name)                                               
 {
     Full_Name = name;
 }
 
 //------------------------------------------------------------------------
-
-void Base_User::set_username(std::string user_name)                                     // sets the username of a user with a validation
+// sets the username of a user with a validation
+void Base_User::set_username(std::string user_name)                                     
 {
     while (1)
     {
@@ -78,11 +82,31 @@ void Base_User::set_username(std::string user_name)                             
 }
 
 //------------------------------------------------------------------------
-
-void Base_User::set_password(std::string input_pass)                                   // sets the password of the user's account
+// sets the password of the user's account
+void Base_User::set_password(std::string input_pass)                                   
 {
-    SHA256 sha256;
-    Password = sha256(input_pass);
+    while (1)
+    {
+        if ((validate_password(input_pass)) == 1)
+        {
+            SHA256 sha256;
+            Password = sha256(input_pass);
+            passwords.insert(input_pass);
+            break;
+        }
+        else if ((validate_password(input_pass)) == 0)
+        {
+            std::cout << "! Wrong Password.Your Password must include number, letter and charector.\n";
+            std::cout << "$ Password : ";
+            std::cin >> input_pass;
+        }
+        else if ((validate_password(input_pass)) == -1)
+        {
+            std::cout << "! Duplicate Password.This password is already repeated.\n";
+            std::cout << "$ Password : ";
+            std::cin >> input_pass;
+        }
+    }
 }
 
 //------------------------------------------------------------------------
@@ -94,14 +118,34 @@ void Base_User::follow(twitterak & app, std::string uName)
 
 // ============================================= general functions ===============================================
 
+// validating the acoount's password
+int Base_User::validate_password(std::string pass)   // check
+{
+    for (int i = 0; i < pass.length(); ++i)
+    {
+        if (!isalnum(pass[i]))
+            return 1;
+    }
+    
+    SHA256 sha256;
+    pass = sha256(pass);
+
+    if (passwords.count(pass) == 1)
+        return -1;
+
+    return 0;
+}
+
+//------------------------------------------------------------------------
+
 void Base_User::add_followers(std::string uName)
 {
     this->followers.insert(uName);
 }
 
 //------------------------------------------------------------------------
-
-int Base_User::Validating_Username(std::string user_name)                              // the validation of a user's username
+// the validation of a user's username
+int Base_User::Validating_Username(std::string user_name)                              
 {
     if (user_name.length() < 5)
         return 0;
@@ -126,8 +170,8 @@ int Base_User::Validating_Username(std::string user_name)                       
 }
 
 //------------------------------------------------------------------------
-
-std::string Base_User::to_lower(std::string str)                                        // makes a string lowercase
+// makes a string lowercase
+std::string Base_User::to_lower(std::string str)                                        
 {
     for (int i = 0; i < str.length(); ++i)
         str[i] = tolower(str[i]);
@@ -136,161 +180,161 @@ std::string Base_User::to_lower(std::string str)                                
 }
 
 //------------------------------------------------------------------------
-
-std::string Base_User::remove_atsing(std::string str)                                   // removes @ from the first of the user name
+// removes @ from the first of the user name
+std::string Base_User::remove_atsing(std::string str)                                   
 {
     return str.erase(0, 1);
 }
 
 //============================================== Virtuals ===============================================
-
+// does not have access to use this function from parent class
 std::string Base_User::get_biography() const
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 std::string Base_User::get_link() const
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 std::string Base_User::get_birthday() const
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 std::string Base_User::get_phone() const
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 std::string Base_User::get_password() const
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 std::string Base_User::get_header() const
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 std::string Base_User::get_country() const
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 int Base_User::get_last_number() const
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 int Base_User::get_followers_num() const
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 int Base_User::get_following_num() const
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::set_biography(std::string bio)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::set_link(std::string link)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::set_birthday(std::string birth)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::set_phone(std::string phone)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::set_header(std::string header)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::set_country(std::string country)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::Delete_Account(twitterak & app)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::Show_Profile(twitterak & app)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::Edit(twitterak & app, std::string edit_part, std::string value)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::edit_tweet(int tNum, twitterak & app)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::Tweet(std::string tweet_text, twitterak & app)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::Logout(twitterak & app)
 {
     app.is_logedin = false;
@@ -298,105 +342,105 @@ void Base_User::Logout(twitterak & app)
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::Push_Tweet(tweet tw)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::last_number()
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::print_likers(int number)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 bool Base_User::like(std::string username, int number)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 bool Base_User::dislike(std::string username, int number)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 bool Base_User::validate_phone_number(std::string phone)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }       
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 bool Base_User::add_mention(int tweet_number, std::string got_name, std::string got_username)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::push_myMentions(int number, std::string uName)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::push_tweetLikes(int number, std::string uName)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::pop_tweetLikes(int number, std::string uName)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::del_myMentions(twitterak & app)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::cls_hashtags(twitterak & app)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::del_tweetLikes(twitterak & app)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 void Base_User::like_mention(int tNumber, std::string uName, int mNumber)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// does not have access to use this function from parent class
 std::map <int, tweet> Base_User::get_tweets()
 {
     std::cout << "! This feature can't be reached for your account.\n";
