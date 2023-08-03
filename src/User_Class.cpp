@@ -64,21 +64,21 @@ std::string user::get_country() const         // returns the color of the header
 
 //------------------------------------------------------------------------
 
-int user::get_last_number()                   // returns the last tweet's number
+int user::get_last_number() const                   // returns the last tweet's number
 {
     return last_num;
 }
 
 //------------------------------------------------------------------------
 
-int user::get_followers_num()
+int user::get_followers_num() const
 {
     return followers.size();
 }
 
 //------------------------------------------------------------------------
 
-int user::get_following_num()
+int user::get_following_num() const
 {
     return following.size();
 }
@@ -248,7 +248,7 @@ void user::Edit(twitterak &app, std::string Edit_part ,std::string value)       
 
 //------------------------------------------------------------------------
 
-void user::Tweet(std::string tweet_text, twitterak &app)                                                                                                  // make a normal tweet                                              
+void user::Tweet(std::string tweet_text, twitterak & app)                                                                                                  // make a normal tweet                                              
 {
     // std::string twt;
     tweet tw;
@@ -391,7 +391,7 @@ bool user::add_mention(int tweet_number, std::string got_name, std::string got_u
 
 //------------------------------------------------------------------------
 
-void user::edit_tweet(int tNum, twitterak &app)
+void user::edit_tweet(int tNum, twitterak & app)
 {
     if(tweets.count(tNum) == 1)
     {
@@ -454,7 +454,7 @@ void user::like_mention(int tNumber, std::string uName, int mNumber)
     }
 }
 
-//============================================== delete user traces =========================================
+//============================================== Delete_User_Traces =========================================
 
 void user::push_myMentions(int number, std::string uName)
 {

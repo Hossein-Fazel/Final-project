@@ -17,6 +17,8 @@ set(SOURCES
    src/TD_Class.cpp
    src/Mention_class.cpp
    src/Base_User.cpp
+   src/Organisation_User.cpp
+   src/Anonymous_User.cpp
 )
 
 add_executable(app ${SOURCES})
