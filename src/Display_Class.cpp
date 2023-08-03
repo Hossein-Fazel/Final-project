@@ -393,6 +393,10 @@ void display::help(twitterak &app)
 
         std::cout << "close the app\n";
         std::cout << "~ exit\n~ quit\n~ q\n\n";
+
+        std::cout << "clear the screen\n";
+        std::cout << "~ cls\n~clear\n\n";
+
         std::cout << "-------------------------------------------------------------------------------------\n";
     }
 
@@ -410,7 +414,7 @@ void display::help(twitterak &app)
 
         std::cout << "to edit your profile\n";
         std::cout << "~ edit profile edit_part value\n";
-        std::cout << "~ if your value is an string, put it between "" \n\n";
+        std::cout << "! if your value is an string, put it between "" \n\n";
 
         std::cout << "logout from your account\n";
         std::cout << "~ logout\n\n";
@@ -462,6 +466,10 @@ void display::help(twitterak &app)
         std::cout << "~ mention username tweetNumber\n";
         std::cout << "~ mention @username tweetNumber\n\n";
 
+        std::cout << "like a mention\n";
+        std::cout << "~ like mention @username:tweet_number mention_number\n";
+        std::cout << "~ like mention username:tweet_number mention_number\n\n";
+
         std::cout << "show mentions of a tweet\n";
         std::cout << "~ show mention username tweetNumber\n";
         std::cout << "~ show mention @username tweetNumber\n\n";
@@ -469,6 +477,12 @@ void display::help(twitterak &app)
         std::cout << "follow a user\n";
         std::cout << "~ follow @username.\n";
         std::cout << "~ follow username.\n\n";
+
+        std::cout << "clear the screen\n";
+        std::cout << "~ cls\n~clear\n\n";
+
+        std::cout << "close the app\n";
+        std::cout << "~ exit\n~ quit\n~ q\n\n";
 
         std::cout << "------------------------------------------------------------------------------------\n";
     }
