@@ -52,7 +52,7 @@ class tweet
 //============ General functions =============
 
         void delete_tweet(twitterak, int);                                       // deletes a tweet of a user 
-        void edit_tweet(twitterak &, int);                                         // edits a tweet of a user
+        void edit_tweet(twitterak &);                                         // edits a tweet of a user
         void rq_tweet(twitterak&, std::string);                                   // quote tweet or retweet
         bool tweet_like(std::string user_name);
         bool tweet_dislike(std::string user_name);

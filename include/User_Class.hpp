@@ -4,7 +4,6 @@
 
 
 #include <string>
-#include <map>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -13,6 +12,7 @@
 #include"Tweet_Class.hpp"
 #include"Display_Class.hpp"
 #include "Mention_class.hpp"
+#include "Organisation_User.hpp"
 
 //================================================================================ User_Class ================================================================================ 
 
@@ -29,8 +29,9 @@ friend void display::show_tweet(twitterak, std::string);                // frien
 friend void display::show_mentions(twitterak, std::string user_name, int tweet_number);
 
 friend void tweet::delete_tweet(twitterak, int);                        // friend with Twitterak_Class to delete a tweet
-friend void tweet::edit_tweet(twitterak &, int);                        // friend with Twitterak_Class to edit a tweet
-
+friend void tweet::edit_tweet(twitterak &);                        // friend with Twitterak_Class to edit a tweet
+friend void Organisation::del_myMentions(twitterak &);
+friend void Organisation::del_tweetLikes(twitterak &app);
 
     public:
 //===================== Gets ======================
@@ -53,7 +54,7 @@ friend void tweet::edit_tweet(twitterak &, int);                        // frien
         void print_likers(int);
         bool like(std::string ,int);
         bool dislike(std::string, int);
-        std::map <int, tweet> get_tweets();
+        std::unordered_map<int, tweet> get_tweets();
         bool add_mention(int, std::string, std::string);
         void follow(twitterak &, std::string);
         void like_mention(int, std::string, int);
@@ -74,7 +75,7 @@ friend void tweet::edit_tweet(twitterak &, int);                        // frien
         std::string Birthday;
         int last_num = 0;
 
-        std::map <int, tweet> tweets;
+        std::unordered_map <int, tweet> tweets;
         std::unordered_set< std::string> following;
 
 // ================================= User_Traces ============================

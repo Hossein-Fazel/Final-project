@@ -140,7 +140,6 @@ void user::Edit(twitterak &app, std::string Edit_part ,std::string value)       
 
 void user::Tweet(std::string tweet_text, twitterak & app)                                                                                                  // make a normal tweet                                              
 {
-    // std::string twt;
     tweet tw;
     tw.set_tweetType("normal");
 
@@ -250,7 +249,7 @@ bool user::dislike(std::string user_name, int number)
 
 //------------------------------------------------------------------------
 
-std::map <int, tweet> user::get_tweets()
+std::unordered_map <int, tweet> user::get_tweets()
 {
     return tweets;
 }
@@ -277,7 +276,7 @@ void user::edit_tweet(int tNum, twitterak & app)
 {
     if(tweets.count(tNum) == 1)
     {
-        tweets[tNum].edit_tweet(app, tNum);
+        tweets[tNum].edit_tweet(app);
     }
     else
     {
@@ -308,6 +307,26 @@ void user::follow(twitterak &app, std::string uName)
                 std::cout << "* Followed.\n";
             }
         }
+
+        else if(app.ans_user.count(uName) == 1)
+        {
+            std::cout << "! You can not follow this user.\n";
+        }
+        
+        else if (app.org_user.count(uName) == 1)
+        {
+            if(following.count(uName) == 1)
+            {
+                std::cout << "! You have already followed this user.\n";
+            }
+            else
+            {
+                this->following.insert(uName);
+                app.org_user[uName].add_followers(uName);
+                std::cout << "* Followed.\n";
+            }
+        }
+        
         else
         {
             std::cout << "! There is no user with this username.\n";
@@ -404,6 +423,20 @@ void user::del_tweetLikes(twitterak &app)
                     if(app.users[i.first].tweets.count(j))
                     {
                         app.users[i.first].tweets[j].dLike(this->get_username());
+                    }
+                }
+            }
+        }
+
+        else if(i.first != this->get_username())
+        {
+            if(app.org_user.count(i.first) == 1)
+            {
+                for(auto j:i.second)
+                {
+                    if(app.org_user[i.first].tweets.count(j))
+                    {
+                        app.org_user[i.first].tweets[j].dLike(this->get_username());
                     }
                 }
             }

@@ -48,13 +48,6 @@ void Anonymous::Edit(twitterak & app, std::string Edit_part ,std::string value)
 
 //------------------------------------------------------------------------
 //
-bool Anonymous::like(std::string ,int)
-{
-    // Hossein
-}
-
-//------------------------------------------------------------------------
-//
 void Anonymous::like_mention(int, std::string, int)
 {
     // Hossein
@@ -69,7 +62,41 @@ void Anonymous::add_followers(std::string)
 
 //------------------------------------------------------------------------
 // follow a user that must be personal user
-void Anonymous::follow(twitterak &, std::string)
+void Anonymous::follow(twitterak &app, std::string uName)
 {
-    // Hossein
+    if(uName == app.logedin_user)
+    {
+        std::cout << "! You can not follow yourself.\n";
+    }
+    else
+    {
+        if(app.users.count(uName) == 1 )
+        {
+            if(following.count(uName) == 1)
+            {
+                std::cout << "! You have already followed this user.\n";
+            }
+            else
+            {
+                this->following.insert(uName);
+                app.users[uName].add_followers(uName);
+                std::cout << "* Followed.\n";
+            }
+        }
+
+        else if(app.ans_user.count(uName) == 1)
+        {
+            std::cout << "! You can not follow this user.\n";
+        }
+
+        else if (app.org_user.count(uName) == 1)
+        {
+            std::cout << "! You can not follow this user.\n";
+        }
+        
+        else
+        {
+            std::cout << "! There is no user with this username.\n";
+        }
+    }
 }

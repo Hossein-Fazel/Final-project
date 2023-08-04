@@ -187,7 +187,7 @@ void Base_User::set_country(std::string country)                                
 
 // ============================================= general functions ===============================================
 // validating the acoount's password
-int Base_User::validate_password(std::string pass)   // check
+int Base_User::validate_password(std::string pass)   
 {
     for (int i = 0; i < pass.length(); ++i)
     {
@@ -456,7 +456,7 @@ void Base_User::like_mention(int tNumber, std::string uName, int mNumber)
 
 //------------------------------------------------------------------------
 // does not have access to use this function from parent class
-std::map <int, tweet> Base_User::get_tweets()
+std::unordered_map <int, tweet> Base_User::get_tweets()
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }

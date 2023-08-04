@@ -41,6 +41,7 @@ class Base_User
         void Logout(twitterak &);                                         // logs out of the user's account
         void add_followers(std::string);                                  // add a new follower to set
         int validate_password(std::string);                               // validating the acoount's password
+        bool validate_phone_number(std::string);                          // validate user's phone_number
 
 //======================================= virtual functions =====================================
 
@@ -48,7 +49,7 @@ class Base_User
         virtual std::string get_birthday() const;                         // returns the date of birth of the user
         virtual int get_last_number() const;                              // returns the last number of tweet
         virtual int get_following_num() const;                            // returns the number of following 
-        virtual std::map <int, tweet> get_tweets();                       // returns the tweets
+        virtual std::unordered_map <int, tweet> get_tweets();                       // returns the tweets
 
 //========================= sets ==========================
 
@@ -67,7 +68,6 @@ class Base_User
         virtual void print_likers(int);                                   // print tweet likers
         virtual bool like(std::string ,int);                              // like a tweet
         virtual bool dislike(std::string, int);                           // dislike a tweet
-        virtual bool validate_phone_number(std::string);                  // validate user's phone_number
         virtual bool add_mention(int, std::string, std::string);          // add a mention to a tweet
         virtual void follow(twitterak &, std::string);                    // follow a user
         virtual void like_mention(int, std::string, int);                 // like a mention

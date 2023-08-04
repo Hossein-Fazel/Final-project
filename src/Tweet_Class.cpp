@@ -153,7 +153,7 @@ void tweet::delete_tweet(twitterak app, int number)                             
 
 //------------------------------------------------------------------------
 
-void tweet::edit_tweet(twitterak &app, int number)                                                                                              // edits a tweet of a user
+void tweet::edit_tweet(twitterak &app)                                                                                              // edits a tweet of a user
 {
     if(get_user_age() >= 18)
     {
@@ -164,8 +164,8 @@ void tweet::edit_tweet(twitterak &app, int number)                              
         }
         std::string E_tweet;
 
-        std::cout << number << " : " << this->get_sefTweet() << std::endl;
-        std::cout << "* Enter new text for tweet " << number << " : ";
+        std::cout << this->get_number() << " : " << this->get_sefTweet() << std::endl;
+        std::cout << "* Enter new text for tweet " << this->get_number() << " : ";
         std::getline(std::cin, E_tweet);
 
         this->set_selfTweet(E_tweet);

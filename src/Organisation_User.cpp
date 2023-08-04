@@ -4,6 +4,7 @@
 
 #include "Twitterak_Class.hpp"
 #include "Organisation_User.hpp"
+// #include "User_Class.hpp"
 #include "sha256.h"
 
 //==================================================================  Get_Functions =================================================================
@@ -23,9 +24,9 @@ int Organisation::get_last_number() const
 
 //------------------------------------------------------------------------
 // shows organisation's tweets
-std::map <int, tweet> Organisation::get_tweets()
+std::unordered_map <int, tweet> Organisation::get_tweets()
 {
-    // Hossein
+    return tweets;
 }
 
 //==================================================================  Set_Functions =================================================================
@@ -148,119 +149,290 @@ void Organisation::Edit(twitterak &app, std::string Edit_part ,std::string value
 // edits an organisation's tweet
 void Organisation::edit_tweet(int tNum, twitterak & app)
 {
-    // Hossein
+    if(this->tweets.count(tNum) == 1)
+    {
+        this->tweets[tNum].edit_tweet(app);
+    }
 }
 
 //------------------------------------------------------------------------
 // make a tweet
 void Organisation::Tweet(std::string tweet_text, twitterak & app)                                                                                                                          
 {
-    // Hossein
+    tweet tw;
+    tw.set_tweetType("normal");
+
+    tw.set_name(get_name());
+    tw.set_user_name(get_username());
+    tw.set_number(get_last_number()+1);
+
+    while (tweet_text.empty())
+    {
+        std::cout << "$ your tweet : ";
+        getline(std::cin, tweet_text);
+    }
+    
+    tw.set_selfTweet(tweet_text);
+    tw.fetch_hashtags(app);
+
+    increase_last_number();
+
+    Push_Tweet(tw);
 }
 
 //------------------------------------------------------------------------
 // push a tweet into a vector
 void Organisation::Push_Tweet(tweet tw)
 {
-    // Hossein
+    tweets[tw.get_number()] = tw;
 }
 
 //------------------------------------------------------------------------
 
 void Organisation::increase_last_number()
 {
-    // Hossein
+    last_number += 1;
 }
 
 //------------------------------------------------------------------------
 
-void Organisation::print_likers(int)
+void Organisation::print_likers(int num)
 {
-    // Hossein
+    if(tweets.count(num))
+    {
+        if(~tweets[num].get_like_number() ==0)
+        {
+            std::cout << "! This tweet has no like.\n";
+        }
+        else
+        {
+            for(auto liker:~tweets[num])
+            {
+                std::cout << liker.first << '\n';
+            }
+        }
+    }
 }
 
 //------------------------------------------------------------------------
 
-bool Organisation::like(std::string ,int)
+bool Organisation::like(std::string user_name,int num)
 {
-    // Hossein
+    if(tweets.count(num) == 1)
+    {
+        bool status;
+        status = tweets[num].tweet_like(user_name);
+        return status;
+    }
+    else
+    {
+        std::cout << "! There is no tweet with this number.\n";
+        return false;
+    }
 }
 
 //------------------------------------------------------------------------
 
-bool Organisation::dislike(std::string, int)
+bool Organisation::dislike(std::string user_name, int num)
 {
-    // Hossein
+    if(tweets.count(num) == 1)
+    {
+        bool status;
+        status = tweets[num].tweet_dislike(user_name);
+        return status;
+    }
+    else
+    {
+        std::cout << "! There is no tweet with this number.\n";
+        return false;
+    }
 }
 
 //------------------------------------------------------------------------
 
-bool Organisation::validate_phone_number(std::string)
+bool Organisation::add_mention(int tweet_number, std::string got_name, std::string got_user_name)
 {
-    // Hossein
+    if(tweets.count(tweet_number) == 1)
+    {
+        tweets[tweet_number].creat_mention(got_user_name, got_name);
+        return true;
+    }
+    else
+    {
+        std::cout << "! There is no tweet with this number.\n";
+        return false;
+    }
 }
 
 //------------------------------------------------------------------------
 
-bool Organisation::add_mention(int, std::string, std::string)
+void Organisation::follow(twitterak &app, std::string uName)
 {
-    // Hossein
+    if(uName == app.logedin_user)
+    {
+        std::cout << "! You can not follow yourself.\n";
+    }
+    else
+    {
+        if(app.users.count(uName) == 1 )
+        {
+            if(following.count(uName) == 1)
+            {
+                std::cout << "! You have already followed this user.\n";
+            }
+            else
+            {
+                this->following.insert(uName);
+                app.users[uName].add_followers(uName);
+                std::cout << "* Followed.\n";
+            }
+        }
+
+        else if(app.ans_user.count(uName) == 1)
+        {
+            std::cout << "! You can not follow this user.\n";
+        }
+
+        else if (app.org_user.count(uName) == 1)
+        {
+            if(following.count(uName) == 1)
+            {
+                std::cout << "! You have already followed this user.\n";
+            }
+            else
+            {
+                this->following.insert(uName);
+                app.org_user[uName].add_followers(uName);
+                std::cout << "* Followed.\n";
+            }
+        }
+        
+        else
+        {
+            std::cout << "! There is no user with this username.\n";
+        }
+    }
 }
 
 //------------------------------------------------------------------------
 
-void Organisation::follow(twitterak &, std::string)
+void Organisation::like_mention(int tNumber, std::string uName, int mNumber)
 {
-    // Hossein
-}
-
-//------------------------------------------------------------------------
-
-void Organisation::like_mention(int, std::string, int)
-{
-    // Hossein
+    if(tweets.count(tNumber) == 1)
+    {
+        tweets[tNumber].mention_like(uName , mNumber);
+    }
+    else
+    {
+        std::cout << "! There is no tweet with this number.\n";
+    }
 }
 
 //================================================================  Save_Organisation_Traces ===============================================================
 
 // save my mention traces
-void Organisation::push_myMentions(int, std::string)
+void Organisation::push_myMentions(int num, std::string uName)
 {
-    // Hossein
+    my_mentions[uName].insert(num);
 }
 
 //------------------------------------------------------------------------
 // save my tweet likes traces
-void Organisation::push_tweetLikes(int, std::string)
+void Organisation::push_tweetLikes(int num, std::string uName)
 {
-    // Hossein
+    tweetLikes[uName].insert(num);
 }
 
 //------------------------------------------------------------------------
 // delete a like of a tweet
-void Organisation::pop_tweetLikes(int, std::string)
+void Organisation::pop_tweetLikes(int num, std::string uName)
 {   
-    // Hossein
+    if(tweetLikes.count(uName) == 1)
+    {
+        tweetLikes[uName].erase(num);
+        if(tweetLikes[uName].size() == 0)
+        {
+            tweetLikes.erase(uName);
+        }
+    }
 }
 
 //================================================================  Delete_Organisation_Traces ===============================================================
 
 // delete mention traces
-void Organisation::del_myMentions(twitterak &)
+void Organisation::del_myMentions(twitterak &app)
 {
-    // Hossein
+    for(auto i : my_mentions)
+    {
+        if(i.first != this->get_username())
+        {
+            if(app.users.count(i.first) == 1)
+            {
+                for(auto j : i.second)
+                {
+                    if(app.users[i.first].tweets.count(j) == 1)
+                    {
+                        app.users[i.first].tweets[j].delete_mentions(this->get_username());
+                    }
+                }
+            }
+
+            else if(app.users.count(i.first) == 1)
+            {
+                for(auto j : i.second)
+                {
+                    if(app.org_user[i.first].tweets.count(j) == 1)
+                    {
+                        app.org_user[i.first].tweets[j].delete_mentions(this->get_username());
+                    }
+                }
+            }
+        }
+    }
 }
 
 //------------------------------------------------------------------------
 // delete hashtag traces
-void Organisation::cls_hashtags(twitterak &)
+void Organisation::cls_hashtags(twitterak &app)
 {
-    // Hossein
+    for(auto i: tweets)
+    {
+        i.second.delete_hashtags(app);
+    }
 }
 
 //------------------------------------------------------------------------
 // delete tweet like traces
-void Organisation::del_tweetLikes(twitterak &)
+void Organisation::del_tweetLikes(twitterak &app)
 {
-    // Hossein
+    for(auto i: tweetLikes)
+    {
+        if(i.first != this->get_username())
+        {
+            if(app.users.count(i.first) == 1)
+            {
+                for(auto j:i.second)
+                {
+                    if(app.users[i.first].tweets.count(j))
+                    {
+                        app.users[i.first].tweets[j].dLike(this->get_username());
+                    }
+                }
+            }
+        }
+
+        else if(i.first != this->get_username())
+        {
+            if(app.org_user.count(i.first) == 1)
+            {
+                for(auto j:i.second)
+                {
+                    if(app.org_user[i.first].tweets.count(j))
+                    {
+                        app.org_user[i.first].tweets[j].dLike(this->get_username());
+                    }
+                }
+            }
+        }
+    }
 }

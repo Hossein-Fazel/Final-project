@@ -2,17 +2,22 @@
 #define ORGANISATION_USER_HPP
 
 #include <iostream>
+#include <map>
 
 #include "Base_User.hpp"
+// #include "User_Class.hpp"
+
 
 class Organisation : public Base_User
 {
+    friend void user::del_tweetLikes(twitterak &);
+    
     public:
 //========================================= Get_Functions =====================================
 
         std::string get_manager_username() const;                                // shows the usernsmae of an organisation's manager 
         int get_last_number() const;                                             // shows the last number of a tweet
-        std::map <int, tweet> get_tweets();                                // shows organisation's tweets
+        std::unordered_map <int, tweet> get_tweets();                                // shows organisation's tweets
 
 //========================================= Set_Functions =====================================
 
@@ -49,8 +54,13 @@ class Organisation : public Base_User
 
     private:
         std::string manager_username;
-        // std::string organisation_bio;
+        std::unordered_map<int , tweet> tweets;
         int last_number = 0;
+
+        std::unordered_set<std::string> following;
+
+       std::unordered_map<std::string , std::unordered_set<int>> my_mentions;
+       std::unordered_map<std::string , std::unordered_set<int>> tweetLikes;
 };
 
 #endif

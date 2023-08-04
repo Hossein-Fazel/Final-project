@@ -38,12 +38,15 @@ friend void display::show_mentions(twitterak, std::string user_name, int tweet_n
 
 friend void tweet::rq_tweet(twitterak&, std::string);
 friend void tweet::delete_tweet(twitterak, int);                          // friend with Twitterak_Class to delete a tweet
-friend void tweet::edit_tweet(twitterak &, int);                          // friend with Twitterak_Class to edit a tweet
+friend void tweet::edit_tweet(twitterak &);                               // friend with Twitterak_Class to edit a tweet
 friend void tweet::fetch_hashtags(twitterak &);                           // friend with Twitterak_Class to fecth hashtags from tweets
 friend void tweet::delete_hashtags(twitterak &); 
 
 friend void Organisation::set_manager_username(twitterak ,std::string);
 friend void Organisation::Edit(twitterak &, std::string, std::string);
+friend void Organisation::follow(twitterak &app, std::string uName);
+friend void Organisation::del_myMentions(twitterak &);
+friend void Organisation::del_tweetLikes(twitterak &app);
 friend void Anonymous::Edit(twitterak &, std::string, std::string); 
 
 
