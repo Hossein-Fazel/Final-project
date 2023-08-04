@@ -14,7 +14,7 @@ Anonymous::Anonymous()
 
 //------------------------------------------------------------------------
 // edits the user's information
-void Anonymous::Edit(twitterak & app, std::string Edit_part ,std::string value)                              // bug                                                                                   
+void Anonymous::Edit(twitterak & app, std::string Edit_part ,std::string value)                                                                                                                
 {
     Edit_part = to_lower(Edit_part);
 
@@ -48,29 +48,28 @@ void Anonymous::Edit(twitterak & app, std::string Edit_part ,std::string value) 
 
 //------------------------------------------------------------------------
 //
-bool like(std::string ,int)
+bool Anonymous::like(std::string ,int)
 {
     // Hossein
 }
 
 //------------------------------------------------------------------------
 //
-void like_mention(int, std::string, int)
+void Anonymous::like_mention(int, std::string, int)
 {
     // Hossein
 }
 
 //------------------------------------------------------------------------
 // add a new follower to set (no one can follow this user)
-void add_followers(std::string);
+void Anonymous::add_followers(std::string)
 {
     // Hossein
 }
 
 //------------------------------------------------------------------------
 // follow a user that must be personal user
-void follow(twitterak &, std::string)
+void Anonymous::follow(twitterak &, std::string)
 {
     // Hossein
 }
-//------------------------------------------------------------------------

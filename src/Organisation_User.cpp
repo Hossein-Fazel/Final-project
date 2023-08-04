@@ -15,41 +15,6 @@ std::string Organisation::get_manager_username() const
 }
 
 //------------------------------------------------------------------------
-// shows the biography of an organisation account 
-std::string Organisation::get_biography() const
-{
-    return organisation_bio;
-}
-
-//------------------------------------------------------------------------
-// shows the link of an organisation account
-std::string Organisation::get_link() const
-{
-    return organisation_link;
-}
-
-//------------------------------------------------------------------------
-// shows the phone number of an organisation
-std::string Organisation::get_phone() const
-{
-    return organisation_phone;
-}
-
-//------------------------------------------------------------------------
-// shows the color of the header that an organisation had chosen
-std::string Organisation::get_header() const
-{
-    return organisation_header;
-}
-
-//------------------------------------------------------------------------
-// shows the country of an organisation
-std::string Organisation::get_country() const
-{
-    return organisation_country;
-}
-
-//------------------------------------------------------------------------
 // shows the last number of a tweet
 int Organisation::get_last_number() const
 {
@@ -58,7 +23,7 @@ int Organisation::get_last_number() const
 
 //------------------------------------------------------------------------
 // shows organisation's tweets
-std::map <int, tweet> Organisation::get_tweets() const
+std::map <int, tweet> Organisation::get_tweets()
 {
     // Hossein
 }
@@ -75,52 +40,13 @@ void Organisation::set_manager_username(twitterak app,std::string username)
         std::cout << "! The username doesn't exist.\n";
 }
 
-//------------------------------------------------------------------------
-// sets the biography of an organisation account
 void Organisation::set_biography(std::string bio)
 {
     if (bio.length() > 1100)
-        organisation_bio = bio.erase(160, bio.length());
+        Biography = bio.erase(1100, bio.length());
 
     else   
-        organisation_bio = bio;
-}
-
-//------------------------------------------------------------------------
-// sets the link of an organisation account
-void Organisation::set_link(std::string link)
-{
-    const std::string Https = "https://";
-    organisation_link = Https + link;
-}
-
-//------------------------------------------------------------------------
-// sets the phone number of an organisation
-void Organisation::set_phone(std::string phone)
-{
-    while (1)
-    {
-        if (!(validate_phone_number(phone)))
-        {
-            std::cout << "! You're phone number is invalid.\n";
-            std::cout << "$ Phone_Number : ";
-            std::cin >> phone;
-        }
-    }
-}
-
-//------------------------------------------------------------------------
-// sets the color of the header that an organisation had chosen
-void Organisation::set_header(std::string header)
-{
-    organisation_header = header;
-}
-
-//------------------------------------------------------------------------
-// sets the country of an organisation
-void Organisation::set_country(std::string country)
-{
-    organisation_country = country;
+        Biography = bio;
 }
 
 //------------------------------------------------------------------------
@@ -241,7 +167,7 @@ void Organisation::Push_Tweet(tweet tw)
 
 //------------------------------------------------------------------------
 
-void Organisation::last_number()
+void Organisation::increase_last_number()
 {
     // Hossein
 }

@@ -5,7 +5,9 @@
 #include <unordered_map>
 
 #include "Base_User.hpp"
-#include "Twitterak_Class.hpp"          
+// #include "Twitterak_Class.hpp"          
+
+class twitterak;
 
 class Anonymous : public Base_User
 {

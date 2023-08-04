@@ -15,51 +15,9 @@
 
 //==================================================================  Get_Functions =================================================================
 
-std::string user::get_biography() const                // returns the biography of the user
-{
-    return Biography;
-}
-
-//------------------------------------------------------------------------
-
-std::string user::get_link() const                    // returns the link of the user
-{
-    return Link;
-}
-
-//------------------------------------------------------------------------
-
 std::string user::get_birthday() const              // returns the date of birth of the user
 {
     return Birthday;
-}
-
-//------------------------------------------------------------------------
-
-std::string user::get_phone() const                // returns the phone number of the user
-{
-    return Phone_Number;
-}
-
-//------------------------------------------------------------------------
-
-std::string user::get_password() const            // returns the password of the user's account
-{
-    return Password;
-}
-
-//------------------------------------------------------------------------
-
-std::string user::get_header() const            // returns the color of the header that user had chosen 
-{
-    return Header;
-}
-
-//------------------------------------------------------------------------
-
-std::string user::get_country() const         // returns the color of the header that user had chosen 
-{
-    return Country;
 }
 
 //------------------------------------------------------------------------
@@ -71,77 +29,16 @@ int user::get_last_number() const                   // returns the last tweet's 
 
 //------------------------------------------------------------------------
 
-int user::get_following_num() const
+int user::get_following_num() const                // returns the following numbers
 {
     return following.size();
 }
 
 //==================================================================  Set_Functions =================================================================
 
-bool user::validate_phone_number(std::string phone)                              // validate user's phone_number
-{
-    for (int i = 0; i < phone.size(); i++)
-    {
-        if ((isdigit(phone[i])) == 0)
-            return false;
-    }
-
-    return true;
-}
-
-//------------------------------------------------------------------------
-
-void user::set_biography(std::string bio)                                        // sets the biography of a user
-{
-    if (bio.length() > 160)
-        Biography = bio.erase(160, bio.length());
-
-    else   
-        Biography = bio;
-}
-
-//------------------------------------------------------------------------
-                                                                                
-void user::set_link(std::string input_link)                                     // sets the link of a user
-{
-    const std::string Https = "https://";
-    Link = Https + input_link;
-}
-
-//------------------------------------------------------------------------
-
 void user::set_birthday(std::string birth)                                     // sets the date of birth of a user
 {
     Birthday = birth;
-}
-
-//------------------------------------------------------------------------
-
-void user::set_phone(std::string input_phone)                                 // sets the phone number of a user
-{
-    while (1)
-    {
-        if (!(validate_phone_number(input_phone)))
-        {
-            std::cout << "! You're phone number is invalid.\n";
-            std::cout << "$ Phone_Number : ";
-            std::cin >> input_phone;
-        }
-    }
-}
-
-//------------------------------------------------------------------------
-
-void user::set_header(std::string input_header)                             // sets the color of the header that user had chosen
-{
-    Header = input_header;
-}
-
-//------------------------------------------------------------------------
-
-void user::set_country(std::string input_country)                          // sets the country of the user
-{
-    Country = input_country;
 }
 
 //================================================================  General_Functions ===============================================================
@@ -400,7 +297,7 @@ void user::follow(twitterak &app, std::string uName)
     {
         if(app.users.count(uName) == 1)
         {
-            if(this->following.count(uName) == 1)
+            if(following.count(uName) == 1)
             {
                 std::cout << "! You have already followed this user.\n";
             }
@@ -445,7 +342,7 @@ void user::del_myMentions(twitterak &app)
 {
     for(auto i : my_mentions)
     {
-        if(i.first != this->Username)
+        if(i.first != this->get_username())
         {
             if(app.users.count(i.first) == 1)
             {
@@ -453,7 +350,7 @@ void user::del_myMentions(twitterak &app)
                 {
                     if(app.users[i.first].tweets.count(j) == 1)
                     {
-                        app.users[i.first].tweets[j].delete_mentions(this->Username);
+                        app.users[i.first].tweets[j].delete_mentions(this->get_username());
                     }
                 }
             }
@@ -498,7 +395,7 @@ void user::del_tweetLikes(twitterak &app)
 {
     for(auto i: tweetLikes)
     {
-        if(i.first != this->Username)
+        if(i.first != this->get_username())
         {
             if(app.users.count(i.first) == 1)
             {
@@ -506,7 +403,7 @@ void user::del_tweetLikes(twitterak &app)
                 {
                     if(app.users[i.first].tweets.count(j))
                     {
-                        app.users[i.first].tweets[j].dLike(this->Username);
+                        app.users[i.first].tweets[j].dLike(this->get_username());
                     }
                 }
             }
