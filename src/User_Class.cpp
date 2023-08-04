@@ -43,7 +43,8 @@ void user::set_birthday(std::string birth)                                     /
 
 //================================================================  General_Functions ===============================================================
 
-void user::Show_Profile(twitterak & app)                                                                    // shows the information of a user itself
+// shows the information of a user itself
+void user::Show_Profile(twitterak & app)                                                                    
 {
     std::cout << "$ Header : " << get_header() << std::endl;
     std::cout << "$ Name : " << get_name() << std::endl;
@@ -53,11 +54,13 @@ void user::Show_Profile(twitterak & app)                                        
     std::cout << "$ Link : " << get_link() << std::endl;
     std::cout << "$ Phone_Number : " << get_phone() << std::endl;
     std::cout << "$ country : " << get_country()   << std::endl;
+    std::cout << "$ Followers : " << get_followers_num() << std::endl;
+    std::cout << "$ Followings : " << get_following_num() << std::endl;
 }
 
 //------------------------------------------------------------------------
-
-void user::Edit(twitterak &app, std::string Edit_part ,std::string value)                                 // edits the user's information                                                                                    
+// edits the user's information 
+void user::Edit(twitterak &app, std::string Edit_part ,std::string value)                                                                                                                    
 {
     Edit_part = to_lower(Edit_part);
 

@@ -46,6 +46,15 @@ void Anonymous::Edit(twitterak & app, std::string Edit_part ,std::string value)
     }
 }
 
+
+// shows the information of a user itself
+void Anonymous::Show_Profile(twitterak & app)
+{
+    std::cout << "$ Name : " << get_name() << std::endl;
+    std::cout << "$ Username : @" << get_username() << std::endl;
+    std::cout << "$ Followings : " << get_following_num() << std::endl;
+}
+
 //------------------------------------------------------------------------
 //
 bool Anonymous::like(std::string ,int)

@@ -30,40 +30,36 @@ int Base_User::get_followers_num() const
 }
 
 //------------------------------------------------------------------------
-
-// does not have access to use this function from parent class
-std::string Base_User::get_link() const                                           // returns the link of the user
+// shows the link of the user
+std::string Base_User::get_link() const                                          
 {
     return Link;
 }
 
 //------------------------------------------------------------------------
-
-std::string Base_User::get_phone() const                                           // returns the phone number of the user
+// shows the phone number of the user
+std::string Base_User::get_phone() const                                           
 {
     return Phone_Number;
 }
 
 //------------------------------------------------------------------------
-
-// does not have access to use this function from parent class
-std::string Base_User::get_password() const                                        // returns the password of the user's account
+// shows the password of the user's account
+std::string Base_User::get_password() const                                        
 {
     return Password;
 }
 
 //------------------------------------------------------------------------
-
-// does not have access to use this function from parent class
-std::string Base_User::get_header() const                                          // returns the color of the header that user had chosen
+// shows the color of the header that user had chosen 
+std::string Base_User::get_header() const                                          
 {
     return Header;
 }
 
 //------------------------------------------------------------------------
-
-// does not have access to use this function from parent class
-std::string Base_User::get_country() const                                         // returns the color of the header that user had chosen
+// shows the country of the user
+std::string Base_User::get_country() const                                         
 {
     return Country;
 }
@@ -145,20 +141,26 @@ void Base_User::set_password(std::string input_pass)
             std::cout << "$ Password : ";
             std::cin >> input_pass;
         }
+        else if ((validate_password(input_pass)) == 2)
+        {
+            std::cout << "! Short Password.You're password at least must be 6 character.\n";
+            std::cout << "$ Password : ";
+            std::cin >> input_pass;
+        }
     }
 }
 
 //------------------------------------------------------------------------
-// does not have access to use this function from parent class
-void Base_User::set_link(std::string link)                                              // sets the link of a user
+// sets the link of a user
+void Base_User::set_link(std::string link)                                              
 {
     const std::string Https = "https://";
     Link = Https + link;
 }
 
 //------------------------------------------------------------------------
-// does not have access to use this function from parent class
-void Base_User::set_phone(std::string phone)                                           // sets the phone number of a user
+// sets the phone number of a user
+void Base_User::set_phone(std::string phone)                                           
 {
     while (1)
     {
@@ -172,28 +174,32 @@ void Base_User::set_phone(std::string phone)                                    
 }
 
 //------------------------------------------------------------------------
-// does not have access to use this function from parent class
-void Base_User::set_header(std::string input_header)                                   // sets the color of the header that user had chosen
+// sets the color of the header that user had chosen
+void Base_User::set_header(std::string input_header)                                   
 {
     Header = input_header;
 }
 
 //------------------------------------------------------------------------
-// does not have access to use this function from parent class
-void Base_User::set_country(std::string country)                                       // sets the country of the user
+// sets the country of the user
+void Base_User::set_country(std::string country)                                       
 {
     Country = country;
 }
 
 // ============================================= general functions ===============================================
 // validating the acoount's password
-int Base_User::validate_password(std::string pass)   // check
+int Base_User::validate_password(std::string pass) 
 {
+    if (pass.length() < 6)
+        return 2;
+    
     for (int i = 0; i < pass.length(); ++i)
     {
         if (!isalnum(pass[i]))
             return 1;
     }
+    
     SHA256 sha256;
     pass = sha256(pass);
 
@@ -254,7 +260,7 @@ std::string Base_User::remove_atsing(std::string str)
 }
 
 //------------------------------------------------------------------------
-// does not have access to use this function from parent class
+// logs out of the user's account
 void Base_User::Logout(twitterak & app)
 {
     app.is_logedin = false;
@@ -262,8 +268,8 @@ void Base_User::Logout(twitterak & app)
 }
 
 //------------------------------------------------------------------------
-// does not have access to use this function from parent class
-bool Base_User::validate_phone_number(std::string phone)                            // validate user's phone_number
+// validate user's phone_number
+bool Base_User::validate_phone_number(std::string phone)                            
 {
     for (int i = 0; i < phone.size(); i++)
     {
@@ -275,14 +281,14 @@ bool Base_User::validate_phone_number(std::string phone)                        
 }
 
 //============================================== Virtuals ===============================================
-
+// does not have access to use this function from parent class
 void Base_User::follow(twitterak & app, std::string uName)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
+// sets the biography of a user
 void Base_User::set_biography(std::string bio)
 {
     if (bio.length() > 160)
@@ -293,14 +299,13 @@ void Base_User::set_biography(std::string bio)
 }
 
 //------------------------------------------------------------------------
-
+// shows the biography of the user
 std::string Base_User::get_biography() const
 {
     return Biography;
 }
 
 //------------------------------------------------------------------------
-
 // does not have access to use this function from parent class
 std::string Base_User::get_birthday() const
 {

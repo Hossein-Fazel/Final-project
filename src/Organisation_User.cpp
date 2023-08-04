@@ -23,13 +23,12 @@ int Organisation::get_last_number() const
 
 //------------------------------------------------------------------------
 // shows organisation's tweets
-std::map <int, tweet> Organisation::get_tweets()
+std::map <int, tweet> Organisation::get_tweets() 
 {
     // Hossein
 }
 
 //==================================================================  Set_Functions =================================================================
-
 // sets the usernsmae of an organisation's manager 
 void Organisation::set_manager_username(twitterak app,std::string username)
 {
@@ -40,6 +39,8 @@ void Organisation::set_manager_username(twitterak app,std::string username)
         std::cout << "! The username doesn't exist.\n";
 }
 
+//------------------------------------------------------------------------
+// sets the biography of an organisation
 void Organisation::set_biography(std::string bio)
 {
     if (bio.length() > 1100)
@@ -58,7 +59,7 @@ void Organisation::Delete_Account(twitterak & app)
 
 //------------------------------------------------------------------------
 // shows the information of an organisation itself
-void Organisation::Show_Profile(twitterak & app) //check
+void Organisation::Show_Profile(twitterak & app)                                                       
 {
     std::cout << "$ Header : " << get_header() << std::endl;
     std::cout << "$ Name : " << get_name() << std::endl;
@@ -68,11 +69,12 @@ void Organisation::Show_Profile(twitterak & app) //check
     std::cout << "$ Link : " << get_link() << std::endl;
     std::cout << "$ Phone_Number : " << get_phone() << std::endl;
     std::cout << "$ country : " << get_country()   << std::endl;
+    std::cout << "$ Followers : " << get_followers_num() << std::endl;
 }
 
 //------------------------------------------------------------------------
 // edits an organisation's information
-void Organisation::Edit(twitterak &app, std::string Edit_part ,std::string value)                                 // edits the user's information                                                                                    
+void Organisation::Edit(twitterak &app, std::string Edit_part ,std::string value)                                                                                                          
 {
     Edit_part = to_lower(Edit_part);
 
@@ -88,7 +90,7 @@ void Organisation::Edit(twitterak &app, std::string Edit_part ,std::string value
             value = remove_atsing(value);
 
         set_username(value);
-        std::unordered_map <std::string, Organisation>::const_iterator got = app.org_user.find(app.logedin_user);                       // bug
+        std::unordered_map <std::string, Organisation>::const_iterator got = app.org_user.find(app.logedin_user);                     
 
         auto entry = app.org_user.find(app.logedin_user);
 
@@ -144,7 +146,6 @@ void Organisation::Edit(twitterak &app, std::string Edit_part ,std::string value
 }
 
 //================================================================  General_Functions ===============================================================
-
 // edits an organisation's tweet
 void Organisation::edit_tweet(int tNum, twitterak & app)
 {

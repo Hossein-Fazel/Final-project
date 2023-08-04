@@ -14,41 +14,41 @@ class Base_User
     public:
 //========================================= Set_Functions =====================================
 
-        void set_name(std::string);                               // sets the name of a user
-        void set_username(std::string);                           // sets the username of a user with a validation
-        void set_password(std::string);                           // sets the password of the user's account
-        void set_link(std::string);                               // sets the link of a user
-        void set_phone(std::string);                              // sets the phone number of a user
-        void set_header(std::string);                             // sets the color of the header that user had chosen
-        void set_country(std::string);                            // sets the country of the user
+        void set_name(std::string);                                       // sets the name of a user
+        void set_username(std::string);                                   // sets the username of a user with a validation
+        void set_password(std::string);                                   // sets the password of the user's account
+        void set_link(std::string);                                       // sets the link of a user
+        void set_phone(std::string);                                      // sets the phone number of a user
+        void set_header(std::string);                                     // sets the color of the header that user had chosen
+        void set_country(std::string);                                    // sets the country of the user
 
 //======================================== Get_Functions ======================================
 
-        std::string get_name() const;                                     // returns the name of the user
-        std::string get_username() const;                                 // returns the username of the user
-        std::string get_password() const;                                 // returns the password of the user's account
-        int get_followers_num() const;                                    // returns the number of followers
-        std::string get_link() const;                                     // returns the link of the user
-        std::string get_phone() const;                                    // returns the phone number of the user
-        std::string get_header() const;                                   // returns the color of the header that user had chosen 
-        std::string get_country() const;                                  // returns the country of the user
+        std::string get_name() const;                                     // shows the name of the user
+        std::string get_username() const;                                 // shows the username of the user
+        std::string get_password() const;                                 // shows the password of the user's account
+        std::string get_link() const;                                     // shows the link of the user
+        std::string get_phone() const;                                    // shows the phone number of the user
+        std::string get_header() const;                                   // shows the color of the header that user had chosen 
+        std::string get_country() const;                                  // shows the country of the user
+        int get_followers_num() const;                                    // shows the number of followers
 
 //======================================= general functions ====================================
 
-        int Validating_Username(std::string);                             // the validation of a user's username
         std::string to_lower(std::string);                                // makes a string a lowercase
         std::string remove_atsing(std::string);                           // removes @ from the first of the user name
+        int Validating_Username(std::string);                             // the validation of a user's username
+        int validate_password(std::string);                               // validating the acoount's password
         void Logout(twitterak &);                                         // logs out of the user's account
         void add_followers(std::string);                                  // add a new follower to set
-        int validate_password(std::string);                               // validating the acoount's password
 
 //======================================= virtual functions =====================================
 
-        virtual std::string get_biography() const;                        // returns the biography of the user
-        virtual std::string get_birthday() const;                         // returns the date of birth of the user
-        virtual int get_last_number() const;                              // returns the last number of tweet
-        virtual int get_following_num() const;                            // returns the number of following 
-        virtual std::map <int, tweet> get_tweets();                       // returns the tweets
+        virtual std::string get_biography() const;                        // shows the biography of the user
+        virtual std::string get_birthday() const;                         // shows the date of birth of the user
+        virtual int get_last_number() const;                              // shows the last number of tweet
+        virtual int get_following_num() const;                            // shows the number of following 
+        virtual std::map <int, tweet> get_tweets();                       // shows the tweets
 
 //========================= sets ==========================
 
@@ -96,8 +96,8 @@ class Base_User
     protected:
         std::string Biography;
 
-        std::unordered_set <std::string> followers;
-        std::unordered_set <std::string> passwords;
+        std::unordered_set <std::string> followers;                      // a set for followers of a specific user
+        std::unordered_set <std::string> passwords;                      // a set for saving all passwords of a user
 };
 
 #endif

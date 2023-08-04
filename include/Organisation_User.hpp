@@ -12,12 +12,13 @@ class Organisation : public Base_User
 
         std::string get_manager_username() const;                                // shows the usernsmae of an organisation's manager 
         int get_last_number() const;                                             // shows the last number of a tweet
-        std::map <int, tweet> get_tweets();                                // shows organisation's tweets
+        std::map <int, tweet> get_tweets();                                      // shows organisation's tweets
 
 //========================================= Set_Functions =====================================
 
         void set_manager_username(twitterak, std::string);                       // sets the usernsmae of an organisation's manager
-        void set_biography(std::string);
+        void set_biography(std::string);                                         // sets the biography of an organisation
+
 //================== General_Functions ====================
 
         void Delete_Account(twitterak &);                                        // delets the account of an organisation
@@ -49,7 +50,6 @@ class Organisation : public Base_User
 
     private:
         std::string manager_username;
-        // std::string organisation_bio;
         int last_number = 0;
 };
 
