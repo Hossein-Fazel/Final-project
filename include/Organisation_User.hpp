@@ -5,12 +5,14 @@
 #include <map>
 
 #include "Base_User.hpp"
-// #include "User_Class.hpp"
+#include "Display_Class.hpp"
 
 
 class Organisation : public Base_User
-{
-    friend void user::del_tweetLikes(twitterak &);
+{    
+    friend void display::show_tweet(twitterak app, std::string user_name);
+    friend void display::show_tweet(twitterak app,std::string user_name, int number);
+    friend void display::show_mentions(twitterak app, std::string user_name, int tweet_number);
     
     public:
 //========================================= Get_Functions =====================================
@@ -22,7 +24,8 @@ class Organisation : public Base_User
 //========================================= Set_Functions =====================================
 
         void set_manager_username(twitterak, std::string);                       // sets the usernsmae of an organisation's manager
-        void set_biography(std::string);
+        void set_biography(std::string);                                         // sets the biography of an organisation
+
 //================== General_Functions ====================
 
         void Delete_Account(twitterak &);                                        // delets the account of an organisation
@@ -35,7 +38,6 @@ class Organisation : public Base_User
         void print_likers(int);                                 
         bool like(std::string ,int);                             
         bool dislike(std::string, int);                           
-        bool validate_phone_number(std::string);                 
         bool add_mention(int, std::string, std::string);         
         void follow(twitterak &, std::string);                   
         void like_mention(int, std::string, int); 
@@ -47,7 +49,8 @@ class Organisation : public Base_User
         void pop_tweetLikes(int, std::string);                                  // delete a like of a tweet
 
 //=================== Delete_Organisation_Traces ===================
-
+        void del_men(int, std::string);                           // delete a mention
+        void del_tweetlike(int , std::string);                    // delete a tweet like
         void del_myMentions(twitterak &);                                       // delete mention traces
         void cls_hashtags(twitterak &);                                         // delete hashtag traces
         void del_tweetLikes(twitterak &);                                       // delete tweet like traces
@@ -59,8 +62,8 @@ class Organisation : public Base_User
 
         std::unordered_set<std::string> following;
 
-       std::unordered_map<std::string , std::unordered_set<int>> my_mentions;
-       std::unordered_map<std::string , std::unordered_set<int>> tweetLikes;
+        std::unordered_map<std::string , std::unordered_set<int>> my_mentions;
+        std::unordered_map<std::string , std::unordered_set<int>> tweetLikes;
 };
 
 #endif

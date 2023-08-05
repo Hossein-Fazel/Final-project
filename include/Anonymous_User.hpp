@@ -4,8 +4,7 @@
 #include <iostream>
 #include <unordered_map>
 
-#include "Base_User.hpp"
-// #include "Twitterak_Class.hpp"          
+#include "Base_User.hpp"          
 
 class twitterak;
 
@@ -14,10 +13,23 @@ class Anonymous : public Base_User
     public: 
         Anonymous();
         void Edit(twitterak &, std::string, std::string);          // edits the user's information    
-        bool like(std::string ,int);                                                                  // شرط اینکه دنبال کرده باشدش
-        void like_mention(int, std::string, int);                                                     // شرط اینکه دنبال کرده باشدش
-        void add_followers(std::string);                            // add a new follower to set (no one can follow this user)   // کسی نباید بتونه فالو کنه
-        void follow(twitterak &, std::string);                      // follow a user that must be personal user
+        void Show_Profile(twitterak &);                            // shows the information of a user itself
+        void follow(twitterak &, std::string);                     // follow a user that must be personal user
+        void Delete_Account(twitterak &);                          // delets the account of the user
+        bool isin_following(std::string);
+
+        void push_myMentions(int, std::string);                   // save my mention traces
+        void push_tweetLikes(int, std::string);                   // save my tweet likes traces
+        void pop_tweetLikes(int, std::string);                    // delete a like of a tweet
+
+        void del_myMentions(twitterak &);
+        void del_tweetLikes(twitterak &);
+
+    private:
+        std::unordered_set<std::string> following;
+
+        std::unordered_map<std::string , std::unordered_set<int>> my_mentions;
+        std::unordered_map<std::string , std::unordered_set<int>> tweetLikes;
 };
 
 #endif

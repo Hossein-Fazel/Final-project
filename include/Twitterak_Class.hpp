@@ -47,7 +47,17 @@ friend void Organisation::Edit(twitterak &, std::string, std::string);
 friend void Organisation::follow(twitterak &app, std::string uName);
 friend void Organisation::del_myMentions(twitterak &);
 friend void Organisation::del_tweetLikes(twitterak &app);
-friend void Anonymous::Edit(twitterak &, std::string, std::string); 
+friend void Organisation::Delete_Account(twitterak & app); 
+
+
+friend void Anonymous::follow(twitterak &app, std::string uName);
+friend void Anonymous::Edit(twitterak &, std::string, std::string);
+friend void Anonymous::Delete_Account(twitterak &);                         // delets the account of the user
+friend void Anonymous::del_myMentions(twitterak &app);
+friend void Anonymous::del_tweetLikes(twitterak &app);
+
+
+
 
 
     public:
@@ -61,8 +71,10 @@ friend void Anonymous::Edit(twitterak &, std::string, std::string);
         void del_atsign(std::string &);
 
     private:
+        Base_User* li_user;
         bool is_logedin = false;
         std:: string logedin_user;
+        
         std::vector<std::string> commands; 
         std::unordered_map<std::string, user> users;
         std::unordered_map<std::string, Organisation> org_user;

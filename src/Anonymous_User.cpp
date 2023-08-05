@@ -3,7 +3,7 @@
 
 #include "Anonymous_User.hpp"
 #include "Twitterak_Class.hpp"
-#include "Mention_class.hpp"                // منشن بزاره اگر که دنبالش کرده
+#include "Mention_class.hpp"              
 
 //------------------------------------------------------------------------
 // constructor
@@ -46,18 +46,13 @@ void Anonymous::Edit(twitterak & app, std::string Edit_part ,std::string value)
     }
 }
 
-//------------------------------------------------------------------------
-//
-void Anonymous::like_mention(int, std::string, int)
-{
-    // Hossein
-}
 
-//------------------------------------------------------------------------
-// add a new follower to set (no one can follow this user)
-void Anonymous::add_followers(std::string)
+// shows the information of a user itself
+void Anonymous::Show_Profile(twitterak & app)
 {
-    // Hossein
+    std::cout << "$ Name : " << get_name() << std::endl;
+    std::cout << "$ Username : @" << get_username() << std::endl;
+    std::cout << "$ Followings : " << get_following_num() << std::endl;
 }
 
 //------------------------------------------------------------------------
@@ -97,6 +92,125 @@ void Anonymous::follow(twitterak &app, std::string uName)
         else
         {
             std::cout << "! There is no user with this username.\n";
+        }
+    }
+}
+
+//------------------------------------------------------------------------
+
+void Anonymous::Delete_Account(twitterak &app)
+{
+    std::cout << "? This operation cannot be reversed in any way. Are you sure? (y/n) : ";
+
+    char ch;
+    std::cin >> ch;
+
+    if (ch == 'y')
+    {
+        app.is_logedin = false;
+        del_myMentions(app);
+        del_tweetLikes(app);
+        app.ans_user.erase(app.logedin_user);
+        std::cout << "* You're account have successfully deleted.\n";
+    }
+}
+
+//------------------------------------------------------------------------
+//check the user name exist in following
+bool Anonymous::isin_following(std::string user_name)
+{
+    if(following.count(user_name) == 1)
+    {
+        return true;
+    }
+
+    else
+    {
+        return false;
+    }
+}
+
+void Anonymous::pop_tweetLikes(int number, std::string uName)
+{
+    if(tweetLikes.count(uName) == 1)
+    {
+        tweetLikes[uName].erase(number);
+        if(tweetLikes[uName].size() == 0)
+        {
+            tweetLikes.erase(uName);
+        }
+    }
+}
+
+void Anonymous::push_tweetLikes(int number, std::string uName)
+{
+    tweetLikes[uName].insert(number);
+}
+
+void Anonymous::push_myMentions(int number, std::string uName)
+{
+    my_mentions[uName].insert(number);
+}
+
+void Anonymous::del_myMentions(twitterak &app)
+{
+    for(auto i : my_mentions)
+    {
+        if(i.first != this->get_username())
+        {
+            if(app.users.count(i.first) == 1)
+            {
+                for(auto j : i.second)
+                {
+                    if(app.users[i.first].get_tweets().count(j) == 1)
+                    {
+                        app.users[i.first].del_men(j ,this->get_username());
+                    }
+                }
+            }
+        }
+
+        else if(app.org_user.count(i.first) == 1)
+            {
+                for(auto j : i.second)
+                {
+                    if(app.org_user[i.first].get_tweets().count(j) == 1)
+                    {
+                        app.org_user[i.first].del_men(j ,this->get_username());
+                    }
+                }
+            }
+    }
+}
+
+
+void Anonymous::del_tweetLikes(twitterak &app)
+{
+    for(auto i: tweetLikes)
+    {
+        if(i.first != this->get_username())
+        {
+            if(app.users.count(i.first) == 1)
+            {
+                for(auto j:i.second)
+                {
+                    if(app.users[i.first].get_tweets().count(j))
+                    {
+                        app.users[i.first].del_tweetlike(j ,this->get_username());
+                    }
+                }
+            }
+
+            else if(app.org_user.count(i.first) == 1)
+            {
+                for(auto j:i.second)
+                {
+                    if(app.org_user[i.first].get_tweets().count(j))
+                    {
+                        app.org_user[i.first].del_tweetlike(j ,this->get_username());
+                    }
+                }
+            }
         }
     }
 }

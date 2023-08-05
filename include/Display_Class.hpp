@@ -6,7 +6,6 @@
 #include "sha256.h"
 
 class twitterak;
-// class mention;
 
 class display
 {

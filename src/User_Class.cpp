@@ -43,7 +43,8 @@ void user::set_birthday(std::string birth)                                     /
 
 //================================================================  General_Functions ===============================================================
 
-void user::Show_Profile(twitterak & app)                                                                    // shows the information of a user itself
+// shows the information of a user itself
+void user::Show_Profile(twitterak & app)                                                                    
 {
     std::cout << "$ Header : " << get_header() << std::endl;
     std::cout << "$ Name : " << get_name() << std::endl;
@@ -53,11 +54,13 @@ void user::Show_Profile(twitterak & app)                                        
     std::cout << "$ Link : " << get_link() << std::endl;
     std::cout << "$ Phone_Number : " << get_phone() << std::endl;
     std::cout << "$ country : " << get_country()   << std::endl;
+    std::cout << "$ Followers : " << get_followers_num() << std::endl;
+    std::cout << "$ Followings : " << get_following_num() << std::endl;
 }
 
 //------------------------------------------------------------------------
-
-void user::Edit(twitterak &app, std::string Edit_part ,std::string value)                                 // edits the user's information                                                                                    
+// edits the user's information 
+void user::Edit(twitterak &app, std::string Edit_part ,std::string value)                                                                                                                    
 {
     Edit_part = to_lower(Edit_part);
 
@@ -174,6 +177,9 @@ void user::Delete_Account(twitterak &app)                                       
     if (ch == 'y')
     {
         app.is_logedin = false;
+        del_myMentions(app);
+        del_tweetLikes(app);
+        cls_hashtags(app);
         app.users.erase(app.logedin_user);
         std::cout << "* You're account have successfully deleted.\n";
     }
@@ -350,6 +356,20 @@ void user::like_mention(int tNumber, std::string uName, int mNumber)
 
 //============================================== Delete_User_Traces =========================================
 
+void user::del_men(int tNum, std::string user_name)                           // delete a mention
+{
+    tweets[tNum].delete_mentions(user_name);
+}
+
+//------------------------------------------------------------------------
+
+void user::del_tweetlike(int tNum, std::string user_name)                    // delete a tweet like
+{
+    tweets[tNum].dLike(user_name);
+}
+
+//------------------------------------------------------------------------
+
 void user::push_myMentions(int number, std::string uName)
 {
     my_mentions[uName].insert(number);
@@ -374,6 +394,17 @@ void user::del_myMentions(twitterak &app)
                 }
             }
         }
+
+        else if(app.org_user.count(i.first) == 1)
+            {
+                for(auto j : i.second)
+                {
+                    if(app.org_user[i.first].get_tweets().count(j) == 1)
+                    {
+                        app.org_user[i.first].del_men(j ,this->get_username());
+                    }
+                }
+            }
     }
 }
 
@@ -426,17 +457,14 @@ void user::del_tweetLikes(twitterak &app)
                     }
                 }
             }
-        }
 
-        else if(i.first != this->get_username())
-        {
-            if(app.org_user.count(i.first) == 1)
+            else if(app.org_user.count(i.first) == 1)
             {
                 for(auto j:i.second)
                 {
-                    if(app.org_user[i.first].tweets.count(j))
+                    if(app.org_user[i.first].get_tweets().count(j))
                     {
-                        app.org_user[i.first].tweets[j].dLike(this->get_username());
+                        app.org_user[i.first].del_tweetlike(j ,this->get_username());
                     }
                 }
             }

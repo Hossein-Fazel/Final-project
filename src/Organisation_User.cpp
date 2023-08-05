@@ -30,17 +30,30 @@ std::unordered_map <int, tweet> Organisation::get_tweets()
 }
 
 //==================================================================  Set_Functions =================================================================
-
 // sets the usernsmae of an organisation's manager 
 void Organisation::set_manager_username(twitterak app,std::string username)
 {
-    if (app.org_user.count(username) == 1)
-        manager_username = username;
+    app.del_atsign(username);
+    while (1)
+    {
+        if (app.users.count(username) == 1)
+        {
+            manager_username = username;
+            break;
+        }
+
+        else 
+        {
+            std::cout << "! The username doesn't exist.\n";
+            std::cout << "$ Manager username : ";
+            std::cin >> username;
+        }
+    }
     
-    else 
-        std::cout << "! The username doesn't exist.\n";
 }
 
+//------------------------------------------------------------------------
+// sets the biography of an organisation
 void Organisation::set_biography(std::string bio)
 {
     if (bio.length() > 1100)
@@ -54,12 +67,25 @@ void Organisation::set_biography(std::string bio)
 // delets the account of an organisation
 void Organisation::Delete_Account(twitterak & app) 
 {
-    // Hossein
+    std::cout << "? This operation cannot be reversed in any way. Are you sure? (y/n) : ";
+
+    char ch;
+    std::cin >> ch;
+
+    if (ch == 'y')
+    {
+        app.is_logedin = false;
+        del_myMentions(app);
+        del_tweetLikes(app);
+        cls_hashtags(app);
+        app.org_user.erase(app.logedin_user);
+        std::cout << "* You're account have successfully deleted.\n";
+    }
 }
 
 //------------------------------------------------------------------------
 // shows the information of an organisation itself
-void Organisation::Show_Profile(twitterak & app) //check
+void Organisation::Show_Profile(twitterak & app)                                                       
 {
     std::cout << "$ Header : " << get_header() << std::endl;
     std::cout << "$ Name : " << get_name() << std::endl;
@@ -69,11 +95,12 @@ void Organisation::Show_Profile(twitterak & app) //check
     std::cout << "$ Link : " << get_link() << std::endl;
     std::cout << "$ Phone_Number : " << get_phone() << std::endl;
     std::cout << "$ country : " << get_country()   << std::endl;
+    std::cout << "$ Followers : " << get_followers_num() << std::endl;
 }
 
 //------------------------------------------------------------------------
 // edits an organisation's information
-void Organisation::Edit(twitterak &app, std::string Edit_part ,std::string value)                                 // edits the user's information                                                                                    
+void Organisation::Edit(twitterak &app, std::string Edit_part ,std::string value)                                                                                                          
 {
     Edit_part = to_lower(Edit_part);
 
@@ -89,7 +116,7 @@ void Organisation::Edit(twitterak &app, std::string Edit_part ,std::string value
             value = remove_atsing(value);
 
         set_username(value);
-        std::unordered_map <std::string, Organisation>::const_iterator got = app.org_user.find(app.logedin_user);                       // bug
+        std::unordered_map <std::string, Organisation>::const_iterator got = app.org_user.find(app.logedin_user);                     
 
         auto entry = app.org_user.find(app.logedin_user);
 
@@ -145,7 +172,6 @@ void Organisation::Edit(twitterak &app, std::string Edit_part ,std::string value
 }
 
 //================================================================  General_Functions ===============================================================
-
 // edits an organisation's tweet
 void Organisation::edit_tweet(int tNum, twitterak & app)
 {
@@ -370,14 +396,14 @@ void Organisation::del_myMentions(twitterak &app)
             {
                 for(auto j : i.second)
                 {
-                    if(app.users[i.first].tweets.count(j) == 1)
+                    if(app.users[i.first].get_tweets().count(j) == 1)
                     {
-                        app.users[i.first].tweets[j].delete_mentions(this->get_username());
+                        app.users[i.first].del_tweetlike(j ,this->get_username());
                     }
                 }
             }
 
-            else if(app.users.count(i.first) == 1)
+            else if(app.org_user.count(i.first) == 1)
             {
                 for(auto j : i.second)
                 {
@@ -413,17 +439,14 @@ void Organisation::del_tweetLikes(twitterak &app)
             {
                 for(auto j:i.second)
                 {
-                    if(app.users[i.first].tweets.count(j))
+                    if(app.users[i.first].get_tweets().count(j))
                     {
-                        app.users[i.first].tweets[j].dLike(this->get_username());
+                        app.users[i.first].del_men(j ,this->get_username());
                     }
                 }
             }
-        }
 
-        else if(i.first != this->get_username())
-        {
-            if(app.org_user.count(i.first) == 1)
+            else if(app.org_user.count(i.first) == 1)
             {
                 for(auto j:i.second)
                 {
@@ -435,4 +458,18 @@ void Organisation::del_tweetLikes(twitterak &app)
             }
         }
     }
+}
+
+//------------------------------------------------------------------------
+// delete a mention
+void Organisation::del_men(int tNum, std::string user_name)                           
+{
+    tweets[tNum].delete_mentions(user_name);
+}
+
+//------------------------------------------------------------------------
+// delete a tweet like
+void Organisation::del_tweetlike(int tNum, std::string user_name)
+{
+    tweets[tNum].dLike(user_name);
 }
