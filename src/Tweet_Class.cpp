@@ -189,9 +189,10 @@ void tweet::rq_tweet(twitterak &app, std:: string type)                         
     rq_tweet.set_ownerUser_name(this->user_name);
     rq_tweet.set_ownerName(this->name);
 
-    rq_tweet.set_name(app.users[app.logedin_user].get_name());
-    rq_tweet.set_user_name(app.users[app.logedin_user].get_username());
-    rq_tweet.set_number(app.users[app.logedin_user].get_last_number() + 1);
+    rq_tweet.set_name(app.li_user->get_name());
+    rq_tweet.set_user_name(app.li_user->get_username());
+    rq_tweet.set_number(app.li_user->get_last_number() + 1);
+    app.li_user->last_number();
 
     if(type == "qoute")
     {
@@ -211,7 +212,7 @@ void tweet::rq_tweet(twitterak &app, std:: string type)                         
         rq_tweet.set_selfTweet(tweet);
     }
 
-    app.users[app.logedin_user].Push_Tweet(rq_tweet);
+    app.li_user->Push_Tweet(rq_tweet);
 }
 
 //------------------------------------------------------------------------

@@ -73,6 +73,7 @@ class Base_User
         virtual void follow(twitterak &, std::string);                    // follow a user
         virtual void like_mention(int, std::string, int);                 // like a mention
         virtual bool isin_following(std::string);                         // check the user name exist in following
+        virtual void unfollow(std::string);                               // unfollow the user name
 
 //==================== Save_User_Traces ====================
 
@@ -87,6 +88,7 @@ class Base_User
         virtual void del_myMentions(twitterak &);                         // delete mention traces
         virtual void cls_hashtags(twitterak &);                           // delete hashtag traces
         virtual void del_tweetLikes(twitterak &);                         // delete tweet like traces
+        virtual void unfollow_followers(twitterak &app);                                // delete you from your followers list
 
     private:
         std::string Full_Name;
@@ -99,7 +101,6 @@ class Base_User
 
     protected:
         std::string Biography;
-
         std::unordered_set <std::string> followers;                      // a set for followers of a specific user
         std::unordered_set <std::string> passwords;                      // a set for saving all passwords of a user
 };

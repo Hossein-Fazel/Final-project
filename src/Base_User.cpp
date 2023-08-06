@@ -495,3 +495,17 @@ void Base_User::del_tweetlike(int tNum, std::string user_name)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
+
+//------------------------------------------------------------------------
+
+void Base_User::unfollow(std::string user_name)
+{
+    std::cout << "! This feature can't be reached for your account.\n";
+}
+
+//------------------------------------------------------------------------
+
+void Base_User::unfollow_followers(twitterak &app)
+{
+    std::cout << "! This feature can't be reached for your account.\n";
+}

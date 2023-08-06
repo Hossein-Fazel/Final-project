@@ -83,6 +83,7 @@ void Organisation::Delete_Account(twitterak & app)
         del_myMentions(app);
         del_tweetLikes(app);
         cls_hashtags(app);
+        unfollow_followers(app);
         app.org_user.erase(app.logedin_user);
         std::cout << "* You're account have successfully deleted.\n";
     }
@@ -92,15 +93,15 @@ void Organisation::Delete_Account(twitterak & app)
 // shows the information of an organisation itself
 void Organisation::Show_Profile(twitterak & app)                                                       
 {
-    std::cout << "$ Header : " << get_header() << std::endl;
-    std::cout << "$ Name : " << get_name() << std::endl;
-    std::cout << "$ Username : @" << get_username() << std::endl;
+    std::cout << "$ Header           : " << get_header() << std::endl;
+    std::cout << "$ Name             : " << get_name() << std::endl;
+    std::cout << "$ Username         : @" << get_username() << std::endl;
     std::cout << "$ Manager_Username : @" << get_manager_username() << std::endl;
-    std::cout << "$ Biography : " << get_biography() << std::endl;
-    std::cout << "$ Link : " << get_link() << std::endl;
-    std::cout << "$ Phone_Number : " << get_phone() << std::endl;
-    std::cout << "$ country : " << get_country()   << std::endl;
-    std::cout << "$ Followers : " << get_followers_num() << std::endl;
+    std::cout << "$ Biography        : " << get_biography() << std::endl;
+    std::cout << "$ Link             : " << get_link() << std::endl;
+    std::cout << "$ Phone_Number     : " << get_phone() << std::endl;
+    std::cout << "$ country          : " << get_country()   << std::endl;
+    std::cout << "$ Followers        : " << get_followers_num() << std::endl;
 }
 
 //------------------------------------------------------------------------
@@ -174,9 +175,20 @@ void Organisation::Edit(twitterak &app, std::string Edit_part ,std::string value
         app.org_user[app.logedin_user].set_country(value);
         std::cout << "* Your " << Edit_part << " has been successfully changed.\n";
     }
+
+    else
+    {
+        std:: cout << "! undefined edit part.\n";
+    }
 }
 
 //================================================================  General_Functions ===============================================================
+void Organisation::unfollow(std::string user_name)
+{
+    followers.erase(user_name);
+}
+
+//------------------------------------------------------------------------
 // edits an organisation's tweet
 void Organisation::edit_tweet(int tNum, twitterak & app)
 {
@@ -314,7 +326,7 @@ void Organisation::follow(twitterak &app, std::string uName)
             else
             {
                 this->following.insert(uName);
-                app.users[uName].add_followers(uName);
+                app.users[uName].add_followers(this->get_username());
                 std::cout << "* Followed.\n";
             }
         }
@@ -333,7 +345,7 @@ void Organisation::follow(twitterak &app, std::string uName)
             else
             {
                 this->following.insert(uName);
-                app.org_user[uName].add_followers(uName);
+                app.org_user[uName].add_followers(this->get_username());
                 std::cout << "* Followed.\n";
             }
         }
@@ -477,4 +489,22 @@ void Organisation::del_men(int tNum, std::string user_name)
 void Organisation::del_tweetlike(int tNum, std::string user_name)
 {
     tweets[tNum].dLike(user_name);
+}
+
+//------------------------------------------------------------------------
+
+void Organisation::unfollow_followers(twitterak &app)
+{
+    for(auto i : following)
+    {
+        if(app.users.count(i) == 1)
+        {
+            app.users[i].unfollow(this->get_username());
+        }
+
+        else if(app.org_user.count(i) == 1)
+        {
+            app.org_user[i].unfollow(this->get_username());
+        }
+    }
 }

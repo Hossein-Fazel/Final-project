@@ -103,6 +103,7 @@ bool twitterak::is_in(std::string str, std::string ch)
 
 void twitterak::tokenize(std::string command)
 {
+    
     commands.clear();
     int counter = 0;
     int cSize = command.size();
@@ -170,7 +171,11 @@ std::string twitterak::lower(std::string command)
 
 void twitterak::run()
 {
-    system("cls | clear");
+    #if OS_Windows
+        system("cls");
+    #else
+        system("clear");
+    #endif
     std::cout << "\t\t\t--- Welcome to Twitterak ---\n\n";
     std::cout << "If you need help, enter help command :)\n";
     std::cout << "~ help\n";
@@ -192,7 +197,7 @@ void twitterak::run()
         if(!command.empty())
         {
             int cSize = commands.size();
-            if(commands[0] == "login" and (cSize == 1 or cSize == 2 or cSize == 4))
+            if(commands[0] == "login" and (cSize == 1 or cSize == 2 or cSize == 3))
             {
                 if(is_logedin == true)
                 {
@@ -207,11 +212,12 @@ void twitterak::run()
                     }
                     else if(cSize == 2)
                     {
+                        del_atsign(commands[1]);
                         d1.login(*this, commands[1]);
-                        std::cin.ignore();
                     }
                     else if (cSize == 3)
                     {
+                        del_atsign(commands[1]);
                         d1.login(*this, commands[1], commands[2]);
                     }
                 }
@@ -496,6 +502,7 @@ void twitterak::run()
                             }
                             break;
                         }
+
                         else
                         {
                             user_name += commands[0][i];
@@ -504,6 +511,11 @@ void twitterak::run()
                     int number = std::stoi(num);
                     user_name.erase(0, 1);
                     
+                    if(user_name == "me")
+                    {
+                        user_name = logedin_user;
+                    }
+
                     d1.show_tweet(*this, user_name, number);
                 }
 
@@ -512,7 +524,10 @@ void twitterak::run()
                 {
                     if(commands[0] == "@me")
                     {
-                        d1.show_tweet(*this);
+                        if(is_logedin)
+                        {
+                            d1.show_tweet(*this, logedin_user);
+                        }
                     }
 
                     else
@@ -584,50 +599,33 @@ void twitterak::run()
 
                         else
                         {
-                            if(ans_user.count(logedin_user) == 1)
+                            if(users.count(user_name))
                             {
-                                if(users.count(user_name))
+                                bool b;
+                                b = users[user_name].dislike(logedin_user, number);
+
+                                if(b)
                                 {
-                                    if(li_user->isin_following(user_name))
-                                    {
-                                        bool b;
-                                        b = users[user_name].dislike(logedin_user, number);
-
-                                        if(b)
-                                        {
-                                            li_user->pop_tweetLikes(number, user_name);
-                                        }
-                                    }
-
-                                    else
-                                    {
-                                        std::cout << "! You can not like this tweet.\n";
-                                    }
+                                    li_user->pop_tweetLikes(number, user_name);
                                 }
 
-                                else if(org_user.count(user_name))
+                            }
+
+                            else if(org_user.count(user_name))
+                            {
+                                bool b;
+                                b = org_user[user_name].dislike(logedin_user, number);
+
+                                if(b)
                                 {
-                                    if(li_user->isin_following(user_name))
-                                    {
-                                        bool b;
-                                        b = org_user[user_name].dislike(logedin_user, number);
-
-                                        if(b)
-                                        {
-                                            li_user->pop_tweetLikes(number, user_name);
-                                        }
-                                    }
-
-                                    else
-                                    {
-                                        std::cout << "! You can not dislike this tweet.\n";
-                                    }
+                                    li_user->pop_tweetLikes(number, user_name);
                                 }
 
-                                else
-                                {
-                                    std::cout << "! There is no user with this username.\n";
-                                }
+                            }
+
+                            else
+                            {
+                                std::cout << "! There is no user with this username.\n";
                             }
                         }
                     }
@@ -747,7 +745,11 @@ void twitterak::run()
 
             else if(commands[0] == "clear" or commands[0] == "cls")
             {
-                system("cls | clear");
+                #if OS_Windows
+                    system("cls");
+                #else
+                    system("clear");
+                #endif
             }
 
             else if(commands[0] == "mention" and cSize == 3)
@@ -869,27 +871,56 @@ void twitterak::run()
 
             else if(commands[0] == "like" and commands[1] == "mention" and cSize == 4)
             {
-                std::string user_name;
-                int tweet_number = 0;
-                int ment_number = std::stoi(commands[3]);
-
-                bool b = get_userName_number(commands[2], user_name, tweet_number);
-
-                if(b)
+                if(is_logedin)
                 {
-                    if(is_logedin)
+                    std::string user_name;
+                    int tweet_number = 0;
+                    int ment_number = std::stoi(commands[3]);
+
+                    bool b = get_userName_number(commands[2], user_name, tweet_number);
+                    del_atsign(user_name);
+                    
+                    if(ans_user.count(logedin_user) == 1)
                     {
-                        li_user->like_mention(tweet_number, user_name, ment_number);
+                        if(li_user->isin_following(user_name))
+                        {
+                            if(users.count(user_name) == 1)
+                            {
+                                users[user_name].like_mention(tweet_number, logedin_user, ment_number);
+                            }
+
+                            else if(org_user.count(user_name) == 1)
+                            {
+                                org_user[user_name].like_mention(tweet_number, logedin_user, ment_number);
+                            }
+                            else
+                            {
+                                std::cout << "! There is no user with this username.\n";
+                            }
+                        }
+                        else
+                        {
+                            std::cout << "! You can not like this mention.\n";
+                        }
                     }
+
                     else
                     {
-                        std::cout << "! You must login first to your account\n";
-                    }
-                }
+                        if(users.count(user_name) == 1)
+                        {
+                            users[user_name].like_mention(tweet_number, logedin_user, ment_number);
+                        }
 
-                else
-                {
-                    std:: cout << "! undefined command.\n";
+                        else if(org_user.count(user_name) == 1)
+                        {
+                            org_user[user_name].like_mention(tweet_number, logedin_user, ment_number);
+                        }
+
+                        else
+                        {
+                            std::cout << "! There is no user with this username.\n";
+                        }
+                    }
                 }
             }
 

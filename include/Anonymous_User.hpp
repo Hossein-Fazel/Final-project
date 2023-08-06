@@ -17,6 +17,7 @@ class Anonymous : public Base_User
         void follow(twitterak &, std::string);                     // follow a user that must be personal user
         void Delete_Account(twitterak &);                          // delets the account of the user
         bool isin_following(std::string);
+        int get_following_num() const;
 
         void push_myMentions(int, std::string);                   // save my mention traces
         void push_tweetLikes(int, std::string);                   // save my tweet likes traces
@@ -24,6 +25,7 @@ class Anonymous : public Base_User
 
         void del_myMentions(twitterak &);
         void del_tweetLikes(twitterak &);
+        void unfollow_followers(twitterak &app);                                // delete you from your followers list
 
     private:
         std::unordered_set<std::string> following;

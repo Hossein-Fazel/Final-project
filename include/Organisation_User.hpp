@@ -41,6 +41,7 @@ class Organisation : public Base_User
         bool add_mention(int, std::string, std::string);         
         void follow(twitterak &, std::string);                   
         void like_mention(int, std::string, int); 
+        void unfollow(std::string);                               // unfollow the user name
 
 //==================== Save_Organisation_Traces ====================
 
@@ -51,9 +52,10 @@ class Organisation : public Base_User
 //=================== Delete_Organisation_Traces ===================
         void del_men(int, std::string);                           // delete a mention
         void del_tweetlike(int , std::string);                    // delete a tweet like
-        void del_myMentions(twitterak &);                                       // delete mention traces
-        void cls_hashtags(twitterak &);                                         // delete hashtag traces
-        void del_tweetLikes(twitterak &);                                       // delete tweet like traces
+        void del_myMentions(twitterak &);                         // delete mention traces
+        void cls_hashtags(twitterak &);                           // delete hashtag traces
+        void del_tweetLikes(twitterak &);                         // delete tweet like traces
+        void unfollow_followers(twitterak &app);                  // delete you from your followers list
 
     private:
         std::string manager_username;

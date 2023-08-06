@@ -24,6 +24,7 @@ friend void user::Edit(twitterak &, std::string, std::string);
 friend void user::del_myMentions(twitterak &);
 friend void user::del_tweetLikes(twitterak &);
 friend void user::follow(twitterak &, std::string);
+friend void user::unfollow_followers(twitterak &app);
 
 friend void display::login(twitterak  &,std::string, std::string);
 friend void display::login(twitterak  &);
@@ -31,7 +32,6 @@ friend void display::login(twitterak  &, std::string);
 friend void display::signup(twitterak &);
 friend void display::help(twitterak &);
 friend void display::signup(twitterak &, std::string);
-friend void display::show_tweet(twitterak);
 friend void display::show_tweet(twitterak, std::string, int);
 friend void display::show_tweet(twitterak, std::string);
 friend void display::show_mentions(twitterak, std::string user_name, int tweet_number);
@@ -47,7 +47,8 @@ friend void Organisation::Edit(twitterak &, std::string, std::string);
 friend void Organisation::follow(twitterak &app, std::string uName);
 friend void Organisation::del_myMentions(twitterak &);
 friend void Organisation::del_tweetLikes(twitterak &app);
-friend void Organisation::Delete_Account(twitterak & app); 
+friend void Organisation::Delete_Account(twitterak & app);
+friend void Organisation::unfollow_followers(twitterak &app);
 
 
 friend void Anonymous::follow(twitterak &app, std::string uName);
@@ -55,6 +56,7 @@ friend void Anonymous::Edit(twitterak &, std::string, std::string);
 friend void Anonymous::Delete_Account(twitterak &);                         // delets the account of the user
 friend void Anonymous::del_myMentions(twitterak &app);
 friend void Anonymous::del_tweetLikes(twitterak &app);
+friend void Anonymous::unfollow_followers(twitterak &app);
 
 
 
