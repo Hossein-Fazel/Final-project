@@ -33,7 +33,12 @@ std::unordered_map <int, tweet> Organisation::get_tweets()
 // sets the usernsmae of an organisation's manager 
 void Organisation::set_manager_username(twitterak app,std::string username)
 {
+    if (username[0] == '@')
+        username = remove_atsing(username);
+
+    username = to_lower(username);
     app.del_atsign(username);
+
     while (1)
     {
         if (app.users.count(username) == 1)

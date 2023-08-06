@@ -46,7 +46,7 @@ void Anonymous::Edit(twitterak & app, std::string Edit_part ,std::string value)
     }
 }
 
-
+//------------------------------------------------------------------------
 // shows the information of a user itself
 void Anonymous::Show_Profile(twitterak & app)
 {
@@ -130,6 +130,8 @@ bool Anonymous::isin_following(std::string user_name)
     }
 }
 
+//------------------------------------------------------------------------
+
 void Anonymous::pop_tweetLikes(int number, std::string uName)
 {
     if(tweetLikes.count(uName) == 1)
@@ -142,15 +144,21 @@ void Anonymous::pop_tweetLikes(int number, std::string uName)
     }
 }
 
+//------------------------------------------------------------------------
+
 void Anonymous::push_tweetLikes(int number, std::string uName)
 {
     tweetLikes[uName].insert(number);
 }
 
+//------------------------------------------------------------------------
+
 void Anonymous::push_myMentions(int number, std::string uName)
 {
     my_mentions[uName].insert(number);
 }
+
+//------------------------------------------------------------------------
 
 void Anonymous::del_myMentions(twitterak &app)
 {
@@ -183,6 +191,7 @@ void Anonymous::del_myMentions(twitterak &app)
     }
 }
 
+//------------------------------------------------------------------------
 
 void Anonymous::del_tweetLikes(twitterak &app)
 {

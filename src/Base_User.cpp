@@ -132,17 +132,17 @@ void Base_User::set_password(std::string input_pass)
         else if ((validate_password(input_pass)) == 0)
         {
             std::cout << "! Wrong Password.Your Password must include number, letter and charector.\n";
-            input_pass = getpass("$ Password");
+            input_pass = getpass("$ Password : ");
         }
         else if ((validate_password(input_pass)) == -1)
         {
             std::cout << "! Duplicate Password.This password is already repeated.\n";
-            input_pass = getpass("$ Password");
+            input_pass = getpass("$ Password : ");
         }
         else if ((validate_password(input_pass)) == 2)
         {
             std::cout << "! Short Password.You're password at least must be 6 character.\n";
-            input_pass = getpass("$ Password");
+            input_pass = getpass("$ Password : ");
         }
     }
 }
@@ -279,6 +279,12 @@ bool Base_User::validate_phone_number(std::string phone)
             return false;
             break;
     }
+
+    if (phone.length() == 11 || phone.length() == 12 || phone.length() == 13)
+        return true;
+        
+    else 
+        return false;
 
     return true;
 }
