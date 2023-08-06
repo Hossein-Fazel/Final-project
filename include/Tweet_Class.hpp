@@ -17,7 +17,9 @@ class mention;
 
 class tweet
 {
-    friend void display::show_tweet(twitterak);
+    friend void display::show_normal(tweet);
+    friend void display::show_re(tweet);
+    friend void display::show_qoute(tweet);
     friend void display::show_tweet(twitterak,std:: string, int);
     friend void display::show_tweet(twitterak,std:: string);
     friend void display::show_mentions(twitterak, std::string user_name, int tweet_number);

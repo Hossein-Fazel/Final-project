@@ -13,6 +13,13 @@ Anonymous::Anonymous()
 }
 
 //------------------------------------------------------------------------
+
+int Anonymous::get_following_num() const
+{
+    return following.size();
+}
+
+//------------------------------------------------------------------------
 // edits the user's information
 void Anonymous::Edit(twitterak & app, std::string Edit_part ,std::string value)                                                                                                                
 {
@@ -44,14 +51,19 @@ void Anonymous::Edit(twitterak & app, std::string Edit_part ,std::string value)
         app.ans_user[app.logedin_user].set_password(value);
         std::cout << "* Your " << Edit_part << " has been successfully changed.\n";
     }
+
+    else
+    {
+        std:: cout << "! undefined edit part.\n";
+    }
 }
 
 
 // shows the information of a user itself
 void Anonymous::Show_Profile(twitterak & app)
 {
-    std::cout << "$ Name : " << get_name() << std::endl;
-    std::cout << "$ Username : @" << get_username() << std::endl;
+    std::cout << "$ Name       : " << get_name() << std::endl;
+    std::cout << "$ Username   : @" << get_username() << std::endl;
     std::cout << "$ Followings : " << get_following_num() << std::endl;
 }
 
@@ -74,7 +86,7 @@ void Anonymous::follow(twitterak &app, std::string uName)
             else
             {
                 this->following.insert(uName);
-                app.users[uName].add_followers(uName);
+                app.users[uName].add_followers(this->get_username());
                 std::cout << "* Followed.\n";
             }
         }
@@ -110,6 +122,7 @@ void Anonymous::Delete_Account(twitterak &app)
         app.is_logedin = false;
         del_myMentions(app);
         del_tweetLikes(app);
+        unfollow_followers(app);
         app.ans_user.erase(app.logedin_user);
         std::cout << "* You're account have successfully deleted.\n";
     }
@@ -130,6 +143,8 @@ bool Anonymous::isin_following(std::string user_name)
     }
 }
 
+//------------------------------------------------------------------------
+
 void Anonymous::pop_tweetLikes(int number, std::string uName)
 {
     if(tweetLikes.count(uName) == 1)
@@ -142,15 +157,21 @@ void Anonymous::pop_tweetLikes(int number, std::string uName)
     }
 }
 
+//------------------------------------------------------------------------
+
 void Anonymous::push_tweetLikes(int number, std::string uName)
 {
     tweetLikes[uName].insert(number);
 }
 
+//------------------------------------------------------------------------
+
 void Anonymous::push_myMentions(int number, std::string uName)
 {
     my_mentions[uName].insert(number);
 }
+
+//------------------------------------------------------------------------
 
 void Anonymous::del_myMentions(twitterak &app)
 {
@@ -183,6 +204,7 @@ void Anonymous::del_myMentions(twitterak &app)
     }
 }
 
+//------------------------------------------------------------------------
 
 void Anonymous::del_tweetLikes(twitterak &app)
 {
@@ -211,6 +233,24 @@ void Anonymous::del_tweetLikes(twitterak &app)
                     }
                 }
             }
+        }
+    }
+}
+
+//------------------------------------------------------------------------
+// delete you from your followers list
+void Anonymous::unfollow_followers(twitterak &app)
+{
+    for(auto i : following)
+    {
+        if(app.users.count(i) == 1)
+        {
+            app.users[i].unfollow(app.logedin_user);
+        }
+
+        else if(app.org_user.count(i) == 1)
+        {
+            app.org_user[i].unfollow(this->get_username());
         }
     }
 }

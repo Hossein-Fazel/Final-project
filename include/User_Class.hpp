@@ -23,7 +23,6 @@ class user: public Base_User
 
 friend void tweet::set_user_age(user);                                  // friend with Tweet_Class to set user age
 friend void tweet::rq_tweet(twitterak&, std::string);                   // friend with Tweet_Class to push_back tweets on vector
-friend void display::show_tweet(twitterak);                             // friend with Twitterak_Class to show tweets
 friend void display::show_tweet(twitterak, std::string, int);           // friend with Twitterak_Class to show tweets
 friend void display::show_tweet(twitterak, std::string);                // friend with Twitterak_Class to show tweets
 friend void display::show_mentions(twitterak, std::string user_name, int tweet_number);
@@ -58,7 +57,7 @@ friend void tweet::edit_tweet(twitterak &);                        // friend wit
         void like_mention(int, std::string, int);
         void del_men(int, std::string);                           // delete a mention
         void del_tweetlike(int , std::string);                    // delete a tweet like
-
+        void unfollow(std::string);                               // unfollow the user name
 //================== Save_User_Traces ==================
 
         void push_myMentions(int , std::string);
@@ -70,6 +69,8 @@ friend void tweet::edit_tweet(twitterak &);                        // friend wit
         void del_myMentions(twitterak &);
         void cls_hashtags(twitterak &);
         void del_tweetLikes(twitterak &);
+        void unfollow_followers(twitterak &app);                                // delete you from your followers list
+
 
     private:
         std::string Birthday;

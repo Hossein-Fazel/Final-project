@@ -132,17 +132,17 @@ void Base_User::set_password(std::string input_pass)
         else if ((validate_password(input_pass)) == 0)
         {
             std::cout << "! Wrong Password.Your Password must include number, letter and charector.\n";
-            input_pass = getpass("$ Password");
+            input_pass = getpass("$ Password : ");
         }
         else if ((validate_password(input_pass)) == -1)
         {
             std::cout << "! Duplicate Password.This password is already repeated.\n";
-            input_pass = getpass("$ Password");
+            input_pass = getpass("$ Password : ");
         }
         else if ((validate_password(input_pass)) == 2)
         {
             std::cout << "! Short Password.You're password at least must be 6 character.\n";
-            input_pass = getpass("$ Password");
+            input_pass = getpass("$ Password : ");
         }
     }
 }
@@ -486,6 +486,20 @@ void Base_User::del_men(int, std::string)
 //------------------------------------------------------------------------
 // delete a tweet like
 void Base_User::del_tweetlike(int tNum, std::string user_name)
+{
+    std::cout << "! This feature can't be reached for your account.\n";
+}
+
+//------------------------------------------------------------------------
+
+void Base_User::unfollow(std::string user_name)
+{
+    std::cout << "! This feature can't be reached for your account.\n";
+}
+
+//------------------------------------------------------------------------
+
+void Base_User::unfollow_followers(twitterak &app)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }

@@ -46,16 +46,16 @@ void user::set_birthday(std::string birth)                                     /
 // shows the information of a user itself
 void user::Show_Profile(twitterak & app)                                                                    
 {
-    std::cout << "$ Header : " << get_header() << std::endl;
-    std::cout << "$ Name : " << get_name() << std::endl;
-    std::cout << "$ Username : @" << get_username() << std::endl;
-    std::cout << "$ Birthday : " << get_birthday() << std::endl;
-    std::cout << "$ Biography : " << get_biography() << std::endl;
-    std::cout << "$ Link : " << get_link() << std::endl;
+    std::cout << "$ Header       : " << get_header() << std::endl;
+    std::cout << "$ Name         : " << get_name() << std::endl;
+    std::cout << "$ Username     : @" << get_username() << std::endl;
+    std::cout << "$ Birthday     : " << get_birthday() << std::endl;
+    std::cout << "$ Biography    : " << get_biography() << std::endl;
+    std::cout << "$ Link         : " << get_link() << std::endl;
     std::cout << "$ Phone_Number : " << get_phone() << std::endl;
-    std::cout << "$ country : " << get_country()   << std::endl;
-    std::cout << "$ Followers : " << get_followers_num() << std::endl;
-    std::cout << "$ Followings : " << get_following_num() << std::endl;
+    std::cout << "$ country      : " << get_country()   << std::endl;
+    std::cout << "$ Followers    : " << get_followers_num() << std::endl;
+    std::cout << "$ Followings   : " << get_following_num() << std::endl;
 }
 
 //------------------------------------------------------------------------
@@ -137,6 +137,11 @@ void user::Edit(twitterak &app, std::string Edit_part ,std::string value)
         app.users[app.logedin_user].set_country(value);
         std::cout << "* Your " << Edit_part << " has been successfully changed.\n";
     }
+
+    else
+    {
+        std:: cout << "! undefined edit part.\n";
+    }
 }
 
 //------------------------------------------------------------------------
@@ -180,6 +185,9 @@ void user::Delete_Account(twitterak &app)                                       
         del_myMentions(app);
         del_tweetLikes(app);
         cls_hashtags(app);
+        std::cout << "deleting followers\n"; 
+        unfollow_followers(app);
+        std::cout << "followers deleted.\n"; 
         app.users.erase(app.logedin_user);
         std::cout << "* You're account have successfully deleted.\n";
     }
@@ -196,7 +204,7 @@ void user::Push_Tweet(tweet tw)                                                 
 
 void user::last_number()                                                                                         // plus plus last_num variable
 {
-    last_num++;
+    last_num += 1;
 }
 
 //------------------------------------------------------------------------
@@ -309,7 +317,7 @@ void user::follow(twitterak &app, std::string uName)
             else
             {
                 this->following.insert(uName);
-                app.users[uName].add_followers(uName);
+                app.users[uName].add_followers(this->get_username());
                 std::cout << "* Followed.\n";
             }
         }
@@ -328,7 +336,7 @@ void user::follow(twitterak &app, std::string uName)
             else
             {
                 this->following.insert(uName);
-                app.org_user[uName].add_followers(uName);
+                app.org_user[uName].add_followers(this->get_username());
                 std::cout << "* Followed.\n";
             }
         }
@@ -352,6 +360,13 @@ void user::like_mention(int tNumber, std::string uName, int mNumber)
     {
         std::cout << "! There is no tweet with this number.\n";
     }
+}
+
+//------------------------------------------------------------------------
+
+void user::unfollow(std::string user_name)
+{
+    this->followers.erase(user_name);
 }
 
 //============================================== Delete_User_Traces =========================================
@@ -468,6 +483,24 @@ void user::del_tweetLikes(twitterak &app)
                     }
                 }
             }
+        }
+    }
+}
+
+//------------------------------------------------------------------------
+
+void user::unfollow_followers(twitterak &app)
+{
+    for(auto i : following)
+    {
+        if(app.users.count(i) == 1)
+        {
+            app.users[i].unfollow(app.logedin_user);
+        }
+
+        else if(app.org_user.count(i) == 1)
+        {
+            app.org_user[i].unfollow(this->get_username());
         }
     }
 }
