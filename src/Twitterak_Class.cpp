@@ -553,8 +553,6 @@ void twitterak::run()
                     {
                         if(ans_user.count(logedin_user) == 1)
                         {
-                            std::cout << "yes ans\n";
-                            std::cout << "h1";
                             if(users.count(user_name))
                             {
                                 if(li_user->isin_following(user_name))
