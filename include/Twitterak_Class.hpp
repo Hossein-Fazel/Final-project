@@ -63,6 +63,7 @@ friend void Anonymous::unfollow_followers(twitterak &app);
 
 
     public:
+        void put_users();
         std::string lower(std::string);
         void run();
         void tokenize(std::string);

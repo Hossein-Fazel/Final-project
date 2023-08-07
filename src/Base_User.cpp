@@ -64,6 +64,20 @@ std::string Base_User::get_country() const
     return Country;
 }
 
+//------------------------------------------------------------------------
+
+std::unordered_set <std::string> Base_User::get_followers()
+{
+    return followers;
+}
+
+//------------------------------------------------------------------------
+
+std::unordered_set <std::string> Base_User::get_passwords()                 // return passwords set
+{
+    return passwords;
+}
+
 //=============================================== set functions ===============================================
 // sets the name of a user
 void Base_User::set_name(std::string name)                                               
@@ -500,6 +514,13 @@ void Base_User::unfollow(std::string user_name)
 //------------------------------------------------------------------------
 
 void Base_User::unfollow_followers(twitterak &app)
+{
+    std::cout << "! This feature can't be reached for your account.\n";
+}
+
+//------------------------------------------------------------------------
+
+std::unordered_set< std::string> Base_User::get_following()
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }

@@ -6,7 +6,6 @@
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
-class Organisation;
 
 #include "Base_User.hpp"
 
@@ -14,19 +13,18 @@ class Organisation;
 #include"Display_Class.hpp"
 #include "Mention_class.hpp"
 
-
 //================================================================================ User_Class ================================================================================ 
 
 class user: public Base_User
 {
 //=================== Friends ===================
-
-friend void tweet::set_user_age(user);                                  // friend with Tweet_Class to set user age
-friend void tweet::rq_tweet(twitterak&, std::string);                   // friend with Tweet_Class to push_back tweets on vector
+friend void twitterak::put_users();
 friend void display::show_tweet(twitterak, std::string, int);           // friend with Twitterak_Class to show tweets
 friend void display::show_tweet(twitterak, std::string);                // friend with Twitterak_Class to show tweets
 friend void display::show_mentions(twitterak, std::string user_name, int tweet_number);
 
+friend void tweet::set_user_age(user);                                  // friend with Tweet_Class to set user age
+friend void tweet::rq_tweet(twitterak&, std::string);                   // friend with Tweet_Class to push_back tweets on vector
 friend void tweet::delete_tweet(twitterak, int);                        // friend with Twitterak_Class to delete a tweet
 friend void tweet::edit_tweet(twitterak &);                        // friend with Twitterak_Class to edit a tweet
 
@@ -35,6 +33,7 @@ friend void tweet::edit_tweet(twitterak &);                        // friend wit
         std::string get_birthday() const;                               // returns the date of birth of the user
         int get_last_number() const;                                    // returns the last tweet's number
         int get_following_num() const;
+        std::unordered_set< std::string> get_following();
 
 //====================== sets =====================
         void set_birthday(std::string);                           // sets the date of birth of a user

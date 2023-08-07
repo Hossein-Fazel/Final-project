@@ -18,6 +18,7 @@ class Anonymous : public Base_User
         void Delete_Account(twitterak &);                          // delets the account of the user
         bool isin_following(std::string);
         int get_following_num() const;
+        std::unordered_set< std::string> get_following();
 
         void push_myMentions(int, std::string);                   // save my mention traces
         void push_tweetLikes(int, std::string);                   // save my tweet likes traces

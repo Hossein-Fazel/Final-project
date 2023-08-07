@@ -360,6 +360,7 @@ void display::signup(twitterak &app)
         org1.set_manager_username(app, managerUser);
 
 
+
         Pass = getpass("$ Password : ");
         while (Pass.empty())
         {
@@ -503,6 +504,8 @@ void display::signup(twitterak &app, std::string user_name)
         std::cout << "$ Name : ";
         std::cin >> Full_Name;
         org1.set_name(Full_Name);
+
+        org1.set_username(user_name);
 
         while(1)
         {

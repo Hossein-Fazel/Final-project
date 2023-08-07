@@ -34,6 +34,13 @@ int user::get_following_num() const                // returns the following numb
     return following.size();
 }
 
+//------------------------------------------------------------------------
+
+std::unordered_set< std::string> user::get_following()
+{
+    return following;
+}
+
 //==================================================================  Set_Functions =================================================================
 
 void user::set_birthday(std::string birth)                                     // sets the date of birth of a user

@@ -29,6 +29,11 @@ std::unordered_map <int, tweet> Organisation::get_tweets()
     return tweets;
 }
 
+std::unordered_set<std::string> Organisation::get_following()
+{
+    return following;
+}
+
 //==================================================================  Set_Functions =================================================================
 // sets the usernsmae of an organisation's manager 
 void Organisation::set_manager_username(twitterak app,std::string username)

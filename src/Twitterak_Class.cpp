@@ -2,11 +2,116 @@
 #include <string>
 #include <ctype.h>
 #include <vector>
+#include <fstream>
 
 #include "Twitterak_Class.hpp"
 #include "Display_Class.hpp"
 #include "User_Class.hpp"
 
+void twitterak::put_users()
+{
+    std::ofstream wuser;
+    wuser.open("users.txt", std::ios::trunc);
+    for(auto i : users)
+    {
+        wuser << "type:user" << std::endl;
+        wuser << "name:" << i.second.get_name() << std::endl;
+        wuser << "username:" << i.second.get_username() << std::endl;
+        wuser << "bio:" << i.second.get_biography() << std::endl;
+        wuser << "link:" << i.second.get_link() << std::endl;
+        wuser << "phone:" << i.second.get_phone() << std::endl;
+        wuser << "header:" << i.second.get_header() << std::endl;
+        wuser << "country:" << i.second.get_country() << std::endl;
+        wuser << "birthday:" << i.second.get_birthday() << std::endl;
+        wuser << "password:" << i.second.get_password() << std::endl;
+        wuser << "followers:";
+        for(auto j : i.second.get_followers())
+        {
+            wuser << j << " ";
+        }
+        wuser << std::endl;
+
+        wuser << "followings:";
+        for(auto j : i.second.get_following())
+        {
+            wuser << j << " ";
+        }
+        wuser << std::endl;
+
+        wuser << "passwords:";
+        for(auto j : i.second.get_passwords())
+        {
+            wuser << j << " ";
+        }
+        wuser << std::endl;
+
+        wuser << "last_num:" << i.second.get_last_number() << std::endl;
+        wuser << "***" << std::endl;
+    }
+
+    for (auto i : org_user)
+    {
+        wuser << "type:org" << std::endl;
+        wuser << "name:" << i.second.get_name() << std::endl;
+        wuser << "username:" << i.second.get_username() << std::endl;
+        wuser << "bio:" << i.second.get_biography() << std::endl;
+        wuser << "link:" << i.second.get_link() << std::endl;
+        wuser << "phone:" << i.second.get_phone() << std::endl;
+        wuser << "header:" << i.second.get_header() << std::endl;
+        wuser << "country:" << i.second.get_country() << std::endl;
+        wuser << "password:" << i.second.get_password() << std::endl;
+        wuser << "followers:";
+        for(auto j : i.second.get_followers())
+        {
+            wuser << j << " ";
+        }
+        wuser << std::endl;
+
+        wuser << "followings:";
+        for(auto j : i.second.get_following())
+        {
+            wuser << j << " ";
+        }
+        wuser << std::endl;
+
+        wuser << "passwords:";
+        for(auto j : i.second.get_passwords())
+        {
+            wuser << j << " ";
+        }
+        wuser << std::endl;
+
+        wuser << "last_num:" << i.second.get_last_number() << std::endl;
+
+        wuser << "manager:" << i.second.get_manager_username() << std::endl;
+        wuser << "***" << std::endl;
+    }
+
+    for (auto i : ans_user)
+    {
+        wuser << "type:org" << std::endl;
+        wuser << "username:" << i.second.get_username() << std::endl;
+        wuser << "password:" << i.second.get_password() << std::endl;
+
+        wuser << "followings:";
+        for(auto j : i.second.get_following())
+        {
+            wuser << j << " ";
+        }
+        wuser << std::endl;
+
+        wuser << "passwords:";
+        for(auto j : i.second.get_passwords())
+        {
+            wuser << j << " ";
+        }
+        wuser << std::endl;     
+
+        wuser << "***" << std::endl;
+    }
+}
+
+//------------------------------------------------------------------------------------------
 
 bool twitterak::get_userName_number(std:: string txt, std::string &username, int &number)
 {
@@ -43,6 +148,8 @@ bool twitterak::get_userName_number(std:: string txt, std::string &username, int
     }
 }
 
+//------------------------------------------------------------------------------------------
+
 void twitterak::del_atsign(std::string &str)
 {
     if(str[0] == '@')
@@ -50,6 +157,8 @@ void twitterak::del_atsign(std::string &str)
         str.erase(0, 1);
     }
 }
+
+//------------------------------------------------------------------------------------------
 
 void twitterak::serch_hashtag(std::string hash)
 {
@@ -75,6 +184,8 @@ void twitterak::serch_hashtag(std::string hash)
     }
 }
 
+//------------------------------------------------------------------------------------------
+
 bool twitterak::is_in(std::string str, char ch)
 {
     int strSize = str.size();
@@ -88,6 +199,8 @@ bool twitterak::is_in(std::string str, char ch)
     return false;
 }
 
+//------------------------------------------------------------------------------------------
+
 bool twitterak::is_in(std::string str, std::string ch)
 {
     int strSize = str.size();
@@ -100,6 +213,8 @@ bool twitterak::is_in(std::string str, std::string ch)
     }
     return false;
 }
+
+//------------------------------------------------------------------------------------------
 
 void twitterak::tokenize(std::string command)
 {
@@ -158,6 +273,8 @@ void twitterak::tokenize(std::string command)
     }
 }
 
+//------------------------------------------------------------------------------------------
+
 std::string twitterak::lower(std::string command)
 {
     for(int i = 0; i < command.size(); i++)
@@ -168,6 +285,7 @@ std::string twitterak::lower(std::string command)
     return command;
 }
 
+//------------------------------------------------------------------------------------------
 
 void twitterak::run()
 {
@@ -347,8 +465,15 @@ void twitterak::run()
 
             else if ((commands[0] == "exit" or commands[0] == "quit" or commands[0] == "q") and cSize == 1)
             {
-                std::cout << "Good Bye\n";
-                exit(0);
+                char ch;
+                std::cout << "? Are you sure? y/n\n";
+
+                if(ch == 'y' or ch == 'Y')
+                {
+                    put_users();
+                    std::cout << "Good Bye\n";
+                    exit(0);
+                }
             }
 
             else if ((commands[0] == "twitterak" and commands[1] == "--help") or commands[0] == "help")
@@ -620,7 +745,6 @@ void twitterak::run()
                                 {
                                     li_user->pop_tweetLikes(number, user_name);
                                 }
-
                             }
 
                             else

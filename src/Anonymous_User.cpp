@@ -19,6 +19,11 @@ int Anonymous::get_following_num() const
     return following.size();
 }
 
+
+std::unordered_set< std::string> Anonymous::get_following()
+{
+    return following;
+}
 //------------------------------------------------------------------------
 // edits the user's information
 void Anonymous::Edit(twitterak & app, std::string Edit_part ,std::string value)                                                                                                                

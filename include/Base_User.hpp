@@ -33,7 +33,8 @@ class Base_User
         std::string get_header() const;                                   // shows the color of the header that user had chosen 
         std::string get_country() const;                                  // shows the country of the user
         int get_followers_num() const;                                    // shows the number of followers
-
+        std::unordered_set <std::string> get_followers();                 // return followers set
+        std::unordered_set <std::string> get_passwords();                 // return passwords set
 //======================================= general functions ====================================
 
         std::string to_lower(std::string);                                // makes a string a lowercase
@@ -51,6 +52,7 @@ class Base_User
         virtual int get_last_number() const;                              // returns the last number of tweet
         virtual int get_following_num() const;                            // returns the number of following 
         virtual std::unordered_map <int, tweet> get_tweets();                       // returns the tweets
+        virtual std::unordered_set< std::string> get_following();
 
 //========================= sets ==========================
 

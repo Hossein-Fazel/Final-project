@@ -42,6 +42,7 @@ class Organisation : public Base_User
         void follow(twitterak &, std::string);                   
         void like_mention(int, std::string, int); 
         void unfollow(std::string);                               // unfollow the user name
+        std::unordered_set<std::string> get_following();
 
 //==================== Save_Organisation_Traces ====================
 
