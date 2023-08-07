@@ -4,7 +4,6 @@
 
 #include "Twitterak_Class.hpp"
 #include "Organisation_User.hpp"
-// #include "User_Class.hpp"
 #include "sha256.h"
 
 //==================================================================  Get_Functions =================================================================
@@ -12,7 +11,7 @@
 // shows the usernsmae of an organisation's manager
 std::string Organisation::get_manager_username() const
 {
-    return manager_username;
+    return manager->get_username();
 }
 
 //------------------------------------------------------------------------
@@ -43,7 +42,7 @@ void Organisation::set_manager_username(twitterak app,std::string username)
     {
         if (app.users.count(username) == 1)
         {
-            manager_username = username;
+            manager = &app.users[username];
             break;
         }
 

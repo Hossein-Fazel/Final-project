@@ -58,7 +58,7 @@ class Organisation : public Base_User
         void unfollow_followers(twitterak &app);                  // delete you from your followers list
 
     private:
-        std::string manager_username;
+        user * manager;
         std::unordered_map<int , tweet> tweets;
         int last_number = 0;
 

@@ -87,19 +87,7 @@ void user::Edit(twitterak &app, std::string Edit_part ,std::string value)
             app.users.insert({value, std::move(val)});
         }
 
-
-        if (app.org_user.count(value) == 1)
-        {
-            std::unordered_map <std::string,Organisation>::const_iterator got = app.org_user.find(app.logedin_user);
-            auto entry_1 = app.org_user.find(app.logedin_user);
-
-            if (entry_1 != end(app.org_user))
-            {
-                auto const vall = std::move(entry_1->second);
-                app.org_user.erase(entry_1);
-                app.org_user.insert({value, std::move(vall)});
-            }
-        }
+        
 
         std::cout << "* Your " << Edit_part << " has been successfully changed.\n";
         app.logedin_user = value;
