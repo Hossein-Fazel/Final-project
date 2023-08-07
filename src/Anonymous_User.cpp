@@ -63,7 +63,7 @@ void Anonymous::Edit(twitterak & app, std::string Edit_part ,std::string value)
     }
 }
 
-
+//------------------------------------------------------------------------
 // shows the information of a user itself
 void Anonymous::Show_Profile(twitterak & app)
 {

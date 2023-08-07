@@ -294,6 +294,12 @@ bool Base_User::validate_phone_number(std::string phone)
             break;
     }
 
+    if (phone.length() == 11 || phone.length() == 12 || phone.length() == 13)
+        return true;
+        
+    else 
+        return false;
+
     return true;
 }
 

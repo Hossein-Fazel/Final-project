@@ -94,6 +94,8 @@ void user::Edit(twitterak &app, std::string Edit_part ,std::string value)
             app.users.insert({value, std::move(val)});
         }
 
+        
+
         std::cout << "* Your " << Edit_part << " has been successfully changed.\n";
         app.logedin_user = value;
     }
