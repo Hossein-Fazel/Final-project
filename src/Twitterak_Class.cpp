@@ -304,6 +304,7 @@ void twitterak::serch_hashtag(std::string hash)
         else
         {
             std::cout << "! There is no tweet with this hashtag.\n";
+            Hashtags.erase(hashtag);
         }
     }
     else

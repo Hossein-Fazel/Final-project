@@ -224,8 +224,15 @@ void Organisation::edit_tweet(int tNum, twitterak & app)
 {
     if(this->tweets.count(tNum) == 1)
     {
-        this->tweets[tNum].set_user_age();
-        this->tweets[tNum].edit_tweet(app);
+        if(tweets[tNum].get_tweetType() == "retweet")
+        {
+            std::cout << "! You can not edit a retweet.\n";
+        }
+        else
+        {
+            tweets[tNum].set_user_age();
+            tweets[tNum].edit_tweet(app);
+        }
     }
 }
 
