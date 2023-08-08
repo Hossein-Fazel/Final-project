@@ -34,6 +34,8 @@ friend void tweet::edit_tweet(twitterak &);                        // friend wit
         int get_last_number() const;                                    // returns the last tweet's number
         int get_following_num() const;
         std::unordered_set< std::string> get_following();
+        std::unordered_map<std::string , std::unordered_set<int>> get_mention_trs();         // returns my_mention map
+        std::unordered_map<std::string , std::unordered_set<int>> get_tweetlike_trs();       // returns tweet_likes map
 
 //====================== sets =====================
         void set_birthday(std::string);                           // sets the date of birth of a user
@@ -80,8 +82,8 @@ friend void tweet::edit_tweet(twitterak &);                        // friend wit
 
 // ================================= User_Traces ============================
 
-       std::unordered_map<std::string , std::unordered_set<int>> my_mentions;
-       std::unordered_map<std::string , std::unordered_set<int>> tweetLikes;
+       std::unordered_map<std::string , std::unordered_set<int> > my_mentions;
+       std::unordered_map<std::string , std::unordered_set<int> > tweetLikes;
        
 
 };

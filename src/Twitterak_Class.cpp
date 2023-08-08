@@ -11,7 +11,8 @@
 void twitterak::put_users()
 {
     std::ofstream wuser;
-    wuser.open("users.txt", std::ios::trunc);
+    wuser.open("users.txt");
+
     for(auto i : users)
     {
         wuser << "type:user" << std::endl;
@@ -24,28 +25,54 @@ void twitterak::put_users()
         wuser << "country:" << i.second.get_country() << std::endl;
         wuser << "birthday:" << i.second.get_birthday() << std::endl;
         wuser << "password:" << i.second.get_password() << std::endl;
+
+        wuser << "----------";
+
         wuser << "followers:";
         for(auto j : i.second.get_followers())
         {
-            wuser << j << " ";
+            wuser << j << ',';
         }
         wuser << std::endl;
 
         wuser << "followings:";
         for(auto j : i.second.get_following())
         {
-            wuser << j << " ";
+            wuser << j << ',';
         }
         wuser << std::endl;
 
         wuser << "passwords:";
         for(auto j : i.second.get_passwords())
         {
-            wuser << j << " ";
+            wuser << j << ',';
         }
         wuser << std::endl;
 
         wuser << "last_num:" << i.second.get_last_number() << std::endl;
+
+        wuser << "my_mentions:" << std::endl;
+        for(auto j : i.second.get_mention_trs())
+        {
+            wuser << j.first << ':';
+            for(auto num : j.second)
+            {
+                wuser << num << ',';
+            }
+            wuser << std::endl;
+        }
+
+        wuser << "tweet_likes:" << std::endl;
+        for(auto j : i.second.get_tweetlike_trs())
+        {
+            wuser << j.first << ':';
+            for(auto num : j.second)
+            {
+                wuser << num << ',';
+            }
+            wuser << std::endl;
+        }
+
         wuser << "***" << std::endl;
     }
 
@@ -60,17 +87,20 @@ void twitterak::put_users()
         wuser << "header:" << i.second.get_header() << std::endl;
         wuser << "country:" << i.second.get_country() << std::endl;
         wuser << "password:" << i.second.get_password() << std::endl;
+
+        wuser << "----------";
+
         wuser << "followers:";
         for(auto j : i.second.get_followers())
         {
-            wuser << j << " ";
+            wuser << j << ',';
         }
         wuser << std::endl;
 
         wuser << "followings:";
         for(auto j : i.second.get_following())
         {
-            wuser << j << " ";
+            wuser << j << ',';
         }
         wuser << std::endl;
 
@@ -84,6 +114,30 @@ void twitterak::put_users()
         wuser << "last_num:" << i.second.get_last_number() << std::endl;
 
         wuser << "manager:" << i.second.get_manager_username() << std::endl;
+
+        wuser << "my_mentions:" << std::endl;
+        for(auto j : i.second.get_mention_trs())
+        {
+            wuser << j.first << ':';
+            for(auto num : j.second)
+            {
+                wuser << num << ',';
+            }
+            wuser << std::endl;
+        }
+
+        wuser << "tweet_likes:" << std::endl;
+        for(auto j : i.second.get_tweetlike_trs())
+        {
+            wuser << j.first << ':';
+            for(auto num : j.second)
+            {
+                wuser << num << ',';
+            }
+            wuser << std::endl;
+        }
+        wuser << "^^^";
+
         wuser << "***" << std::endl;
     }
 
@@ -107,6 +161,30 @@ void twitterak::put_users()
         }
         wuser << std::endl;     
 
+        wuser << "my_mentions:" << std::endl;
+        for(auto j : i.second.get_mention_trs())
+        {
+            wuser << j.first << ':';
+            for(auto num : j.second)
+            {
+                wuser << num << ' ';
+            }
+            wuser << std::endl;
+        }
+        wuser << "---";
+
+        wuser << "tweet_likes:" << std::endl;
+        for(auto j : i.second.get_tweetlike_trs())
+        {
+            wuser << j.first << ':';
+            for(auto num : j.second)
+            {
+                wuser << num << ' ';
+            }
+            wuser << std::endl;
+        }
+        wuser << "^^^";
+        
         wuser << "***" << std::endl;
     }
 }

@@ -10,9 +10,9 @@ void display::show_normal(tweet tw)
     std::cout << tw.get_number() << " : " << tw.get_sefTweet() << std:: endl;
     std::cout << "likes : " << tw.get_like_number() << "\t";
     std::cout << "mentions : " << tw.get_mentions_number() << "  ";
-    tw.timeDate.print_time();
+    std::cout << tw.get_time();
     std::cout << " ";
-    tw.timeDate.print_date();
+    std::cout << tw.get_date();
     std::cout << "\n\n";
 }
 
@@ -29,9 +29,9 @@ void display::show_qoute(tweet tw)
 
     std::cout << "likes : " << tw.get_like_number() << " ";
     std::cout << "mentions : " << tw.get_mentions_number() << "  ";
-    tw.timeDate.print_time();
+    std::cout << tw.get_time();
     std::cout << " ";
-    tw.timeDate.print_date();
+    std::cout << tw.get_date();
     std::cout << "\n\n";
 }
 
@@ -47,9 +47,9 @@ void display::show_re(tweet tw)
 
     std::cout << "likes : " << tw.get_like_number() << " ";
     std::cout << "mentions : " << tw.get_mentions_number() << "  ";
-    tw.timeDate.print_time();
+    std::cout << tw.get_time();
     std::cout << " ";
-    tw.timeDate.print_date();
+    std::cout << tw.get_date();
     std::cout << "\n\n";
 }
 

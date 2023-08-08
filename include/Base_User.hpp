@@ -47,6 +47,8 @@ class Base_User
 
 //======================================= virtual functions =====================================
 
+        virtual std::unordered_map<std::string , std::unordered_set<int>> get_mention_trs();
+        virtual std::unordered_map<std::string , std::unordered_set<int>> get_tweetlike_trs();
         virtual std::string get_biography() const;                        // returns the biography of the user
         virtual std::string get_birthday() const;                         // returns the date of birth of the user
         virtual int get_last_number() const;                              // returns the last number of tweet

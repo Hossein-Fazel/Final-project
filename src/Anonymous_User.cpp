@@ -24,6 +24,18 @@ std::unordered_set< std::string> Anonymous::get_following()
 {
     return following;
 }
+
+std::unordered_map<std::string , std::unordered_set<int>> Anonymous::get_mention_trs()         // returns my_mention map
+{
+    return my_mentions;
+}
+
+
+std::unordered_map<std::string , std::unordered_set<int>> Anonymous::get_tweetlike_trs()       // returns tweet_likes map
+{
+    return tweetLikes;
+}
+
 //------------------------------------------------------------------------
 // edits the user's information
 void Anonymous::Edit(twitterak & app, std::string Edit_part ,std::string value)                                                                                                                

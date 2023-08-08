@@ -41,6 +41,17 @@ std::unordered_set< std::string> user::get_following()
     return following;
 }
 
+std::unordered_map<std::string , std::unordered_set<int>> user::get_mention_trs()         // returns my_mention map
+{
+    return my_mentions;
+}
+
+
+std::unordered_map<std::string , std::unordered_set<int>> user::get_tweetlike_trs()       // returns tweet_likes map
+{
+    return tweetLikes;
+}
+
 //==================================================================  Set_Functions =================================================================
 
 void user::set_birthday(std::string birth)                                     // sets the date of birth of a user

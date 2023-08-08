@@ -25,8 +25,9 @@ class tweet
     friend void display::show_mentions(twitterak, std::string user_name, int tweet_number);
 
     public:
+        
 //================ gets =====================
-
+        tweet();
         std::string get_tweetType() const;                                      // returns the type of a tweet(quote/retweet)
         std::string get_sefTweet() const;                                       // returns the user's tweet
         std::string get_ownerName() const;                                      // returns the name of the owner of another user
@@ -39,6 +40,9 @@ class tweet
         int get_like_number() const;
         int get_mentions_number() const;
         std::unordered_map<std::string, bool> operator~() const;
+        std::string get_time();
+        std::string get_date();
+
 //================ sets =====================
 
         void set_tweetType(std::string);
@@ -50,7 +54,8 @@ class tweet
         void set_user_name(std:: string);                                       // sets the username of the user
         void set_number(int);                                                   // sets the tweet's number
         void set_user_age(user);                                                // sets the age of the user 
-        
+        void set_time();
+
 //============ General functions =============
 
         void delete_tweet(twitterak, int);                                       // deletes a tweet of a user 
@@ -81,7 +86,9 @@ class tweet
         std::string user_name;
         int number;
         int user_age;
-        TD timeDate;
+        // TD timeDate;
+        std::string time;
+        std::string date;
 };
 
 #endif

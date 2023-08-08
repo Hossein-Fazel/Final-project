@@ -19,7 +19,9 @@ class Organisation : public Base_User
 
         std::string get_manager_username() const;                                // shows the usernsmae of an organisation's manager 
         int get_last_number() const;                                             // shows the last number of a tweet
-        std::unordered_map <int, tweet> get_tweets();                                // shows organisation's tweets
+        std::unordered_map <int, tweet> get_tweets();                           // shows organisation's tweets
+        std::unordered_map<std::string , std::unordered_set<int>> get_mention_trs();         // returns my_mention map
+        std::unordered_map<std::string , std::unordered_set<int>> get_tweetlike_trs();       // returns tweet_likes map
 
 //========================================= Set_Functions =====================================
 

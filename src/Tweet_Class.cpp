@@ -9,6 +9,11 @@
 #include "Twitterak_Class.hpp"
 #include "Mention_class.hpp"
 
+tweet::tweet()
+{
+    set_time();
+}
+
 //==================================================================  Get_Functions =================================================================
 
 std::string tweet::get_tweetType() const                                                              // returns the type of tweet(quote/retweet)
@@ -72,6 +77,16 @@ int tweet::get_user_age() const                                                 
     return user_age;
 }
 
+
+std::string tweet::get_date()
+{
+    return date;
+}
+
+std::string tweet::get_time()
+{
+    return time;
+}
 //==================================================================  Set_Functions =================================================================
 
 void tweet::set_tweetType(std::string type)                                                                    // sets the type of a tweet(quote/retweet)
@@ -135,6 +150,42 @@ void tweet::set_user_age(user usr)                                              
     int user_birth;
     user_birth = std::stoi(usr.get_birthday().substr(0,3));
     user_age = 2023 - user_birth;
+}
+
+void tweet::set_time()
+{
+    std::vector<std::string> time_part;
+    time_t now = std::time(0);
+    std::string dt = std::ctime(&now);
+
+    std::string cm="";
+    int size = dt.size();
+    for(int i = 0; i < size; i++)
+    {
+        if(int(dt[i]) != 32)
+        {
+            cm += dt[i];
+        }
+        else
+        {
+            if(cm.empty())
+            {
+                continue;
+            }
+            else
+            {
+                time_part.push_back(cm);
+                cm = "";
+            }
+        }
+    }
+    if(!cm.empty())
+    {
+        time_part.push_back(cm);
+    }
+
+    time = time_part[3];
+    date = time_part[1] + ' ' + time_part[2] + ',' + time_part[4];
 }
 
 //================================================================  General_Functions ===============================================================

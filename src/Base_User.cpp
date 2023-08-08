@@ -85,6 +85,7 @@ void Base_User::set_name(std::string name)
     Full_Name = name;
 }
 
+
 //------------------------------------------------------------------------
 // sets the username of a user with a validation
 void Base_User::set_username(std::string user_name)                                     
@@ -529,4 +530,17 @@ void Base_User::unfollow_followers(twitterak &app)
 std::unordered_set< std::string> Base_User::get_following()
 {
     std::cout << "! This feature can't be reached for your account.\n";
+}
+
+std::unordered_map<std::string , std::unordered_set<int>> Base_User::get_mention_trs()         // returns my_mention map
+{
+    std::cout << "! This feature can't be reached for your account.\n";
+
+}
+
+
+std::unordered_map<std::string , std::unordered_set<int>> Base_User::get_tweetlike_trs()       // returns tweet_likes map
+{
+    std::cout << "! This feature can't be reached for your account.\n";
+
 }
