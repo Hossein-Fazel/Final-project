@@ -26,7 +26,7 @@ void twitterak::put_users()
         wuser << "birthday:" << i.second.get_birthday() << std::endl;
         wuser << "password:" << i.second.get_password() << std::endl;
 
-        wuser << "----------";
+        wuser << "----------" << std::endl;
 
         wuser << "followers:";
         for(auto j : i.second.get_followers())
@@ -52,24 +52,39 @@ void twitterak::put_users()
         wuser << "last_num:" << i.second.get_last_number() << std::endl;
 
         wuser << "my_mentions:" << std::endl;
-        for(auto j : i.second.get_mention_trs())
+        if(i.second.get_mention_trs().size() != 0)
         {
-            wuser << j.first << ':';
-            for(auto num : j.second)
+            for(auto j : i.second.get_mention_trs())
             {
-                wuser << num << ',';
+                wuser << j.first << ':';
+                for(auto num : j.second)
+                {
+                    wuser << num << ',';
+                }
+                wuser << std::endl;
             }
+        }
+        else
+        {
             wuser << std::endl;
         }
 
         wuser << "tweet_likes:" << std::endl;
-        for(auto j : i.second.get_tweetlike_trs())
+        
+        if(i.second.get_tweetlike_trs().size() != 0)
         {
-            wuser << j.first << ':';
-            for(auto num : j.second)
+            for(auto j : i.second.get_tweetlike_trs())
             {
-                wuser << num << ',';
+                wuser << j.first << ':';
+                for(auto num : j.second)
+                {
+                    wuser << num << ',';
+                }
+                wuser << std::endl;
             }
+        }
+        else
+        {
             wuser << std::endl;
         }
 
@@ -88,7 +103,7 @@ void twitterak::put_users()
         wuser << "country:" << i.second.get_country() << std::endl;
         wuser << "password:" << i.second.get_password() << std::endl;
 
-        wuser << "----------";
+        wuser << "----------" << std::endl;
 
         wuser << "followers:";
         for(auto j : i.second.get_followers())
@@ -116,27 +131,40 @@ void twitterak::put_users()
         wuser << "manager:" << i.second.get_manager_username() << std::endl;
 
         wuser << "my_mentions:" << std::endl;
-        for(auto j : i.second.get_mention_trs())
+        if(i.second.get_mention_trs().size() != 0)
         {
-            wuser << j.first << ':';
-            for(auto num : j.second)
+            for(auto j : i.second.get_mention_trs())
             {
-                wuser << num << ',';
+                wuser << j.first << ':';
+                for(auto num : j.second)
+                {
+                    wuser << num << ',';
+                }
+                wuser << std::endl;
             }
+        }
+        else
+        {
             wuser << std::endl;
         }
 
         wuser << "tweet_likes:" << std::endl;
-        for(auto j : i.second.get_tweetlike_trs())
+        if(i.second.get_tweetlike_trs().size() != 0)
         {
-            wuser << j.first << ':';
-            for(auto num : j.second)
+            for(auto j : i.second.get_tweetlike_trs())
             {
-                wuser << num << ',';
+                wuser << j.first << ':';
+                for(auto num : j.second)
+                {
+                    wuser << num << ',';
+                }
+                wuser << std::endl;
             }
+        }
+        else
+        {
             wuser << std::endl;
         }
-        wuser << "^^^";
 
         wuser << "***" << std::endl;
     }
@@ -146,6 +174,8 @@ void twitterak::put_users()
         wuser << "type:org" << std::endl;
         wuser << "username:" << i.second.get_username() << std::endl;
         wuser << "password:" << i.second.get_password() << std::endl;
+
+        wuser << "----------" << std::endl;
 
         wuser << "followings:";
         for(auto j : i.second.get_following())
@@ -162,28 +192,40 @@ void twitterak::put_users()
         wuser << std::endl;     
 
         wuser << "my_mentions:" << std::endl;
-        for(auto j : i.second.get_mention_trs())
+        if(i.second.get_mention_trs().size() != 0)
         {
-            wuser << j.first << ':';
-            for(auto num : j.second)
+            for(auto j : i.second.get_mention_trs())
             {
-                wuser << num << ' ';
+                wuser << j.first << ':';
+                for(auto num : j.second)
+                {
+                    wuser << num << ',';
+                }
+                wuser << std::endl;
             }
+        }
+        else
+        {
             wuser << std::endl;
         }
-        wuser << "---";
 
         wuser << "tweet_likes:" << std::endl;
-        for(auto j : i.second.get_tweetlike_trs())
+        if(i.second.get_tweetlike_trs().size() != 0)
         {
-            wuser << j.first << ':';
-            for(auto num : j.second)
+            for(auto j : i.second.get_tweetlike_trs())
             {
-                wuser << num << ' ';
+                wuser << j.first << ':';
+                for(auto num : j.second)
+                {
+                    wuser << num << ',';
+                }
+                wuser << std::endl;
             }
+        }
+        else
+        {
             wuser << std::endl;
         }
-        wuser << "^^^";
         
         wuser << "***" << std::endl;
     }
@@ -544,8 +586,8 @@ void twitterak::run()
             else if ((commands[0] == "exit" or commands[0] == "quit" or commands[0] == "q") and cSize == 1)
             {
                 char ch;
-                std::cout << "? Are you sure? y/n\n";
-
+                std::cout << "? Are you sure (y/n) ? ";
+                std::cin >> ch;
                 if(ch == 'y' or ch == 'Y')
                 {
                     put_users();

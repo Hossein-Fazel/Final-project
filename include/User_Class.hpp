@@ -18,7 +18,6 @@
 class user: public Base_User
 {
 //=================== Friends ===================
-friend void twitterak::put_users();
 friend void display::show_tweet(twitterak, std::string, int);           // friend with Twitterak_Class to show tweets
 friend void display::show_tweet(twitterak, std::string);                // friend with Twitterak_Class to show tweets
 friend void display::show_mentions(twitterak, std::string user_name, int tweet_number);
