@@ -52,13 +52,12 @@ void Organisation::set_manager_username(twitterak app,std::string username)
         username = remove_atsing(username);
 
     username = to_lower(username);
-    app.del_atsign(username);
 
     while (1)
     {
         if (app.users.count(username) == 1)
         {
-            manager = &app.users[username];
+            manager = &(app.users[username]);
             break;
         }
 
@@ -131,7 +130,7 @@ void Organisation::Edit(twitterak &app, std::string Edit_part ,std::string value
         std::cout << "* Your " << Edit_part << " has been successfully changed.\n";
     }
 
-    if (Edit_part == "username")
+    else if (Edit_part == "username")
     {
         if (value[0] == '@')
             value = remove_atsing(value);
@@ -152,7 +151,7 @@ void Organisation::Edit(twitterak &app, std::string Edit_part ,std::string value
         app.logedin_user = value;
     }
 
-    if (Edit_part == "biography")
+    else if (Edit_part == "biography")
     {
         if (value.length() > 160) 
             value.erase(160, value.length());
