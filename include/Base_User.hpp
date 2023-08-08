@@ -63,6 +63,7 @@ class Base_User
 
 //================== General_Functions ====================
 
+        virtual void delete_tweet(int, twitterak &app);                                   // delete tweet
         virtual void Delete_Account(twitterak &);                         // delets the account of the user
         virtual void Show_Profile(twitterak &);                           // shows the information of a user itself
         virtual void Edit(twitterak &, std::string, std::string);         // edits the user's information                                                                    

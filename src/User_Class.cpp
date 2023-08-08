@@ -181,6 +181,7 @@ void user::Tweet(std::string tweet_text, twitterak & app)                       
     }
     
     tw.set_selfTweet(tweet_text);
+    tw.set_time();
     tw.fetch_hashtags(app);
 
     last_number();
@@ -203,9 +204,7 @@ void user::Delete_Account(twitterak &app)                                       
         del_myMentions(app);
         del_tweetLikes(app);
         cls_hashtags(app);
-        std::cout << "deleting followers\n"; 
         unfollow_followers(app);
-        std::cout << "followers deleted.\n"; 
         app.users.erase(app.logedin_user);
         std::cout << "* You're account have successfully deleted.\n";
     }
@@ -308,6 +307,7 @@ void user::edit_tweet(int tNum, twitterak & app)
 {
     if(tweets.count(tNum) == 1)
     {
+        tweets[tNum].set_user_age(*this);
         tweets[tNum].edit_tweet(app);
     }
     else
@@ -385,6 +385,21 @@ void user::like_mention(int tNumber, std::string uName, int mNumber)
 void user::unfollow(std::string user_name)
 {
     this->followers.erase(user_name);
+}
+
+//------------------------------------------------------------------------
+
+void user::delete_tweet(int tNum, twitterak &app)
+{
+    if(tweets.count(tNum) == 1)
+    {
+        tweets[tNum].delete_hashtags(app);
+        tweets.erase(tNum);
+    }
+    else
+    {
+        std::cout << "! There is no tweet with this number.\n";
+    }
 }
 
 //============================================== Delete_User_Traces =========================================

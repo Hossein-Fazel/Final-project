@@ -291,11 +291,19 @@ void twitterak::serch_hashtag(std::string hash)
 
     if(Hashtags.count(hashtag) == 1)
     {
-        for(auto i : Hashtags[hashtag])
+        if(Hashtags[hashtag].size() != 0)
         {
-            std::cout << i.get_number() << " : \n";
-            std::cout << i.get_name() << '\n' << i.get_user_name() << '\n';
-            std::cout << i.get_sefTweet() << "\n\n";
+            for(auto i : Hashtags[hashtag])
+            {
+                std::cout << "tweet number  : " << i.get_number() << std::endl;
+                std::cout << "name          : " << i.get_name() << std::endl;
+                std::cout << "username      : " << i.get_user_name() << std::endl;
+                std::cout << "tweet text    : " << i.get_sefTweet() << "\n\n";
+            }
+        }
+        else
+        {
+            std::cout << "! There is no tweet with this hashtag.\n";
         }
     }
     else
@@ -338,7 +346,6 @@ bool twitterak::is_in(std::string str, std::string ch)
 
 void twitterak::tokenize(std::string command)
 {
-    
     commands.clear();
     int counter = 0;
     int cSize = command.size();
@@ -481,13 +488,19 @@ void twitterak::run()
                 }
             }
 
-            else if(commands[0] == "delete" and cSize == 2)
+            else if(commands[0] == "delete" and (cSize == 2 or cSize == 3))
             {
                 if(is_logedin)
                 {
                     if(commands[1] == "account")
                     {
                         li_user->Delete_Account(*this);
+                    }
+
+                    else if(commands[1] == "tweet")
+                    {
+                        li_user->delete_tweet(std::stoi(commands[2]), *this);
+                        // std::cin.ignore();
                     }
                 }
                 else
@@ -536,11 +549,11 @@ void twitterak::run()
                 }
             }
 
-            else if(commands[0] == "edit")
+            else if(commands[0] == "edit" and (cSize == 4 or cSize == 3))
             {
                 if(is_logedin)
                 {
-                    if(cSize == 4 and !commands[3].empty())
+                    if(commands[1] == "profile" and !commands[3].empty())
                     {
                         if(commands[2] != "phone_number" and commands[2] != "birthday")
                         {
@@ -549,7 +562,7 @@ void twitterak::run()
                         }
                         li_user->Edit(*this, commands[2], commands[3]);
                     }
-                    else if(cSize = 3)
+                    else if( commands[1] == "tweet")
                     {
                         if(is_logedin)
                         {
@@ -586,7 +599,7 @@ void twitterak::run()
             else if ((commands[0] == "exit" or commands[0] == "quit" or commands[0] == "q") and cSize == 1)
             {
                 char ch;
-                std::cout << "? Are you sure (y/n) ? ";
+                std::cout << "? Are you sure ? (y/n) : ";
                 std::cin >> ch;
                 if(ch == 'y' or ch == 'Y')
                 {
@@ -625,23 +638,30 @@ void twitterak::run()
             {
                 if(is_logedin)
                 {
-                    del_atsign(commands[1]);
-
-                    if( users[commands[1]].get_tweets().count(std::stoi(commands[2])) )
+                    if(ans_user.count(logedin_user) == 1)
                     {
-                        users[commands[1]].get_tweets()[std::stoi(commands[2])].rq_tweet(*this, "retweet");
-                        std::cout << "* Retweeted.\n";
+                        std::cout << "! You can not retweet.\n";
                     }
-                    
-                    else if( org_user[commands[1]].get_tweets().count(std::stoi(commands[2])) )
-                    {
-                        org_user[commands[1]].get_tweets()[std::stoi(commands[2])].rq_tweet(*this, "retweet");
-                        std::cout << "* Retweeted.\n";
-                    }
-
                     else
                     {
-                        std::cout << "! There is no tweet with this number.\n";
+                        del_atsign(commands[1]);
+
+                        if( users[commands[1]].get_tweets().count(std::stoi(commands[2])) )
+                        {
+                            users[commands[1]].get_tweets()[std::stoi(commands[2])].rq_tweet(*this, "retweet");
+                            std::cout << "* Retweeted.\n";
+                        }
+                        
+                        else if( org_user[commands[1]].get_tweets().count(std::stoi(commands[2])) )
+                        {
+                            org_user[commands[1]].get_tweets()[std::stoi(commands[2])].rq_tweet(*this, "retweet");
+                            std::cout << "* Retweeted.\n";
+                        }
+
+                        else
+                        {
+                            std::cout << "! There is no tweet with this number.\n";
+                        }
                     }
                 }
 
@@ -653,11 +673,10 @@ void twitterak::run()
 
             else if(commands[0] == "qoutetweet" and cSize == 3)
             {
-                if(commands.size() !=  3)
+                if(ans_user.count(logedin_user) == 1)
                 {
-                    std::cout << "! undefined command.\n";
+                    std::cout << "! You can not retweet.\n";
                 }
-
                 else
                 {
                     del_atsign(commands[1]);
@@ -1089,6 +1108,10 @@ void twitterak::run()
                 {
                     d1.show_mentions(*this, commands[2], stoi(commands[3]));
                 }
+                else if (org_user.count(commands[2]) == 1)
+                {
+                    d1.show_mentions(*this, commands[2], stoi(commands[3]));
+                }
                 else
                 {
                     std::cout << "! There is no user with this username.\n";
@@ -1126,26 +1149,7 @@ void twitterak::run()
                     
                     if(ans_user.count(logedin_user) == 1)
                     {
-                        if(li_user->isin_following(user_name))
-                        {
-                            if(users.count(user_name) == 1)
-                            {
-                                users[user_name].like_mention(tweet_number, logedin_user, ment_number);
-                            }
-
-                            else if(org_user.count(user_name) == 1)
-                            {
-                                org_user[user_name].like_mention(tweet_number, logedin_user, ment_number);
-                            }
-                            else
-                            {
-                                std::cout << "! There is no user with this username.\n";
-                            }
-                        }
-                        else
-                        {
-                            std::cout << "! You can not like this mention.\n";
-                        }
+                        li_user->like_mention(tweet_number, logedin_user, ment_number);
                     }
 
                     else

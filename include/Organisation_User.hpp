@@ -30,6 +30,7 @@ class Organisation : public Base_User
 
 //================== General_Functions ====================
 
+        void delete_tweet(int, twitterak &app);                                   // delete tweet
         void Delete_Account(twitterak &);                                        // delets the account of an organisation
         void Show_Profile(twitterak &);                                          // shows the information of an organisation itself
         void Edit(twitterak &, std::string, std::string);                        // edits an organisation's information                                                                    

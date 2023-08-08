@@ -197,6 +197,22 @@ void Organisation::Edit(twitterak &app, std::string Edit_part ,std::string value
 }
 
 //================================================================  General_Functions ===============================================================
+
+void Organisation::delete_tweet(int tNum, twitterak &app)
+{
+    if(tweets.count(tNum) == 1)
+    {
+        tweets[tNum].delete_hashtags(app);
+        tweets.erase(tNum);
+    }
+    else
+    {
+        std::cout << "! There is no tweet with this number.\n";
+    }
+}
+
+//------------------------------------------------------------------------
+
 void Organisation::unfollow(std::string user_name)
 {
     followers.erase(user_name);
@@ -208,6 +224,7 @@ void Organisation::edit_tweet(int tNum, twitterak & app)
 {
     if(this->tweets.count(tNum) == 1)
     {
+        this->tweets[tNum].set_user_age();
         this->tweets[tNum].edit_tweet(app);
     }
 }
@@ -230,6 +247,7 @@ void Organisation::Tweet(std::string tweet_text, twitterak & app)
     }
     
     tw.set_selfTweet(tweet_text);
+    tw.set_time();
     tw.fetch_hashtags(app);
 
     increase_last_number();

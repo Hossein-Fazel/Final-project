@@ -532,15 +532,23 @@ std::unordered_set< std::string> Base_User::get_following()
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
+//------------------------------------------------------------------------
+
 std::unordered_map<std::string , std::unordered_set<int>> Base_User::get_mention_trs()         // returns my_mention map
 {
     std::cout << "! This feature can't be reached for your account.\n";
-
 }
 
+//------------------------------------------------------------------------
 
 std::unordered_map<std::string , std::unordered_set<int>> Base_User::get_tweetlike_trs()       // returns tweet_likes map
 {
     std::cout << "! This feature can't be reached for your account.\n";
+}
 
+//------------------------------------------------------------------------
+
+void Base_User::delete_tweet(int tNum, twitterak &app)
+{
+    std::cout << "! This feature can't be reached for your account.\n";
 }

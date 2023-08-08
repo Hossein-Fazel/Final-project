@@ -37,7 +37,6 @@ friend void display::show_tweet(twitterak, std::string);
 friend void display::show_mentions(twitterak, std::string user_name, int tweet_number);
 
 friend void tweet::rq_tweet(twitterak&, std::string);
-friend void tweet::delete_tweet(twitterak, int);                          // friend with Twitterak_Class to delete a tweet
 friend void tweet::edit_tweet(twitterak &);                               // friend with Twitterak_Class to edit a tweet
 friend void tweet::fetch_hashtags(twitterak &);                           // friend with Twitterak_Class to fecth hashtags from tweets
 friend void tweet::delete_hashtags(twitterak &); 

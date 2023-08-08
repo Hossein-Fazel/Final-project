@@ -5,13 +5,12 @@
 #include <vector>
 #include <string>
 
-#include "TD_Class.hpp"
 #include "Display_Class.hpp"
-// #include "Mention_class.hpp"
 
 class twitterak;
 class user;
 class mention;
+class Organisation;
 
 //================================================================================ Tweet_Class ================================================================================ 
 
@@ -27,7 +26,6 @@ class tweet
     public:
         
 //================ gets =====================
-        tweet();
         std::string get_tweetType() const;                                      // returns the type of a tweet(quote/retweet)
         std::string get_sefTweet() const;                                       // returns the user's tweet
         std::string get_ownerName() const;                                      // returns the name of the owner of another user
@@ -54,11 +52,13 @@ class tweet
         void set_user_name(std:: string);                                       // sets the username of the user
         void set_number(int);                                                   // sets the tweet's number
         void set_user_age(user);                                                // sets the age of the user 
+        void set_user_age();                                                // sets the age of the user
         void set_time();
+        void set_time(std::string , std::string);
+
 
 //============ General functions =============
 
-        void delete_tweet(twitterak, int);                                       // deletes a tweet of a user 
         void edit_tweet(twitterak &);                                         // edits a tweet of a user
         void rq_tweet(twitterak&, std::string);                                   // quote tweet or retweet
         bool tweet_like(std::string user_name);

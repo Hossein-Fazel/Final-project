@@ -9,11 +9,6 @@
 #include "Twitterak_Class.hpp"
 #include "Mention_class.hpp"
 
-tweet::tweet()
-{
-    set_time();
-}
-
 //==================================================================  Get_Functions =================================================================
 
 std::string tweet::get_tweetType() const                                                              // returns the type of tweet(quote/retweet)
@@ -148,9 +143,18 @@ void tweet::set_number(int number)                                              
 void tweet::set_user_age(user usr)                                                                                    // sets the age of the user 
 {
     int user_birth;
-    user_birth = std::stoi(usr.get_birthday().substr(0,3));
+    user_birth = std::stoi(usr.get_birthday().substr(0,4));
     user_age = 2023 - user_birth;
 }
+
+//------------------------------------------------------------------------
+
+void tweet::set_user_age()                                                                                    // sets the age of the user 
+{
+    user_age = 2023;
+}
+
+//------------------------------------------------------------------------
 
 void tweet::set_time()
 {
@@ -188,25 +192,17 @@ void tweet::set_time()
     date = time_part[1] + ' ' + time_part[2] + ',' + time_part[4];
 }
 
-//================================================================  General_Functions ===============================================================
-
-void tweet::delete_tweet(twitterak app, int number)                                                                  // deletes a tweet of a user 
+void tweet::set_time(std::string got_time, std::string got_date)
 {
-    if(app.users[app.logedin_user].tweets.count(number))
-    {
-        app.users[app.logedin_user].tweets.erase(number);
-    }
-    else
-    {
-        std::cout << "! There is no tweet wtih this number.\n";
-    }
+    time = got_time;
+    date = got_date;
 }
 
-//------------------------------------------------------------------------
+//================================================================  General_Functions ===============================================================
 
 void tweet::edit_tweet(twitterak &app)                                                                                              // edits a tweet of a user
 {
-    if(get_user_age() >= 18)
+    if(user_age >= 18)
     {
         if(hashtags.size() != 0)
         {
@@ -261,8 +257,10 @@ void tweet::rq_tweet(twitterak &app, std:: string type)                         
         }
 
         rq_tweet.set_selfTweet(tweet);
+        rq_tweet.fetch_hashtags(app);
     }
 
+    rq_tweet.set_time();
     app.li_user->Push_Tweet(rq_tweet);
 }
 
@@ -283,6 +281,7 @@ void tweet::fetch_hashtags(twitterak &app)                                      
     {
         if(this->self_tweet[i] == '#')
         {
+
             for(int j = i+1; j < tsize; j++)
             {
                 if(this->self_tweet[j] != ' ')
@@ -304,7 +303,13 @@ void tweet::fetch_hashtags(twitterak &app)                                      
             }
         }
     }
-    hashtags.push_back(hashtag);
+
+    if(!hashtag.empty())
+    {
+        std::string lHashtag = app.lower(hashtag);
+        hashtags.push_back(lHashtag);
+        app.Hashtags[lHashtag].push_back(*this);
+    }
 }
 
 //-----------------------------------------------------------------------
@@ -394,10 +399,6 @@ void tweet::delete_hashtags(twitterak &app)
             if(app.Hashtags[hashtag][i].get_number() == this->get_number() and app.Hashtags[hashtag][i].get_user_name() == this->get_user_name())
             {
                 app.Hashtags[hashtag].erase(app.Hashtags[hashtag].begin() + i);
-                if(app.Hashtags[hashtag].size())
-                {
-                    app.Hashtags.erase(hashtag);
-                }
                 break;
             }
         }
