@@ -410,6 +410,10 @@ void user::delete_tweet(int tNum, twitterak &app)
     }
 }
 
+void user::add_following(std::string user_name)
+{
+    following.insert(user_name);
+}
 //============================================== Delete_User_Traces =========================================
 
 void user::del_men(int tNum, std::string user_name)                           // delete a mention

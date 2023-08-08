@@ -1,5 +1,6 @@
 #include <iostream>
 #include <unistd.h>
+#include <stdio.h>
 
 #include "sha256.h"
 #include "Display_Class.hpp"

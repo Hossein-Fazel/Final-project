@@ -14,6 +14,13 @@ Anonymous::Anonymous()
 
 //------------------------------------------------------------------------
 
+void Anonymous::add_following(std::string user_name)
+{
+    following.insert(user_name);
+}
+
+//------------------------------------------------------------------------
+
 int Anonymous::get_following_num() const
 {
     return following.size();

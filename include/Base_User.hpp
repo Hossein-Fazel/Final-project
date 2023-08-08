@@ -18,6 +18,7 @@ class Base_User
         void set_name(std::string);                                       // sets the name of a user
         void set_username(std::string);                                   // sets the username of a user with a validation
         void set_password(std::string);                                   // sets the password of the user's account
+        void set_pass_wHash(std::string);                                 // sets the password without hashing
         void set_link(std::string);                                       // sets the link of a user
         void set_phone(std::string);                                      // sets the phone number of a user
         void set_header(std::string);                                     // sets the color of the header that user had chosen
@@ -44,6 +45,7 @@ class Base_User
         void Logout(twitterak &);                                         // logs out of the user's account
         void add_followers(std::string);                                  // add a new follower to set
         bool validate_phone_number(std::string);                          // validate user's phone_number
+        void add_to_passwords(std::string);                               // add to passwords set
 
 //======================================= virtual functions =====================================
 
@@ -79,7 +81,7 @@ class Base_User
         virtual void like_mention(int, std::string, int);                 // like a mention
         virtual bool isin_following(std::string);                         // check the user name exist in following
         virtual void unfollow(std::string);                               // unfollow the user name
-
+        virtual void add_following(std::string);
 //==================== Save_User_Traces ====================
 
         virtual void push_myMentions(int, std::string);                   // save my mention traces

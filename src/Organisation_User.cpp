@@ -439,6 +439,10 @@ void Organisation::pop_tweetLikes(int num, std::string uName)
     }
 }
 
+void Organisation::add_following(std::string user_name)
+{
+    following.insert(user_name);
+}
 //================================================================  Delete_Organisation_Traces ===============================================================
 
 // delete mention traces

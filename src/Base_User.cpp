@@ -163,6 +163,13 @@ void Base_User::set_password(std::string input_pass)
 }
 
 //------------------------------------------------------------------------
+
+void Base_User::set_pass_wHash(std::string hashPass)
+{
+    Password = hashPass;
+}
+
+//------------------------------------------------------------------------
 // sets the link of a user
 void Base_User::set_link(std::string link)                                              
 {
@@ -205,6 +212,14 @@ void Base_User::set_country(std::string country)
 }
 
 // ============================================= general functions ===============================================
+// push to passwords set
+void Base_User::add_to_passwords(std::string pass)
+{
+    passwords.insert(pass);
+}
+
+//------------------------------------------------------------------------
+
 // validating the acoount's password
 int Base_User::validate_password(std::string pass)   
 {
@@ -533,15 +548,15 @@ std::unordered_set< std::string> Base_User::get_following()
 }
 
 //------------------------------------------------------------------------
-
-std::unordered_map<std::string , std::unordered_set<int>> Base_User::get_mention_trs()         // returns my_mention map
+// returns my_mention map
+std::unordered_map<std::string , std::unordered_set<int>> Base_User::get_mention_trs()
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
 
 //------------------------------------------------------------------------
-
-std::unordered_map<std::string , std::unordered_set<int>> Base_User::get_tweetlike_trs()       // returns tweet_likes map
+// returns tweet_likes map
+std::unordered_map<std::string , std::unordered_set<int>> Base_User::get_tweetlike_trs()
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
@@ -549,6 +564,13 @@ std::unordered_map<std::string , std::unordered_set<int>> Base_User::get_tweetli
 //------------------------------------------------------------------------
 
 void Base_User::delete_tweet(int tNum, twitterak &app)
+{
+    std::cout << "! This feature can't be reached for your account.\n";
+}
+
+//------------------------------------------------------------------------
+
+void Base_User::add_following(std::string user_name)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }

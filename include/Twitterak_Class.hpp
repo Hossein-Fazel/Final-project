@@ -58,11 +58,10 @@ friend void Anonymous::del_tweetLikes(twitterak &app);
 friend void Anonymous::unfollow_followers(twitterak &app);
 
 
-
-
-
     public:
+        twitterak();
         void put_users();
+        void read_users();
         std::string lower(std::string);
         void run();
         void tokenize(std::string);

@@ -29,7 +29,7 @@ class Organisation : public Base_User
         void set_biography(std::string);                                         // sets the biography of an organisation
 
 //================== General_Functions ====================
-
+        void add_following(std::string);
         void delete_tweet(int, twitterak &app);                                   // delete tweet
         void Delete_Account(twitterak &);                                        // delets the account of an organisation
         void Show_Profile(twitterak &);                                          // shows the information of an organisation itself

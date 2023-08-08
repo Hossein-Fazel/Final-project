@@ -55,6 +55,8 @@ friend void display::show_mentions(twitterak, std::string user_name, int tweet_n
         void del_men(int, std::string);                           // delete a mention
         void del_tweetlike(int , std::string);                    // delete a tweet like
         void unfollow(std::string);                               // unfollow the user name
+        void add_following(std::string);
+
 //================== Save_User_Traces ==================
 
         void push_myMentions(int , std::string);

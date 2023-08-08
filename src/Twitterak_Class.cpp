@@ -8,6 +8,11 @@
 #include "Display_Class.hpp"
 #include "User_Class.hpp"
 
+twitterak::twitterak()
+{
+    read_users();
+}
+
 void twitterak::put_users()
 {
     std::ofstream wuser;
@@ -25,8 +30,6 @@ void twitterak::put_users()
         wuser << "country:" << i.second.get_country() << std::endl;
         wuser << "birthday:" << i.second.get_birthday() << std::endl;
         wuser << "password:" << i.second.get_password() << std::endl;
-
-        wuser << "----------" << std::endl;
 
         wuser << "followers:";
         for(auto j : i.second.get_followers())
@@ -103,8 +106,6 @@ void twitterak::put_users()
         wuser << "country:" << i.second.get_country() << std::endl;
         wuser << "password:" << i.second.get_password() << std::endl;
 
-        wuser << "----------" << std::endl;
-
         wuser << "followers:";
         for(auto j : i.second.get_followers())
         {
@@ -175,8 +176,6 @@ void twitterak::put_users()
         wuser << "username:" << i.second.get_username() << std::endl;
         wuser << "password:" << i.second.get_password() << std::endl;
 
-        wuser << "----------" << std::endl;
-
         wuser << "followings:";
         for(auto j : i.second.get_following())
         {
@@ -229,6 +228,101 @@ void twitterak::put_users()
         
         wuser << "***" << std::endl;
     }
+
+    wuser.close();
+}
+
+
+void twitterak::read_users()
+{
+    std::cout << "reading ...\n";
+    std::ifstream ruser;
+    ruser.open("users.txt");
+
+    if(ruser)
+    {
+        std::cout << "opened\n";
+        std::string value;
+
+        while (!ruser.eof())
+        {
+            ruser.ignore(1000,':');
+            getline(ruser, value);
+
+            if(value == "user")
+            {
+                user u1;
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    u1.set_name(value);
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    u1.set_username(value);
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    u1.set_biography(value);
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    u1.set_link(value);
+                }
+
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    u1.set_phone(value);
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    u1.set_header(value);
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    u1.set_country(value);
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    u1.set_birthday(value);
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    u1.set_pass_wHash(value);
+                }
+
+                users[u1.get_username()] = u1;
+            }
+        }
+
+    }
+    ruser.close();
 }
 
 //------------------------------------------------------------------------------------------
