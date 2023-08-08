@@ -126,7 +126,7 @@ void Base_User::set_password(std::string input_pass)
         {
             SHA256 sha256;
             Password = sha256(input_pass);
-            passwords.insert(input_pass);
+            passwords.insert(Password);
             break;
         }
         else if ((validate_password(input_pass)) == 0)
