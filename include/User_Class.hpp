@@ -34,6 +34,7 @@ friend void display::show_mentions(twitterak, std::string user_name, int tweet_n
 
 //====================== sets =====================
         void set_birthday(std::string);                           // sets the date of birth of a user
+        void set_lastNum(int);
 
 //=============== General functions =================
 
@@ -44,7 +45,7 @@ friend void display::show_mentions(twitterak, std::string user_name, int tweet_n
         void edit_tweet(int, twitterak &);
         void Tweet(std::string , twitterak &);                     // make a normal tweet
         void Push_Tweet(tweet);                                    // push a tweet into a vector
-        void last_number();                                        // plus plus last_num variable
+        void increase_last_number();                                        // plus plus last_num variable
         void print_likers(int);
         bool like(std::string ,int);
         bool dislike(std::string, int);

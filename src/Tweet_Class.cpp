@@ -239,7 +239,7 @@ void tweet::rq_tweet(twitterak &app, std:: string type)                         
     rq_tweet.set_name(app.li_user->get_name());
     rq_tweet.set_user_name(app.li_user->get_username());
     rq_tweet.set_number(app.li_user->get_last_number() + 1);
-    app.li_user->last_number();
+    app.li_user->increase_last_number();
 
     if(type == "qoute")
     {

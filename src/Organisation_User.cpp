@@ -83,6 +83,13 @@ void Organisation::set_biography(std::string bio)
 }
 
 //------------------------------------------------------------------------
+
+void Organisation::set_lastNum(int num)
+{
+    last_number = num;
+}
+
+//------------------------------------------------------------------------
 // delets the account of an organisation
 void Organisation::Delete_Account(twitterak & app) 
 {

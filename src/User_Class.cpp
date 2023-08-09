@@ -41,11 +41,14 @@ std::unordered_set< std::string> user::get_following()
     return following;
 }
 
+//------------------------------------------------------------------------
+
 std::unordered_map<std::string , std::unordered_set<int>> user::get_mention_trs()         // returns my_mention map
 {
     return my_mentions;
 }
 
+//------------------------------------------------------------------------
 
 std::unordered_map<std::string , std::unordered_set<int>> user::get_tweetlike_trs()       // returns tweet_likes map
 {
@@ -57,6 +60,13 @@ std::unordered_map<std::string , std::unordered_set<int>> user::get_tweetlike_tr
 void user::set_birthday(std::string birth)                                     // sets the date of birth of a user
 {
     Birthday = birth;
+}
+
+//------------------------------------------------------------------------
+
+void user::set_lastNum(int num)
+{
+    last_num = num;
 }
 
 //================================================================  General_Functions ===============================================================
@@ -184,7 +194,7 @@ void user::Tweet(std::string tweet_text, twitterak & app)                       
     tw.set_time();
     tw.fetch_hashtags(app);
 
-    last_number();
+    increase_last_number();
 
     Push_Tweet(tw);
 }
@@ -219,7 +229,7 @@ void user::Push_Tweet(tweet tw)                                                 
 
 //------------------------------------------------------------------------
 
-void user::last_number()                                                                                         // plus plus last_num variable
+void user::increase_last_number()                                                                                         // plus plus last_num variable
 {
     last_num += 1;
 }

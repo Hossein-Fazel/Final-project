@@ -59,7 +59,7 @@ class Base_User
         virtual std::unordered_set< std::string> get_following();
 
 //========================= sets ==========================
-
+        virtual void set_lastNum(int);
         virtual void set_biography(std::string);                          // sets the biography of a user
         virtual void set_birthday(std::string);                           // sets the date of birth of a user
 
@@ -72,7 +72,7 @@ class Base_User
         virtual void edit_tweet(int, twitterak &);                        // edits user's tweet
         virtual void Tweet(std::string , twitterak &);                    // make a normal tweet
         virtual void Push_Tweet(tweet);                                   // push a tweet into a vector
-        virtual void last_number();                                       // plus plus last_num variable
+        virtual void increase_last_number();                                       // plus plus last_num variable
         virtual void print_likers(int);                                   // print tweet likers
         virtual bool like(std::string ,int);                              // like a tweet
         virtual bool dislike(std::string, int);                           // dislike a tweet

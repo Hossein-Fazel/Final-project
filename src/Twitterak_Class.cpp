@@ -30,6 +30,7 @@ void twitterak::put_users()
         wuser << "country:" << i.second.get_country() << std::endl;
         wuser << "birthday:" << i.second.get_birthday() << std::endl;
         wuser << "password:" << i.second.get_password() << std::endl;
+        wuser << "last_num:" << i.second.get_last_number() << std::endl;
 
         wuser << "followers:";
         for(auto j : i.second.get_followers())
@@ -52,7 +53,6 @@ void twitterak::put_users()
         }
         wuser << std::endl;
 
-        wuser << "last_num:" << i.second.get_last_number() << std::endl;
 
         wuser << "my_mentions:" << std::endl;
         if(i.second.get_mention_trs().size() != 0)
@@ -105,6 +105,8 @@ void twitterak::put_users()
         wuser << "header:" << i.second.get_header() << std::endl;
         wuser << "country:" << i.second.get_country() << std::endl;
         wuser << "password:" << i.second.get_password() << std::endl;
+        wuser << "last_num:" << i.second.get_last_number() << std::endl;
+        wuser << "manager:" << i.second.get_manager_username() << std::endl;
 
         wuser << "followers:";
         for(auto j : i.second.get_followers())
@@ -127,9 +129,6 @@ void twitterak::put_users()
         }
         wuser << std::endl;
 
-        wuser << "last_num:" << i.second.get_last_number() << std::endl;
-
-        wuser << "manager:" << i.second.get_manager_username() << std::endl;
 
         wuser << "my_mentions:" << std::endl;
         if(i.second.get_mention_trs().size() != 0)
@@ -172,7 +171,7 @@ void twitterak::put_users()
 
     for (auto i : ans_user)
     {
-        wuser << "type:org" << std::endl;
+        wuser << "type:ans" << std::endl;
         wuser << "username:" << i.second.get_username() << std::endl;
         wuser << "password:" << i.second.get_password() << std::endl;
 
@@ -317,10 +316,115 @@ void twitterak::read_users()
                     u1.set_pass_wHash(value);
                 }
 
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    u1.set_lastNum(std::stoi(value));
+                }
+
                 users[u1.get_username()] = u1;
             }
-        }
 
+            else if(value == "org")
+            {
+                Organisation org1;
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    org1.set_name(value);
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    org1.set_username(value);
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    org1.set_biography(value);
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    org1.set_link(value);
+                }
+
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    org1.set_phone(value);
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    org1.set_header(value);
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    org1.set_country(value);
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    org1.set_pass_wHash(value);
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    org1.set_lastNum(std::stoi(value));
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    org1.set_manager_username(*this,value);
+                }
+
+                org_user[org1.get_username()] = org1;
+            }
+
+            else if(value == "ans")
+            {
+                Anonymous ans1;
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value);
+                if(!value.empty())
+                {
+                    ans1.set_username(value);
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value);
+                if(!value.empty())
+                {
+                    ans1.set_pass_wHash(value);
+                }
+
+                ans_user[ans1.get_username()] = ans1;
+            }
+        }
     }
     ruser.close();
 }

@@ -416,7 +416,7 @@ void Base_User::Push_Tweet(tweet tw)
 
 //------------------------------------------------------------------------
 // does not have access to use this function from parent class
-void Base_User::last_number()
+void Base_User::increase_last_number()
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
@@ -571,6 +571,13 @@ void Base_User::delete_tweet(int tNum, twitterak &app)
 //------------------------------------------------------------------------
 
 void Base_User::add_following(std::string user_name)
+{
+    std::cout << "! This feature can't be reached for your account.\n";
+}
+
+//------------------------------------------------------------------------
+
+void Base_User::set_lastNum(int num)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
