@@ -35,21 +35,21 @@ void twitterak::put_users()
         wuser << "followers:";
         for(auto j : i.second.get_followers())
         {
-            wuser << j << ',';
+            wuser << j << ' ';
         }
         wuser << std::endl;
 
         wuser << "followings:";
         for(auto j : i.second.get_following())
         {
-            wuser << j << ',';
+            wuser << j << ' ';
         }
         wuser << std::endl;
 
         wuser << "passwords:";
         for(auto j : i.second.get_passwords())
         {
-            wuser << j << ',';
+            wuser << j << ' ';
         }
         wuser << std::endl;
 
@@ -62,7 +62,7 @@ void twitterak::put_users()
                 wuser << j.first << ':';
                 for(auto num : j.second)
                 {
-                    wuser << num << ',';
+                    wuser << num << ' ';
                 }
                 wuser << std::endl;
             }
@@ -81,7 +81,7 @@ void twitterak::put_users()
                 wuser << j.first << ':';
                 for(auto num : j.second)
                 {
-                    wuser << num << ',';
+                    wuser << num << ' ';
                 }
                 wuser << std::endl;
             }
@@ -111,21 +111,21 @@ void twitterak::put_users()
         wuser << "followers:";
         for(auto j : i.second.get_followers())
         {
-            wuser << j << ',';
+            wuser << j << ' ';
         }
         wuser << std::endl;
 
         wuser << "followings:";
         for(auto j : i.second.get_following())
         {
-            wuser << j << ',';
+            wuser << j << ' ';
         }
         wuser << std::endl;
 
         wuser << "passwords:";
         for(auto j : i.second.get_passwords())
         {
-            wuser << j << " ";
+            wuser << j << ' ';
         }
         wuser << std::endl;
 
@@ -138,7 +138,7 @@ void twitterak::put_users()
                 wuser << j.first << ':';
                 for(auto num : j.second)
                 {
-                    wuser << num << ',';
+                    wuser << num << ' ';
                 }
                 wuser << std::endl;
             }
@@ -156,7 +156,7 @@ void twitterak::put_users()
                 wuser << j.first << ':';
                 for(auto num : j.second)
                 {
-                    wuser << num << ',';
+                    wuser << num << ' ';
                 }
                 wuser << std::endl;
             }
@@ -178,14 +178,14 @@ void twitterak::put_users()
         wuser << "followings:";
         for(auto j : i.second.get_following())
         {
-            wuser << j << " ";
+            wuser << j << ' ';
         }
         wuser << std::endl;
 
         wuser << "passwords:";
         for(auto j : i.second.get_passwords())
         {
-            wuser << j << " ";
+            wuser << j << ' ';
         }
         wuser << std::endl;     
 
@@ -197,7 +197,7 @@ void twitterak::put_users()
                 wuser << j.first << ':';
                 for(auto num : j.second)
                 {
-                    wuser << num << ',';
+                    wuser << num << ' ';
                 }
                 wuser << std::endl;
             }
@@ -215,7 +215,7 @@ void twitterak::put_users()
                 wuser << j.first << ':';
                 for(auto num : j.second)
                 {
-                    wuser << num << ',';
+                    wuser << num << ' ';
                 }
                 wuser << std::endl;
             }
@@ -234,7 +234,6 @@ void twitterak::put_users()
 
 void twitterak::read_users()
 {
-    std::cout << "reading ...\n";
     std::ifstream ruser;
     ruser.open("users.txt");
 
