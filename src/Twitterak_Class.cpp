@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <vector>
 #include <fstream>
+#include <sstream>
 
 #include "Twitterak_Class.hpp"
 #include "Display_Class.hpp"
@@ -239,12 +240,11 @@ void twitterak::read_users()
 
     if(ruser)
     {
-        std::cout << "opened\n";
         std::string value;
 
         while (!ruser.eof())
         {
-            ruser.ignore(1000,':');
+            ruser.ignore(1000, ':');
             getline(ruser, value);
 
             if(value == "user")
@@ -320,6 +320,103 @@ void twitterak::read_users()
                 if(!value.empty())
                 {
                     u1.set_lastNum(std::stoi(value));
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    std::string follower;
+                    std::stringstream str;
+                    str << value;
+
+                    while(str >> follower)
+                    {
+                        u1.add_followers(follower);
+                    }
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    std::string following;
+                    std::stringstream str;
+                    str << value;
+
+                    while(str >> following)
+                    {
+                        u1.add_following(following);
+                    }
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    std::string pass;
+                    std::stringstream str;
+                    str << value;
+
+                    while(str >> pass)
+                    {
+                        u1.add_to_passwords(pass);
+                    }
+                }
+
+                ruser.ignore(1000, '\n');
+                getline(ruser, value, '\n');
+                while(value != "tweet_likes:")
+                {
+                    if(value.empty())
+                    {
+                        break;
+                    }
+                    
+                    else
+                    {
+                        int size = value.size();
+                        auto fcolon = value.find(':');
+                        std::string user_name = value.substr(0, fcolon);
+                        std::string line = value.substr(fcolon+1, size);
+                        std::stringstream str;
+
+                        str << line;
+                        int num;
+                        while(str >> num)
+                        {
+                            u1.push_myMentions(num, user_name);
+                        }
+
+                        getline(ruser, value, '\n');
+                    }
+                }
+
+                getline(ruser, value, '\n');
+                while(value != "***")
+                {
+                    if(value.empty())
+                    {
+                        break;
+                    }
+                    
+                    else
+                    {
+                        int size = value.size();
+                        auto fcolon = value.find(':');
+                        std::string user_name = value.substr(0, fcolon);
+                        std::string line = value.substr(fcolon+1, size);
+                        std::stringstream str;
+
+                        str << line;
+                        int num;
+                        while(str >> num)
+                        {
+                            u1.push_tweetLikes(num, user_name);
+                        }
+
+                        getline(ruser, value, '\n');
+                    }
                 }
 
                 users[u1.get_username()] = u1;
@@ -400,6 +497,103 @@ void twitterak::read_users()
                     org1.set_manager_username(*this,value);
                 }
 
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    std::string follower;
+                    std::stringstream str;
+                    str << value;
+
+                    while(str >> follower)
+                    {
+                        org1.add_followers(follower);
+                    }
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    std::string following;
+                    std::stringstream str;
+                    str << value;
+
+                    while(str >> following)
+                    {
+                        org1.add_following(following);
+                    }
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    std::string pass;
+                    std::stringstream str;
+                    str << value;
+
+                    while(str >> pass)
+                    {
+                        org1.add_to_passwords(pass);
+                    }
+                }
+
+                ruser.ignore(1000, '\n');
+                getline(ruser, value, '\n');
+                while(value != "tweet_likes:")
+                {
+                    if(value.empty())
+                    {
+                        break;
+                    }
+                    
+                    else
+                    {
+                        int size = value.size();
+                        auto fcolon = value.find(':');
+                        std::string user_name = value.substr(0, fcolon);
+                        std::string line = value.substr(fcolon+1, size);
+                        std::stringstream str;
+
+                        str << line;
+                        int num;
+                        while(str >> num)
+                        {
+                            org1.push_myMentions(num, user_name);
+                        }
+
+                        getline(ruser, value, '\n');
+                    }
+                }
+
+                getline(ruser, value, '\n');
+                while(value != "***")
+                {
+                    if(value.empty())
+                    {
+                        break;
+                    }
+                    
+                    else
+                    {
+                        int size = value.size();
+                        auto fcolon = value.find(':');
+                        std::string user_name = value.substr(0, fcolon);
+                        std::string line = value.substr(fcolon+1, size);
+                        std::stringstream str;
+
+                        str << line;
+                        int num;
+                        while(str >> num)
+                        {
+                            org1.push_tweetLikes(num, user_name);
+                        }
+
+                        getline(ruser, value, '\n');
+                    }
+                }
+
                 org_user[org1.get_username()] = org1;
             }
 
@@ -419,6 +613,89 @@ void twitterak::read_users()
                 if(!value.empty())
                 {
                     ans1.set_pass_wHash(value);
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    std::string following;
+                    std::stringstream str;
+                    str << value;
+
+                    while(str >> following)
+                    {
+                        ans1.add_following(following);
+                    }
+                }
+
+                ruser.ignore(1000, ':');
+                getline(ruser, value, '\n');
+                if(!value.empty())
+                {
+                    std::string pass;
+                    std::stringstream str;
+                    str << value;
+
+                    while(str >> pass)
+                    {
+                        ans1.add_to_passwords(pass);
+                    }
+                }
+
+                ruser.ignore(1000, '\n');
+                getline(ruser, value, '\n');
+                while(value != "tweet_likes:")
+                {
+                    if(value.empty())
+                    {
+                        break;
+                    }
+                    
+                    else
+                    {
+                        int size = value.size();
+                        auto fcolon = value.find(':');
+                        std::string user_name = value.substr(0, fcolon);
+                        std::string line = value.substr(fcolon+1, size);
+                        std::stringstream str;
+
+                        str << line;
+                        int num;
+                        while(str >> num)
+                        {
+                            ans1.push_myMentions(num, user_name);
+                        }
+
+                        getline(ruser, value, '\n');
+                    }
+                }
+
+                getline(ruser, value, '\n');
+                while(value != "***")
+                {
+                    if(value.empty())
+                    {
+                        break;
+                    }
+                    
+                    else
+                    {
+                        int size = value.size();
+                        auto fcolon = value.find(':');
+                        std::string user_name = value.substr(0, fcolon);
+                        std::string line = value.substr(fcolon+1, size);
+                        std::stringstream str;
+
+                        str << line;
+                        int num;
+                        while(str >> num)
+                        {
+                            ans1.push_tweetLikes(num, user_name);
+                        }
+
+                        getline(ruser, value, '\n');
+                    }
                 }
 
                 ans_user[ans1.get_username()] = ans1;

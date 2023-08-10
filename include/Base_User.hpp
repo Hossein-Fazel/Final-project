@@ -95,7 +95,7 @@ class Base_User
         virtual void del_myMentions(twitterak &);                         // delete mention traces
         virtual void cls_hashtags(twitterak &);                           // delete hashtag traces
         virtual void del_tweetLikes(twitterak &);                         // delete tweet like traces
-        virtual void unfollow_followers(twitterak &app);                                // delete you from your followers list
+        virtual void unfollow_followers(twitterak &app);                  // delete you from your followers list
 
     private:
         std::string Full_Name;
