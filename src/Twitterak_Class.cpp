@@ -1071,16 +1071,36 @@ void twitterak::run()
                 }
             }
 
-            else if ((commands[0] == "exit" or commands[0] == "quit" or commands[0] == "q") and cSize == 1)
+            else if ((commands[0] == "exit" or commands[0] == "quit" or commands[0] == "q") and (cSize == 1  or cSize == 2))
             {
-                char ch;
-                std::cout << "? Are you sure ? (y/n) : ";
-                std::cin >> ch;
-                if(ch == 'y' or ch == 'Y')
+                if(cSize == 2)
                 {
-                    put_users();
-                    std::cout << "Good Bye\n";
-                    exit(0);
+                    if(commands[1][0] == '-')
+                    {
+                        if(commands[1] == "-y")
+                        {
+                            put_users();
+                            std::cout << "Good Bye\n";
+                            exit(0);
+                        }
+                    }
+                    else
+                    {
+                        std::cout << "! undefined command.\n";
+                    }
+                }
+
+                else
+                {
+                    char ch;
+                    std::cout << "? Are you sure ? (y/n) : ";
+                    std::cin >> ch;
+                    if(ch == 'y' or ch == 'Y')
+                    {
+                        put_users();
+                        std::cout << "Good Bye\n";
+                        exit(0);
+                    }
                 }
             }
 

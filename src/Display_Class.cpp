@@ -732,7 +732,7 @@ void display::help(twitterak &app)
         std::cout << "~ signup your_user_name\n~ signup \n\n";
 
         std::cout << "close the app\n";
-        std::cout << "~ exit\n~ quit\n~ q\n\n";
+        std::cout << "~ exit (-y exit without confirm)\n~ quit (-y exit without confirm)\n~ q    (-y exit without confirm)\n\n";
 
         std::cout << "clear the screen\n";
         std::cout << "~ cls\n~ clear\n\n";
@@ -816,13 +816,13 @@ void display::help(twitterak &app)
 
         std::cout << "follow a user\n";
         std::cout << "~ follow @username.\n";
-        std::cout << "~ follow username.\n\n";
+        std::cout << "~ follow username.\n";
 
         std::cout << "clear the screen\n";
         std::cout << "~ cls\n~ clear\n\n";
 
         std::cout << "close the app\n";
-        std::cout << "~ exit\n~ quit\n~ q\n\n";
+        std::cout << "~ exit (-y exit without confirm)\n~ quit (-y exit without confirm)\n~ q    (-y exit without confirm)\n\n";
 
         std::cout << "------------------------------------------------------------------------------------\n";
     }
