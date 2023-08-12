@@ -52,3 +52,8 @@ void mention::set_userName(std:: string userName)
 {
     mUsername = userName;
 }
+
+void mention::set_likers(std::string liker)
+{
+    mLikes.insert(liker);
+}

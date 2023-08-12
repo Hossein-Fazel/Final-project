@@ -6,17 +6,24 @@
 
 #include "Tweet_Class.hpp"
 
+
+
 class mention
 {
     friend void tweet::mention_like(std::string, int);
+    friend void tweet::insert_to_file();
+
     public:
-//      ======================================== sets =============================================
+//======================================== sets =============================================4
+
         void set_userName(std::string);
         void set_name(std::string);
         void set_mention(std::string);
         void set_number(int);
+        void set_likers(std::string);
 
-//      ======================================== gets =============================================
+//======================================== gets =============================================
+
         int get_number() const;
         int get_likes_number() const;
         std::string get_name() const;

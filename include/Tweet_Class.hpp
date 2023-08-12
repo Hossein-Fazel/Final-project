@@ -44,31 +44,34 @@ class tweet
 //================ sets =====================
 
         void set_tweetType(std::string);
-        void set_selfTweet(std:: string);                                       // sets the user's tweet
-        void set_ownerName(std:: string);                                       // sets the name of the owner of another user
-        void set_ownerUser_name(std:: string);                                  // sets the username of the owner of another user
-        void set_ownerTweet(std:: string);                                      // sets the tweet of the owner of another user
-        void set_name(std:: string);                                            // sets the name of the user
-        void set_user_name(std:: string);                                       // sets the username of the user
+        void set_selfTweet(std::string);                                       // sets the user's tweet
+        void set_ownerName(std::string);                                       // sets the name of the owner of another user
+        void set_ownerUser_name(std::string);                                  // sets the username of the owner of another user
+        void set_ownerTweet(std::string);                                      // sets the tweet of the owner of another user
+        void set_name(std::string);                                            // sets the name of the user
+        void set_user_name(std::string);                                       // sets the username of the user
         void set_number(int);                                                   // sets the tweet's number
         void set_user_age(user);                                                // sets the age of the user 
-        void set_user_age();                                                // sets the age of the user
+        void set_user_age();                                                    // sets the age of the user
         void set_time();
         void set_time(std::string , std::string);
 
 
 //============ General functions =============
 
-        void edit_tweet(twitterak &);                                         // edits a tweet of a user
-        void rq_tweet(twitterak&, std::string);                                   // quote tweet or retweet
+        void edit_tweet(twitterak &);                                           // edits a tweet of a user
+        void rq_tweet(twitterak&, std::string);                                 // quote tweet or retweet
         bool tweet_like(std::string user_name);
         bool tweet_dislike(std::string user_name);
-        void fetch_hashtags(twitterak &);                            // finds and saves hashtags of user's tweet
+        void fetch_hashtags(twitterak &);                                       // finds and saves hashtags of user's tweet
         void creat_mention(std::string, std::string);
         void delete_mentions(std::string);
         void delete_hashtags(twitterak &);
         void dLike(std::string);
         void mention_like(std::string, int);
+        
+        void push_to_tweet(mention);
+        void insert_to_file();                                                  // put all tweets and mentions in a file 
 
     private:
         int mentionNumber = 1;

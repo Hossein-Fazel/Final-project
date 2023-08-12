@@ -9,10 +9,14 @@
 #include "Display_Class.hpp"
 #include "User_Class.hpp"
 
+
 twitterak::twitterak()
 {
     read_users();
+    read_from_file();
 }
+
+//------------------------------------------------------------------------------------------
 
 void twitterak::put_users()
 {
@@ -93,6 +97,7 @@ void twitterak::put_users()
         }
 
         wuser << "***" << std::endl;
+        i.second.search_to_file();
     }
 
     for (auto i : org_user)
@@ -168,6 +173,7 @@ void twitterak::put_users()
         }
 
         wuser << "***" << std::endl;
+        i.second.search_to_file();
     }
 
     for (auto i : ans_user)
@@ -232,6 +238,7 @@ void twitterak::put_users()
     wuser.close();
 }
 
+//------------------------------------------------------------------------------------------
 
 void twitterak::read_users()
 {
@@ -703,6 +710,284 @@ void twitterak::read_users()
         }
     }
     ruser.close();
+}
+
+
+//------------------------------------------------------------------------------------------
+// read tweets and mentions from a text file
+void twitterak::read_from_file()
+{
+    std::ifstream read_file;
+    read_file.open("tweet.txt");
+
+    if (read_file.is_open())
+    {
+        while (!read_file.eof())
+        {
+            tweet tw;
+            std::string tweet_type;
+            std::string general;
+            std::string time;
+            std::string date;
+            std::stringstream stm;
+            //int number = 0;
+
+            read_file.ignore(1000, ':');
+            getline(read_file, tweet_type, '\n');
+
+            if (tweet_type == "normal")
+            {
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                tw.set_name(general);
+
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                tw.set_user_name(general);
+
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                tw.set_number(std::stoi(general));
+
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                tw.set_selfTweet(general);
+                tw.fetch_hashtags(*this);
+
+                read_file.ignore(1000, ':');
+                getline(read_file, time, '\n');
+                read_file.ignore(1000, ':');
+                getline(read_file, date, '\n');
+                tw.set_time(time, date);
+
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                stm << general;
+                while (stm >> general)
+                {
+                    tw.tweet_like(general);
+                }
+
+                getline(read_file, general, '\n');
+                while (general != "---")
+                {
+                    mention mt;
+
+                    read_file.ignore(1000, ':');
+                    getline(read_file, general, '\n');
+                    mt.set_number(std::stoi(general));
+
+                    read_file.ignore(1000, ':');
+                    getline(read_file, general, '\n');
+                    mt.set_name(general);
+
+                    read_file.ignore(1000, ':');
+                    getline(read_file, general, '\n');
+                    mt.set_userName(general);
+
+                    read_file.ignore(1000, ':');
+                    getline(read_file, general, '\n');
+                    mt.set_mention(general);
+
+                    read_file.ignore(1000, ':');
+                    getline(read_file, general, '\n');
+                    stm << general;
+                    while (stm >> general)
+                    {
+                        mt.set_likers(general);
+                    }
+
+                    tw.push_to_tweet(mt);
+                    getline(read_file, general, '\n');
+                }
+
+                if (users.count(tw.get_user_name()))
+                {       
+                    users[tw.get_user_name()].Push_Tweet(tw);
+                }
+                else if (org_user.count(tw.get_user_name()))
+                {       
+                    org_user[tw.get_user_name()].Push_Tweet(tw);
+                }
+            }
+
+
+            else if (tweet_type == "retweet")
+            {
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                tw.set_name(general);
+
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                tw.set_user_name(general);
+
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                tw.set_number(std::stoi(general));
+                
+
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                tw.set_ownerName(general);
+
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                tw.set_ownerUser_name(general);
+
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                tw.set_ownerTweet(general);
+
+                read_file.ignore(1000, ':');
+                getline(read_file, time, '\n');
+                read_file.ignore(1000, ':');
+                getline(read_file, date, '\n');
+                tw.set_time(time, date);
+
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                stm << general;
+                while (stm >> general)
+                {
+                    tw.tweet_like(general);
+                }
+
+                getline(read_file, general, '\n');
+                while (general != "---")
+                {
+                    mention mt;
+
+                    read_file.ignore(1000, ':');
+                    getline(read_file, general, '\n');
+                    mt.set_number(std::stoi(general));
+
+                    read_file.ignore(1000, ':');
+                    getline(read_file, general, '\n');
+                    mt.set_name(general);
+
+                    read_file.ignore(1000, ':');
+                    getline(read_file, general, '\n');
+                    mt.set_userName(general);
+
+                    read_file.ignore(1000, ':');
+                    getline(read_file, general, '\n');
+                    mt.set_mention(general);
+
+                    read_file.ignore(1000, ':');
+                    getline(read_file, general, '\n');
+                    stm << general;
+                    while (stm >> general)
+                    {
+                        mt.set_likers(general);
+                    }
+
+                    tw.push_to_tweet(mt);
+                    getline(read_file, general, '\n');
+                }
+
+                if (users.count(tw.get_user_name()))
+                {       
+                    users[tw.get_user_name()].Push_Tweet(tw);
+                }
+                else if (org_user.count(tw.get_user_name()))
+                {       
+                    org_user[tw.get_user_name()].Push_Tweet(tw);
+                }
+            }
+
+
+            else if (tweet_type == "qoutetweet")
+            {
+                 read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                tw.set_name(general);
+
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                tw.set_user_name(general);
+
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                tw.set_number(std::stoi(general));
+
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                tw.set_selfTweet(general);
+                tw.fetch_hashtags(*this);
+                
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                tw.set_ownerName(general);
+
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                tw.set_ownerUser_name(general);
+
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                tw.set_ownerTweet(general);
+
+                read_file.ignore(1000, ':');
+                getline(read_file, time, '\n');
+                read_file.ignore(1000, ':');
+                getline(read_file, date, '\n');
+                tw.set_time(time, date);
+
+                read_file.ignore(1000, ':');
+                getline(read_file, general, '\n');
+                stm << general;
+                while (stm >> general)
+                {
+                    tw.tweet_like(general);
+                }
+
+                getline(read_file, general, '\n');
+                while (general != "---")
+                {
+                    mention mt;
+
+                    read_file.ignore(1000, ':');
+                    getline(read_file, general, '\n');
+                    mt.set_number(std::stoi(general));
+
+                    read_file.ignore(1000, ':');
+                    getline(read_file, general, '\n');
+                    mt.set_name(general);
+
+                    read_file.ignore(1000, ':');
+                    getline(read_file, general, '\n');
+                    mt.set_userName(general);
+
+                    read_file.ignore(1000, ':');
+                    getline(read_file, general, '\n');
+                    mt.set_mention(general);
+
+                    read_file.ignore(1000, ':');
+                    getline(read_file, general, '\n');
+                    stm << general;
+                    while (stm >> general)
+                    {
+                        mt.set_likers(general);
+                    }
+
+                    tw.push_to_tweet(mt);
+                    getline(read_file, general, '\n');
+                }
+
+                if (users.count(tw.get_user_name()))
+                {       
+                    users[tw.get_user_name()].Push_Tweet(tw);
+                }
+                else if (org_user.count(tw.get_user_name()))
+                {       
+                    org_user[tw.get_user_name()].Push_Tweet(tw);
+                }
+            }
+        }
+    }
+
+    read_file.close();
 }
 
 //------------------------------------------------------------------------------------------

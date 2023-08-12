@@ -581,3 +581,10 @@ void Base_User::set_lastNum(int num)
 {
     std::cout << "! This feature can't be reached for your account.\n";
 }
+
+//------------------------------------------------------------------------
+
+void Base_User::search_to_file()
+{
+    std::cout << "! This feature can't be reached for your account.\n";
+}

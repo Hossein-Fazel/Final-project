@@ -4,7 +4,6 @@
 #include "User_Class.hpp"
 #include "Tweet_Class.hpp"
 #include "Display_Class.hpp"
-#include "Mention_class.hpp"
 #include "Base_User.hpp"
 #include "Organisation_User.hpp"
 #include "Anonymous_User.hpp"
@@ -12,6 +11,8 @@
 #include <unordered_map>
 #include <vector>
 #include <string>
+
+class mention;
 
 class twitterak
 {
@@ -70,6 +71,8 @@ friend void Anonymous::unfollow_followers(twitterak &app);
         void serch_hashtag(std::string);
         bool get_userName_number(std:: string, std::string &, int &);
         void del_atsign(std::string &);
+
+        void read_from_file();                                              // read tweets and mentions from a text file
 
     private:
         Base_User* li_user;

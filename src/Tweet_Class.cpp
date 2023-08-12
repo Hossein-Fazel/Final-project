@@ -1,10 +1,12 @@
 #include <iostream>
+#include <fstream>
 #include <unordered_map>
 #include <vector>
 #include <string>
 #include <ctime>
 #include <unordered_set>
 
+#include "User_Class.hpp"
 #include "Tweet_Class.hpp"
 #include "Twitterak_Class.hpp"
 #include "Mention_class.hpp"
@@ -228,7 +230,7 @@ void tweet::edit_tweet(twitterak &app)                                          
 
 //------------------------------------------------------------------------
 
-void tweet::rq_tweet(twitterak &app, std:: string type)                                                                // quote tweet or retweet
+void tweet::rq_tweet(twitterak &app, std::string type)                                                                // quote tweet or retweet
 {
     tweet rq_tweet;
     rq_tweet.set_tweetType(type);
@@ -451,3 +453,152 @@ void tweet::mention_like(std::string uName, int mNumber)
         }
     }
 }
+
+
+void tweet::push_to_tweet(mention mt)
+{
+    tweet_mentions[mt.get_username()].push_back(mt);
+}
+
+//-----------------------------------------------------------------------
+// put all tweets and mentions in a file 
+void tweet::insert_to_file()
+{
+    std::ofstream insert_file;
+    insert_file.open("tweet.txt");
+
+
+    insert_file << "tweet_type:" << get_tweetType() << std::endl;
+    if (get_tweetType() == "normal")
+    {
+        insert_file << "name:" << get_name() << std::endl;
+        insert_file << "username:" << get_user_name() << std::endl;
+        insert_file << "number:" << get_number() << std::endl;
+        insert_file << "tweet:" << get_sefTweet() << std::endl;
+        insert_file << "time:" << get_time() << std::endl;
+        insert_file << "date:" << get_date() << std::endl;
+
+        insert_file << "likes:";
+        for (auto i : likes)
+        {
+            insert_file << i.first << " ";
+        }
+        insert_file << std::endl;
+
+        if (get_mentions_number() != 0)
+        {
+            for (auto j : tweet_mentions)
+            { 
+                for (auto k : j.second)
+                {
+                    insert_file << "mention_number:" << k.get_number() << std::endl;
+                    insert_file << "name:" << k.get_name() << std::endl;
+                    insert_file << "username:" << k.get_username() << std::endl;
+                    insert_file << "text:" << k.get_mention() << std::endl;
+                    insert_file << "likes:";
+
+                    for (auto i : k.mLikes)
+                    {
+                        insert_file << i << " ";
+                    }
+                    insert_file << std::endl;
+                }
+            }
+        }
+            
+        insert_file << "---" << std::endl;
+    }
+
+    //--------------------------------------------------
+    else if (get_tweetType() == "retweet")
+    {
+        insert_file << "name:" << get_name() << std::endl;
+        insert_file << "username:" << get_user_name() << std::endl;
+        insert_file << "number:" << get_number() << std::endl;
+        insert_file << "owner_name:" << get_ownerName() << std::endl;
+        insert_file << "owner_username:" << get_ownerUser_name() << std::endl;
+        insert_file << "owner_tweet:" << get_ownerTweet() << std::endl;
+        insert_file << "time:" << get_time() << std::endl; 
+        insert_file << "date:" << get_date() << std::endl;
+
+        insert_file << "likes:";
+        for (auto i : likes)
+        {
+            insert_file << i.first << " ";
+        }
+        insert_file << std::endl;
+
+
+        if (get_mentions_number() != 0)
+        {
+            for (auto j : tweet_mentions)
+            {
+                for (auto k : j.second)
+                {
+                    insert_file << "mention_number:" << k.get_number() << std::endl;
+                    insert_file << "name:" << k.get_name() << std::endl;
+                    insert_file << "username:" << k.get_username() << std::endl;
+                    insert_file << "text:" << k.get_mention() << std::endl;
+                    insert_file << "likes:";
+                    
+                    for (auto i : k.mLikes)
+                    {
+                        insert_file << i << " ";
+                    }
+                }
+            }
+        }
+
+        insert_file << "---" << std::endl;
+    }
+
+    //--------------------------------------------------
+    else if (get_tweetType() == "qoutetweet")
+    {
+        insert_file << "name:" << get_name() << std::endl;
+        insert_file << "username:" << get_user_name() << std::endl;
+        insert_file << "number:" << get_number() << std::endl;
+        insert_file << "tweet:" << get_sefTweet() << std::endl;
+        insert_file << "owner_name:" << get_ownerName() << std::endl;
+        insert_file << "owner_username:" << get_ownerUser_name() << std::endl;
+        insert_file << "owner_tweet:" << get_ownerTweet() << std::endl;            
+        insert_file << "time:" << get_time() << std::endl; 
+        insert_file << "date:" << get_date() << std::endl;
+
+        insert_file << "likes:";
+        for (auto i : likes)
+        {
+            insert_file << i.first << " ";
+        }
+        insert_file << std::endl;
+
+
+        if (get_mentions_number() != 0)
+        {
+            for (auto j : tweet_mentions)
+            {
+                for (auto k : j.second)
+                {
+                    insert_file << "mention_number:" << k.get_number() << std::endl;
+                    insert_file << "name:" << k.get_name() << std::endl;
+                    insert_file << "username:" << k.get_username() << std::endl;
+                    insert_file << "text:" << k.get_mention() << std::endl;
+                    insert_file << "likes:";
+        
+                    for (auto i : k.mLikes)
+                    {
+                        insert_file << i << " ";
+                    }
+                    insert_file << std::endl;
+                }
+            }
+        }
+        
+        insert_file << "---" << std::endl;
+    }
+
+
+    insert_file.close();
+}
+
+

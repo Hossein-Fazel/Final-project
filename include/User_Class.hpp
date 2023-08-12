@@ -20,7 +20,8 @@ class user: public Base_User
 //=================== Friends ===================
 friend void display::show_tweet(twitterak, std::string, int);           // friend with Twitterak_Class to show tweets
 friend void display::show_tweet(twitterak, std::string);                // friend with Twitterak_Class to show tweets
-friend void display::show_mentions(twitterak, std::string user_name, int tweet_number);
+friend void display::show_mentions(twitterak, std::string, int);
+friend void tweet::insert_to_file();
 
 
     public:
@@ -57,6 +58,7 @@ friend void display::show_mentions(twitterak, std::string user_name, int tweet_n
         void del_tweetlike(int , std::string);                    // delete a tweet like
         void unfollow(std::string);                               // unfollow the user name
         void add_following(std::string);
+        void search_to_file();
 
 //================== Save_User_Traces ==================
 

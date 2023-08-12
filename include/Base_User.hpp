@@ -82,6 +82,9 @@ class Base_User
         virtual bool isin_following(std::string);                         // check the user name exist in following
         virtual void unfollow(std::string);                               // unfollow the user name
         virtual void add_following(std::string);
+
+        virtual void search_to_file();
+        
 //==================== Save_User_Traces ====================
 
         virtual void push_myMentions(int, std::string);                   // save my mention traces
