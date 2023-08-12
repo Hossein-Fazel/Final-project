@@ -173,7 +173,7 @@ void Base_User::set_phone(std::string phone)
             break;
         }
     }
-}
+}                 
 
 //------------------------------------------------------------------------
 // sets the color of the header that user had chosen
